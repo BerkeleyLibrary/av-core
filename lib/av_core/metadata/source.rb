@@ -56,9 +56,9 @@ module AVCore
           resp = RestClient.get(url)
           if resp.code != 200
             log.error("GET #{url} returned #{resp.code}: #{resp.body || 'nil'}")
-            raise RestClient::RequestFailed.new(resp, resp.code).tap do |ex|
+            raise(RestClient::RequestFailed.new(resp, resp.code).tap do |ex|
               ex.message = "No record found at #{url}; host returned #{resp.code}"
-            end
+            end)
           end
           resp.body
         end
