@@ -6,8 +6,8 @@ module AVCore
     describe :mime_type do
       it 'is correct' do
         expected = {
-            FileType::MP3 => 'application/x-mpegURL',
-            FileType::MP4 => 'video/mp4'
+          FileType::MP3 => 'application/x-mpegURL',
+          FileType::MP4 => 'video/mp4'
         }
         expected.each do |t, mt_expected|
           expect(t.mime_type).to eq(mt_expected)
@@ -18,8 +18,8 @@ module AVCore
     describe :player_tag do
       it 'is correct' do
         expected = {
-            FileType::MP3 => 'audio',
-            FileType::MP4 => 'video'
+          FileType::MP3 => 'audio',
+          FileType::MP4 => 'video'
         }
         expected.each do |t, pt_expected|
           expect(t.player_tag).to eq(pt_expected)
@@ -54,4 +54,3 @@ module AVCore
     end
   end
 end
-
