@@ -20,6 +20,6 @@ namespace :cal do
     end
 
     desc 'Run the test suite in Jenkins CI (including test coverage)'
-    task ci: %w[environment ci:setup:rspec cal:db:wait cal:test:coverage]
+    task ci: %w[ci:setup:rspec cal:test:coverage]
   end
 end
