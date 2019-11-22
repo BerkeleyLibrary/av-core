@@ -1,5 +1,6 @@
-lib = File.expand_path('lib', __dir__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+File.expand_path('lib', __dir__).tap do |lib|
+  $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+end
 
 require 'avplayer/core/module_info'
 
@@ -26,6 +27,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'colorize'
   spec.add_development_dependency 'irb' # workaroundfor https://github.com/bundler/bundler/issues/6929
   spec.add_development_dependency 'listen', '>= 3.0.5', '< 3.2'
+  spec.add_development_dependency 'rake', '>= 13.0'
   spec.add_development_dependency 'rspec-support'
   spec.add_development_dependency 'rubocop', '~> 0.74.0'
   spec.add_development_dependency 'simplecov', '~> 0.16.1'
