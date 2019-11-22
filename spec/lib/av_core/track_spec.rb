@@ -1,7 +1,7 @@
 require 'spec_helper'
-require 'avplayer/core'
+require 'av_core'
 
-module AvPlayer
+module AVCore
   module Core
     describe Track do
       describe :file_type do

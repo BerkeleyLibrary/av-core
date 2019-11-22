@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/avplayer_core.iml" filepath="$PROJECT_DIR$/avplayer_core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/av_core.iml" filepath="$PROJECT_DIR$/av_core.iml" />
     </modules>
   </component>
 </project>
