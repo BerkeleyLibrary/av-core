@@ -46,7 +46,7 @@ module AVCore
 
       def start_next_tag(tag, ind_1, ind_2, text)
         finalize_current_field if current_field
-        return if tag.start_with?('00') # skip control fields
+        return if tag.start_with?('00') # skip control field
 
         self.current_field = MARC::DataField.new(tag, ind_1, ind_2)
         add_text(text.strip)

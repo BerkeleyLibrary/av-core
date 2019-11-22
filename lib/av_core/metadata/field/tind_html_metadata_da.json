@@ -1,0 +1,2076 @@
+{
+  "human_name": "TIND DA Details Section",
+  "config": [
+    {
+      "machine_name": "title_245%%",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "fr": "Titre",
+        "en": "Title",
+        "no": "Tittel"
+      },
+      "visible": false,
+      "params": {
+        "subfield_order": "a,b",
+        "output_pattern": "",
+        "extension": "",
+        "instances_separator": " ",
+        "default": "",
+        "subfields_separator": ": ",
+        "tag": "245%%",
+        "escape": "",
+        "max_instance_length": ""
+      },
+      "type": "global",
+      "order": 0
+    },
+    {
+      "machine_name": "local_245_880_linking",
+      "bfe": {
+        "obj_name": "BFE_TIND_FIELD_MULTI"
+      },
+      "labels": {
+        "en": "Title"
+      },
+      "visible": true,
+      "params": {
+        "output_separator": "<br />",
+        "fields": "245%%",
+        "link_880": "yes",
+        "subfields_separator": ", ",
+        "escape": "0",
+        "exclude_numeric_subfields": "yes"
+      },
+      "type": "local",
+      "order": 1
+    },
+    {
+      "machine_name": "creator_o1",
+      "bfe": {
+        "obj_name": "BFE_AUTHORS_AND_CORPORATION"
+      },
+      "labels": {
+        "fr": "Cr\u00e9ateur",
+        "en": "Creator",
+        "no": "Skaper"
+      },
+      "visible": true,
+      "params": {
+        "affiliation_suffix": ")",
+        "multiple_affiliations": "no",
+        "affiliation_prefix": " (",
+        "extension": "[...]",
+        "print_details": "yes",
+        "default": "",
+        "link_author_pages": "no",
+        "print_affiliations": "yes",
+        "print_links": "yes",
+        "relator_code_pattern": "",
+        "limit": "",
+        "separator": "<br>",
+        "escape": "",
+        "operator": "and",
+        "highlight": "no",
+        "search_author": "f1=creator&as=1&sf=title&so=a&rm=&m1=e&p1=",
+        "link_mobile_pages": "no",
+        "search_corporation": "f1=creator&as=1&sf=title&so=a&rm=&m1=e&p1=",
+        "interactive": "no"
+      },
+      "type": "global",
+      "order": 2
+    },
+    {
+      "machine_name": "contributor_o2",
+      "bfe": {
+        "obj_name": "BFE_FIELD_LINK_SEARCH"
+      },
+      "labels": {
+        "en": "Contributor",
+        "no": "Bidragsyter"
+      },
+      "visible": true,
+      "params": {
+        "search": "f1=creator&as=1&sf=title&so=a&rm=&m1=e&p1=",
+        "quotes": "False",
+        "default": "",
+        "fields": "720%%a",
+        "link_text": "",
+        "key_class": "",
+        "separator": "<br>",
+        "value_class": "",
+        "escape": ""
+      },
+      "type": "global",
+      "order": 3
+    },
+    {
+      "machine_name": "conference_711%%%",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "ru": "\u041d\u0430\u0437\u0432\u0430\u043d\u0438\u0435 \u0441\u043e\u0431\u0440\u0430\u043d\u0438\u044f",
+        "fr": "Nom de la r\u00e9union",
+        "en": "Meeting Name",
+        "no": "Konferansetittel",
+        "zh_CN": "\u4f1a\u8bae\u540d\u79f0",
+        "ar": "\u0627\u0633\u0645 \u0627\u0644\u0627\u062c\u062a\u0645\u0627\u0639",
+        "es": "Nombre de congreso"
+      },
+      "visible": true,
+      "params": {
+        "subfield_order": "a,n,d,c",
+        "tag": "711%%%",
+        "instances_separator": "<br>",
+        "subfields_separator": ", ",
+        "escape": "0"
+      },
+      "type": "global",
+      "order": 4
+    },
+    {
+      "machine_name": "varianttitle_246%%",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "en": "Variant Title",
+        "no": "Alternativ tittel"
+      },
+      "visible": false,
+      "params": {
+        "subfield_order": "a,b",
+        "output_pattern": "",
+        "extension": "",
+        "instances_separator": "<br>",
+        "default": "",
+        "subfields_separator": "; ",
+        "tag": "246%%",
+        "escape": "0",
+        "max_instance_length": ""
+      },
+      "type": "global",
+      "order": 5
+    },
+    {
+      "machine_name": "local_246_880_linking",
+      "bfe": {
+        "obj_name": "BFE_TIND_FIELD_MULTI"
+      },
+      "labels": {
+        "en": "Variant Title"
+      },
+      "visible": true,
+      "params": {
+        "output_separator": "<br />",
+        "fields": "246%%",
+        "link_880": "yes",
+        "subfields_separator": ", ",
+        "escape": "0",
+        "exclude_numeric_subfields": "yes"
+      },
+      "type": "local",
+      "order": 6
+    },
+    {
+      "machine_name": "date_269%%",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "en": "Date",
+        "no": "Dato"
+      },
+      "visible": false,
+      "params": {
+        "subfield_order": "a,b",
+        "tag": "269%%",
+        "instances_separator": "<br>",
+        "subfields_separator": " - ",
+        "escape": "0"
+      },
+      "type": "global",
+      "order": 7
+    },
+    {
+      "machine_name": "datetext_260%%",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "en": "Date (Text)",
+        "no": "Dato (Tekst)"
+      },
+      "visible": false,
+      "params": {
+        "subfield_order": "",
+        "tag": "260%%c",
+        "instances_separator": "<br>",
+        "subfields_separator": " - ",
+        "escape": "0"
+      },
+      "type": "global",
+      "order": 8
+    },
+    {
+      "machine_name": "local_260_880_linking",
+      "bfe": {
+        "obj_name": "BFE_TIND_FIELD_MULTI"
+      },
+      "labels": {
+        "en": "Published"
+      },
+      "visible": true,
+      "params": {
+        "output_separator": "<br />",
+        "fields": "260%%",
+        "link_880": "yes",
+        "subfields_separator": ", ",
+        "escape": "0",
+        "exclude_numeric_subfields": "yes"
+      },
+      "type": "local",
+      "order": 9
+    },
+    {
+      "machine_name": "local_250_880_linking",
+      "bfe": {
+        "obj_name": "BFE_TIND_FIELD_MULTI"
+      },
+      "labels": {
+        "en": "Edition"
+      },
+      "visible": true,
+      "params": {
+        "output_separator": "<br />",
+        "fields": "250%%",
+        "link_880": "yes",
+        "subfields_separator": ", ",
+        "escape": "0",
+        "exclude_numeric_subfields": "yes"
+      },
+      "type": "local",
+      "order": 10
+    },
+    {
+      "machine_name": "externalresources_local",
+      "bfe": {
+        "obj_name": "BFE_MARC_8564p"
+      },
+      "labels": {
+        "en": "Link to Content"
+      },
+      "visible": true,
+      "params": {
+        "default": "",
+        "instance_separator": "<br>",
+        "escape": "",
+        "link_text": "",
+        "ind2": "2"
+      },
+      "type": "special_link",
+      "order": 11
+    },
+    {
+      "machine_name": "placeofcreation_260%%",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "en": "Place of Creation",
+        "no": "Skapelsessted"
+      },
+      "visible": false,
+      "params": {
+        "subfield_order": "",
+        "tag": "260%%a",
+        "instances_separator": "<br>",
+        "subfields_separator": ": ",
+        "escape": "0"
+      },
+      "type": "global",
+      "order": 12
+    },
+    {
+      "machine_name": "publisher_260%%",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "en": "Publisher",
+        "no": "Utgiver"
+      },
+      "visible": false,
+      "params": {
+        "subfield_order": "",
+        "tag": "260%%b",
+        "instances_separator": "<br>",
+        "subfields_separator": ": ",
+        "escape": "0"
+      },
+      "type": "global",
+      "order": 13
+    },
+    {
+      "machine_name": "collection_982",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "en": "Full Collection Name"
+      },
+      "visible": true,
+      "params": {
+        "subfield_order": "",
+        "output_pattern": "",
+        "extension": "",
+        "instances_separator": "<br>",
+        "default": "",
+        "subfields_separator": ", ",
+        "tag": "982%%b",
+        "escape": "0",
+        "max_instance_length": ""
+      },
+      "type": "local",
+      "order": 14
+    },
+    {
+      "machine_name": "series_490%%",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "en": "Series"
+      },
+      "visible": true,
+      "params": {
+        "subfield_order": "",
+        "tag": "490%%a",
+        "subfields_separator": ", ",
+        "instances_separator": "<br>"
+      },
+      "type": "local",
+      "order": 15
+    },
+    {
+      "machine_name": "isbn_020%%",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "ru": "ISBN",
+        "fr": "ISSB",
+        "en": "ISBN",
+        "no": "ISBN",
+        "zh_CN": "\u56fd\u9645\u56fe\u4e66\u7f16\u53f7",
+        "ar": "\u0627\u0644\u0631\u0642\u0645 \u0627\u0644\u062f\u0648\u0644\u064a \u0627\u0644\u0645\u0639\u064a\u0627\u0631\u064a \u0644\u0644\u0643\u062a\u0627\u0628",
+        "es": "ISBN"
+      },
+      "visible": true,
+      "params": {
+        "output_pattern": "%(a)s",
+        "tag": "020%%",
+        "instances_separator": "<br/> ",
+        "subfields_separator": " ",
+        "escape": "0"
+      },
+      "type": "global",
+      "order": 16
+    },
+    {
+      "machine_name": "issn_022%%",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "ru": "ISSN",
+        "fr": "ISSN",
+        "en": "ISSN",
+        "no": "ISSN",
+        "zh_CN": "\u56fd\u9645\u6807\u51c6\u671f\u520a\u7f16\u53f7",
+        "ar": "\u0627\u0644\u0631\u0642\u0645 \u0627\u0644\u062f\u0648\u0644\u064a \u0627\u0644\u0645\u0639\u064a\u0627\u0631\u064a \u0627\u0644\u0645\u0633\u0644\u0633\u0644",
+        "es": "ISSN"
+      },
+      "visible": true,
+      "params": {
+        "output_pattern": "%(a)s",
+        "tag": "022%%",
+        "instances_separator": "<br/> ",
+        "subfields_separator": " ",
+        "escape": "0"
+      },
+      "type": "global",
+      "order": 17
+    },
+    {
+      "machine_name": "doi_0247_",
+      "bfe": {
+        "obj_name": "BFE_DOI"
+      },
+      "labels": {
+        "ru": "DOI",
+        "fr": "DOI",
+        "en": "DOI",
+        "no": "DOI",
+        "zh_CN": "\u6570\u5b57\u5bf9\u8c61\u552f\u4e00\u6807\u8bc6\u7b26",
+        "ar": "\u0645\u0639\u0631\u0641 \u0627\u0644\u0648\u062b\u064a\u0642\u0629 \u0627\u0644\u0631\u0642\u0645\u064a\u0629",
+        "es": "DOI"
+      },
+      "visible": false,
+      "params": {
+        "default": "",
+        "description_location": "front",
+        "label": "",
+        "tag": "0247_",
+        "separator": "<br/> ",
+        "escape": ""
+      },
+      "type": "global",
+      "order": 18
+    },
+    {
+      "machine_name": "otheridentifiers_o12",
+      "bfe": {
+        "obj_name": "BFE_RELATED_IDENTIFIERS"
+      },
+      "labels": {
+        "en": "Other Identifiers",
+        "no": "Annet standardnummer"
+      },
+      "visible": false,
+      "params": {
+        "style": "",
+        "default": "",
+        "description_location": "end",
+        "print_doi": "No",
+        "separator": "<br/>",
+        "escape": "",
+        "tag_1": "02470",
+        "tag_2": ""
+      },
+      "type": "global",
+      "order": 19
+    },
+    {
+      "machine_name": "local_02480a",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "en": "Other Identifiers"
+      },
+      "visible": true,
+      "params": {
+        "subfield_order": "",
+        "tag": "02480a",
+        "instances_separator": "<br>",
+        "escape": "0"
+      },
+      "type": "local",
+      "order": 20
+    },
+    {
+      "machine_name": "subjectperson_o13",
+      "bfe": {
+        "obj_name": "BFE_FIELD_LINK_SEARCH"
+      },
+      "labels": {
+        "en": "Subject (Person)",
+        "no": "Omtalt person"
+      },
+      "visible": true,
+      "params": {
+        "search": "f1=subject&as=1&sf=title&so=a&rm=&m1=p&p1=",
+        "quotes": "False",
+        "default": "",
+        "fields": "600%%",
+        "link_text": "",
+        "key_class": "",
+        "separator": "<br> ",
+        "value_class": "",
+        "escape": "",
+        "field_separator": ", "
+      },
+      "type": "global",
+      "order": 21
+    },
+    {
+      "machine_name": "subjectcorporate_o14",
+      "bfe": {
+        "obj_name": "BFE_FIELD_LINK_SEARCH"
+      },
+      "labels": {
+        "en": "Subject (Corporate)",
+        "no": "Omtalt korporasjon"
+      },
+      "visible": true,
+      "params": {
+        "search": "f1=subject&as=1&sf=title&so=a&rm=&m1=p&p1=",
+        "quotes": "False",
+        "default": "",
+        "fields": "610%%a",
+        "link_text": "",
+        "key_class": "",
+        "separator": "<br> ",
+        "value_class": "",
+        "escape": ""
+      },
+      "type": "global",
+      "order": 22
+    },
+    {
+      "machine_name": "subjecttopic_o15",
+      "bfe": {
+        "obj_name": "BFE_FIELD_LINK_SEARCH"
+      },
+      "labels": {
+        "en": "Subject (Topic)",
+        "no": "Emneord"
+      },
+      "visible": true,
+      "params": {
+        "search": "f1=subject&as=1&sf=title&so=a&rm=&m1=p&p1=",
+        "quotes": "False",
+        "default": "",
+        "fields": "650%%a",
+        "link_text": "",
+        "key_class": "",
+        "separator": "<br> ",
+        "value_class": "",
+        "escape": ""
+      },
+      "type": "global",
+      "order": 23
+    },
+    {
+      "machine_name": "subjectmeeting611%%",
+      "bfe": {
+        "obj_name": "BFE_FIELD_LINK_SEARCH"
+      },
+      "labels": {
+        "en": "Subject (Meeting Name)"
+      },
+      "visible": true,
+      "params": {
+        "search": "f1=subject&as=1&sf=title&so=a&rm=&m1=a&p1=",
+        "quotes": "False",
+        "default": "",
+        "fields": "611%%a",
+        "link_text": "",
+        "key_class": "",
+        "separator": "<br> ",
+        "value_class": "",
+        "escape": ""
+      },
+      "type": "special_link",
+      "order": 24
+    },
+    {
+      "machine_name": "subjectmuniform630%%",
+      "bfe": {
+        "obj_name": "BFE_FIELD_LINK_SEARCH"
+      },
+      "labels": {
+        "en": "Subject (Uniform Title)"
+      },
+      "visible": true,
+      "params": {
+        "search": "f1=subject&as=1&sf=title&so=a&rm=&m1=a&p1=",
+        "quotes": "False",
+        "default": "",
+        "fields": "630%%a",
+        "link_text": "",
+        "key_class": "",
+        "separator": "<br> ",
+        "value_class": "",
+        "escape": ""
+      },
+      "type": "special_link",
+      "order": 25
+    },
+    {
+      "machine_name": "keyword_o16",
+      "bfe": {
+        "obj_name": "BFE_KEYWORDS"
+      },
+      "labels": {
+        "ru": "\u041a\u043b\u044e\u0447\u0435\u0432\u044b\u0435 \u0441\u043b\u043e\u0432\u0430",
+        "fr": "Mots-cl\u00e9",
+        "en": "Keyword",
+        "no": "Stikkord",
+        "zh_CN": "\u5173\u952e\u8bcd",
+        "ar": "\u0643\u0644\u0645\u0627\u062a \u0627\u0644\u0628\u062d\u062b",
+        "es": "Palabras clave"
+      },
+      "visible": true,
+      "params": {
+        "separator": " ; "
+      },
+      "type": "global",
+      "order": 26
+    },
+    {
+      "machine_name": "geographiccoverage_o17",
+      "bfe": {
+        "obj_name": "BFE_FIELD_LINK_SEARCH"
+      },
+      "labels": {
+        "en": "Geographic Coverage",
+        "no": "Stedsnavn"
+      },
+      "visible": true,
+      "params": {
+        "search": "f1=subject&as=1&sf=title&so=a&rm=&m1=p&p1=",
+        "quotes": "False",
+        "default": "",
+        "fields": "651%%a",
+        "link_text": "",
+        "key_class": "",
+        "separator": "<br>",
+        "value_class": "",
+        "escape": "",
+        "field_separator": ", "
+      },
+      "type": "global",
+      "order": 27
+    },
+    {
+      "machine_name": "credits_508%%",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "en": "Credits",
+        "no": "Andre bidragsytere"
+      },
+      "visible": true,
+      "params": {
+        "subfield_order": "",
+        "output_pattern": "",
+        "extension": "",
+        "instances_separator": "<br>",
+        "default": "",
+        "subfields_separator": ", ",
+        "tag": "508%%a",
+        "escape": "0",
+        "max_instance_length": ""
+      },
+      "type": "global",
+      "order": 28
+    },
+    {
+      "machine_name": "scale_255%%",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "en": "Scale"
+      },
+      "visible": true,
+      "params": {
+        "subfield_order": "",
+        "tag": "255%%a",
+        "subfields_separator": ", ",
+        "instances_separator": "<br>"
+      },
+      "type": "local",
+      "order": 29
+    },
+    {
+      "machine_name": "projection_255%%",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "en": "Projection"
+      },
+      "visible": true,
+      "params": {
+        "subfield_order": "",
+        "tag": "255%%b",
+        "subfields_separator": ", ",
+        "instances_separator": "<br>"
+      },
+      "type": "local",
+      "order": 30
+    },
+    {
+      "machine_name": "coordinates_255%%",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "en": "Coordinates",
+        "no": "Koordinater"
+      },
+      "visible": true,
+      "params": {
+        "subfield_order": "",
+        "output_pattern": "",
+        "extension": "",
+        "instances_separator": "<br>",
+        "default": "",
+        "subfields_separator": ", ",
+        "tag": "255%%c",
+        "escape": "0",
+        "max_instance_length": ""
+      },
+      "type": "global",
+      "order": 31
+    },
+    {
+      "machine_name": "local_392%%c",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "en": "Sheet Name"
+      },
+      "visible": true,
+      "params": {
+        "subfield_order": "",
+        "tag": "392%%c",
+        "subfields_separator": ", ",
+        "instances_separator": "<br>"
+      },
+      "type": "local",
+      "order": 32
+    },
+    {
+      "machine_name": "local_392%%d",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "en": "Sheet Number"
+      },
+      "visible": true,
+      "params": {
+        "subfield_order": "",
+        "tag": "392%%d",
+        "subfields_separator": ", ",
+        "instances_separator": "<br>"
+      },
+      "type": "local",
+      "order": 33
+    },
+    {
+      "machine_name": "type_336%%",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "en": "Type",
+        "no": "Type"
+      },
+      "visible": true,
+      "params": {
+        "subfield_order": "",
+        "tag": "336%%a",
+        "instances_separator": "<br>",
+        "subfields_separator": ", ",
+        "escape": "0"
+      },
+      "type": "global",
+      "order": 34
+    },
+    {
+      "machine_name": "format_o21",
+      "bfe": {
+        "obj_name": "BFE_FIELD_LINK_SEARCH"
+      },
+      "labels": {
+        "en": "Format",
+        "no": "Format"
+      },
+      "visible": true,
+      "params": {
+        "search": "f1=subject&as=1&sf=title&so=a&rm=&m1=p&p1=",
+        "quotes": "False",
+        "default": "",
+        "fields": "655%%a",
+        "link_text": "",
+        "key_class": "",
+        "separator": "<br>",
+        "value_class": "",
+        "escape": ""
+      },
+      "type": "global",
+      "order": 35
+    },
+    {
+      "machine_name": "extent_300%%",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "en": "Extent",
+        "no": "Omfang"
+      },
+      "visible": true,
+      "params": {
+        "subfield_order": "",
+        "tag": "300%%a",
+        "instances_separator": "<br>",
+        "escape": "0"
+      },
+      "type": "global",
+      "order": 36
+    },
+    {
+      "machine_name": "otherphysicaldetails_300%%",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "en": "Other Physical Details",
+        "no": "Annen fysisk informasjon"
+      },
+      "visible": true,
+      "params": {
+        "subfield_order": "",
+        "tag": "300%%b",
+        "instances_separator": "<br>",
+        "escape": "0"
+      },
+      "type": "global",
+      "order": 37
+    },
+    {
+      "machine_name": "dimensions_300%%",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "en": "Dimensions",
+        "no": "St\u00f8rrelse"
+      },
+      "visible": true,
+      "params": {
+        "subfield_order": "",
+        "tag": "300%%c",
+        "instances_separator": "<br>",
+        "escape": "0"
+      },
+      "type": "global",
+      "order": 38
+    },
+    {
+      "machine_name": "duration_306%%",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "en": "Duration",
+        "no": "Varighet"
+      },
+      "visible": true,
+      "params": {
+        "subfield_order": "",
+        "output_pattern": "",
+        "extension": "",
+        "instances_separator": "<br>",
+        "default": "",
+        "subfields_separator": ", ",
+        "tag": "306%%a",
+        "escape": "0",
+        "max_instance_length": ""
+      },
+      "type": "global",
+      "order": 39
+    },
+    {
+      "machine_name": "physicalmedium_340%%",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "en": "Physical Medium",
+        "no": "B\u00e6rende materiale"
+      },
+      "visible": true,
+      "params": {
+        "subfield_order": "",
+        "tag": "340%%a",
+        "instances_separator": "<br>",
+        "escape": "0"
+      },
+      "type": "global",
+      "order": 40
+    },
+    {
+      "machine_name": "colourbw_340%%",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "en": "Colour/ B&W",
+        "no": "Farge/Svart-hvitt"
+      },
+      "visible": true,
+      "params": {
+        "subfield_order": "",
+        "tag": "340%%g",
+        "instances_separator": "<br>",
+        "escape": "0"
+      },
+      "type": "global",
+      "order": 41
+    },
+    {
+      "machine_name": "technicalspecifications_340%%",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "en": "Technical Specifications",
+        "no": "Tekniske spesifikasjoner"
+      },
+      "visible": true,
+      "params": {
+        "subfield_order": "",
+        "tag": "340%%i",
+        "instances_separator": "<br>",
+        "escape": "0"
+      },
+      "type": "global",
+      "order": 42
+    },
+    {
+      "machine_name": "language_546%%",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "ru": "\u042f\u0437\u044b\u043a(\u0438)",
+        "fr": "Langue",
+        "en": "Language",
+        "no": "Spr\u00e5k",
+        "zh_CN": "\u8bed\u8a00",
+        "ar": "\u0627\u0644\u0644\u063a\u0629(\u0644\u063a\u0627\u062a)",
+        "es": "Lengua(s)"
+      },
+      "visible": true,
+      "params": {
+        "subfield_order": "",
+        "tag": "546%%a",
+        "instances_separator": "<br>",
+        "escape": "0"
+      },
+      "type": "global",
+      "order": 43
+    },
+    {
+      "machine_name": "Language_041%%a",
+      "bfe": {
+        "obj_name": "BFE_VAL_FROM_TO"
+      },
+      "labels": {
+        "en": "Language",
+        "no": "Spr\u00e5k"
+      },
+      "visible": false,
+      "params": {
+        "dict_from_to": "{\n    \"aar\": {\"en\": \"Afar\"},\n    \"abk\": {\"en\": \"Abkhaz\"},\n    \"ace\": {\"en\": \"Achinese\"},\n    \"ach\": {\"en\": \"Acoli\"},\n    \"ada\": {\"en\": \"Adangme\"},\n    \"ady\": {\"en\": \"Adygei\"},\n    \"afa\": {\"en\": \"Afroasiatic (Other)\"},\n    \"afh\": {\"en\": \"Afrihili (Artificial language)\"},\n    \"afr\": {\"en\": \"Afrikaans\"},\n    \"ain\": {\"en\": \"Ainu\"},\n    \"-ajm\": {\"en\": \"Aljam\u00eda\"},\n    \"aka\": {\"en\": \"Akan\"},\n    \"akk\": {\"en\": \"Akkadian\"},\n    \"alb\": {\"en\": \"Albanian\"},\n    \"ale\": {\"en\": \"Aleut\"},\n    \"alg\": {\"en\": \"Algonquian (Other)\"},\n    \"alt\": {\"en\": \"Altai\"},\n    \"amh\": {\"en\": \"Amharic\"},\n    \"ang\": {\"en\": \"English, Old (ca. 450-1100)\"},\n    \"anp\": {\"en\": \"Angika\"},\n    \"apa\": {\"en\": \"Apache languages\"},\n    \"ara\": {\"en\": \"Arabic\"},\n    \"arc\": {\"en\": \"Aramaic\"},\n    \"arg\": {\"en\": \"Aragonese\"},\n    \"arm\": {\"en\": \"Armenian\"},\n    \"arn\": {\"en\": \"Mapuche\"},\n    \"arp\": {\"en\": \"Arapaho\"},\n    \"art\": {\"en\": \"Artificial (Other)\"},\n    \"arw\": {\"en\": \"Arawak\"},\n    \"asm\": {\"en\": \"Assamese\"},\n    \"ast\": {\"en\": \"Bable\"},\n    \"ath\": {\"en\": \"Athapascan (Other)\"},\n    \"aus\": {\"en\": \"Australian languages\"},\n    \"ava\": {\"en\": \"Avaric\"},\n    \"ave\": {\"en\": \"Avestan\"},\n    \"awa\": {\"en\": \"Awadhi\"},\n    \"aym\": {\"en\": \"Aymara\"},\n    \"aze\": {\"en\": \"Azerbaijani\"},\n    \"bad\": {\"en\": \"Banda languages\"},\n    \"bai\": {\"en\": \"Bamileke languages\"},\n    \"bak\": {\"en\": \"Bashkir\"},\n    \"bal\": {\"en\": \"Baluchi\"},\n    \"bam\": {\"en\": \"Bambara\"},\n    \"ban\": {\"en\": \"Balinese\"},\n    \"baq\": {\"en\": \"Basque\"},\n    \"bas\": {\"en\": \"Basa\"},\n    \"bat\": {\"en\": \"Baltic (Other)\"},\n    \"bej\": {\"en\": \"Beja\"},\n    \"bel\": {\"en\": \"Belarusian\"},\n    \"bem\": {\"en\": \"Bemba\"},\n    \"ben\": {\"en\": \"Bengali\"},\n    \"ber\": {\"en\": \"Berber (Other)\"},\n    \"bho\": {\"en\": \"Bhojpuri\"},\n    \"bih\": {\"en\": \"Bihari (Other)\"},\n    \"bik\": {\"en\": \"Bikol\"},\n    \"bin\": {\"en\": \"Edo\"},\n    \"bis\": {\"en\": \"Bislama\"},\n    \"bla\": {\"en\": \"Siksika\"},\n    \"bnt\": {\"en\": \"Bantu (Other)\"},\n    \"bos\": {\"en\": \"Bosnian\"},\n    \"bra\": {\"en\": \"Braj\"},\n    \"bre\": {\"en\": \"Breton\"},\n    \"btk\": {\"en\": \"Batak\"},\n    \"bua\": {\"en\": \"Buriat\"},\n    \"bug\": {\"en\": \"Bugis\"},\n    \"bul\": {\"en\": \"Bulgarian\"},\n    \"bur\": {\"en\": \"Burmese\"},\n    \"byn\": {\"en\": \"Bilin\"},\n    \"cad\": {\"en\": \"Caddo\"},\n    \"cai\": {\"en\": \"Central American Indian (Other)\"},\n    \"-cam\": {\"en\": \"Khmer\"},\n    \"car\": {\"en\": \"Carib\"},\n    \"cat\": {\"en\": \"Catalan\"},\n    \"cau\": {\"en\": \"Caucasian (Other)\"},\n    \"ceb\": {\"en\": \"Cebuano\"},\n    \"cel\": {\"en\": \"Celtic (Other)\"},\n    \"cha\": {\"en\": \"Chamorro\"},\n    \"chb\": {\"en\": \"Chibcha\"},\n    \"che\": {\"en\": \"Chechen\"},\n    \"chg\": {\"en\": \"Chagatai\"},\n    \"chi\": {\"en\": \"Chinese\"},\n    \"chk\": {\"en\": \"Chuukese\"},\n    \"chm\": {\"en\": \"Mari\"},\n    \"chn\": {\"en\": \"Chinook jargon\"},\n    \"cho\": {\"en\": \"Choctaw\"},\n    \"chp\": {\"en\": \"Chipewyan\"},\n    \"chr\": {\"en\": \"Cherokee\"},\n    \"chu\": {\"en\": \"Church Slavic\"},\n    \"chv\": {\"en\": \"Chuvash\"},\n    \"chy\": {\"en\": \"Cheyenne\"},\n    \"cmc\": {\"en\": \"Chamic languages\"},\n    \"cop\": {\"en\": \"Coptic\"},\n    \"cor\": {\"en\": \"Cornish\"},\n    \"cos\": {\"en\": \"Corsican\"},\n    \"cpe\": {\"en\": \"Creoles and Pidgins, English-based (Other)\"},\n    \"cpf\": {\"en\": \"Creoles and Pidgins, French-based (Other)\"},\n    \"cpp\": {\"en\": \"Creoles and Pidgins, Portuguese-based (Other)\"},\n    \"cre\": {\"en\": \"Cree\"},\n    \"crh\": {\"en\": \"Crimean Tatar\"},\n    \"crp\": {\"en\": \"Creoles and Pidgins (Other)\"},\n    \"csb\": {\"en\": \"Kashubian\"},\n    \"cus\": {\"en\": \"Cushitic (Other)\"},\n    \"cze\": {\"en\": \"Czech\"},\n    \"dak\": {\"en\": \"Dakota\"},\n    \"dan\": {\"en\": \"Danish\"},\n    \"dar\": {\"en\": \"Dargwa\"},\n    \"day\": {\"en\": \"Dayak\"},\n    \"del\": {\"en\": \"Delaware\"},\n    \"den\": {\"en\": \"Slavey\"},\n    \"dgr\": {\"en\": \"Dogrib\"},\n    \"din\": {\"en\": \"Dinka\"},\n    \"div\": {\"en\": \"Divehi\"},\n    \"doi\": {\"en\": \"Dogri\"},\n    \"dra\": {\"en\": \"Dravidian (Other)\"},\n    \"dsb\": {\"en\": \"Lower Sorbian\"},\n    \"dua\": {\"en\": \"Duala\"},\n    \"dum\": {\"en\": \"Dutch, Middle (ca. 1050-1350)\"},\n    \"dut\": {\"en\": \"Dutch\"},\n    \"dyu\": {\"en\": \"Dyula\"},\n    \"dzo\": {\"en\": \"Dzongkha\"},\n    \"efi\": {\"en\": \"Efik\"},\n    \"egy\": {\"en\": \"Egyptian\"},\n    \"eka\": {\"en\": \"Ekajuk\"},\n    \"elx\": {\"en\": \"Elamite\"},\n    \"eng\": {\"en\": \"English\"},\n    \"enm\": {\"en\": \"English, Middle (1100-1500)\"},\n    \"epo\": {\"en\": \"Esperanto\"},\n    \"-esk\": {\"en\": \"Eskimo languages\"},\n    \"-esp\": {\"en\": \"Esperanto\"},\n    \"est\": {\"en\": \"Estonian\"},\n    \"-eth\": {\"en\": \"Ethiopic\"},\n    \"ewe\": {\"en\": \"Ewe\"},\n    \"ewo\": {\"en\": \"Ewondo\"},\n    \"fan\": {\"en\": \"Fang\"},\n    \"fao\": {\"en\": \"Faroese\"},\n    \"-far\": {\"en\": \"Faroese\"},\n    \"fat\": {\"en\": \"Fanti\"},\n    \"fij\": {\"en\": \"Fijian\"},\n    \"fil\": {\"en\": \"Filipino\"},\n    \"fin\": {\"en\": \"Finnish\"},\n    \"fiu\": {\"en\": \"Finno-Ugrian (Other)\"},\n    \"fon\": {\"en\": \"Fon\"},\n    \"fre\": {\"en\": \"French\"},\n    \"-fri\": {\"en\": \"Frisian\"},\n    \"frm\": {\"en\": \"French, Middle (ca. 1300-1600)\"},\n    \"fro\": {\"en\": \"French, Old (ca. 842-1300)\"},\n    \"frr\": {\"en\": \"North Frisian\"},\n    \"frs\": {\"en\": \"East Frisian\"},\n    \"fry\": {\"en\": \"Frisian\"},\n    \"ful\": {\"en\": \"Fula\"},\n    \"fur\": {\"en\": \"Friulian\"},\n    \"gaa\": {\"en\": \"G\u00e3\"},\n    \"-gae\": {\"en\": \"Scottish Gaelix\"},\n    \"-gag\": {\"en\": \"Galician\"},\n    \"-gal\": {\"en\": \"Oromo\"},\n    \"gay\": {\"en\": \"Gayo\"},\n    \"gba\": {\"en\": \"Gbaya\"},\n    \"gem\": {\"en\": \"Germanic (Other)\"},\n    \"geo\": {\"en\": \"Georgian\"},\n    \"ger\": {\"en\": \"German\"},\n    \"gez\": {\"en\": \"Ethiopic\"},\n    \"gil\": {\"en\": \"Gilbertese\"},\n    \"gla\": {\"en\": \"Scottish Gaelic\"},\n    \"gle\": {\"en\": \"Irish\"},\n    \"glg\": {\"en\": \"Galician\"},\n    \"glv\": {\"en\": \"Manx\"},\n    \"gmh\": {\"en\": \"German, Middle High (ca. 1050-1500)\"},\n    \"goh\": {\"en\": \"German, Old High (ca. 750-1050)\"},\n    \"gon\": {\"en\": \"Gondi\"},\n    \"gor\": {\"en\": \"Gorontalo\"},\n    \"got\": {\"en\": \"Gothic\"},\n    \"grb\": {\"en\": \"Grebo\"},\n    \"grc\": {\"en\": \"Greek, Ancient (to 1453)\"},\n    \"gre\": {\"en\": \"Greek, Modern (1453-)\"},\n    \"grn\": {\"en\": \"Guarani\"},\n    \"gsw\": {\"en\": \"Swiss German\"},\n    \"-gua\": {\"en\": \"Guarani\"},\n    \"guj\": {\"en\": \"Gujarati\"},\n    \"gwi\": {\"en\": \"Gwichin\"},\n    \"hai\": {\"en\": \"Haida\"},\n    \"hat\": {\"en\": \"Haitian French Creole\"},\n    \"hau\": {\"en\": \"Hausa\"},\n    \"haw\": {\"en\": \"Hawaiian\"},\n    \"heb\": {\"en\": \"Hebrew\"},\n    \"her\": {\"en\": \"Herero\"},\n    \"hil\": {\"en\": \"Hiligaynon\"},\n    \"him\": {\"en\": \"Western Pahari languages\"},\n    \"hin\": {\"en\": \"Hindi\"},\n    \"hit\": {\"en\": \"Hittite\"},\n    \"hmn\": {\"en\": \"Hmong\"},\n    \"hmo\": {\"en\": \"Hiri Motu\"},\n    \"hrv\": {\"en\": \"Croatian\"},\n    \"hsb\": {\"en\": \"Upper Sorbian\"},\n    \"hun\": {\"en\": \"Hungarian\"},\n    \"hup\": {\"en\": \"Hupa\"},\n    \"iba\": {\"en\": \"Iban\"},\n    \"ibo\": {\"en\": \"Igbo\"},\n    \"ice\": {\"en\": \"Icelandic\"},\n    \"ido\": {\"en\": \"Ido\"},\n    \"iii\": {\"en\": \"Sichuan Yi\"},\n    \"ijo\": {\"en\": \"Ijo\"},\n    \"iku\": {\"en\": \"Inuktitut\"},\n    \"ile\": {\"en\": \"Interlingue\"},\n    \"ilo\": {\"en\": \"Iloko\"},\n    \"ina\": {\"en\": \"Interlingua (International Auxiliary Language Association)\"},\n    \"inc\": {\"en\": \"Indic (Other)\"},\n    \"ind\": {\"en\": \"Indonesian\"},\n    \"ine\": {\"en\": \"Indo-European (Other)\"},\n    \"inh\": {\"en\": \"Ingush\"},\n    \"-int\": {\"en\": \"Interlingua (International Auxiliary Language Association)\"},\n    \"ipk\": {\"en\": \"Inupiaq\"},\n    \"ira\": {\"en\": \"Iranian (Other)\"},\n    \"-iri\": {\"en\": \"Irish\"},\n    \"iro\": {\"en\": \"Iroquoian (Other)\"},\n    \"ita\": {\"en\": \"Italian\"},\n    \"jav\": {\"en\": \"Javanese\"},\n    \"jbo\": {\"en\": \"Lojban (Artificial language)\"},\n    \"jpn\": {\"en\": \"Japanese\"},\n    \"jpr\": {\"en\": \"Judeo-Persian\"},\n    \"jrb\": {\"en\": \"Judeo-Arabic\"},\n    \"kaa\": {\"en\": \"Kara-Kalpak\"},\n    \"kab\": {\"en\": \"Kabyle\"},\n    \"kac\": {\"en\": \"Kachin\"},\n    \"kal\": {\"en\": \"Kal\u00e2tdlisut\"},\n    \"kam\": {\"en\": \"Kamba\"},\n    \"kan\": {\"en\": \"Kannada\"},\n    \"kar\": {\"en\": \"Karen languages\"},\n    \"kas\": {\"en\": \"Kashmiri\"},\n    \"kau\": {\"en\": \"Kanuri\"},\n    \"kaw\": {\"en\": \"Kawi\"},\n    \"kaz\": {\"en\": \"Kazakh\"},\n    \"kbd\": {\"en\": \"Kabardian\"},\n    \"kha\": {\"en\": \"Khasi\"},\n    \"khi\": {\"en\": \"Khoisan (Other)\"},\n    \"khm\": {\"en\": \"Khmer\"},\n    \"kho\": {\"en\": \"Khotanese\"},\n    \"kik\": {\"en\": \"Kikuyu\"},\n    \"kin\": {\"en\": \"Kinyarwanda\"},\n    \"kir\": {\"en\": \"Kyrgyz\"},\n    \"kmb\": {\"en\": \"Kimbundu\"},\n    \"kok\": {\"en\": \"Konkani\"},\n    \"kom\": {\"en\": \"Komi\"},\n    \"kon\": {\"en\": \"Kongo\"},\n    \"kor\": {\"en\": \"Korean\"},\n    \"kos\": {\"en\": \"Kosraean\"},\n    \"kpe\": {\"en\": \"Kpelle\"},\n    \"krc\": {\"en\": \"Karachay-Balkar\"},\n    \"krl\": {\"en\": \"Karelian\"},\n    \"kro\": {\"en\": \"Kru (Other)\"},\n    \"kru\": {\"en\": \"Kurukh\"},\n    \"kua\": {\"en\": \"Kuanyama\"},\n    \"kum\": {\"en\": \"Kumyk\"},\n    \"kur\": {\"en\": \"Kurdish\"},\n    \"-kus\": {\"en\": \"Kusaie\"},\n    \"kut\": {\"en\": \"Kootenai\"},\n    \"lad\": {\"en\": \"Ladino\"},\n    \"lah\": {\"en\": \"Lahnd\u0101\"},\n    \"lam\": {\"en\": \"Lamba (Zambia and Congo)\"},\n    \"-lan\": {\"en\": \"Occitan (post 1500)\"},\n    \"lao\": {\"en\": \"Lao\"},\n    \"-lap\": {\"en\": \"Sami\"},\n    \"lat\": {\"en\": \"Latin\"},\n    \"lav\": {\"en\": \"Latvian\"},\n    \"lez\": {\"en\": \"Lezgian\"},\n    \"lim\": {\"en\": \"Limburgish\"},\n    \"lin\": {\"en\": \"Lingala\"},\n    \"lit\": {\"en\": \"Lithuanian\"},\n    \"lol\": {\"en\": \"Mongo-Nkundu\"},\n    \"loz\": {\"en\": \"Lozi\"},\n    \"ltz\": {\"en\": \"Luxembourgish\"},\n    \"lua\": {\"en\": \"Luba-Lulua\"},\n    \"lub\": {\"en\": \"Luba-Katanga\"},\n    \"lug\": {\"en\": \"Ganda\"},\n    \"lui\": {\"en\": \"Luise\u00f1o\"},\n    \"lun\": {\"en\": \"Lunda\"},\n    \"luo\": {\"en\": \"Luo (Kenya and Tanzania)\"},\n    \"lus\": {\"en\": \"Lushai\"},\n    \"mac\": {\"en\": \"Macedonian\"},\n    \"mad\": {\"en\": \"Madurese\"},\n    \"mag\": {\"en\": \"Magahi\"},\n    \"mah\": {\"en\": \"Marshallese\"},\n    \"mai\": {\"en\": \"Maithili\"},\n    \"mak\": {\"en\": \"Makasar\"},\n    \"mal\": {\"en\": \"Malayalam\"},\n    \"man\": {\"en\": \"Mandingo\"},\n    \"mao\": {\"en\": \"Maori\"},\n    \"map\": {\"en\": \"Austronesian (Other)\"},\n    \"mar\": {\"en\": \"Marathi\"},\n    \"mas\": {\"en\": \"Maasai\"},\n    \"-max\": {\"en\": \"Manx\"},\n    \"may\": {\"en\": \"Malay\"},\n    \"mdf\": {\"en\": \"Moksha\"},\n    \"mdr\": {\"en\": \"Mandar\"},\n    \"men\": {\"en\": \"Mende\"},\n    \"mga\": {\"en\": \"Irish, Middle (ca. 1100-1550)\"},\n    \"mic\": {\"en\": \"Micmac\"},\n    \"min\": {\"en\": \"Minangkabau\"},\n    \"mis\": {\"en\": \"Miscellaneous languages\"},\n    \"mkh\": {\"en\": \"Mon-Khmer (Other)\"},\n    \"-mla\": {\"en\": \"Malagasy\"},\n    \"mlg\": {\"en\": \"Malagasy\"},\n    \"mlt\": {\"en\": \"Maltese\"},\n    \"mnc\": {\"en\": \"Manchu\"},\n    \"mni\": {\"en\": \"Manipuri\"},\n    \"mno\": {\"en\": \"Manobo languages\"},\n    \"moh\": {\"en\": \"Mohawk\"},\n    \"-mol\": {\"en\": \"Moldavian\"},\n    \"mon\": {\"en\": \"Mongolian\"},\n    \"mos\": {\"en\": \"Moor\u00e9\"},\n    \"mul\": {\"en\": \"Multiple languages\"},\n    \"mun\": {\"en\": \"Munda (Other)\"},\n    \"mus\": {\"en\": \"Creek\"},\n    \"mwl\": {\"en\": \"Mirandese\"},\n    \"mwr\": {\"en\": \"Marwari\"},\n    \"myn\": {\"en\": \"Mayan languages\"},\n    \"myv\": {\"en\": \"Erzya\"},\n    \"nah\": {\"en\": \"Nahuatl\"},\n    \"nai\": {\"en\": \"North American Indian (Other)\"},\n    \"nap\": {\"en\": \"Neapolitan Italian\"},\n    \"nau\": {\"en\": \"Nauru\"},\n    \"nav\": {\"en\": \"Navajo\"},\n    \"nbl\": {\"en\": \"Ndebele (South Africa)\"},\n    \"nde\": {\"en\": \"Ndebele (Zimbabwe)\"},\n    \"ndo\": {\"en\": \"Ndonga\"},\n    \"nds\": {\"en\": \"Low German\"},\n    \"nep\": {\"en\": \"Nepali\"},\n    \"new\": {\"en\": \"Newari\"},\n    \"nia\": {\"en\": \"Nias\"},\n    \"nic\": {\"en\": \"Niger-Kordofanian (Other)\"},\n    \"niu\": {\"en\": \"Niuean\"},\n    \"nno\": {\"en\": \"Norwegian (Nynorsk)\"},\n    \"nob\": {\"en\": \"Norwegian (Bokm\u00e5l)\"},\n    \"nog\": {\"en\": \"Nogai\"},\n    \"non\": {\"en\": \"Old Norse\"},\n    \"nor\": {\"en\": \"Norwegian\"},\n    \"nqo\": {\"en\": \"NKo\"},\n    \"nso\": {\"en\": \"Northern Sotho\"},\n    \"nub\": {\"en\": \"Nubian languages\"},\n    \"nwc\": {\"en\": \"Newari, Old\"},\n    \"nya\": {\"en\": \"Nyanja\"},\n    \"nym\": {\"en\": \"Nyamwezi\"},\n    \"nyn\": {\"en\": \"Nyankole\"},\n    \"nyo\": {\"en\": \"Nyoro\"},\n    \"nzi\": {\"en\": \"Nzima\"},\n    \"oci\": {\"en\": \"Occitan (post-1500)\"},\n    \"oji\": {\"en\": \"Ojibwa\"},\n    \"ori\": {\"en\": \"Oriya\"},\n    \"orm\": {\"en\": \"Oromo\"},\n    \"osa\": {\"en\": \"Osage\"},\n    \"oss\": {\"en\": \"Ossetic\"},\n    \"ota\": {\"en\": \"Turkish, Ottoman\"},\n    \"oto\": {\"en\": \"Otomian languages\"},\n    \"paa\": {\"en\": \"Papuan (Other)\"},\n    \"pag\": {\"en\": \"Pangasinan\"},\n    \"pal\": {\"en\": \"Pahlavi\"},\n    \"pam\": {\"en\": \"Pampanga\"},\n    \"pan\": {\"en\": \"Panjabi\"},\n    \"pap\": {\"en\": \"Papiamento\"},\n    \"pau\": {\"en\": \"Palauan\"},\n    \"peo\": {\"en\": \"Old Persian (ca. 600-400 B.C.)\"},\n    \"per\": {\"en\": \"Persian\"},\n    \"phi\": {\"en\": \"Philippine (Other)\"},\n    \"phn\": {\"en\": \"Phoenician\"},\n    \"pli\": {\"en\": \"Pali\"},\n    \"pol\": {\"en\": \"Polish\"},\n    \"pon\": {\"en\": \"Pohnpeian\"},\n    \"por\": {\"en\": \"Portuguese\"},\n    \"pra\": {\"en\": \"Prakrit languages\"},\n    \"pro\": {\"en\": \"Proven\u00e7al (to 1500)\"},\n    \"pus\": {\"en\": \"Pushto\"},\n    \"que\": {\"en\": \"Quechua\"},\n    \"raj\": {\"en\": \"Rajasthani\"},\n    \"rap\": {\"en\": \"Rapanui\"},\n    \"rar\": {\"en\": \"Rarotongan\"},\n    \"roa\": {\"en\": \"Romance (Other)\"},\n    \"roh\": {\"en\": \"Raeto-Romance\"},\n    \"rom\": {\"en\": \"Romani\"},\n    \"rum\": {\"en\": \"Romanian\"},\n    \"run\": {\"en\": \"Rundi\"},\n    \"rup\": {\"en\": \"Aromanian\"},\n    \"rus\": {\"en\": \"Russian\"},\n    \"sad\": {\"en\": \"Sandawe\"},\n    \"sag\": {\"en\": \"Sango (Ubangi Creole)\"},\n    \"sah\": {\"en\": \"Yakut\"},\n    \"sai\": {\"en\": \"South American Indian (Other)\"},\n    \"sal\": {\"en\": \"Salishan languages\"},\n    \"sam\": {\"en\": \"Samaritan Aramaic\"},\n    \"san\": {\"en\": \"Sanskrit\"},\n    \"-sao\": {\"en\": \"Samoan\"},\n    \"sas\": {\"en\": \"Sasak\"},\n    \"sat\": {\"en\": \"Santali\"},\n    \"-scc\": {\"en\": \"Serbian\"},\n    \"scn\": {\"en\": \"Sicilian Italian\"},\n    \"sco\": {\"en\": \"Scots\"},\n    \"-scr\": {\"en\": \"Croatian\"},\n    \"sel\": {\"en\": \"Selkup\"},\n    \"sem\": {\"en\": \"Semitic (Other)\"},\n    \"sga\": {\"en\": \"Irish, Old (to 1100)\"},\n    \"sgn\": {\"en\": \"Sign languages\"},\n    \"shn\": {\"en\": \"Shan\"},\n    \"-sho\": {\"en\": \"Shona\"},\n    \"sid\": {\"en\": \"Sidamo\"},\n    \"sin\": {\"en\": \"Sinhalese\"},\n    \"sio\": {\"en\": \"Siouan (Other)\"},\n    \"sit\": {\"en\": \"Sino-Tibetan (Other)\"},\n    \"sla\": {\"en\": \"Slavic (Other)\"},\n    \"slo\": {\"en\": \"Slovak\"},\n    \"slv\": {\"en\": \"Slovenian\"},\n    \"sma\": {\"en\": \"Southern Sami\"},\n    \"sme\": {\"en\": \"Northern Sami\"},\n    \"smi\": {\"en\": \"Sami\"},\n    \"smj\": {\"en\": \"Lule Sami\"},\n    \"smn\": {\"en\": \"Inari Sami\"},\n    \"smo\": {\"en\": \"Samoan\"},\n    \"sms\": {\"en\": \"Skolt Sami\"},\n    \"sna\": {\"en\": \"Shona\"},\n    \"snd\": {\"en\": \"Sindhi\"},\n    \"-snh\": {\"en\": \"Sinhalese\"},\n    \"snk\": {\"en\": \"Soninke\"},\n    \"sog\": {\"en\": \"Sogdian\"},\n    \"som\": {\"en\": \"Somali\"},\n    \"son\": {\"en\": \"Songhai\"},\n    \"sot\": {\"en\": \"Sotho\"},\n    \"spa\": {\"en\": \"Spanish\"},\n    \"srd\": {\"en\": \"Sardinian\"},\n    \"srn\": {\"en\": \"Sranan\"},\n    \"srp\": {\"en\": \"Serbian\"},\n    \"srr\": {\"en\": \"Serer\"},\n    \"ssa\": {\"en\": \"Nilo-Saharan (Other)\"},\n    \"-sso\": {\"en\": \"Sotho\"},\n    \"ssw\": {\"en\": \"Swazi\"},\n    \"suk\": {\"en\": \"Sukuma\"},\n    \"sun\": {\"en\": \"Sundanese\"},\n    \"sus\": {\"en\": \"Susu\"},\n    \"sux\": {\"en\": \"Sumerian\"},\n    \"swa\": {\"en\": \"Swahili\"},\n    \"swe\": {\"en\": \"Swedish\"},\n    \"-swz\": {\"en\": \"Swazi\"},\n    \"syc\": {\"en\": \"Syriac\"},\n    \"syr\": {\"en\": \"Syriac, Modern\"},\n    \"-tag\": {\"en\": \"Tagalog\"},\n    \"tah\": {\"en\": \"Tahitian\"},\n    \"tai\": {\"en\": \"Tai (Other)\"},\n    \"-taj\": {\"en\": \"Tajik\"},\n    \"tam\": {\"en\": \"Tamil\"},\n    \"-tar\": {\"en\": \"Tatar\"},\n    \"tat\": {\"en\": \"Tatar\"},\n    \"tel\": {\"en\": \"Telugu\"},\n    \"tem\": {\"en\": \"Temne\"},\n    \"ter\": {\"en\": \"Terena\"},\n    \"tet\": {\"en\": \"Tetum\"},\n    \"tgk\": {\"en\": \"Tajik\"},\n    \"tgl\": {\"en\": \"Tagalog\"},\n    \"tha\": {\"en\": \"Thai\"},\n    \"tib\": {\"en\": \"Tibetan\"},\n    \"tig\": {\"en\": \"Tigr\u00e9\"},\n    \"tir\": {\"en\": \"Tigrinya\"},\n    \"tiv\": {\"en\": \"Tiv\"},\n    \"tkl\": {\"en\": \"Tokelauan\"},\n    \"tlh\": {\"en\": \"Klingon (Artificial language)\"},\n    \"tli\": {\"en\": \"Tlingit\"},\n    \"tmh\": {\"en\": \"Tamashek\"},\n    \"tog\": {\"en\": \"Tonga (Nyasa)\"},\n    \"ton\": {\"en\": \"Tongan\"},\n    \"tpi\": {\"en\": \"Tok Pisin\"},\n    \"-tru\": {\"en\": \"Truk\"},\n    \"tsi\": {\"en\": \"Tsimshian\"},\n    \"tsn\": {\"en\": \"Tswana\"},\n    \"tso\": {\"en\": \"Tsonga\"},\n    \"-tsw\": {\"en\": \"Tswana\"},\n    \"tuk\": {\"en\": \"Turkmen\"},\n    \"tum\": {\"en\": \"Tumbuka\"},\n    \"tup\": {\"en\": \"Tupi languages\"},\n    \"tur\": {\"en\": \"Turkish\"},\n    \"tut\": {\"en\": \"Altaic (Other)\"},\n    \"tvl\": {\"en\": \"Tuvaluan\"},\n    \"twi\": {\"en\": \"Twi\"},\n    \"tyv\": {\"en\": \"Tuvinian\"},\n    \"udm\": {\"en\": \"Udmurt\"},\n    \"uga\": {\"en\": \"Ugaritic\"},\n    \"uig\": {\"en\": \"Uighur\"},\n    \"ukr\": {\"en\": \"Ukrainian\"},\n    \"umb\": {\"en\": \"Umbundu\"},\n    \"und\": {\"en\": \"Undetermined\"},\n    \"urd\": {\"en\": \"Urdu\"},\n    \"uzb\": {\"en\": \"Uzbek\"},\n    \"vai\": {\"en\": \"Vai\"},\n    \"ven\": {\"en\": \"Venda\"},\n    \"vie\": {\"en\": \"Vietnamese\"},\n    \"vol\": {\"en\": \"Volap\u00fck\"},\n    \"vot\": {\"en\": \"Votic\"},\n    \"wak\": {\"en\": \"Wakashan languages\"},\n    \"wal\": {\"en\": \"Wolayta\"},\n    \"war\": {\"en\": \"Waray\"},\n    \"was\": {\"en\": \"Washoe\"},\n    \"wel\": {\"en\": \"Welsh\"},\n    \"wen\": {\"en\": \"Sorbian (Other)\"},\n    \"wln\": {\"en\": \"Walloon\"},\n    \"wol\": {\"en\": \"Wolof\"},\n    \"xal\": {\"en\": \"Oirat\"},\n    \"xho\": {\"en\": \"Xhosa\"},\n    \"yao\": {\"en\": \"Yao (Africa)\"},\n    \"yap\": {\"en\": \"Yapese\"},\n    \"yid\": {\"en\": \"Yiddish\"},\n    \"yor\": {\"en\": \"Yoruba\"},\n    \"ypk\": {\"en\": \"Yupik languages\"},\n    \"zap\": {\"en\": \"Zapotec\"},\n    \"zbl\": {\"en\": \"Blissymbolics\"},\n    \"zen\": {\"en\": \"Zenaga\"},\n    \"zha\": {\"en\": \"Zhuang\"},\n    \"znd\": {\"en\": \"Zande languages\"},\n    \"zul\": {\"en\": \"Zulu\"},\n    \"zun\": {\"en\": \"Zuni\"},\n    \"zxx\": {\"en\": \"No linguistic content\"},\n    \"zza\": {\"en\": \"Zaza\"},\n}",
+        "title": "",
+        "default": "",
+        "key_class": "",
+        "tag": "041%%a",
+        "separator": "<br>",
+        "value_class": "",
+        "escape": "0"
+      },
+      "type": "global",
+      "order": 44
+    },
+    {
+      "machine_name": "repository_533%%",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "en": "Repository",
+        "no": "Ansvarlig arkiv"
+      },
+      "visible": true,
+      "params": {
+        "subfield_order": "",
+        "tag": "533%%c"
+      },
+      "type": "global",
+      "order": 45
+    },
+    {
+      "machine_name": "in_773%_",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "en": "In",
+        "no": "I"
+      },
+      "visible": true,
+      "params": {
+        "extension": "",
+        "instances_separator": ", ",
+        "default": "",
+        "subfields_separator": ", ",
+        "tag": "773%_",
+        "limit": "",
+        "escape": ""
+      },
+      "type": "global",
+      "order": 46
+    },
+    {
+      "machine_name": "digitalcollection_o33",
+      "bfe": {
+        "obj_name": "BFE_SUBFIELD_INPUT_OUTPUT"
+      },
+      "labels": {
+        "en": "Digital Collection",
+        "no": "Digital samling"
+      },
+      "visible": true,
+      "params": {
+        "output_subfield": "t",
+        "title": "",
+        "default": "",
+        "input_subfield": "i",
+        "key_class": "",
+        "input_tag": "773%8",
+        "value_class": "",
+        "escape": "",
+        "separator": "<br>",
+        "input_condittion_value": "digital collection"
+      },
+      "type": "global",
+      "order": 47
+    },
+    {
+      "machine_name": "volume_363%%",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "en": "Volume",
+        "no": "\u00c5rgang"
+      },
+      "visible": true,
+      "params": {
+        "subfield_order": "",
+        "tag": "363%%a"
+      },
+      "type": "global",
+      "order": 48
+    },
+    {
+      "machine_name": "issue_363%%",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "en": "Issue",
+        "no": "Hefte"
+      },
+      "visible": true,
+      "params": {
+        "subfield_order": "",
+        "tag": "363%%b"
+      },
+      "type": "global",
+      "order": 49
+    },
+    {
+      "machine_name": "relation_o36",
+      "bfe": {
+        "obj_name": "BFE_TIND_LINK_TO_RECORD"
+      },
+      "labels": {
+        "en": "Relation",
+        "no": "Relasjon"
+      },
+      "visible": true,
+      "params": {
+        "find_id_in_subf_code": "w",
+        "search": "p=",
+        "control_prefix": "",
+        "key_class": "record-meta-key",
+        "default": "",
+        "title": "Resolution",
+        "title_field": "t",
+        "collection": "",
+        "ref_field": "776%%",
+        "quotes": "True",
+        "separator": "<br>",
+        "value_class": "record-meta-value",
+        "escape": "",
+        "search_tag_1": "035__a",
+        "list_subfields": "t",
+        "basic_search": "False",
+        "search_tag_2": "001"
+      },
+      "type": "global",
+      "order": 50
+    },
+    {
+      "machine_name": "digitalexhibit_o37",
+      "bfe": {
+        "obj_name": "BFE_SUBFIELD_INPUT_OUTPUT"
+      },
+      "labels": {
+        "en": "Digital Exhibit",
+        "no": "Digital utstilling"
+      },
+      "visible": true,
+      "params": {
+        "output_subfield": "t",
+        "title": "",
+        "default": "",
+        "input_subfield": "i",
+        "key_class": "",
+        "input_tag": "787%8",
+        "value_class": "",
+        "escape": "",
+        "separator": "<br>",
+        "input_condittion_value": "digital exhibit"
+      },
+      "type": "global",
+      "order": 51
+    },
+    {
+      "machine_name": "collectioninrepository_o38",
+      "bfe": {
+        "obj_name": "BFE_SUBFIELD_INPUT_OUTPUT"
+      },
+      "labels": {
+        "en": "Collection in Repository",
+        "no": "Samling"
+      },
+      "visible": true,
+      "params": {
+        "output_subfield": "t",
+        "title": "",
+        "default": "",
+        "input_subfield": "i",
+        "key_class": "",
+        "input_tag": "786%8",
+        "value_class": "",
+        "escape": "",
+        "separator": "<br>",
+        "input_condittion_value": "collection in repository"
+      },
+      "type": "global",
+      "order": 52
+    },
+    {
+      "machine_name": "analyticaltitle_740%%",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "en": "Text on Picture"
+      },
+      "visible": true,
+      "params": {
+        "subfield_order": "",
+        "tag": "740%%a",
+        "subfields_separator": ", ",
+        "instances_separator": "<br>"
+      },
+      "type": "local",
+      "order": 53
+    },
+    {
+      "machine_name": "geographicname_751%%",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "en": "Mentioned Place"
+      },
+      "visible": true,
+      "params": {
+        "subfield_order": "",
+        "tag": "751%%a",
+        "subfields_separator": ", ",
+        "instances_separator": "<br>"
+      },
+      "type": "local",
+      "order": 54
+    },
+    {
+      "machine_name": "relateditem_o39",
+      "bfe": {
+        "obj_name": "BFE_TIND_LINK_TO_RECORD"
+      },
+      "labels": {
+        "en": "Related Item",
+        "no": "Relatert dokument"
+      },
+      "visible": true,
+      "params": {
+        "find_id_in_subf_code": "w",
+        "search": "f1=&as=1&sf=title&so=a&rm=&m1=a&p1=",
+        "default": "",
+        "title_field": "t",
+        "collection": "",
+        "ref_field": "787%_",
+        "quotes": "False",
+        "escape": "0",
+        "list_subfields": "n,t,a,b",
+        "basic_search": "False"
+      },
+      "type": "global",
+      "order": 55
+    },
+    {
+      "machine_name": "relatedresource_789%%",
+      "bfe": {
+        "obj_name": "BFE_RELATED_IDENTIFIERS"
+      },
+      "labels": {
+        "fr": "Ressource li\u00e9e",
+        "de": "Verwandte Ressource",
+        "en": "Related Resource",
+        "it": "Relazione esterna"
+      },
+      "visible": true,
+      "params": {
+        "description_location=": "front",
+        "default": "",
+        "print_doi": "No",
+        "separator": "<br/>",
+        "escape": "0",
+        "tag_1": "",
+        "tag_2": "789%_"
+      },
+      "type": "local",
+      "order": 56
+    },
+    {
+      "machine_name": "contributinginstitution_o40",
+      "bfe": {
+        "obj_name": "BFE_FIELD_LINK_SEARCH"
+      },
+      "labels": {
+        "en": "Contributing Institution",
+        "no": "Medvirkende institusjon"
+      },
+      "visible": true,
+      "params": {
+        "search": "f1=contributinginstitution&as=1&sf=title&so=a&rm=&m1=e&p1=",
+        "quotes": "False",
+        "default": "",
+        "fields": "790%%a",
+        "link_text": "",
+        "key_class": "",
+        "separator": "<br>",
+        "value_class": "",
+        "escape": ""
+      },
+      "type": "global",
+      "order": 57
+    },
+    {
+      "machine_name": "archive_852%%",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "en": "Archive",
+        "no": "Fysisk plassering"
+      },
+      "visible": true,
+      "params": {
+        "subfield_order": "a,b,c,h",
+        "tag": "852%%",
+        "subfields_separator": "; "
+      },
+      "type": "global",
+      "order": 58
+    },
+    {
+      "machine_name": "note_500%%",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "ru": "\u041f\u0440\u0438\u043c\u0435\u0447\u0430\u043d\u0438\u0435",
+        "fr": "Note",
+        "en": "Note",
+        "no": "Note",
+        "zh_CN": "\u9644\u6ce8",
+        "ar": "\u0645\u0644\u0627\u062d\u0638\u0629",
+        "es": "Nota"
+      },
+      "visible": false,
+      "params": {
+        "subfield_order": "",
+        "tag": "500%%a",
+        "instances_separator": "<br>",
+        "escape": "0"
+      },
+      "type": "global",
+      "order": 59
+    },
+    {
+      "machine_name": "local_500_880_linking",
+      "bfe": {
+        "obj_name": "BFE_TIND_FIELD_MULTI"
+      },
+      "labels": {
+        "en": "Note"
+      },
+      "visible": true,
+      "params": {
+        "output_separator": "<br />",
+        "fields": "500%%",
+        "link_880": "yes",
+        "subfields_separator": ", ",
+        "escape": "0",
+        "exclude_numeric_subfields": "yes"
+      },
+      "type": "local",
+      "order": 60
+    },
+    {
+      "machine_name": "dissertationnote_502%%",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "en": "Dissertation/Thesis Note"
+      },
+      "visible": true,
+      "params": {
+        "subfield_order": "",
+        "tag": "502%%a",
+        "subfields_separator": ", ",
+        "instances_separator": "<br>"
+      },
+      "type": "local",
+      "order": 61
+    },
+    {
+      "machine_name": "tableofcontents_505%%",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "fr": "Remarque du contenu formatt\u00e9",
+        "en": "Table of Contents"
+      },
+      "visible": true,
+      "params": {},
+      "type": "local",
+      "order": 62
+    },
+    {
+      "machine_name": "coveragenote_522%%",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "en": "Coverage"
+      },
+      "visible": true,
+      "params": {
+        "subfield_order": "",
+        "tag": "522%%a",
+        "subfields_separator": ", ",
+        "instances_separator": "<br>"
+      },
+      "type": "local",
+      "order": 63
+    },
+    {
+      "machine_name": "preferredcitation_524%%",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "en": "Preferred Citation"
+      },
+      "visible": true,
+      "params": {
+        "subfield_order": "",
+        "tag": "524%%a",
+        "subfields_separator": ", ",
+        "instances_separator": "<br>"
+      },
+      "type": "local",
+      "order": 64
+    },
+    {
+      "machine_name": "reproductionnote_533%%",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "en": "Reproduction Note"
+      },
+      "visible": true,
+      "params": {
+        "subfield_order": "",
+        "tag": "533%%a",
+        "subfields_separator": ", ",
+        "instances_separator": "<br>"
+      },
+      "type": "local",
+      "order": 65
+    },
+    {
+      "machine_name": "grantinformation_536%%",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "en": "Grant Information",
+        "no": "Informasjon om finansiering"
+      },
+      "visible": true,
+      "params": {
+        "subfield_order": "a,o,m,n",
+        "tag": "536%%"
+      },
+      "type": "global",
+      "order": 66
+    },
+    {
+      "machine_name": "acquistionnote_541%%a",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "en": "Provenance"
+      },
+      "visible": true,
+      "params": {
+        "subfield_order": "",
+        "tag": "541%%a",
+        "subfields_separator": ", ",
+        "instances_separator": "<br>"
+      },
+      "type": "local",
+      "order": 67
+    },
+    {
+      "machine_name": "acquistionnote_541%%c",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "en": "Acquisition Method"
+      },
+      "visible": true,
+      "params": {
+        "subfield_order": "",
+        "tag": "541%%c",
+        "subfields_separator": ", ",
+        "instances_separator": "<br>"
+      },
+      "type": "local",
+      "order": 68
+    },
+    {
+      "machine_name": "acquistionnote_541%%d",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "en": "Year of Admission"
+      },
+      "visible": true,
+      "params": {
+        "subfield_order": "",
+        "tag": "541%%d",
+        "subfields_separator": ", ",
+        "instances_separator": "<br>"
+      },
+      "type": "local",
+      "order": 69
+    },
+    {
+      "machine_name": "acquistionnote_541%%f",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "en": "Owner"
+      },
+      "visible": true,
+      "params": {
+        "subfield_order": "",
+        "tag": "541%%f",
+        "subfields_separator": ", ",
+        "instances_separator": "<br>"
+      },
+      "type": "local",
+      "order": 70
+    },
+    {
+      "machine_name": "standardrightsstatement_542%%",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "en": "Standard Rights Statement",
+        "no": "Lisens"
+      },
+      "visible": true,
+      "params": {
+        "subfield_order": "",
+        "tag": "542%%f",
+        "instances_separator": "<br>",
+        "escape": "0"
+      },
+      "type": "global",
+      "order": 71
+    },
+    {
+      "machine_name": "bionote_545%%",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "en": "Note"
+      },
+      "visible": true,
+      "params": {
+        "subfield_order": "",
+        "tag": "545%%a",
+        "subfields_separator": ", ",
+        "instances_separator": "<br>"
+      },
+      "type": "local",
+      "order": 72
+    },
+    {
+      "machine_name": "standardrightsstatement_o45",
+      "bfe": {
+        "obj_name": "BFE_SUBFIELD_INPUT_OUTPUT"
+      },
+      "labels": {
+        "en": "Standard Rights Statement",
+        "no": "Lisens"
+      },
+      "visible": true,
+      "params": {
+        "output_subfield": "u",
+        "title": "",
+        "default": "",
+        "input_subfield": "u",
+        "key_class": "",
+        "input_tag": "542__",
+        "value_class": "",
+        "escape": "",
+        "link_subfield": "u",
+        "separator": "<br>",
+        "input_condittion_value": "http://rightsstatements.org/vocab/InC/1.0/"
+      },
+      "type": "global",
+      "order": 73
+    },
+    {
+      "machine_name": "standardrightsstatement_o46",
+      "bfe": {
+        "obj_name": "BFE_SUBFIELD_INPUT_OUTPUT"
+      },
+      "labels": {
+        "en": "Standard Rights Statement",
+        "no": "Lisens"
+      },
+      "visible": true,
+      "params": {
+        "output_subfield": "u",
+        "title": "",
+        "default": "",
+        "input_subfield": "u",
+        "key_class": "",
+        "input_tag": "542__",
+        "value_class": "",
+        "escape": "",
+        "link_subfield": "u",
+        "separator": "<br>",
+        "input_condittion_value": "http://rightsstatements.org/vocab/InC-OW-EU/1.0/"
+      },
+      "type": "global",
+      "order": 74
+    },
+    {
+      "machine_name": "standardrightsstatement_o47",
+      "bfe": {
+        "obj_name": "BFE_SUBFIELD_INPUT_OUTPUT"
+      },
+      "labels": {
+        "en": "Standard Rights Statement",
+        "no": "Lisens"
+      },
+      "visible": true,
+      "params": {
+        "output_subfield": "u",
+        "title": "",
+        "default": "",
+        "input_subfield": "u",
+        "key_class": "",
+        "input_tag": "542__",
+        "value_class": "",
+        "escape": "",
+        "link_subfield": "u",
+        "separator": "<br>",
+        "input_condittion_value": "http://rightsstatements.org/vocab/InC-EDU/1.0/"
+      },
+      "type": "global",
+      "order": 75
+    },
+    {
+      "machine_name": "standardrightsstatement_o48",
+      "bfe": {
+        "obj_name": "BFE_SUBFIELD_INPUT_OUTPUT"
+      },
+      "labels": {
+        "en": "Standard Rights Statement",
+        "no": "Lisens"
+      },
+      "visible": true,
+      "params": {
+        "output_subfield": "u",
+        "title": "",
+        "default": "",
+        "input_subfield": "u",
+        "key_class": "",
+        "input_tag": "542__",
+        "value_class": "",
+        "escape": "",
+        "link_subfield": "u",
+        "separator": "<br>",
+        "input_condittion_value": "http://rightsstatements.org/vocab/InC-NC/1.0/"
+      },
+      "type": "global",
+      "order": 76
+    },
+    {
+      "machine_name": "standardrightsstatement_o49",
+      "bfe": {
+        "obj_name": "BFE_SUBFIELD_INPUT_OUTPUT"
+      },
+      "labels": {
+        "en": "Standard Rights Statement",
+        "no": "Lisens"
+      },
+      "visible": true,
+      "params": {
+        "output_subfield": "u",
+        "title": "",
+        "default": "",
+        "input_subfield": "u",
+        "key_class": "",
+        "input_tag": "542__",
+        "value_class": "",
+        "escape": "",
+        "link_subfield": "u",
+        "separator": "<br>",
+        "input_condittion_value": "http://rightsstatements.org/vocab/InC-RUU/1.0/"
+      },
+      "type": "global",
+      "order": 77
+    },
+    {
+      "machine_name": "standardrightsstatement_o50",
+      "bfe": {
+        "obj_name": "BFE_SUBFIELD_INPUT_OUTPUT"
+      },
+      "labels": {
+        "en": "Standard Rights Statement",
+        "no": "Lisens"
+      },
+      "visible": true,
+      "params": {
+        "output_subfield": "u",
+        "title": "",
+        "default": "",
+        "input_subfield": "u",
+        "key_class": "",
+        "input_tag": "542__",
+        "value_class": "",
+        "escape": "",
+        "link_subfield": "u",
+        "separator": "<br>",
+        "input_condittion_value": "http://rightsstatements.org/vocab/NoC-CR/1.0/"
+      },
+      "type": "global",
+      "order": 78
+    },
+    {
+      "machine_name": "standardrightsstatement_o51",
+      "bfe": {
+        "obj_name": "BFE_SUBFIELD_INPUT_OUTPUT"
+      },
+      "labels": {
+        "en": "Standard Rights Statement",
+        "no": "Lisens"
+      },
+      "visible": true,
+      "params": {
+        "output_subfield": "u",
+        "title": "",
+        "default": "",
+        "input_subfield": "u",
+        "key_class": "",
+        "input_tag": "542__",
+        "value_class": "",
+        "escape": "",
+        "link_subfield": "u",
+        "separator": "<br>",
+        "input_condittion_value": "http://rightsstatements.org/vocab/NoC-NC/1.0/"
+      },
+      "type": "global",
+      "order": 79
+    },
+    {
+      "machine_name": "standardrightsstatement_o52",
+      "bfe": {
+        "obj_name": "BFE_SUBFIELD_INPUT_OUTPUT"
+      },
+      "labels": {
+        "en": "Standard Rights Statement",
+        "no": "Lisens"
+      },
+      "visible": true,
+      "params": {
+        "output_subfield": "u",
+        "title": "",
+        "default": "",
+        "input_subfield": "u",
+        "key_class": "",
+        "input_tag": "542__",
+        "value_class": "",
+        "escape": "",
+        "link_subfield": "u",
+        "separator": "<br>",
+        "input_condittion_value": "http://rightsstatements.org/vocab/NoC-OKLR/1.0/"
+      },
+      "type": "global",
+      "order": 80
+    },
+    {
+      "machine_name": "standardrightsstatement_o53",
+      "bfe": {
+        "obj_name": "BFE_SUBFIELD_INPUT_OUTPUT"
+      },
+      "labels": {
+        "en": "Standard Rights Statement",
+        "no": "Lisens"
+      },
+      "visible": true,
+      "params": {
+        "output_subfield": "u",
+        "title": "",
+        "default": "",
+        "input_subfield": "u",
+        "key_class": "",
+        "input_tag": "542__",
+        "value_class": "",
+        "escape": "",
+        "link_subfield": "u",
+        "separator": "<br>",
+        "input_condittion_value": "http://rightsstatements.org/vocab/NoC-US/1.0/"
+      },
+      "type": "global",
+      "order": 81
+    },
+    {
+      "machine_name": "standardrightsstatement_o54",
+      "bfe": {
+        "obj_name": "BFE_SUBFIELD_INPUT_OUTPUT"
+      },
+      "labels": {
+        "en": "Standard Rights Statement",
+        "no": "Lisens"
+      },
+      "visible": true,
+      "params": {
+        "output_subfield": "u",
+        "title": "",
+        "default": "",
+        "input_subfield": "u",
+        "key_class": "",
+        "input_tag": "542__",
+        "value_class": "",
+        "escape": "",
+        "link_subfield": "u",
+        "separator": "<br>",
+        "input_condittion_value": "http://rightsstatements.org/vocab/CNE/1.0/"
+      },
+      "type": "global",
+      "order": 82
+    },
+    {
+      "machine_name": "standardrightsstatement_o55",
+      "bfe": {
+        "obj_name": "BFE_SUBFIELD_INPUT_OUTPUT"
+      },
+      "labels": {
+        "en": "Standard Rights Statement",
+        "no": "Lisens"
+      },
+      "visible": true,
+      "params": {
+        "output_subfield": "u",
+        "title": "",
+        "default": "",
+        "input_subfield": "u",
+        "key_class": "",
+        "input_tag": "542__",
+        "value_class": "",
+        "escape": "",
+        "link_subfield": "u",
+        "separator": "<br>",
+        "input_condittion_value": "http://rightsstatements.org/vocab/UND/1.0/"
+      },
+      "type": "global",
+      "order": 83
+    },
+    {
+      "machine_name": "standardrightsstatement_o56",
+      "bfe": {
+        "obj_name": "BFE_SUBFIELD_INPUT_OUTPUT"
+      },
+      "labels": {
+        "en": "Standard Rights Statement",
+        "no": "Lisens"
+      },
+      "visible": true,
+      "params": {
+        "output_subfield": "u",
+        "title": "",
+        "default": "",
+        "input_subfield": "u",
+        "key_class": "",
+        "input_tag": "542__",
+        "value_class": "",
+        "escape": "",
+        "link_subfield": "u",
+        "separator": "<br>",
+        "input_condittion_value": "http://rightsstatements.org/vocab/NKC/1.0/"
+      },
+      "type": "global",
+      "order": 84
+    },
+    {
+      "machine_name": "usagestatement_540%%",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "en": "Usage Statement",
+        "no": "Brukserkl\u00e6ring"
+      },
+      "visible": true,
+      "params": {
+        "subfield_order": "",
+        "output_pattern": "",
+        "extension": "",
+        "instances_separator": "<br>",
+        "default": "",
+        "subfields_separator": ", ",
+        "tag": "540%%a",
+        "escape": "0",
+        "max_instance_length": ""
+      },
+      "type": "global",
+      "order": 85
+    },
+    {
+      "machine_name": "access_991%%",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "en": "Access",
+        "no": "Tilgang"
+      },
+      "visible": true,
+      "params": {
+        "subfield_order": "",
+        "output_pattern": "",
+        "extension": "",
+        "instances_separator": "<br>",
+        "default": "",
+        "subfields_separator": ", ",
+        "tag": "991%%a",
+        "escape": "0",
+        "max_instance_length": ""
+      },
+      "type": "global",
+      "order": 86
+    },
+    {
+      "machine_name": "externalresources_o60",
+      "bfe": {
+        "obj_name": "BFE_MARC_8564p"
+      },
+      "labels": {
+        "en": "Linked Resources",
+        "no": "Lenkede ressurser"
+      },
+      "visible": true,
+      "params": {
+        "default": "",
+        "instance_separator": "<br>",
+        "escape": "",
+        "link_text": "",
+        "ind2": "1"
+      },
+      "type": "global",
+      "order": 87
+    },
+    {
+      "machine_name": "externalresources_o61",
+      "bfe": {
+        "obj_name": "BFE_MARC_8564p"
+      },
+      "labels": {
+        "en": "Linked Resources",
+        "no": "Lenkede ressurser"
+      },
+      "visible": false,
+      "params": {
+        "default": "",
+        "instance_separator": "<br>",
+        "escape": "",
+        "link_text": "",
+        "ind2": "2"
+      },
+      "type": "global",
+      "order": 88
+    },
+    {
+      "machine_name": "local_collection_982%%a",
+      "bfe": {
+        "obj_name": "BFE_FIELD_LINK_SEARCH"
+      },
+      "labels": {
+        "en": "Collection"
+      },
+      "visible": true,
+      "params": {
+        "search": "&sf=title&so=a&rm=&p=collection:",
+        "quotes": "True",
+        "default": "",
+        "fields": "982%%a",
+        "link_text": "",
+        "key_class": "",
+        "separator": "<br> ",
+        "value_class": "",
+        "escape": ""
+      },
+      "type": "special_link",
+      "order": 89
+    },
+    {
+      "machine_name": "recordappearsin_o62",
+      "bfe": {
+        "obj_name": "BFE_APPEARS_IN_COLLECTIONS"
+      },
+      "labels": {
+        "ru": "\u0417\u0430\u043f\u0438\u0441\u044c \u0438\u043c\u0435\u0435\u0442\u0441\u044f \u0432",
+        "fr": "Le document appara\u00eet dans",
+        "en": "Record appears in",
+        "no": "Dokumentet vises i",
+        "zh_CN": "\u8bb0\u5f55\u51fa\u5904",
+        "ar": "\u0627\u0644\u0633\u062c\u0644 \u064a\u0638\u0647\u0631 \u0641\u0649",
+        "es": "El registro aparece en"
+      },
+      "visible": false,
+      "params": {
+        "separator": "<br/> "
+      },
+      "type": "global",
+      "order": 90
+    },
+    {
+      "machine_name": "accompanyingmaterial_300%%e",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "en": "Accompanying material",
+        "no": "Vedlegg"
+      },
+      "visible": false,
+      "params": {
+        "subfield_order": "",
+        "tag": "300%%e",
+        "instances_separator": "<br>",
+        "escape": "0"
+      },
+      "type": "global",
+      "order": 91
+    },
+    {
+      "machine_name": "materialsapplied_340%%c",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "en": "Materials applied to surface",
+        "no": "Kolorering"
+      },
+      "visible": false,
+      "params": {
+        "subfield_order": "",
+        "tag": "340%%c",
+        "instances_separator": "<br>",
+        "escape": "0"
+      },
+      "type": "global",
+      "order": 92
+    },
+    {
+      "machine_name": "polarity_340%%o",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "en": "Polarity",
+        "no": "Positiv/Negativ"
+      },
+      "visible": false,
+      "params": {
+        "subfield_order": "",
+        "tag": "340%%o",
+        "instances_separator": "<br>",
+        "escape": "0"
+      },
+      "type": "global",
+      "order": 93
+    },
+    {
+      "machine_name": "ownershiphistory_561%%a",
+      "bfe": {
+        "obj_name": "BFE_FIELD"
+      },
+      "labels": {
+        "en": "Ownership history",
+        "no": "Eierskapshistorikk"
+      },
+      "visible": false,
+      "params": {
+        "subfield_order": "",
+        "tag": "561%%a",
+        "instances_separator": "<br>",
+        "escape": "0"
+      },
+      "type": "global",
+      "order": 94
+    }
+  ],
+  "description": "Configure the metadata display of TIND DA record pages.",
+  "section_label": {
+    "en": "Details"
+  }
+}
