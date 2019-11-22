@@ -19,7 +19,7 @@ namespace :cal do
       cop.options = %w[--out tmp/reports/rubocop/index.html]
     end
 
-    desc 'Run the test suite in Jenkins CI (including test coverage)'
+    desc 'Run the test suite in CI (including test coverage)'
     task ci: %w[ci:setup:rspec cal:test:coverage]
   end
 end
