@@ -24,6 +24,10 @@ Layout/MultilineMethodCallIndentation:
 Layout/MultilineOperationIndentation:
   Enabled: false
 
+# Just because my 'begin' is badly indented doesn't mean I want the rest of my code to be
+Layout/RescueEnsureAlignment:
+  Enabled: false
+
 # Reasonable line-length check; it's too easy for the cure to be worse than the disease
 Metrics/LineLength:
   Max: 150

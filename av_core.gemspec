@@ -19,6 +19,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_dependency 'marc', '~> 1.0'
+  spec.add_dependency 'rest-client', '~> 2.1'
   spec.add_dependency 'typesafe_enum', '~> 0.1.9'
 
   spec.add_development_dependency 'brakeman'
