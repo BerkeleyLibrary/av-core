@@ -22,6 +22,7 @@ module AVCore
         self.record = MARC::Record.new
         self.current_field = nil
         marc_txt.lines.each { |line| process_line(line) }
+        finalize_current_field if current_field
         record
       end
 

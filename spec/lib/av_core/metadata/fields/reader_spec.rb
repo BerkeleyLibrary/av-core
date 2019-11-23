@@ -31,6 +31,16 @@ module AVCore
             ['4', '711', 'Meeting Name'].each { |v| expect(ffs).to include(v) }
           end
         end
+
+        describe Readers::TRACKS do
+          require 'av_core/metadata'
+          it 'extracts the tracks' do
+            marc_html = File.read('spec/data/b23161018.html')
+            marc_record = AVCore::Metadata::MillenniumMARCExtractor.new(marc_html).extract_marc_record
+            field = Readers::TRACKS.create_field(marc_record)
+            expect(field).not_to(be_nil) # TODO: better support for repeated subfields
+          end
+        end
       end
     end
   end
