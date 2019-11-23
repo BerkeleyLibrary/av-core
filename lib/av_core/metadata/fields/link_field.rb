@@ -1,7 +1,7 @@
 module AVCore
   module Metadata
-    module Field
-      class LinkField < Base
+    module Fields
+      class LinkField < Field
         attr_reader :links
 
         def initialize(tag:, label:, links:)

@@ -1,7 +1,7 @@
 module AVCore
   module Metadata
-    module Field
-      class Base
+    module Fields
+      class Field
         attr_reader :tag
         attr_reader :label
 

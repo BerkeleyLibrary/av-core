@@ -1,7 +1,7 @@
 module AVCore
   module Metadata
-    module Field
-      class TextField < Base
+    module Fields
+      class TextField < Field
         attr_reader :lines
 
         def initialize(tag:, label:, lines:)

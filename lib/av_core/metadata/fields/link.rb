@@ -1,6 +1,6 @@
 module AVCore
   module Metadata
-    module Field
+    module Fields
       class Link
         attr_reader :body
         attr_reader :url

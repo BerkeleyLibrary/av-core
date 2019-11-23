@@ -2,7 +2,7 @@ require 'json'
 
 module AVCore
   module Metadata
-    module Field
+    module Fields
       module Readers
         TITLE = Reader.new(label: 'Title', marc_tag: '245%%', order: 1, subfield_order: 'a')
         DESCRIPTION = Reader.new(label: 'Description', marc_tag: '520%%', order: 2, subfield_order: 'a')
@@ -18,16 +18,21 @@ module AVCore
               json_config = File.read(json_config_path)
               json = JSON.parse(json_config)
 
-              configured = json['config'].map { |jf| Reader.from_json(jf) }.compact
-              readers = (DEFAULT_FIELDS + configured).sort
-
-              unique_readers = []
-              readers.each do |f|
-                next if unique_readers.any? { |u| u.same_field?(f) }
-                unique_readers << f
-              end
-              unique_readers
+              readers = DEFAULT_FIELDS + json['config'].map { |jf| Reader.from_json(jf) }.compact
+              find_uniques(readers)
             end
+          end
+
+          private
+
+          def find_uniques(readers)
+            unique_readers = []
+            readers.sort.each do |f|
+              next if unique_readers.any? { |u| u.same_field?(f) }
+
+              unique_readers << f
+            end
+            unique_readers
           end
         end
       end

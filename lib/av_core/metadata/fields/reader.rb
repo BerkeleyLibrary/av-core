@@ -1,6 +1,13 @@
+# TODO: put this somewhere more sensible
+class String
+  def blank?
+    empty? || ''.equal?(strip)
+  end
+end
+
 module AVCore
   module Metadata
-    module Field
+    module Fields
       # rubocop:disable Metrics/ClassLength
       class Reader
         include Comparable
@@ -38,7 +45,7 @@ module AVCore
         end
 
         # @param marc_record [MARC::Record]
-        # @return [Metadata::Field::Base]
+        # @return [Metadata::Fields::Field]
         def create_field(marc_record)
           values = values_from(marc_record)
           return if values.empty?
@@ -90,7 +97,7 @@ module AVCore
             ind_char if ind_char && ind_char != '%' && ind_char != '_'
           end
 
-          # rubocop:disable Metrics/MethodLength
+          # rubocop:disable Metrics/MethodLength, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
           def from_json(json_field)
             return unless json_field['visible']
 
@@ -110,15 +117,14 @@ module AVCore
             return unless marc_tag
 
             Reader.new(
-                order: json_field['order'],
-                marc_tag: marc_tag,
-                label: label_en,
-                subfields_separator: params['subfields_separator'] || ' ',
-                subfield_order: params['subfield_order']
+              order: json_field['order'],
+              marc_tag: marc_tag,
+              label: label_en,
+              subfields_separator: params['subfields_separator'] || ' ',
+              subfield_order: params['subfield_order']
             )
           end
-
-          # rubocop:enable Metrics/MethodLength
+          # rubocop:enable Metrics/MethodLength, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
           # rubocop:disable Metrics/MethodLength, Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
           def find_marc_tag(json)
@@ -128,7 +134,7 @@ module AVCore
               return tag unless tag.blank?
             end
 
-            if (fields = params['field'])
+            if (fields = params['fields'])
               return fields unless fields.blank?
             end
 
@@ -147,7 +153,6 @@ module AVCore
             nil
           end
           # rubocop:enable Metrics/MethodLength, Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
-
         end
 
         private
@@ -200,7 +205,7 @@ module AVCore
 
           if subfield
             subfield_value = data_field[subfield]
-            return subfield_value ? {subfield.to_sym => subfield_value} : {}
+            return subfield_value ? { subfield.to_sym => subfield_value } : {}
           end
 
           extract_subfield_values(data_field)
