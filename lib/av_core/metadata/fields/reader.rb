@@ -15,30 +15,22 @@ module AVCore
         TAG_RE = /([0-9]{3})([a-z0-9_%])([a-z0-9_%])([a-z0-9_%]?)/.freeze
         SUBJECT_TAG_RE = /6[0-9]{2}/.freeze
 
-        ATTRS = %i[order tag ind_1 ind_2 subfield label subfields_separator subfield_order].freeze
+        ATTRS = %i[order tag ind_1 ind_2 subfields_separator subfield_order label].freeze
         FIELD_LOOKUP_ATTRS = (ATTRS - %i[order label]).freeze
 
         ATTRS.each { |attr| attr_reader attr }
 
-        # rubocop:disable Metrics/AbcSize
-        def initialize(order:, marc_tag:, label:, subfields_separator: ' ', subfield_order: nil)
-          md = TAG_RE.match(marc_tag)
-          raise ArgumentError, "Invalid MARC tag #{marc_tag}" unless md
-
-          @tag = md[1]
-          @ind_1 = Reader.indicator(md[2])
-          @ind_2 = Reader.indicator(md[3])
-
-          @subfield = md[4] unless md[4].blank? || md[4] == '%'
-
-          @subfield_order = subfield_order && !subfield_order.blank? ? subfield_order.split(',') : nil
-
-          @label = label
-          @subfields_separator = subfields_separator
+        # rubocop:disable Metrics/ParameterLists
+        def initialize(order:, label:, tag:, ind_1: nil, ind_2: nil, subfields_separator: ' ', subfield_order: nil)
           @order = order
+          @label = label
+          @tag = tag
+          @ind_1 = ind_1
+          @ind_2 = ind_2
+          @subfields_separator = subfields_separator
+          @subfield_order = subfield_order
         end
-
-        # rubocop:enable Metrics/AbcSize
+        # rubocop:enable Metrics/ParameterLists
 
         def link?
           tag == '856'
@@ -47,12 +39,12 @@ module AVCore
         # @param marc_record [MARC::Record]
         # @return [Metadata::Fields::Field]
         def create_field(marc_record)
-          values = values_from(marc_record)
-          return if values.empty?
+          all_subfield_values = all_subfield_values_from(marc_record)
+          return if all_subfield_values.empty?
 
-          return link_field_from(values) if link?
+          return link_field_from(all_subfield_values) if link?
 
-          text_field_from(values)
+          text_field_from(all_subfield_values)
         end
 
         # @param other [Reader] the Reader to compare
@@ -61,9 +53,9 @@ module AVCore
           return 0 if equal?(other)
 
           (ATTRS - [:subfield_order]).each do |attr|
-            order = compare_attrs(attr, other)
-            return nil if order.nil?
-            return order if order != 0
+            o = compare_attrs(attr, other)
+            return nil if o.nil?
+            return o if o != 0
           end
 
           s1 = subfield_order&.join
@@ -97,7 +89,7 @@ module AVCore
             ind_char if ind_char && ind_char != '%' && ind_char != '_'
           end
 
-          # rubocop:disable Metrics/MethodLength, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+          # rubocop:disable Metrics/MethodLength, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/AbcSize
           def from_json(json_field)
             return unless json_field['visible']
 
@@ -116,15 +108,45 @@ module AVCore
             marc_tag = find_marc_tag(json_field)
             return unless marc_tag
 
+            md = TAG_RE.match(marc_tag)
+            raise ArgumentError, "Invalid MARC tag #{marc_tag}" unless md
+
+            tag = md[1]
+
+            ind_1 = indicator(md[2])
+            ind_2 = indicator(md[3])
+            subfield = subfield_or_nil(md[4])
+
+            subfield_order = params['subfield_order']
+            subfield_order = subfield_order_or_nil(subfield_order)
+            subfield_order ||= [subfield.to_sym] if subfield
+
             Reader.new(
               order: json_field['order'],
-              marc_tag: marc_tag,
               label: label_en,
+              tag: tag,
+              ind_1: ind_1,
+              ind_2: ind_2,
               subfields_separator: params['subfields_separator'] || ' ',
-              subfield_order: params['subfield_order']
+              subfield_order: subfield_order
             )
           end
-          # rubocop:enable Metrics/MethodLength, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+          # rubocop:enable Metrics/MethodLength, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/AbcSize
+
+          def subfield_or_nil(sf)
+            return nil unless sf
+            return nil if sf.strip == ''
+            return nil if sf == '%'
+
+            sf
+          end
+
+          def subfield_order_or_nil(subfield_order)
+            return nil unless subfield_order
+            return nil if subfield_order.strip.empty?
+
+            subfield_order.split(',').map(&:to_sym)
+          end
 
           # rubocop:disable Metrics/MethodLength, Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
           def find_marc_tag(json)
@@ -171,70 +193,52 @@ module AVCore
           v1 < v2 ? -1 : 1
         end
 
-        # @param values [Array<Hash{Symbol=>String}>]
-        def link_field_from(values)
-          links = values.map { |field| Link.new(body: field[:y], url: field[:u]) }
+        # @param all_subfield_values [Array<SubfieldValues>] The subfield values
+        def link_field_from(all_subfield_values)
+          links = []
+          all_subfield_values.each do |subfield_values|
+            subfield_values.by_index.each do |value_group|
+              next unless value_group.key?(:y) && value_group.key?(:u)
+
+              links << Link.new(body: value_group[:y], url: value_group[:u])
+            end
+          end
           LinkField.new(tag: tag, label: label, links: links)
         end
 
-        # @param values [Array<Hash{Symbol=>String}>]
-        def text_field_from(values)
-          lines = values.map { |field| field.values.join(subfields_separator) }
+        def text_field_from(all_subfield_values)
+          lines = []
+          all_subfield_values.each do |subfield_values|
+            subfield_values.by_index.each do |code_to_value|
+              lines << code_to_value.values.join(subfields_separator)
+            end
+          end
           TextField.new(tag: tag, label: label, lines: lines)
         end
 
-        # Finds the values for this field in a MARC record.
-        # @param marc_record [MARC::Record]
-        # @return [Array<Hash{Symbol=>String}>]
-        def values_from(marc_record)
-          values = []
-          marc_record.each_by_tag(tag) do |field|
-            value = value_from(field)
-            values << value unless value.empty?
+        def all_subfield_values_from(marc_record)
+          [].tap do |all_subfield_values|
+            marc_record.each_by_tag(tag) do |data_field|
+              next unless relevant?(data_field)
+
+              subfield_values = subfield_values_from(data_field)
+              all_subfield_values << subfield_values unless subfield_values.empty?
+            end
           end
-          values
         end
 
-        # @param data_field MARC::DataField
-        # @return [Hash{Symbol=>String}]
-        # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
-        def value_from(data_field)
-          raise ArgumentError, "Field has wrong tag: expected #{tag}, was #{data_field.tag}" unless tag == data_field.tag
-          return {} if ind_1 && ind_1 != data_field.indicator1
-          return {} if ind_2 && ind_2 != data_field.indicator2
+        def relevant?(data_field)
+          return false unless tag == data_field.tag
+          return false if ind_1 && ind_1 != data_field.indicator1
+          return false if ind_2 && ind_2 != data_field.indicator2
 
-          if subfield
-            subfield_value = data_field[subfield]
-            return subfield_value ? { subfield.to_sym => subfield_value } : {}
-          end
-
-          extract_subfield_values(data_field)
-        end
-        # rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
-
-        def extract_subfield_values(data_field)
-          return ordered_subfields(data_field) if subfield_order
-
-          all_subfields(data_field)
+          true
         end
 
-        def all_subfields(data_field)
-          subfield_values = {}
-          data_field.subfields.each do |subfield|
-            subfield_value = subfield.value
-            # TODO: solve https://github.com/fguillen/simplecov-rcov/issues/20 and use proper em dash
-            subfield_value = '-- ' + subfield_value if data_field.tag =~ SUBJECT_TAG_RE && 'xyz'.include?(subfield.code)
-            subfield_values[subfield.code.to_sym] = subfield_value if subfield_value
-          end
-          subfield_values
-        end
+        def subfield_values_from(data_field)
+          subfield_values = SubfieldValues.from_data_field(data_field)
+          return subfield_values.ordered_by(subfield_order) if subfield_order
 
-        def ordered_subfields(data_field)
-          subfield_values = {}
-          subfield_order.each do |code|
-            subfield_value = data_field[code]
-            subfield_values[code.to_sym] = subfield_value if subfield_value
-          end
           subfield_values
         end
       end

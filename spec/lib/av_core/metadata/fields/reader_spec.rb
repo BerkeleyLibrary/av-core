@@ -15,8 +15,8 @@ module AVCore
 
         describe :<=> do
           it 'treats fields that differ only in subfield order as different' do
-            args1 = { order: 4, marc_tag: '711%%%', label: 'Meeting Name', subfields_separator: ', ', subfield_order: 'a,n,d,c' }
-            args2 = args1.merge(subfield_order: 'c,n,d,a')
+            args1 = { order: 4, tag: '711', label: 'Meeting Name', subfields_separator: ', ', subfield_order: %i[a n d c] }
+            args2 = args1.merge(subfield_order: %i[c n d a])
             ff1 = Reader.new(args1)
             ff2 = Reader.new(args2)
             expect(ff1 < ff2).to be_truthy
@@ -26,7 +26,7 @@ module AVCore
 
         describe :to_s do
           it 'includes all pertinent info' do
-            ff = Reader.new(order: 4, marc_tag: '711%%%', label: 'Meeting Name', subfields_separator: ', ', subfield_order: 'c,n,d,a')
+            ff = Reader.new(order: 4, tag: '711', label: 'Meeting Name', subfields_separator: ', ', subfield_order: %i[c n d a])
             ffs = ff.to_s
             ['4', '711', 'Meeting Name'].each { |v| expect(ffs).to include(v) }
           end

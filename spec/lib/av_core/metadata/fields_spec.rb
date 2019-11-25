@@ -34,8 +34,10 @@ module AVCore
 
           fields = Fields.fields_from(marc_record)
           expect(fields.size).to eq(expected.size)
-          fields.each_with_index do |f, i|
-            expect(f.to_s.gsub('|', '')).to eq(expected[i])
+          aggregate_failures 'fields' do
+            fields.each_with_index do |f, i|
+              expect(f.to_s.gsub('|', '')).to eq(expected[i])
+            end
           end
         end
         # rubocop:enable Metrics/LineLength

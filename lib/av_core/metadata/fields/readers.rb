@@ -4,12 +4,12 @@ module AVCore
   module Metadata
     module Fields
       module Readers
-        TITLE = Reader.new(label: 'Title', marc_tag: '245%%', order: 1, subfield_order: 'a')
-        DESCRIPTION = Reader.new(label: 'Description', marc_tag: '520%%', order: 2, subfield_order: 'a')
-        CREATOR_PERSONAL = Reader.new(label: 'Creator', marc_tag: '700%%', order: 2)
-        CREATOR_CORPORATE = Reader.new(label: 'Creator', marc_tag: '710%%', order: 2)
-        LINKS_HTTP = Reader.new(label: 'Linked Resources', marc_tag: '85641', order: 11)
-        TRACKS = Reader.new(label: 'Tracks', marc_tag: '99800', order: 99)
+        TITLE = Reader.new(label: 'Title', tag: '245', order: 1, subfield_order: [:a])
+        DESCRIPTION = Reader.new(label: 'Description', tag: '520', order: 2, subfield_order: [:a])
+        CREATOR_PERSONAL = Reader.new(label: 'Creator', tag: '700', order: 2)
+        CREATOR_CORPORATE = Reader.new(label: 'Creator', tag: '710', order: 2)
+        LINKS_HTTP = Reader.new(label: 'Linked Resources', tag: '856', ind_1: '4', ind_2: '1', order: 11)
+        TRACKS = Reader.new(label: 'Tracks', tag: '998', ind_1: '0', ind_2: '0', order: 99)
         DEFAULT_FIELDS = [TITLE, DESCRIPTION, CREATOR_PERSONAL, CREATOR_CORPORATE, LINKS_HTTP].freeze
 
         class << self
