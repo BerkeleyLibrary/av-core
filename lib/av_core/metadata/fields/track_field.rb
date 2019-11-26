@@ -4,9 +4,6 @@ module AVCore
   module Metadata
     module Fields
       class TrackField < Field
-        class << self
-          include AVCore::Util::Constants
-        end
 
         attr_reader :tracks
 
@@ -20,6 +17,7 @@ module AVCore
         end
 
         class << self
+          include AVCore::Util::Constants
 
           def from_subfield_values(all_subfield_values, tag:, label:)
             tracks = []

@@ -4,10 +4,6 @@ module AVCore
   module Metadata
     module Fields
       class Field
-        class << self
-          include AVCore::Util::Constants
-        end
-
         attr_reader :tag
         attr_reader :label
 
@@ -17,6 +13,8 @@ module AVCore
         end
 
         class << self
+          include AVCore::Util::Constants
+
           def from_subfield_values(all_subfield_values, tag:, label:, subfields_separator:)
             case tag
             when LINK_FIELD_TAG
