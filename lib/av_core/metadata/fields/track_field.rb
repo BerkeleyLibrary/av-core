@@ -4,9 +4,9 @@ module AVCore
   module Metadata
     module Fields
       class TrackField < Field
-        SUBFIELD_CODE_PATH = :g
-        SUBFIELD_CODE_TITLE = :t
-        SUBFIELD_CODE_DURATION = :a
+        class << self
+          include AVCore::Util::Constants
+        end
 
         attr_reader :tracks
 

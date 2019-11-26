@@ -1,9 +1,12 @@
+require 'av_core/util'
+
 module AVCore
   module Metadata
     module Fields
       class Field
-        LINK_FIELD_TAG = '856'.freeze
-        TRACK_FIELD_TAG = '998'.freeze
+        class << self
+          include AVCore::Util::Constants
+        end
 
         attr_reader :tag
         attr_reader :label
