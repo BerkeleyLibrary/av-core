@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    avplayer_core (0.0.1)
+    av_core (0.0.1)
       marc (~> 1.0)
       rest-client (~> 2.1)
       typesafe_enum (~> 0.1.9)
@@ -110,7 +110,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  avplayer_core!
+  av_core!
   brakeman
   bundle-audit
   ci_reporter_rspec

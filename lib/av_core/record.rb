@@ -2,13 +2,14 @@ require 'av_core/metadata'
 
 module AVCore
   class Record
-    attr_reader :bib_number, :tracks, :metadata_source, :metadata_fields
+    attr_reader :bib_number, :tracks, :metadata_source, :metadata_fields, :marc_record
 
-    def initialize(bib_number:, tracks:, metadata_source:, metadata_fields:)
+    def initialize(bib_number:, tracks:, metadata_source:, metadata_fields:, marc_record:)
       @bib_number = bib_number
       @tracks = tracks.sort
       @metadata_source = metadata_source
       @metadata_fields = metadata_fields
+      @marc_record = marc_record
     end
 
     class << self
@@ -18,7 +19,8 @@ module AVCore
           bib_number: bib_number_for(record_id: record_id, metadata_source: metadata_source, marc_record: marc_record),
           tracks: Track.tracks_from(marc_record),
           metadata_source: metadata_source,
-          metadata_fields: Metadata::Fields.fields_from(marc_record)
+          metadata_fields: Metadata::Fields.fields_from(marc_record),
+          marc_record: marc_record
         )
       end
 

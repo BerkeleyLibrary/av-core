@@ -11,7 +11,8 @@ module AVCore
           bib_number: '11082434',
           tracks: [t2, t1],
           metadata_source: Metadata::Source::MILLENNIUM,
-          metadata_fields: []
+          metadata_fields: [],
+          marc_record: instance_double(MARC::Record)
         )
         tracks = record.tracks
         expect(tracks[0]).to eq(t1)
