@@ -1,3 +1,5 @@
+require 'av_core/util'
+
 module AVCore
   module Metadata
     module Fields
@@ -32,7 +34,7 @@ module AVCore
             TrackInfo.new(
               path: subfield_values_by_code[:g],
               title: subfield_values_by_code[:t],
-              duration: Duration.from_string(subfield_values_by_code[:a])
+              duration: AVCore::Util::Duration.from_string(subfield_values_by_code[:a])
             )
           end
         end

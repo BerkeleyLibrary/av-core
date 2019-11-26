@@ -23,6 +23,7 @@ module AVCore
 
       class << self
         def millennium_record_for(bib_number)
+          # noinspection RubyResolve
           url = "#{MILLENNIUM.base_uri}?/.#{bib_number}/.#{bib_number}/1%2C1%2C1%2CB/marc~#{bib_number}"
           html = do_get(url).scrub
           MillenniumMARCExtractor.new(html).extract_marc_record
@@ -32,6 +33,7 @@ module AVCore
 
         def tind_record_for(tind_id)
           record = begin
+            # noinspection RubyResolve
             url = "#{TIND.base_uri}/record/#{tind_id}/export/xm"
             xml = do_get(url).scrub
             input = StringIO.new(xml)

@@ -16,7 +16,7 @@
     <inspection_tool class="RubyInstanceVariableNamingConvention" enabled="true" level="INFORMATION" enabled_by_default="true" />
     <inspection_tool class="RubyLocalVariableNamingConvention" enabled="true" level="INFORMATION" enabled_by_default="true" />
     <inspection_tool class="RubyParameterNamingConvention" enabled="true" level="INFORMATION" enabled_by_default="true" />
-    <inspection_tool class="RubyResolve" enabled="true" level="ERROR" enabled_by_default="true">
+    <inspection_tool class="RubyResolve" enabled="true" level="WEAK WARNING" enabled_by_default="true">
       <option name="warnImplicitResults" value="false" />
     </inspection_tool>
     <inspection_tool class="RubyStringKeysInHashInspection" enabled="true" level="INFORMATION" enabled_by_default="true" />
