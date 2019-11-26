@@ -4,6 +4,10 @@ module AVCore
   module Metadata
     module Fields
       class TrackField < Field
+        SUBFIELD_CODE_PATH = :g
+        SUBFIELD_CODE_TITLE = :t
+        SUBFIELD_CODE_DURATION = :a
+
         attr_reader :tracks
 
         def initialize(tag:, label:, tracks:)
@@ -16,11 +20,12 @@ module AVCore
         end
 
         class << self
+
           def from_subfield_values(all_subfield_values, tag:, label:)
             tracks = []
             all_subfield_values.each do |subfield_values|
               subfield_values.each do |subfield_values_by_code|
-                next unless subfield_values_by_code.key?(:g)
+                next unless subfield_values_by_code.key?(SUBFIELD_CODE_PATH)
 
                 tracks << to_track_info(subfield_values_by_code)
               end
@@ -32,9 +37,9 @@ module AVCore
 
           def to_track_info(subfield_values_by_code)
             TrackInfo.new(
-              path: subfield_values_by_code[:g],
-              title: subfield_values_by_code[:t],
-              duration: AVCore::Util::Duration.from_string(subfield_values_by_code[:a])
+              path: subfield_values_by_code[SUBFIELD_CODE_PATH],
+              title: subfield_values_by_code[SUBFIELD_CODE_TITLE],
+              duration: AVCore::Util::Duration.from_string(subfield_values_by_code[SUBFIELD_CODE_DURATION])
             )
           end
         end
