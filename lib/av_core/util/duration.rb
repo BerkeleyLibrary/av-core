@@ -37,6 +37,7 @@ module AVCore
       end
 
       class << self
+        # @return [Duration] the duration, or nil
         def from_string(s)
           md = DURATION_RE.match(s)
           return nil unless md
