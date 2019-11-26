@@ -9,8 +9,8 @@ module AVCore
         CREATOR_PERSONAL = Reader.new(label: 'Creator', tag: '700', order: 2)
         CREATOR_CORPORATE = Reader.new(label: 'Creator', tag: '710', order: 2)
         LINKS_HTTP = Reader.new(label: 'Linked Resources', tag: '856', ind_1: '4', ind_2: '1', order: 11)
-        TRACKS = Reader.new(label: 'Tracks', tag: '998', ind_1: '0', ind_2: '0', order: 99)
-        DEFAULT_FIELDS = [TITLE, DESCRIPTION, CREATOR_PERSONAL, CREATOR_CORPORATE, LINKS_HTTP].freeze
+        TRACKS = Reader.new(label: 'Tracks', tag: '998', ind_1: '0', ind_2: '0', order: 99, subfield_order: %i[g t a])
+        DEFAULT_FIELDS = [TITLE, DESCRIPTION, CREATOR_PERSONAL, CREATOR_CORPORATE, LINKS_HTTP, TRACKS].freeze
 
         class << self
           def all

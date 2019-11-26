@@ -32,19 +32,13 @@ module AVCore
         end
         # rubocop:enable Metrics/ParameterLists
 
-        def link?
-          tag == '856'
-        end
-
         # @param marc_record [MARC::Record]
         # @return [Metadata::Fields::Field]
         def create_field(marc_record)
           all_subfield_values = all_subfield_values_from(marc_record)
           return if all_subfield_values.empty?
 
-          return link_field_from(all_subfield_values) if link?
-
-          text_field_from(all_subfield_values)
+          Field.from_subfield_values(all_subfield_values, tag: tag, label: label, subfields_separator: subfields_separator)
         end
 
         # @param other [Reader] the Reader to compare
@@ -191,29 +185,6 @@ module AVCore
           return -1 if v2.nil?
 
           v1 < v2 ? -1 : 1
-        end
-
-        # @param all_subfield_values [Array<SubfieldValues>] The subfield values
-        def link_field_from(all_subfield_values)
-          links = []
-          all_subfield_values.each do |subfield_values|
-            subfield_values.by_index.each do |value_group|
-              next unless value_group.key?(:y) && value_group.key?(:u)
-
-              links << Link.new(body: value_group[:y], url: value_group[:u])
-            end
-          end
-          LinkField.new(tag: tag, label: label, links: links)
-        end
-
-        def text_field_from(all_subfield_values)
-          lines = []
-          all_subfield_values.each do |subfield_values|
-            subfield_values.by_index.each do |code_to_value|
-              lines << code_to_value.values.join(subfields_separator)
-            end
-          end
-          TextField.new(tag: tag, label: label, lines: lines)
         end
 
         def all_subfield_values_from(marc_record)

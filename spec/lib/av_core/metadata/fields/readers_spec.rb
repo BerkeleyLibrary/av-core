@@ -72,17 +72,17 @@ module AVCore
               { order: 73, tag: '542', ind_1: nil, ind_2: nil, label: 'Standard Rights Statement', subfields_separator: ' ', subfield_order: [:u] },
               { order: 85, tag: '540', ind_1: nil, ind_2: nil, label: 'Usage Statement', subfields_separator: ', ', subfield_order: [:a] },
               { order: 86, tag: '991', ind_1: nil, ind_2: nil, label: 'Access', subfields_separator: ', ', subfield_order: [:a] },
-              { order: 89, tag: '982', ind_1: nil, ind_2: nil, label: 'Collection', subfields_separator: ' ', subfield_order: [:a] }
+              { order: 89, tag: '982', ind_1: nil, ind_2: nil, label: 'Collection', subfields_separator: ' ', subfield_order: [:a] },
+              { order: 99, tag: '998', ind_1: '0', ind_2: '0', label: 'Tracks', subfields_separator: ' ', subfield_order: %i[g t a] }
             ]
             readers = Readers.all
             expect(readers.size).to eq(expected_readers.size)
             aggregate_failures 'reader attributes' do
-              readers.each_with_index do |r, index|
-                exp = expected_readers[index]
-                %i[order tag ind_1 ind_2 label subfields_separator subfield_order].each do |attr|
+              %i[order tag ind_1 ind_2 label subfields_separator subfield_order].each do |attr|
+                readers.each_with_index do |r, index|
+                  exp = expected_readers[index]
                   actual = r.send(attr)
                   expected = exp[attr]
-
                   expect(actual).to eq(expected), "expected #{attr} #{expected.inspect} at index #{index}, got #{actual.inspect}"
                 end
               end
