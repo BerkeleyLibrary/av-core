@@ -28,8 +28,6 @@ module AVCore
       after(:each) do
         Metadata::Config.instance_variable_set(:@tind_base_uri, nil)
       end
-
-      # rubocop:disable Metrics/LineLength
       it 'loads the metadata' do
         marc_xml = File.read('spec/data/record-21178.xml')
         search_url = 'https://digicoll.lib.berkeley.edu/record/21178/export/xm'
@@ -70,7 +68,7 @@ module AVCore
           end
         end
       end
-      # rubocop:enable Metrics/LineLength
+
     end
   end
 end

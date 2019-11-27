@@ -25,9 +25,7 @@ module AVCore
 
     class << self
       def tracks_from(marc_record)
-        tracks_reader = AVCore::Metadata::Fields::Readers::TRACKS
-        tracks_field = tracks_reader.create_field(marc_record)
-        tracks_field.tracks.each_with_index.map do |t, i|
+        marc_field_tracks(marc_record).map.with_index do |t, i|
           Track.new(
             sort_order: i,
             title: t.title,
@@ -35,6 +33,13 @@ module AVCore
             duration: t.duration
           )
         end
+      end
+
+      private
+
+      def marc_field_tracks(marc_record)
+        tracks_field = Metadata::Fields::Readers::TRACKS.create_field(marc_record)
+        tracks_field ? tracks_field.tracks : []
       end
     end
   end

@@ -13,8 +13,6 @@ module AVCore
           input = StringIO.new(marc_xml)
           @marc_record = MARC::XMLReader.new(input).first
         end
-
-        # rubocop:disable Metrics/LineLength
         it 'parses the fields' do
           expected = [
             'Title (245): Wanda Coleman',
@@ -41,7 +39,7 @@ module AVCore
             end
           end
         end
-        # rubocop:enable Metrics/LineLength
+
       end
     end
   end
