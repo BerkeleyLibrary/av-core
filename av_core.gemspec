@@ -2,17 +2,17 @@ File.expand_path('lib', __dir__).tap do |lib|
   $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 end
 
-require 'av_core/module_info'
+require 'av/core/module_info'
 
 Gem::Specification.new do |spec|
-  spec.name = AVCore::ModuleInfo::NAME
-  spec.author = AVCore::ModuleInfo::AUTHOR
-  spec.email = AVCore::ModuleInfo::AUTHOR_EMAIL
-  spec.summary = AVCore::ModuleInfo::SUMMARY
-  spec.description = AVCore::ModuleInfo::DESCRIPTION
-  spec.license = AVCore::ModuleInfo::LICENSE
-  spec.version = AVCore::ModuleInfo::VERSION
-  spec.homepage = AVCore::ModuleInfo::HOMEPAGE
+  spec.name = AV::Core::ModuleInfo::NAME
+  spec.author = AV::Core::ModuleInfo::AUTHOR
+  spec.email = AV::Core::ModuleInfo::AUTHOR_EMAIL
+  spec.summary = AV::Core::ModuleInfo::SUMMARY
+  spec.description = AV::Core::ModuleInfo::DESCRIPTION
+  spec.license = AV::Core::ModuleInfo::LICENSE
+  spec.version = AV::Core::ModuleInfo::VERSION
+  spec.homepage = AV::Core::ModuleInfo::HOMEPAGE
 
   spec.files = `git ls-files -z`.split("\x0")
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
