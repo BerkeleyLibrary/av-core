@@ -1,4 +1,5 @@
 require 'av/constants'
+require 'av/types/duration'
 require 'av/types/file_type'
 require 'av/marc/subfield_groups'
 
