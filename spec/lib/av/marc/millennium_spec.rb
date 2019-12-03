@@ -32,6 +32,16 @@ module AV
 
         personal_names = marc_record.fields('700')
         expect(personal_names.size).to eq(27)
+
+        link = marc_record['856']
+        expect(link['z']).to eq('UC Berkeley online videos. Freely available.')
+        expect(link['u']).to eq('https://avplayer.lib.berkeley.edu/b18538031')
+      end
+
+      it 'handles long 856 links' do
+        marc_record = Millennium.marc_from_html(File.read('spec/data/b23161018-original.html'))
+        link = marc_record['856']
+        expect(link['u']).to eq('http://servlet1.lib.berkeley.edu:8080/audio/stream.play.logic?coll=music&group=b23161018')
       end
     end
   end
