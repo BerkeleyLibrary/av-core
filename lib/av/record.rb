@@ -2,6 +2,8 @@ require 'av/track'
 require 'av/metadata'
 require 'av/metadata/source'
 
+require 'forwardable'
+
 module AV
   class Record
     attr_reader :tracks, :metadata
@@ -9,6 +11,14 @@ module AV
     def initialize(metadata:, tracks:)
       @tracks = tracks.sort
       @metadata = metadata
+    end
+
+    def title
+      metadata.title
+    end
+
+    def bib_number
+      metadata.bib_number
     end
 
     class << self

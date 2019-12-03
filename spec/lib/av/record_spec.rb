@@ -68,6 +68,9 @@ module AV
               expect(f.to_s.gsub('|', '')).to eq(expected[i])
             end
           end
+
+          expect(record.title).to eq(metadata.title)
+          expect(record.bib_number).to eq(metadata.bib_number)
         end
       end
 
