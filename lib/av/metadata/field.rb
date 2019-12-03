@@ -30,7 +30,7 @@ module AV
         return if all_subfield_values.empty?
 
         case tag
-        when LINK_FIELD_TAG
+        when TAG_LINK_FIELD
           LinkValue.from_subfield_values(all_subfield_values, tag: tag, label: label)
         else
           TextValue.from_subfield_values(all_subfield_values, tag: tag, label: label, subfields_separator: subfields_separator)

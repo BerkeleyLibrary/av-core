@@ -11,7 +11,11 @@ module AV
       end
 
       def to_s
-        "#{label} (#{tag}): #{lines.join('| ')}"
+        "#{label} (#{tag}): #{lines && lines.join('| ')}"
+      end
+
+      def first
+        lines && lines.first
       end
 
       class << self

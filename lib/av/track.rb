@@ -63,7 +63,7 @@ module AV
 
       def marc_field_tracks(marc_record)
         [].tap do |tracks|
-          marc_record.each_by_tag(TRACK_FIELD_TAG) do |df|
+          marc_record.each_by_tag(TAG_TRACK_FIELD) do |df|
             subfield_values = AV::Marc::SubfieldGroups.from_data_field(df)
             subfield_values.each do |group|
               next unless group.key?(SUBFIELD_CODE_PATH)

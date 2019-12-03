@@ -12,7 +12,11 @@ module AV
       end
 
       def to_s
-        "#{label} (#{tag}): #{links.map(&:to_s).join(' ')}"
+        "#{label} (#{tag}): #{links && links.map(&:to_s).join(' ')}"
+      end
+
+      def first
+        links && links.first
       end
 
       class << self

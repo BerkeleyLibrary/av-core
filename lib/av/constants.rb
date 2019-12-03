@@ -1,7 +1,11 @@
 module AV
   module Constants
-    LINK_FIELD_TAG = '856'.freeze
-    TRACK_FIELD_TAG = '998'.freeze
+    TAG_TITLE_FIELD = '245'.freeze
+    TAG_LINK_FIELD = '856'.freeze
+    TAG_TIND_CATALOG_ID = '901'
+    TAG_TRACK_FIELD = '998'.freeze
+
+    SUBFIELD_CODE_MILLENNIUM_ID = 'm'
 
     SUBFIELD_CODE_PATH = :g
     SUBFIELD_CODE_TITLE = :t

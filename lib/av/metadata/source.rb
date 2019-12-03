@@ -72,8 +72,6 @@ module AV
         end
 
         def do_get(url)
-          log.debug("GET #{url}")
-
           resp = RestClient.get(url)
           if resp.code != 200
             log.error("GET #{url} returned #{resp.code}: #{resp.body || 'nil'}")

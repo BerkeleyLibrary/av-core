@@ -126,6 +126,7 @@ module AV
           aggregate_failures 'values' do
             values.each_with_index do |v, i|
               expect(v.to_s.gsub('|', '')).to eq(expected[i])
+              expect(v.first).not_to be_nil
             end
           end
         end
