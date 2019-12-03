@@ -3,17 +3,24 @@ require 'av/metadata/fields'
 
 module AV
   class Metadata
-    attr_reader :record_id, :source, :marc_record, :values
+    attr_reader :record_id, :source
 
-    def initialize(record_id:, source:, marc_record:)
+    def initialize(record_id:, source:, marc_record: nil)
       @record_id = record_id
       @source = source
       @marc_record = marc_record
-      @values = Fields.values_from(marc_record)
     end
 
     def bib_number
       @bib_number ||= find_bib_number
+    end
+
+    def marc_record
+      @marc_record ||= source.record_for(record_id)
+    end
+
+    def values
+      @values ||= Fields.values_from(marc_record)
     end
 
     private
@@ -30,12 +37,7 @@ module AV
 
     class << self
       def for_record(record_id:, source:)
-        marc_record = source.record_for(record_id)
-        Metadata.new(
-          record_id: record_id,
-          source: source,
-          marc_record: marc_record
-        )
+        Metadata.new(record_id: record_id, source: source)
       end
     end
   end
