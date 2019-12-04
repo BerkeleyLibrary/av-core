@@ -3,6 +3,7 @@ require 'typesafe_enum'
 require 'av/config'
 require 'av/logger'
 require 'av/record_not_found'
+require 'av/marc'
 require 'av/marc/millennium'
 
 module AV
@@ -54,9 +55,8 @@ module AV
           record = begin
             # noinspection RubyResolve
             url = "#{TIND.base_uri}/record/#{tind_id}/export/xm"
-            xml = do_get(url).scrub
-            input = StringIO.new(xml)
-            MARC::XMLReader.new(input).first
+            xml = do_get(url)
+            AV::Marc.from_xml(xml)
           rescue StandardError => e
             raise AV::RecordNotFound, "Can't find TIND record for record ID #{tind_id.inspect}: #{e.message}"
           end

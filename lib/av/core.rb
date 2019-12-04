@@ -1,4 +1,5 @@
 require 'av/config'
+require 'av/marc'
 require 'av/metadata'
 require 'av/player'
 require 'av/record'
