@@ -1,8 +1,5 @@
 require 'spec_helper'
 require 'marc'
-require 'av/metadata/field'
-require 'av/metadata/fields'
-require 'av/marc/millennium'
 
 module AV
   class Metadata

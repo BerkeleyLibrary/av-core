@@ -1,7 +1,5 @@
 require 'spec_helper'
 
-require 'av/marc/subfield_groups'
-
 module AV
   module Marc
     describe SubfieldGroups do

@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'av/types/duration'
 
 module AV
   module Types

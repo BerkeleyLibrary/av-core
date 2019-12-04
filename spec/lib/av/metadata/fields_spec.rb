@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'av/metadata/fields'
+
 require 'marc'
 
 module AV

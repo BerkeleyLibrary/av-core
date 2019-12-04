@@ -1,7 +1,5 @@
 require 'spec_helper'
 
-require 'av/player'
-
 module AV
   describe Player do
     describe :link_to do

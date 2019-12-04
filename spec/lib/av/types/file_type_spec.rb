@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'av/types/file_type'
 
 module AV
   module Types

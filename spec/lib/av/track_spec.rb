@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'av/track'
 
 module AV
   describe Track do

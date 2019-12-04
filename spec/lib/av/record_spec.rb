@@ -1,6 +1,4 @@
 require 'spec_helper'
-require 'av/record'
-require 'av/metadata'
 
 module AV
   describe Record do

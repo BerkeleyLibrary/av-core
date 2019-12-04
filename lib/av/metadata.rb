@@ -1,6 +1,7 @@
 require 'av/constants'
 require 'av/metadata/source'
 require 'av/metadata/fields'
+require 'av/metadata/source'
 
 module AV
   class Metadata

@@ -1,6 +1,5 @@
 require 'spec_helper'
 require 'uri'
-require 'av/config'
 
 module AV
   describe Config do

@@ -1,6 +1,4 @@
 require 'spec_helper'
-require 'av/metadata'
-require 'av/marc/millennium'
 
 module AV
   describe Metadata do

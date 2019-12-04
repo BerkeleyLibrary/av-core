@@ -1,7 +1,4 @@
 require 'spec_helper'
-require 'av/logger'
-require 'av/metadata/source'
-require 'av/record_not_found'
 
 module AV
   class Metadata

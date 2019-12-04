@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'av/marc/millennium'
 
 module AV
   module Marc
