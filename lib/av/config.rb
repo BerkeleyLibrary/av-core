@@ -1,6 +1,7 @@
 require 'uri'
 
 module AV
+
   class Config
     class << self
       def millennium_base_uri
@@ -64,4 +65,15 @@ module AV
     private_class_method :new
 
   end
+
+  class << self
+    def config
+      AV::Config
+    end
+
+    def configure(&block)
+      class_eval(&block)
+    end
+  end
+
 end
