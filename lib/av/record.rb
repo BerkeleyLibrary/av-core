@@ -8,6 +8,7 @@ module AV
   class Record
     attr_reader :tracks, :metadata
 
+    # TODO: introduce collections, somehow
     def initialize(metadata:, tracks:)
       @tracks = tracks.sort
       @metadata = metadata
