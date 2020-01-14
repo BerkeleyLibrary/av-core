@@ -5,8 +5,23 @@ module AV
   describe Config do
 
     after(:each) do
+      Config.instance_variable_set(:@avplayer_base_uri, nil)
       Config.instance_variable_set(:@millennium_base_uri, nil)
       Config.instance_variable_set(:@tind_base_uri, nil)
+    end
+
+    describe :avplayer_base_uri= do
+      it 'converts strings to URIs' do
+        expected_uri = URI.parse('http://avplayer.example.edu')
+        Config.avplayer_base_uri = expected_uri.to_s
+        expect(Config.avplayer_base_uri).to eq(expected_uri)
+      end
+
+      it 'strips trailing slashes' do
+        expected_uri = URI.parse('http://avplayer.example.edu')
+        Config.avplayer_base_uri = expected_uri.to_s + '/'
+        expect(Config.avplayer_base_uri).to eq(expected_uri)
+      end
     end
 
     describe :millennium_base_uri= do
@@ -54,6 +69,24 @@ module AV
 
       after(:each) do
         Object.send(:remove_const, :Rails)
+      end
+
+      describe :avplayer_base_uri do
+        attr_reader :avplayer_base_uri
+        before(:each) do
+          @avplayer_base_uri = URI.parse('http://avplayer.example.edu')
+          allow(config).to receive(:avplayer_base_uri).and_return(avplayer_base_uri.to_s)
+        end
+
+        it 'falls back to the Rails config, if available' do
+          expect(Config.avplayer_base_uri).to eq(avplayer_base_uri)
+        end
+
+        it 'prefers the explicitly configured URI' do
+          expected_avplayer_uri = URI.parse('https://avplayer-other.example.edu')
+          Config.avplayer_base_uri = expected_avplayer_uri
+          expect(Config.avplayer_base_uri).to eq(expected_avplayer_uri)
+        end
       end
 
       describe :millennium_base_uri do

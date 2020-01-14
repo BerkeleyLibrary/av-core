@@ -4,12 +4,25 @@ module AV
 
   class Config
     class << self
+      def avplayer_base_uri
+        @avplayer_base_uri ||= uri_from_rails_config(:avplayer_base_uri)
+      end
+
       def millennium_base_uri
         @millennium_base_uri ||= uri_from_rails_config(:millennium_base_uri)
       end
 
       def tind_base_uri
         @tind_base_uri ||= uri_from_rails_config(:tind_base_uri)
+      end
+
+      # Sets the AV Player base URI
+      #
+      # @param [URI, String] uri the base URI
+      # @return [URI] the URI
+      # @raise URI::InvalidURIError if the URI cannot be parsed, or is not HTTP/HTTPS
+      def avplayer_base_uri=(uri)
+        @avplayer_base_uri = clean_uri(uri)
       end
 
       # Sets the Millennium base URI

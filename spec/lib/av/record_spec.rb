@@ -7,12 +7,34 @@ module AV
         t1 = Track.new(sort_order: 1, title: 'Part 1', path: 'frost-read1.mp3')
         t2 = Track.new(sort_order: 2, title: 'Part 2', path: 'frost-read2.mp3')
         record = Record.new(
+          collection: 'MRCAudio',
           tracks: [t2, t1],
           metadata: instance_double(Metadata)
         )
         tracks = record.tracks
         expect(tracks[0]).to eq(t1)
         expect(tracks[1]).to eq(t2)
+      end
+    end
+
+    describe :player_uri do
+      after :each do
+        Config.instance_variable_set(:@avplayer_base_uri, nil)
+      end
+
+      it 'generates the player URI' do
+        avplayer_base_uri = 'https://avplayer.lib.berkeley.edu'
+        collection = 'MRCAudio'
+        bib_number = 'b11082434'
+
+        metadata = instance_double(Metadata)
+        expect(metadata).to receive(:bib_number).and_return(bib_number)
+
+        Config.avplayer_base_uri = avplayer_base_uri
+        record = Record.new(collection: collection, tracks: [], metadata: metadata)
+
+        expected_uri = URI.parse("#{avplayer_base_uri}/#{collection}/#{bib_number}")
+        expect(record.player_uri).to eq(expected_uri)
       end
     end
 
@@ -30,7 +52,11 @@ module AV
         search_url = 'https://digicoll.lib.berkeley.edu/record/21178/export/xm'
         stub_request(:get, search_url).to_return(status: 200, body: marc_xml)
 
-        record = Record.from_metadata(record_id: '21178', metadata_source: AV::Metadata::Source::TIND)
+        record = Record.from_metadata(
+          collection: 'Pacifica',
+          record_id: '21178',
+          metadata_source: AV::Metadata::Source::TIND
+        )
 
         tracks = record.tracks
         expect(tracks.size).to eq(1)
