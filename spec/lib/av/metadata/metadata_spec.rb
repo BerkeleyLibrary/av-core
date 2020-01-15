@@ -15,7 +15,7 @@ module AV
       it 'finds the title' do
         search_url = 'http://oskicat.berkeley.edu/search~S1?/.b22139658/.b22139658/1%2C1%2C1%2CB/marc~b22139658'
         stub_request(:get, search_url).to_return(status: 200, body: File.read('spec/data/b22139658.html'))
-        metadata = Metadata.for_record(record_id: 'b22139658', source: Metadata::Source::MILLENNIUM)
+        metadata = Metadata.for_record(record_id: 'b22139658')
         expect(metadata.title).to eq('Communists on campus')
       end
 

@@ -25,8 +25,8 @@ module AV
     end
 
     class << self
-      def from_metadata(collection:, record_id:, metadata_source:)
-        metadata = Metadata.for_record(record_id: record_id, source: metadata_source)
+      def from_metadata(collection:, record_id:)
+        metadata = Metadata.for_record(record_id: record_id)
         Record.new(
           collection: collection,
           metadata: metadata,

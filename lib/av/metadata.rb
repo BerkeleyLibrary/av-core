@@ -50,7 +50,8 @@ module AV
     end
 
     class << self
-      def for_record(record_id:, source:)
+      def for_record(record_id:)
+        source = Source.for_record_id(record_id)
         Metadata.new(record_id: record_id, source: source)
       end
     end

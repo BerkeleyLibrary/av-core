@@ -54,8 +54,7 @@ module AV
 
         record = Record.from_metadata(
           collection: 'Pacifica',
-          record_id: '21178',
-          metadata_source: AV::Metadata::Source::TIND
+          record_id: '21178'
         )
 
         tracks = record.tracks
