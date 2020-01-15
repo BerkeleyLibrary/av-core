@@ -97,6 +97,16 @@ module AV
         end
       end
 
+      it "raises #{AV::RecordNotFound} if the record cannot be found" do
+        search_url = 'https://digicoll.lib.berkeley.edu/record/21178/export/xm'
+        stub_request(:get, search_url).to_return(status: 404)
+        expect do
+          Record.from_metadata(
+            collection: 'Pacifica',
+            record_id: '21178'
+          )
+        end.to raise_error(AV::RecordNotFound)
+      end
     end
   end
 end
