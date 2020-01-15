@@ -18,3 +18,9 @@ SELECT DISTINCT COUNT(m.MediaId),
 ;
 
                 
+SELECT DISTINCT COUNT(DISTINCT(m.WowzaCollectionId)),
+                m.GroupName
+           FROM tblMedia m
+       GROUP BY m.GroupName
+       ORDER BY 1 DESC, 2
+;
