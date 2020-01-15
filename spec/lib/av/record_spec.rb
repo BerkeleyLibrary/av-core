@@ -39,7 +39,7 @@ module AV
 
         record = Record.new(collection: collection, tracks: [], metadata: metadata)
 
-        expected_uri = URI.parse("#{'https://avplayer.lib.berkeley.edu'}/#{collection}/#{bib_number}")
+        expected_uri = URI.parse("https://avplayer.lib.berkeley.edu/#{collection}/#{bib_number}")
         expect(record.player_uri).to eq(expected_uri)
       end
     end
@@ -50,16 +50,16 @@ module AV
         stub_request(:get, search_url).to_return(status: 200, body: File.read('spec/data/b22139658.html'))
 
         desc_text = <<~DESC
-          An American propaganda documentary created "to inform and 
-          impress on American citizens the true nature and the true 
-          magnitude of those forces that are working within our 
-          nation for its overthrow...and the destruction of our 
-          educational system." Film covers the July 1969 California 
+          An American propaganda documentary created "to inform and
+          impress on American citizens the true nature and the true
+          magnitude of those forces that are working within our
+          nation for its overthrow...and the destruction of our
+          educational system." Film covers the July 1969 California
           Revolutionary Conference and other demonstrations, warning
-          against the activities of Students for a Democratic 
-          Society, the Black Panthers, student protestors and 
+          against the activities of Students for a Democratic
+          Society, the Black Panthers, student protestors and
           Vietnam War demonstrators as they promote a "socialist/
-          communist overthrow of the U.S. government," taking as 
+          communist overthrow of the U.S. government," taking as
           their mentor Chairman Mao Tse-Tung.
         DESC
         expected_desc = desc_text.gsub(/[[:space:]]+/, ' ').strip
