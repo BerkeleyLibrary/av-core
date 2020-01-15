@@ -33,6 +33,14 @@ module AV
       end
 
       class << self
+        MILLENNIUM_RECORD_RE = /^b[0-9]+$/.freeze
+        TIND_RECORD_RE = /^[0-9]+$/.freeze
+
+        def for_record_id(record_id)
+          return Source::MILLENNIUM if record_id =~ MILLENNIUM_RECORD_RE
+
+          Source::TIND if record_id =~ TIND_RECORD_RE
+        end
 
         # Gets a MARC record from Millennium.
         #

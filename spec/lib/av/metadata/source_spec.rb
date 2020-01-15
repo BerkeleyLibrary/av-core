@@ -28,6 +28,20 @@ module AV
         end
       end
 
+      describe :source_for do
+        it 'returns MILLENNIUM for a Millennium bib number' do
+          expect(Source.for_record_id('b12345678')).to be(Source::MILLENNIUM)
+        end
+
+        it 'returns TIND for a TIND record number' do
+          expect(Source.for_record_id('12345678')).to be(Source::TIND)
+        end
+
+        it 'returns nil for a non-Millennium, non-TIND number' do
+          expect(Source.for_record_id('o12345678')).to be_nil
+        end
+      end
+
       describe Source::MILLENNIUM do
         attr_reader :search_url
 
