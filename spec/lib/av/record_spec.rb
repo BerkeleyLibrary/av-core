@@ -16,8 +16,8 @@ module AV
 
     describe :new do
       it 'sorts the tracks' do
-        t1 = Track.new(sort_order: 1, title: 'Part 1', path: 'frost-read1.mp3')
-        t2 = Track.new(sort_order: 2, title: 'Part 2', path: 'frost-read2.mp3')
+        t1 = Track.new(sort_order: 1, title: 'Part 1', path: 'MRCAudio/frost-read1.mp3')
+        t2 = Track.new(sort_order: 2, title: 'Part 2', path: 'MRCAudio/frost-read2.mp3')
         record = Record.new(
           collection: 'MRCAudio',
           tracks: [t2, t1],
@@ -85,7 +85,7 @@ module AV
         track = tracks[0]
         expect(track.sort_order).to eq(0)
         expect(track.title).to be_nil
-        expect(track.path).to eq('PRA_NHPRC1_AZ1084_00_000_00.mp3')
+        expect(track.path).to eq('Pacifica/PRA_NHPRC1_AZ1084_00_000_00.mp3')
         expect(track.duration).to eq(AV::Types::Duration.from_string('00:54:03'))
 
         record.metadata.tap do |metadata|

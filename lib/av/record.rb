@@ -37,7 +37,7 @@ module AV
         Record.new(
           collection: collection,
           metadata: metadata,
-          tracks: Track.tracks_from(metadata.marc_record)
+          tracks: Track.tracks_from(metadata.marc_record, collection: collection)
         )
       end
     end

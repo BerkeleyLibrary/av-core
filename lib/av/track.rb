@@ -48,38 +48,26 @@ module AV
     class << self
       include AV::Constants
 
-      def tracks_from(marc_record)
-        marc_field_tracks(marc_record).map.with_index do |t, i|
-          Track.new(
-            sort_order: i,
-            title: t.title,
-            path: t.path,
-            duration: t.duration
-          )
-        end
-      end
-
-      private
-
-      def marc_field_tracks(marc_record)
+      def tracks_from(marc_record, collection:)
         [].tap do |tracks|
           marc_record.each_by_tag(TAG_TRACK_FIELD) do |df|
             subfield_values = AV::Marc::SubfieldGroups.from_data_field(df)
             subfield_values.each do |group|
               next unless group.key?(SUBFIELD_CODE_PATH)
 
-              sort_order = tracks.size
-              tracks << from_subfield_group(group, sort_order)
+              tracks << from_group(group, collection: collection, sort_order: tracks.size)
             end
           end
         end
       end
 
-      def from_subfield_group(group, sort_order)
+      private
+
+      def from_group(group, collection:, sort_order:)
         Track.new(
           sort_order: sort_order,
           title: group[SUBFIELD_CODE_TITLE],
-          path: group[SUBFIELD_CODE_PATH],
+          path: "#{collection}/#{group[SUBFIELD_CODE_PATH]}",
           duration: group[SUBFIELD_CODE_DURATION]
         )
       end
