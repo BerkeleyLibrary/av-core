@@ -2,6 +2,18 @@ require 'spec_helper'
 
 module AV
   describe Record do
+    before(:each) do
+      Config.avplayer_base_uri = 'https://avplayer.lib.berkeley.edu'
+      Config.millennium_base_uri = 'http://oskicat.berkeley.edu/search~S1'
+      Config.tind_base_uri = 'https://digicoll.lib.berkeley.edu'
+    end
+
+    after(:each) do
+      Config.instance_variable_set(:@millennium_base_uri, nil)
+      Config.instance_variable_set(:@tind_base_uri, nil)
+      Config.instance_variable_set(:@avplayer_base_uri, nil)
+    end
+
     describe :new do
       it 'sorts the tracks' do
         t1 = Track.new(sort_order: 1, title: 'Part 1', path: 'frost-read1.mp3')
@@ -18,35 +30,46 @@ module AV
     end
 
     describe :player_uri do
-      after :each do
-        Config.instance_variable_set(:@avplayer_base_uri, nil)
-      end
-
       it 'generates the player URI' do
-        avplayer_base_uri = 'https://avplayer.lib.berkeley.edu'
         collection = 'MRCAudio'
         bib_number = 'b11082434'
 
         metadata = instance_double(Metadata)
         expect(metadata).to receive(:bib_number).and_return(bib_number)
 
-        Config.avplayer_base_uri = avplayer_base_uri
         record = Record.new(collection: collection, tracks: [], metadata: metadata)
 
-        expected_uri = URI.parse("#{avplayer_base_uri}/#{collection}/#{bib_number}")
+        expected_uri = URI.parse("#{'https://avplayer.lib.berkeley.edu'}/#{collection}/#{bib_number}")
         expect(record.player_uri).to eq(expected_uri)
       end
     end
 
+    describe :description do
+      it 'gets the description from the 520 tag' do
+        search_url = 'http://oskicat.berkeley.edu/search~S1?/.b22139658/.b22139658/1%2C1%2C1%2CB/marc~b22139658'
+        stub_request(:get, search_url).to_return(status: 200, body: File.read('spec/data/b22139658.html'))
+
+        desc_text = <<~DESC
+          An American propaganda documentary created "to inform and 
+          impress on American citizens the true nature and the true 
+          magnitude of those forces that are working within our 
+          nation for its overthrow...and the destruction of our 
+          educational system." Film covers the July 1969 California 
+          Revolutionary Conference and other demonstrations, warning
+          against the activities of Students for a Democratic 
+          Society, the Black Panthers, student protestors and 
+          Vietnam War demonstrators as they promote a "socialist/
+          communist overthrow of the U.S. government," taking as 
+          their mentor Chairman Mao Tse-Tung.
+        DESC
+        expected_desc = desc_text.gsub(/[[:space:]]+/, ' ').strip
+
+        record = Record.from_metadata(collection: 'MRCVideo', record_id: 'b22139658')
+        expect(record.description).to eq(expected_desc)
+      end
+    end
+
     describe :from_metadata do
-      before(:each) do
-        AV::Config.tind_base_uri = 'https://digicoll.lib.berkeley.edu'
-      end
-
-      after(:each) do
-        AV::Config.instance_variable_set(:@tind_base_uri, nil)
-      end
-
       it 'loads the metadata' do
         marc_xml = File.read('spec/data/record-21178.xml')
         search_url = 'https://digicoll.lib.berkeley.edu/record/21178/export/xm'

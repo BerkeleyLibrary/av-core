@@ -21,7 +21,14 @@ module AV
     end
 
     def player_uri
-      URI.join(AV::Config.avplayer_base_uri, "#{collection}/#{bib_number}")
+      @player_uri ||= URI.join(AV::Config.avplayer_base_uri, "#{collection}/#{bib_number}")
+    end
+
+    def description
+      @description ||= begin
+        desc_value = metadata.values.find { |v| v.tag == '520' }
+        desc_value ? desc_value.lines.join(' ').gsub(/[[:space:]]+/, ' ').strip : ''
+      end
     end
 
     class << self
