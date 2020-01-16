@@ -54,6 +54,14 @@ module AV
           AV::Config.instance_variable_set(:@millennium_base_uri, nil)
         end
 
+        describe :uri_for do
+          it 'returns the search URI' do
+            uri_expected = URI.parse(search_url)
+            uri_actual = Source::MILLENNIUM.uri_for('b22139658')
+            expect(uri_actual).to eq(uri_expected)
+          end
+        end
+
         describe :record_for do
           it 'finds a MARC record' do
             marc_html = File.read('spec/data/b22139658.html')
@@ -118,6 +126,14 @@ module AV
 
         after(:each) do
           AV::Config.instance_variable_set(:@tind_base_uri, nil)
+        end
+
+        describe :uri_for do
+          it 'returns the search URI' do
+            uri_expected = URI.parse(search_url)
+            uri_actual = Source::TIND.uri_for('19816')
+            expect(uri_actual).to eq(uri_expected)
+          end
         end
 
         describe :record_for do

@@ -13,16 +13,20 @@ module AV
         def record_for(tind_id)
           Source.tind_record_for(tind_id)
         end
+
+        def uri_for(tind_id)
+          URI.join(base_uri, "/record/#{tind_id}/export/xm")
+        end
       end
 
       new :MILLENNIUM do
         def record_for(bib_number)
           Source.millennium_record_for(bib_number)
         end
-      end
 
-      def record_for(_record_id)
-        raise NoMethodError, "Source class #{self.class} must override Source.record_for"
+        def uri_for(bib_number)
+          URI.join(base_uri, "?/.#{bib_number}/.#{bib_number}/1%2C1%2C1%2CB/marc~#{bib_number}")
+        end
       end
 
       def base_uri
@@ -30,6 +34,14 @@ module AV
         return AV::Config.tind_base_uri if self == Source::TIND
 
         raise ArgumentError, "Unsupported metadata source: #{self}"
+      end
+
+      def record_for(_record_id)
+        raise NoMethodError, "Source class #{self.class} must override Source.record_for"
+      end
+
+      def uri_for(_record_id)
+        raise NoMethodError, "Source class #{self.class} must override Source.uri_for"
       end
 
       class << self
@@ -47,9 +59,7 @@ module AV
         # @param bib_number [String] the bib number
         # @return [MARC::Record] the MARC record for the specified bib number
         def millennium_record_for(bib_number)
-          # noinspection RubyResolve
-          uri = URI.join(MILLENNIUM.base_uri, "?/.#{bib_number}/.#{bib_number}/1%2C1%2C1%2CB/marc~#{bib_number}")
-          html = do_get(uri.to_s).scrub
+          html = do_get(MILLENNIUM.uri_for(bib_number)).scrub
           AV::Marc::Millennium.marc_from_html(html)
         rescue StandardError => e
           raise AV::RecordNotFound, "Can't find Millennium record for bib number #{bib_number.inspect}: #{e.message}"
@@ -61,9 +71,7 @@ module AV
         # @return [MARC::Record] the MARC record for the specified TIND ID
         def tind_record_for(tind_id)
           record = begin
-            # noinspection RubyResolve
-            uri = URI.join(TIND.base_uri, "/record/#{tind_id}/export/xm")
-            xml = do_get(uri.to_s)
+            xml = do_get(TIND.uri_for(tind_id))
             AV::Marc.from_xml(xml)
           rescue StandardError => e
             raise AV::RecordNotFound, "Can't find TIND record for record ID #{tind_id.inspect}: #{e.message}"
@@ -79,12 +87,12 @@ module AV
           AV.logger
         end
 
-        def do_get(url)
-          resp = RestClient.get(url)
+        def do_get(uri)
+          resp = RestClient.get(uri.to_s)
           if resp.code != 200
-            log.error("GET #{url} returned #{resp.code}: #{resp.body || 'nil'}")
+            log.error("GET #{uri} returned #{resp.code}: #{resp.body || 'nil'}")
             raise(RestClient::RequestFailed.new(resp, resp.code).tap do |ex|
-              ex.message = "No record found at #{url}; host returned #{resp.code}"
+              ex.message = "No record found at #{uri}; host returned #{resp.code}"
             end)
           end
           resp.body
