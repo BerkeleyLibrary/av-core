@@ -140,5 +140,30 @@ module AV
         end.to raise_error(AV::RecordNotFound)
       end
     end
+
+    describe :ucb_access? do
+      it 'returns true for restricted, false for unrestricted' do
+        restricted = %w[b18538031 b24071548 4188 4959]
+        unrestricted = %w[b22139658 b23161018 19816 21178]
+        (restricted + unrestricted).each do |record_id|
+          source = Metadata::Source.for_record_id(record_id)
+          test_data = 'spec/data/' + (source == Metadata::Source::TIND ? "record-#{record_id}.xml" : "#{record_id}.html")
+          stub_request(:get, source.uri_for(record_id)).to_return(status: 200, body: File.read(test_data))
+        end
+
+        aggregate_failures 'restrictions' do
+          restricted.each do |record_id|
+            record = Record.from_metadata(collection: 'test', record_id: record_id)
+            expect(record.ucb_access?).to eq(true), "Expected #{record_id} to be restricted, was not"
+          end
+
+          unrestricted.each do |record_id|
+            record = Record.from_metadata(collection: 'test', record_id: record_id)
+            expect(record.ucb_access?).to eq(false), "Expected #{record_id} not to be restricted, was"
+          end
+        end
+      end
+
+    end
   end
 end

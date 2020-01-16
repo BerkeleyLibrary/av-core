@@ -20,6 +20,10 @@ module AV
       metadata.bib_number
     end
 
+    def ucb_access?
+      metadata.ucb_access?
+    end
+
     def player_uri
       @player_uri ||= URI.join(AV::Config.avplayer_base_uri, "#{collection}/#{bib_number}")
     end

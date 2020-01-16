@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Search-Engine-Total-Number-Of-Results: 1 -->
+<collection xmlns="http://www.loc.gov/MARC21/slim">
+    <record>
+        <controlfield tag="001">4188</controlfield>
+        <controlfield tag="005">20190614222624.0</controlfield>
+        <datafield tag="035" ind1=" " ind2=" ">
+            <subfield code="a">(cityarts)00002</subfield>
+        </datafield>
+        <datafield tag="041" ind1=" " ind2=" ">
+            <subfield code="a">eng</subfield>
+        </datafield>
+        <datafield tag="245" ind1=" " ind2=" ">
+            <subfield code="a">826 Spelling Bee For Cheaters, February 17, 2011</subfield>
+        </datafield>
+        <datafield tag="260" ind1=" " ind2=" ">
+            <subfield code="a">San Francisco </subfield>
+            <subfield code="b">City Arts &amp; Lectures, Inc.</subfield>
+            <subfield code="c">2011</subfield>
+        </datafield>
+        <datafield tag="269" ind1=" " ind2=" ">
+            <subfield code="a">2011-02-17</subfield>
+        </datafield>
+        <datafield tag="300" ind1=" " ind2=" ">
+            <subfield code="a">1 audio file (1 hour, 26 min., 28 sec.)</subfield>
+        </datafield>
+        <datafield tag="336" ind1=" " ind2=" ">
+            <subfield code="a">Audio</subfield>
+        </datafield>
+        <datafield tag="500" ind1=" " ind2=" ">
+            <subfield code="a">Event venue: Herbst Theater.</subfield>
+        </datafield>
+        <datafield tag="540" ind1=" " ind2=" ">
+            <subfield code="a"> RESTRICTED.  Reproduction or quotation only by permission of the interviewee and interviewer. Inquiries concerning these materials should be directed, in writing, to the Head of Public Services, The Bancroft Library.</subfield>
+        </datafield>
+        <datafield tag="541" ind1=" " ind2=" ">
+            <subfield code="a"> Gift;  City Arts and Lectures, Inc.;  October 2011.</subfield>
+        </datafield>
+        <datafield tag="541" ind1=" " ind2=" ">
+            <subfield code="a"> Gift;  City Arts and Lectures, Inc.;  October 2011.</subfield>
+        </datafield>
+        <datafield tag="710" ind1="2" ind2=" ">
+            <subfield code="a">City Arts &amp; Lectures (Firm).</subfield>
+            <subfield code="e">sponsor.</subfield>
+        </datafield>
+        <datafield tag="852" ind1=" " ind2=" ">
+            <subfield code="c">The Bancroft Library</subfield>
+        </datafield>
+        <datafield tag="856" ind1="4" ind2="1">
+            <subfield code="u">http://oskicat.berkeley.edu/record=b18538031</subfield>
+            <subfield code="y">View library catalog record.</subfield>
+        </datafield>
+        <datafield tag="856" ind1="4" ind2="2">
+            <subfield code="u">http://servlet1.lib.berkeley.edu:8080/audio/stream.play.logic?coll=cityarts&amp;group=b18538031</subfield>
+            <subfield code="y">Play Audio for City Arts and Lectures. UCB access.</subfield>
+        </datafield>
+        <datafield tag="901" ind1=" " ind2=" ">
+            <subfield code="m">b18538031</subfield>
+            <subfield code="o">769440422</subfield>
+        </datafield>
+        <datafield tag="903" ind1=" " ind2=" ">
+            <subfield code="b">m</subfield>
+        </datafield>
+        <datafield tag="980" ind1=" " ind2=" ">
+            <subfield code="a">cityarts</subfield>
+        </datafield>
+        <datafield tag="982" ind1=" " ind2=" ">
+            <subfield code="a">City Arts and Lectures</subfield>
+            <subfield code="b">City Arts and Lectures</subfield>
+        </datafield>
+        <datafield ind1="0" ind2="0" tag="998">
+            <subfield code="g">CA01476a.mp3</subfield>
+            <subfield code="g">CA01476b.mp3</subfield>
+        </datafield>
+    </record>
+
+    
+</collection>

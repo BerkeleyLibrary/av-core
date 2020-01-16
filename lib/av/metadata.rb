@@ -37,6 +37,13 @@ module AV
       end
     end
 
+    def ucb_access?
+      @ucb_access ||= marc_record.fields(TAG_LINK_FIELD).any? do |data_field|
+        subfields = data_field.subfields
+        subfields.any? { |sf| sf.value.include?('UCB access') }
+      end
+    end
+
     private
 
     def find_bib_number

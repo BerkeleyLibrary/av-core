@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Search-Engine-Total-Number-Of-Results: 1 -->
+<collection xmlns="http://www.loc.gov/MARC21/slim">
+    <record>
+        <controlfield tag="001">4959</controlfield>
+        <controlfield tag="005">20190614222638.0</controlfield>
+        <datafield tag="035" ind1=" " ind2=" ">
+            <subfield code="a">(cityarts)00773</subfield>
+        </datafield>
+        <datafield tag="041" ind1=" " ind2=" ">
+            <subfield code="a">eng</subfield>
+        </datafield>
+        <datafield tag="245" ind1=" " ind2=" ">
+            <subfield code="a">Interview with Joyce Carol Oates, January 26, 2016</subfield>
+        </datafield>
+        <datafield tag="260" ind1=" " ind2=" ">
+            <subfield code="a">San Francisco </subfield>
+            <subfield code="b">City Arts &amp; Lectures, Inc.</subfield>
+            <subfield code="c">2016</subfield>
+        </datafield>
+        <datafield tag="269" ind1=" " ind2=" ">
+            <subfield code="a">2016-01-26</subfield>
+        </datafield>
+        <datafield tag="300" ind1=" " ind2=" ">
+            <subfield code="a">1 audio file (1 hour, 25 min., 35 sec.)</subfield>
+        </datafield>
+        <datafield tag="336" ind1=" " ind2=" ">
+            <subfield code="a">Audio</subfield>
+        </datafield>
+        <datafield tag="500" ind1=" " ind2=" ">
+            <subfield code="a">Event venue: Nourse Theater.</subfield>
+        </datafield>
+        <datafield tag="500" ind1=" " ind2=" ">
+            <subfield code="a">Joyce Carol Oates: National Book Award-winning novelist, short story writer, and poet. Her works include them, We Were the Mulvaneys, Them, Blonde, Black Water, and The Lost Landscape: A Writer's Memoir.</subfield>
+        </datafield>
+        <datafield tag="500" ind1=" " ind2=" ">
+            <subfield code="a">Robert Hass: Former Poet Laureate of US and author of the collections Field Guide, Sun Under Wood, The Apple Trees at Olema and many more.</subfield>
+        </datafield>
+        <datafield tag="540" ind1=" " ind2=" ">
+            <subfield code="a"> RESTRICTED.  Reproduction or quotation only by permission of the interviewee and interviewer. Inquiries concerning these materials should be directed, in writing, to the Head of Public Services, The Bancroft Library.</subfield>
+        </datafield>
+        <datafield tag="541" ind1=" " ind2=" ">
+            <subfield code="a"> Gift;  City Arts and Lectures, Inc.;  October, 2017.</subfield>
+        </datafield>
+        <datafield tag="600" ind1=" " ind2=" ">
+            <subfield code="a"> Oates, Joyce -- Interviews.</subfield>
+        </datafield>
+        <datafield tag="655" ind1=" " ind2=" ">
+            <subfield code="a">Interviews.</subfield>
+        </datafield>
+        <datafield tag="700" ind1="1" ind2=" ">
+            <subfield code="a">Hass, Robert</subfield>
+            <subfield code="e">interviewer.</subfield>
+        </datafield>
+        <datafield tag="700" ind1="1" ind2=" ">
+            <subfield code="a">Oates, Joyce</subfield>
+            <subfield code="e">interviewee.</subfield>
+        </datafield>
+        <datafield tag="710" ind1="2" ind2=" ">
+            <subfield code="a">City Arts &amp; Lectures, Inc.</subfield>
+            <subfield code="e">sponsor.</subfield>
+        </datafield>
+        <datafield tag="852" ind1=" " ind2=" ">
+            <subfield code="c">The Bancroft Library</subfield>
+        </datafield>
+        <datafield tag="856" ind1="4" ind2="1">
+            <subfield code="u">http://oskicat.berkeley.edu/record=b24071548</subfield>
+            <subfield code="y">View library catalog record.</subfield>
+        </datafield>
+        <datafield tag="856" ind1="4" ind2="2">
+            <subfield code="u">http://servlet1.lib.berkeley.edu:8080/audio/stream.play.logic?coll=cityarts&amp;group=b24071548</subfield>
+            <subfield code="y">Play Audio for City Arts and Lectures. UCB access.</subfield>
+        </datafield>
+        <datafield tag="901" ind1=" " ind2=" ">
+            <subfield code="m">b24071548</subfield>
+            <subfield code="o">1006429847</subfield>
+        </datafield>
+        <datafield tag="903" ind1=" " ind2=" ">
+            <subfield code="b">m</subfield>
+        </datafield>
+        <datafield tag="980" ind1=" " ind2=" ">
+            <subfield code="a">cityarts</subfield>
+        </datafield>
+        <datafield tag="982" ind1=" " ind2=" ">
+            <subfield code="a">City Arts and Lectures</subfield>
+            <subfield code="b">City Arts and Lectures</subfield>
+        </datafield>
+        <datafield ind1="0" ind2="0" tag="998">
+            <subfield code="g">CA01693.mp3</subfield>
+        </datafield>
+    </record>
+
+    
+</collection>

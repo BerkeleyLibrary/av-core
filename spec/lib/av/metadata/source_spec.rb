@@ -28,6 +28,13 @@ module AV
         end
       end
 
+      describe :uri_for do
+        it 'raises NoMethodError for unconfigured sources' do
+          source = Source.allocate
+          expect { source.uri_for('Lot 49') }.to raise_error(NoMethodError)
+        end
+      end
+
       describe :source_for do
         it 'returns MILLENNIUM for a Millennium bib number' do
           expect(Source.for_record_id('b12345678')).to be(Source::MILLENNIUM)
