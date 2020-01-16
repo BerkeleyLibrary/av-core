@@ -3,6 +3,7 @@ require 'av/metadata/field'
 module AV
   class Metadata
     class Fields
+      # TODO: identify link to catalog, and generate it synthetically if not present
       TITLE = Field.new(label: 'Title', tag: '245', order: 1, subfield_order: [:a])
       DESCRIPTION = Field.new(label: 'Description', tag: '520', order: 2, subfield_order: [:a])
       CREATOR_PERSONAL = Field.new(label: 'Creator', tag: '700', order: 2)
