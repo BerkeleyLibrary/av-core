@@ -48,8 +48,8 @@ module AV
         # @return [MARC::Record] the MARC record for the specified bib number
         def millennium_record_for(bib_number)
           # noinspection RubyResolve
-          url = "#{MILLENNIUM.base_uri}?/.#{bib_number}/.#{bib_number}/1%2C1%2C1%2CB/marc~#{bib_number}"
-          html = do_get(url).scrub
+          uri = URI.join(MILLENNIUM.base_uri, "?/.#{bib_number}/.#{bib_number}/1%2C1%2C1%2CB/marc~#{bib_number}")
+          html = do_get(uri.to_s).scrub
           AV::Marc::Millennium.marc_from_html(html)
         rescue StandardError => e
           raise AV::RecordNotFound, "Can't find Millennium record for bib number #{bib_number.inspect}: #{e.message}"
@@ -62,8 +62,8 @@ module AV
         def tind_record_for(tind_id)
           record = begin
             # noinspection RubyResolve
-            url = "#{TIND.base_uri}/record/#{tind_id}/export/xm"
-            xml = do_get(url)
+            uri = URI.join(TIND.base_uri, "/record/#{tind_id}/export/xm")
+            xml = do_get(uri.to_s)
             AV::Marc.from_xml(xml)
           rescue StandardError => e
             raise AV::RecordNotFound, "Can't find TIND record for record ID #{tind_id.inspect}: #{e.message}"
