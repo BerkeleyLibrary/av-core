@@ -130,6 +130,15 @@ module AV
           )
         end.to raise_error(AV::RecordNotFound)
       end
+
+      it "raises #{AV::RecordNotFound} for a record with a bad ID" do
+        expect do
+          Record.from_metadata(
+            collection: 'Pacifica',
+            record_id: 'abcdefg'
+          )
+        end.to raise_error(AV::RecordNotFound)
+      end
     end
   end
 end

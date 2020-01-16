@@ -52,6 +52,8 @@ module AV
     class << self
       def for_record(record_id:)
         source = Source.for_record_id(record_id)
+        raise AV::RecordNotFound, "Unable to determine metadata source for record ID: #{record_id}" unless source
+
         Metadata.new(record_id: record_id, source: source)
       end
     end
