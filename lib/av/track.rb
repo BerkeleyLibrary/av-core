@@ -64,12 +64,18 @@ module AV
       private
 
       def from_group(group, collection:, sort_order:)
+        path = normalize_path(group[SUBFIELD_CODE_PATH])
         Track.new(
           sort_order: sort_order,
           title: group[SUBFIELD_CODE_TITLE],
-          path: "#{collection}/#{group[SUBFIELD_CODE_PATH]}",
+          path: "#{collection}/#{path}",
           duration: group[SUBFIELD_CODE_DURATION]
         )
+      end
+
+      def normalize_path(path)
+        # Millennium hyphenation can introduce bogus spaces into paths
+        path && path.gsub(/ ?- ?/, '-')
       end
     end
   end

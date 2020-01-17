@@ -98,6 +98,17 @@ module AV
         tracks = Track.tracks_from(marc_record, collection: 'MRCAudio')
         expect(tracks).to eq([])
       end
+
+      it 'handles tracks with spaces' do
+        expected_tracks = [
+          Track.new(sort_order: 0, title: 'Part 1', path: 'MRCAudio/frost-read1.mp3'),
+          Track.new(sort_order: 1, title: 'Part 2', path: 'MRCAudio/frost-read2.mp3')
+        ]
+
+        marc_record = AV::Marc::Millennium.marc_from_html(File.read('spec/data/b11082434.html'))
+        tracks = Track.tracks_from(marc_record, collection: 'MRCAudio')
+        expect(tracks).to eq(expected_tracks)
+      end
     end
   end
 end
