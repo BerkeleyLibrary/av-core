@@ -3,13 +3,19 @@ require 'av/metadata/field'
 module AV
   class Metadata
     class Fields
-      # TODO: identify link to catalog, and generate it synthetically if not present
-      TITLE = Field.new(label: 'Title', tag: '245', order: 1, subfield_order: [:a])
+      include AV::Constants
+
+      TITLE = Field.new(label: 'Title', tag: TAG_TITLE_FIELD, order: 1, subfield_order: [:a])
       DESCRIPTION = Field.new(label: 'Description', tag: '520', order: 2, subfield_order: [:a])
       CREATOR_PERSONAL = Field.new(label: 'Creator', tag: '700', order: 2)
       CREATOR_CORPORATE = Field.new(label: 'Creator', tag: '710', order: 2)
-      CATALOG_LINK = Field.new(label: 'Linked Resources', tag: '856', ind_1: '4', ind_2: '1', order: 11)
-      TRACKS = Field.new(label: 'Tracks', tag: '998', ind_1: '0', ind_2: '0', order: 99, subfield_order: %i[g t a])
+      CATALOG_LINK = Field.new(label: 'Linked Resources', tag: TAG_LINK_FIELD, ind_1: '4', ind_2: '1', order: 11)
+      TRACKS = Field.new(
+        label: 'Tracks',
+        tag: TAG_TRACK_FIELD,
+        order: 99,
+        subfield_order: [SUBFIELD_CODE_PATH, SUBFIELD_CODE_TITLE, SUBFIELD_CODE_DURATION]
+      )
       DEFAULT_FIELDS = [TITLE, DESCRIPTION, CREATOR_PERSONAL, CREATOR_CORPORATE, CATALOG_LINK, TRACKS].freeze
 
       JSON_REQUIRED_FIELDS = %w[visible params labels order].freeze

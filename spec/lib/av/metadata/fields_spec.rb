@@ -73,7 +73,7 @@ module AV
             { order: 85, tag: '540', ind_1: nil, ind_2: nil, label: 'Usage Statement', subfields_separator: ', ', subfield_order: [:a] },
             { order: 86, tag: '991', ind_1: nil, ind_2: nil, label: 'Access', subfields_separator: ', ', subfield_order: [:a] },
             { order: 89, tag: '982', ind_1: nil, ind_2: nil, label: 'Collection', subfields_separator: ' ', subfield_order: [:a] },
-            { order: 99, tag: '998', ind_1: '0', ind_2: '0', label: 'Tracks', subfields_separator: ' ', subfield_order: %i[g t a] }
+            { order: 99, tag: '998', ind_1: nil, ind_2: nil, label: 'Tracks', subfields_separator: ' ', subfield_order: %i[g t a] }
           ]
           fields = Fields.all
           expect(fields.size).to eq(expected_fields.size)
@@ -98,35 +98,72 @@ module AV
       describe :fields_from do
         attr_reader :marc_record
 
-        before(:all) do
-          marc_xml = File.read('spec/data/record-21178.xml')
-          input = StringIO.new(marc_xml)
-          @marc_record = MARC::XMLReader.new(input).first
-        end
-        it 'parses the fields' do
-          expected = [
-            'Title (245): Wanda Coleman',
-            'Description (520): Poet Opal Palmer Adisa interviews writer/poet Wanda Coleman, author of Mad Dog, Black Lady, African Sleeping Sickness and Hand Dance, among other books. Coleman discusses when she found her poetic voice, talks about the function of poetry, her personal encounters with anti-Black discrimination, and about the reluctance of white liberals to discuss issues that affect the Black community. She also talks about the plight of the African American community in South Central Los Angeles. The poems Coleman reads are A civilized plague, David Polion, Notes of a cultural terrorist and Jazz wazz.',
-            'Creator (700): Coleman, Wanda. interviewee. Adisa, Opal Palmer. interviewer.',
-            'Creator (710): Pacifica Radio Archive. KPFA (Radio station : Berkeley, Calif.).',
-            'Published (260): Los Angeles , Pacifica Radio Archives, 1993.',
-            'Linked Resources (856): [View library catalog record.](http://oskicat.berkeley.edu/record=b23305522)',
-            'Full Collection Name (982): Pacifica Radio Archives Social Activism Sound Recording Project',
-            'Type (336): Audio',
-            'Extent (300): 1 online resource.',
-            'Archive (852): The Library',
-            "Grant Information (536): Sponsored by the National Historical Publications and Records Commission at the National Archives and Records Administration as part of Pacifica's American Women Making History and Culture: 1963-1982 grant preservation project.",
-            'Usage Statement (540): RESTRICTED.  Permissions, licensing requests, and all other inquiries should be directed in writing to: Director of the Archives, Pacifica Radio Archives, 3729 Cahuenga Blvd. West, North Hollywood, CA 91604, 800-735-0230 x 263, fax 818-506-1084, info@pacificaradioarchives.org, http://www.pacificaradioarchives.org',
-            'Collection (982): Pacifica Radio Archives',
-            'Tracks (998): PRA_NHPRC1_AZ1084_00_000_00.mp3 00:54:03'
-          ]
+        describe :MILLENNIUM do
+          before(:each) do
+            marc_html = File.read('spec/data/b23305522.html')
+            @marc_record = AV::Marc::Millennium.marc_from_html(marc_html)
+          end
 
-          values = Fields.values_from(marc_record)
-          expect(values.size).to eq(expected.size)
-          aggregate_failures 'values' do
-            values.each_with_index do |v, i|
-              expect(v.to_s.gsub('|', '')).to eq(expected[i])
-              expect(v.first).not_to be_nil
+          it 'parses the fields' do
+            expected = [
+              'Title (245): Wanda Coleman',
+              'Description (520): Poet Opal Palmer Adisa interviews writer/poet Wanda Coleman, author of Mad Dog, Black Lady, African Sleeping Sickness and Hand Dance, among other books. Coleman discusses when she found her poetic voice, talks about the function of poetry, her personal encounters with anti- Black discrimination, and about the reluctance of white liberals to discuss issues that affect the Black community. She also talks about the plight of the African American community in South Central Los Angeles. The poems Coleman reads are A civilized plague, David Polion, Notes of a cultural terrorist and Jazz wazz.',
+              'Creator (700): Coleman, Wanda. interviewee. Adisa, Opal Palmer. interviewer.',
+              'Creator (710): Pacifica Radio Archive. KPFA (Radio station : Berkeley, Calif.).',
+              'Published (260): Los Angeles :, Pacifica Radio Archives, , 1993.',
+              'Extent (300): 1 online resource.',
+              'Repository (533): Pacifica Radio Archives.',
+              'Reproduction Note (533): Electronic reproduction.',
+              "Grant Information (536): Sponsored by the National Historical Publications and Records Commission at the National Archives and Records Administration as part of Pacifica's American Women Making History and Culture: 1963-1982 grant preservation project.",
+              'Usage Statement (540): RESTRICTED.',
+              'Tracks (998): PRA_NHPRC1_AZ1084_00_000_00.mp3 00:54:03'
+            ]
+
+            values = Fields.values_from(marc_record)
+            aggregate_failures 'values' do
+              expect(values.size).to eq(expected.size)
+              expected.each_with_index do |x, i|
+                index = values.find_index { |v| v.to_s.gsub('|', '') == x }
+                expect(index).not_to be_nil, "Value #{x.inspect} not found"
+                expect(index).to eq(i), "Value #{x.inspect} found at #{index}, expected #{i}" if index
+              end
+            end
+          end
+        end
+
+        describe :TIND do
+          before(:each) do
+            marc_xml = File.read('spec/data/record-21178.xml')
+            input = StringIO.new(marc_xml)
+            @marc_record = MARC::XMLReader.new(input).first
+          end
+
+          it 'parses the fields' do
+            expected = [
+              'Title (245): Wanda Coleman',
+              'Description (520): Poet Opal Palmer Adisa interviews writer/poet Wanda Coleman, author of Mad Dog, Black Lady, African Sleeping Sickness and Hand Dance, among other books. Coleman discusses when she found her poetic voice, talks about the function of poetry, her personal encounters with anti-Black discrimination, and about the reluctance of white liberals to discuss issues that affect the Black community. She also talks about the plight of the African American community in South Central Los Angeles. The poems Coleman reads are A civilized plague, David Polion, Notes of a cultural terrorist and Jazz wazz.',
+              'Creator (700): Coleman, Wanda. interviewee. Adisa, Opal Palmer. interviewer.',
+              'Creator (710): Pacifica Radio Archive. KPFA (Radio station : Berkeley, Calif.).',
+              'Published (260): Los Angeles , Pacifica Radio Archives, 1993.',
+              'Linked Resources (856): [View library catalog record.](http://oskicat.berkeley.edu/record=b23305522)',
+              'Full Collection Name (982): Pacifica Radio Archives Social Activism Sound Recording Project',
+              'Type (336): Audio',
+              'Extent (300): 1 online resource.',
+              'Archive (852): The Library',
+              "Grant Information (536): Sponsored by the National Historical Publications and Records Commission at the National Archives and Records Administration as part of Pacifica's American Women Making History and Culture: 1963-1982 grant preservation project.",
+              'Usage Statement (540): RESTRICTED.  Permissions, licensing requests, and all other inquiries should be directed in writing to: Director of the Archives, Pacifica Radio Archives, 3729 Cahuenga Blvd. West, North Hollywood, CA 91604, 800-735-0230 x 263, fax 818-506-1084, info@pacificaradioarchives.org, http://www.pacificaradioarchives.org',
+              'Collection (982): Pacifica Radio Archives',
+              'Tracks (998): PRA_NHPRC1_AZ1084_00_000_00.mp3 00:54:03'
+            ]
+
+            values = Fields.values_from(marc_record)
+            aggregate_failures 'values' do
+              expect(values.size).to eq(expected.size)
+              expected.each_with_index do |x, i|
+                index = values.find_index { |v| v.to_s.gsub('|', '') == x }
+                expect(index).not_to be_nil, "Value #{x.inspect} not found"
+                expect(index).to eq(i), "Value #{x.inspect} found at #{index}, expected #{i}" if index
+              end
             end
           end
         end
