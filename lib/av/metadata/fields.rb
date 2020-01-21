@@ -9,14 +9,14 @@ module AV
       DESCRIPTION = Field.new(label: 'Description', tag: '520', order: 2, subfield_order: [:a])
       CREATOR_PERSONAL = Field.new(label: 'Creator', tag: '700', order: 2)
       CREATOR_CORPORATE = Field.new(label: 'Creator', tag: '710', order: 2)
-      CATALOG_LINK = Field.new(label: 'Linked Resources', tag: TAG_LINK_FIELD, ind_1: '4', ind_2: '1', order: 11)
       TRACKS = Field.new(
         label: 'Tracks',
         tag: TAG_TRACK_FIELD,
         order: 99,
         subfield_order: [SUBFIELD_CODE_PATH, SUBFIELD_CODE_TITLE, SUBFIELD_CODE_DURATION]
       )
-      DEFAULT_FIELDS = [TITLE, DESCRIPTION, CREATOR_PERSONAL, CREATOR_CORPORATE, CATALOG_LINK, TRACKS].freeze
+      CATALOG_LINK = Field.new(label: 'Linked Resources', tag: TAG_LINK_FIELD, ind_1: '4', ind_2: '1', order: 999)
+      DEFAULT_FIELDS = [TITLE, DESCRIPTION, CREATOR_PERSONAL, CREATOR_CORPORATE, TRACKS, CATALOG_LINK].freeze
 
       JSON_REQUIRED_FIELDS = %w[visible params labels order].freeze
       TAG_RE = /([0-9]{3})([a-z0-9_%])([a-z0-9_%])([a-z0-9_%]?)/.freeze

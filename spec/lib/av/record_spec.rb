@@ -98,7 +98,6 @@ module AV
             'Creator (700): Coleman, Wanda. interviewee. Adisa, Opal Palmer. interviewer.',
             'Creator (710): Pacifica Radio Archive. KPFA (Radio station : Berkeley, Calif.).',
             'Published (260): Los Angeles , Pacifica Radio Archives, 1993.',
-            'Linked Resources (856): [View library catalog record.](http://oskicat.berkeley.edu/record=b23305522)',
             'Full Collection Name (982): Pacifica Radio Archives Social Activism Sound Recording Project',
             'Type (336): Audio',
             'Extent (300): 1 online resource.',
@@ -106,7 +105,8 @@ module AV
             "Grant Information (536): Sponsored by the National Historical Publications and Records Commission at the National Archives and Records Administration as part of Pacifica's American Women Making History and Culture: 1963-1982 grant preservation project.",
             'Usage Statement (540): RESTRICTED.  Permissions, licensing requests, and all other inquiries should be directed in writing to: Director of the Archives, Pacifica Radio Archives, 3729 Cahuenga Blvd. West, North Hollywood, CA 91604, 800-735-0230 x 263, fax 818-506-1084, info@pacificaradioarchives.org, http://www.pacificaradioarchives.org',
             'Collection (982): Pacifica Radio Archives',
-            'Tracks (998): PRA_NHPRC1_AZ1084_00_000_00.mp3 00:54:03'
+            'Tracks (998): PRA_NHPRC1_AZ1084_00_000_00.mp3 00:54:03',
+            'Linked Resources (856): [View library catalog record.](http://oskicat.berkeley.edu/record=b23305522)'
           ]
           expect(values.size).to eq(expected.size)
           aggregate_failures 'fields' do

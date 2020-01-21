@@ -17,7 +17,6 @@ module AV
             { order: 6, tag: '246', ind_1: nil, ind_2: nil, label: 'Variant Title', subfields_separator: ', ', subfield_order: nil },
             { order: 9, tag: '260', ind_1: nil, ind_2: nil, label: 'Published', subfields_separator: ', ', subfield_order: nil },
             { order: 10, tag: '250', ind_1: nil, ind_2: nil, label: 'Edition', subfields_separator: ', ', subfield_order: nil },
-            { order: 11, tag: '856', ind_1: '4', ind_2: '1', label: 'Linked Resources', subfields_separator: ' ', subfield_order: nil },
             { order: 14, tag: '982', ind_1: nil, ind_2: nil, label: 'Full Collection Name', subfields_separator: ', ', subfield_order: [:b] },
             { order: 15, tag: '490', ind_1: nil, ind_2: nil, label: 'Series', subfields_separator: ', ', subfield_order: [:a] },
             { order: 16, tag: '020', ind_1: nil, ind_2: nil, label: 'ISBN', subfields_separator: ' ', subfield_order: nil },
@@ -73,7 +72,8 @@ module AV
             { order: 85, tag: '540', ind_1: nil, ind_2: nil, label: 'Usage Statement', subfields_separator: ', ', subfield_order: [:a] },
             { order: 86, tag: '991', ind_1: nil, ind_2: nil, label: 'Access', subfields_separator: ', ', subfield_order: [:a] },
             { order: 89, tag: '982', ind_1: nil, ind_2: nil, label: 'Collection', subfields_separator: ' ', subfield_order: [:a] },
-            { order: 99, tag: '998', ind_1: nil, ind_2: nil, label: 'Tracks', subfields_separator: ' ', subfield_order: %i[g t a] }
+            { order: 99, tag: '998', ind_1: nil, ind_2: nil, label: 'Tracks', subfields_separator: ' ', subfield_order: %i[g t a] },
+            { order: 999, tag: '856', ind_1: '4', ind_2: '1', label: 'Linked Resources', subfields_separator: ' ', subfield_order: nil }
           ]
           fields = Fields.all
           expect(fields.size).to eq(expected_fields.size)
@@ -145,7 +145,6 @@ module AV
               'Creator (700): Coleman, Wanda. interviewee. Adisa, Opal Palmer. interviewer.',
               'Creator (710): Pacifica Radio Archive. KPFA (Radio station : Berkeley, Calif.).',
               'Published (260): Los Angeles , Pacifica Radio Archives, 1993.',
-              'Linked Resources (856): [View library catalog record.](http://oskicat.berkeley.edu/record=b23305522)',
               'Full Collection Name (982): Pacifica Radio Archives Social Activism Sound Recording Project',
               'Type (336): Audio',
               'Extent (300): 1 online resource.',
@@ -153,7 +152,8 @@ module AV
               "Grant Information (536): Sponsored by the National Historical Publications and Records Commission at the National Archives and Records Administration as part of Pacifica's American Women Making History and Culture: 1963-1982 grant preservation project.",
               'Usage Statement (540): RESTRICTED.  Permissions, licensing requests, and all other inquiries should be directed in writing to: Director of the Archives, Pacifica Radio Archives, 3729 Cahuenga Blvd. West, North Hollywood, CA 91604, 800-735-0230 x 263, fax 818-506-1084, info@pacificaradioarchives.org, http://www.pacificaradioarchives.org',
               'Collection (982): Pacifica Radio Archives',
-              'Tracks (998): PRA_NHPRC1_AZ1084_00_000_00.mp3 00:54:03'
+              'Tracks (998): PRA_NHPRC1_AZ1084_00_000_00.mp3 00:54:03',
+              'Linked Resources (856): [View library catalog record.](http://oskicat.berkeley.edu/record=b23305522)'
             ]
 
             values = Fields.values_from(marc_record)
