@@ -60,7 +60,7 @@ module AV
         attr_reader :search_url
 
         before(:each) do
-          AV::Config.millennium_base_uri = 'http://oskicat.berkeley.edu/search~S1'
+          AV::Config.millennium_base_uri = 'http://oskicat.berkeley.edu/'
           @search_url = 'http://oskicat.berkeley.edu/search~S1?/.b22139658/.b22139658/1%2C1%2C1%2CB/marc~b22139658'
         end
 

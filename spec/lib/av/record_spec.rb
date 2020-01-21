@@ -4,7 +4,7 @@ module AV
   describe Record do
     before(:each) do
       Config.avplayer_base_uri = 'https://avplayer.lib.berkeley.edu'
-      Config.millennium_base_uri = 'http://oskicat.berkeley.edu/search~S1'
+      Config.millennium_base_uri = 'http://oskicat.berkeley.edu/'
       Config.tind_base_uri = 'https://digicoll.lib.berkeley.edu'
     end
 

@@ -5,7 +5,7 @@ module AV
     describe :title do
 
       before(:each) do
-        AV::Config.millennium_base_uri = 'http://oskicat.berkeley.edu/search~S1'
+        AV::Config.millennium_base_uri = 'http://oskicat.berkeley.edu/'
       end
 
       after(:each) do
