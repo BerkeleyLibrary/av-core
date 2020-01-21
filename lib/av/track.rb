@@ -65,9 +65,10 @@ module AV
 
       def from_group(group, collection:, sort_order:)
         path = normalize_path(group[SUBFIELD_CODE_PATH])
+        title = group[SUBFIELD_CODE_TITLE]
         Track.new(
           sort_order: sort_order,
-          title: group[SUBFIELD_CODE_TITLE],
+          title: title && title.strip,
           path: "#{collection}/#{path}",
           duration: group[SUBFIELD_CODE_DURATION]
         )

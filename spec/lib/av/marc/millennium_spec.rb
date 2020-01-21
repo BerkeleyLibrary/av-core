@@ -38,7 +38,7 @@ module AV
       end
 
       it 'handles long 856 links' do
-        marc_record = Millennium.marc_from_html(File.read('spec/data/b23161018-original.html'))
+        marc_record = Millennium.marc_from_html(File.read('spec/data/b23161018-unmigrated.html'))
         link = marc_record['856']
         expect(link['u']).to eq('http://servlet1.lib.berkeley.edu:8080/audio/stream.play.logic?coll=music&group=b23161018')
       end

@@ -94,7 +94,7 @@ module AV
       end
 
       it 'handles records with no tracks' do
-        marc_record = AV::Marc::Millennium.marc_from_html(File.read('spec/data/b23161018-original.html'))
+        marc_record = AV::Marc::Millennium.marc_from_html(File.read('spec/data/b23161018-unmigrated.html'))
         tracks = Track.tracks_from(marc_record, collection: 'MRCAudio')
         expect(tracks).to eq([])
       end
