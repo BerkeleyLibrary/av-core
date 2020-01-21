@@ -28,10 +28,17 @@ module AV
         end
       end
 
-      describe :uri_for do
+      describe :marc_uri_for do
         it 'raises NoMethodError for unconfigured sources' do
           source = Source.allocate
-          expect { source.uri_for('Lot 49') }.to raise_error(NoMethodError)
+          expect { source.marc_uri_for('Lot 49') }.to raise_error(NoMethodError)
+        end
+      end
+
+      describe :display_uri_for do
+        it 'raises NoMethodError for unconfigured sources' do
+          source = Source.allocate
+          expect { source.display_uri_for('Lot 49') }.to raise_error(NoMethodError)
         end
       end
 
@@ -61,10 +68,18 @@ module AV
           AV::Config.instance_variable_set(:@millennium_base_uri, nil)
         end
 
-        describe :uri_for do
+        describe :marc_uri_for do
           it 'returns the search URI' do
             uri_expected = URI.parse(search_url)
-            uri_actual = Source::MILLENNIUM.uri_for('b22139658')
+            uri_actual = Source::MILLENNIUM.marc_uri_for('b22139658')
+            expect(uri_actual).to eq(uri_expected)
+          end
+        end
+
+        describe :display_uri_for do
+          it 'returns the record display page URI' do
+            uri_expected = URI.parse('http://oskicat.berkeley.edu/record=b22139658')
+            uri_actual = Source::MILLENNIUM.display_uri_for('b22139658')
             expect(uri_actual).to eq(uri_expected)
           end
         end
@@ -135,10 +150,18 @@ module AV
           AV::Config.instance_variable_set(:@tind_base_uri, nil)
         end
 
-        describe :uri_for do
+        describe :marc_uri_for do
           it 'returns the search URI' do
             uri_expected = URI.parse(search_url)
-            uri_actual = Source::TIND.uri_for('19816')
+            uri_actual = Source::TIND.marc_uri_for('19816')
+            expect(uri_actual).to eq(uri_expected)
+          end
+        end
+
+        describe :display_uri_for do
+          it 'returns the record display page URI' do
+            uri_expected = URI.parse('https://digicoll.lib.berkeley.edu/record/19816')
+            uri_actual = Source::TIND.display_uri_for('19816')
             expect(uri_actual).to eq(uri_expected)
           end
         end

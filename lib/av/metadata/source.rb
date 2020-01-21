@@ -14,8 +14,12 @@ module AV
           Source.tind_record_for(tind_id)
         end
 
-        def uri_for(tind_id)
+        def marc_uri_for(tind_id)
           URI.join(base_uri, "/record/#{tind_id}/export/xm")
+        end
+
+        def display_uri_for(tind_id)
+          URI.join(base_uri, "/record/#{tind_id}")
         end
       end
 
@@ -24,8 +28,12 @@ module AV
           Source.millennium_record_for(bib_number)
         end
 
-        def uri_for(bib_number)
-          URI.join(base_uri, "?/.#{bib_number}/.#{bib_number}/1%2C1%2C1%2CB/marc~#{bib_number}")
+        def marc_uri_for(bib_number)
+          URI.join(base_uri, "search~S1?/.#{bib_number}/.#{bib_number}/1%2C1%2C1%2CB/marc~#{bib_number}")
+        end
+
+        def display_uri_for(bib_number)
+          URI.join(base_uri, "record=#{bib_number}")
         end
       end
 
@@ -37,11 +45,15 @@ module AV
       end
 
       def record_for(_record_id)
-        raise NoMethodError, "Source class #{self.class} must override Source.record_for"
+        raise NoMethodError, "Source #{self.value.inspect} must override Source.record_for"
       end
 
-      def uri_for(_record_id)
-        raise NoMethodError, "Source class #{self.class} must override Source.uri_for"
+      def marc_uri_for(_record_id)
+        raise NoMethodError, "Source #{self.value.inspect} must override Source.marc_uri_for"
+      end
+
+      def display_uri_for(_record_id)
+        raise NoMethodError, "Source #{self.value.inspect} must override Source.display_uri_for"
       end
 
       class << self
@@ -59,7 +71,7 @@ module AV
         # @param bib_number [String] the bib number
         # @return [MARC::Record] the MARC record for the specified bib number
         def millennium_record_for(bib_number)
-          html = do_get(MILLENNIUM.uri_for(bib_number)).scrub
+          html = do_get(MILLENNIUM.marc_uri_for(bib_number)).scrub
           AV::Marc::Millennium.marc_from_html(html)
         rescue StandardError => e
           raise AV::RecordNotFound, "Can't find Millennium record for bib number #{bib_number.inspect}: #{e.message}"
@@ -71,7 +83,7 @@ module AV
         # @return [MARC::Record] the MARC record for the specified TIND ID
         def tind_record_for(tind_id)
           record = begin
-            xml = do_get(TIND.uri_for(tind_id))
+            xml = do_get(TIND.marc_uri_for(tind_id))
             AV::Marc.from_xml(xml)
           rescue StandardError => e
             raise AV::RecordNotFound, "Can't find TIND record for record ID #{tind_id.inspect}: #{e.message}"

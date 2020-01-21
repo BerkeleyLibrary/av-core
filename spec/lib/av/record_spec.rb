@@ -148,7 +148,7 @@ module AV
         (restricted + unrestricted).each do |record_id|
           source = Metadata::Source.for_record_id(record_id)
           test_data = 'spec/data/' + (source == Metadata::Source::TIND ? "record-#{record_id}.xml" : "#{record_id}.html")
-          stub_request(:get, source.uri_for(record_id)).to_return(status: 200, body: File.read(test_data))
+          stub_request(:get, source.marc_uri_for(record_id)).to_return(status: 200, body: File.read(test_data))
         end
 
         aggregate_failures 'restrictions' do
