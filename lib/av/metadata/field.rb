@@ -31,13 +31,17 @@ module AV
 
         case tag
         when TAG_LINK_FIELD
-          LinkValue.from_subfield_values(all_subfield_values, tag: tag, label: label)
+          LinkValue.from_subfield_values(all_subfield_values, tag: tag, label: label, order: order)
         else
-          TextValue.from_subfield_values(all_subfield_values, tag: tag, label: label, subfields_separator: subfields_separator)
+          TextValue.from_subfield_values(all_subfield_values, tag: tag, label: label, order: order, subfields_separator: subfields_separator)
         end
       end
 
-      # @param other [Field] the Reader to compare
+      def value?(value)
+        value && value.tag == tag && value.label == label && value.order == order
+      end
+
+      # @param other [Field] the Field to compare
       def <=>(other)
         return unless other
         return 0 if equal?(other)

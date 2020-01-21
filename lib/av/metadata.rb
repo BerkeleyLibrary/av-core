@@ -26,13 +26,16 @@ module AV
     end
 
     def values
-      @values ||= Fields.values_from(marc_record)
+      @values ||= begin
+        values = Fields.values_from(marc_record)
+        ensure_catalog_link(values)
+      end
     end
 
     def title
       @title ||= begin
         title_field = values.find { |v| v.tag == TAG_TITLE_FIELD }
-        first_title_value = title_field && title_field.first
+        first_title_value = title_field && title_field.lines.first
         first_title_value || UNKNOWN_TITLE
       end
     end
@@ -44,7 +47,24 @@ module AV
       end
     end
 
+    def display_uri
+      @display_uri ||= Source::MILLENNIUM.display_uri_for(bib_number)
+    end
+
     private
+
+    def ensure_catalog_link(values)
+      return values if values.any? { |v| Fields::CATALOG_LINK.value?(v) }
+      return values unless bib_number
+
+      values << LinkValue.new(
+        tag: Fields::CATALOG_LINK.tag,
+        label: Fields::CATALOG_LINK.label,
+        order: Fields::CATALOG_LINK.order,
+        links: [Link.new(body: 'View library catalog record.', url: display_uri.to_s)]
+      )
+      values.sort!
+    end
 
     def find_bib_number
       return record_id if source == Source::MILLENNIUM
