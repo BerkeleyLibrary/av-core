@@ -11,29 +11,35 @@ module AV
     class Source < TypesafeEnum::Base
       new :TIND do
         def record_for(tind_id)
-          Source.tind_record_for(tind_id)
+          record_id = ensure_valid_id(tind_id)
+          Source.tind_record_for(record_id)
         end
 
         def marc_uri_for(tind_id)
-          URI.join(base_uri, "/record/#{tind_id}/export/xm")
+          record_id = ensure_valid_id(tind_id)
+          URI.join(base_uri, "/record/#{record_id}/export/xm")
         end
 
         def display_uri_for(tind_id)
-          URI.join(base_uri, "/record/#{tind_id}")
+          record_id = ensure_valid_id(tind_id)
+          URI.join(base_uri, "/record/#{record_id}")
         end
       end
 
       new :MILLENNIUM do
         def record_for(bib_number)
-          Source.millennium_record_for(bib_number)
+          record_id = ensure_valid_id(bib_number)
+          Source.millennium_record_for(record_id)
         end
 
         def marc_uri_for(bib_number)
-          URI.join(base_uri, "search~S1?/.#{bib_number}/.#{bib_number}/1%2C1%2C1%2CB/marc~#{bib_number}")
+          record_id = ensure_valid_id(bib_number)
+          URI.join(base_uri, "search~S1?/.#{record_id}/.#{record_id}/1%2C1%2C1%2CB/marc~#{record_id}")
         end
 
         def display_uri_for(bib_number)
-          URI.join(base_uri, "record=#{bib_number}")
+          record_id = ensure_valid_id(bib_number)
+          URI.join(base_uri, "record=#{record_id}")
         end
       end
 
@@ -45,15 +51,21 @@ module AV
       end
 
       def record_for(_record_id)
-        raise NoMethodError, "Source #{self.value.inspect} must override Source.record_for"
+        raise NoMethodError, "Source #{value.inspect} must override Source.record_for"
       end
 
       def marc_uri_for(_record_id)
-        raise NoMethodError, "Source #{self.value.inspect} must override Source.marc_uri_for"
+        raise NoMethodError, "Source #{value.inspect} must override Source.marc_uri_for"
       end
 
       def display_uri_for(_record_id)
-        raise NoMethodError, "Source #{self.value.inspect} must override Source.display_uri_for"
+        raise NoMethodError, "Source #{value.inspect} must override Source.display_uri_for"
+      end
+
+      def ensure_valid_id(record_id)
+        return record_id if Source.for_record_id(record_id) == self
+
+        raise ArgumentError, "Not a valid record ID for source #{value.inspect}: #{record_id}"
       end
 
       class << self

@@ -74,6 +74,10 @@ module AV
             uri_actual = Source::MILLENNIUM.marc_uri_for('b22139658')
             expect(uri_actual).to eq(uri_expected)
           end
+
+          it 'raises ArgumentError for a non-Millennium ID' do
+            expect { Source::MILLENNIUM.marc_uri_for('19816') }.to raise_error(ArgumentError)
+          end
         end
 
         describe :display_uri_for do
@@ -82,9 +86,17 @@ module AV
             uri_actual = Source::MILLENNIUM.display_uri_for('b22139658')
             expect(uri_actual).to eq(uri_expected)
           end
+
+          it 'raises ArgumentError for a non-Millennium ID' do
+            expect { Source::MILLENNIUM.display_uri_for('19816') }.to raise_error(ArgumentError)
+          end
         end
 
         describe :record_for do
+          it 'raises ArgumentError for a non-Millennium ID' do
+            expect { Source::MILLENNIUM.record_for('19816') }.to raise_error(ArgumentError)
+          end
+
           it 'finds a MARC record' do
             marc_html = File.read('spec/data/b22139658.html')
             stub_request(:get, search_url).to_return(status: 200, body: marc_html)
@@ -156,6 +168,10 @@ module AV
             uri_actual = Source::TIND.marc_uri_for('19816')
             expect(uri_actual).to eq(uri_expected)
           end
+
+          it 'raises ArgumentError for a non-TIND ID' do
+            expect { Source::TIND.marc_uri_for('b22139658') }.to raise_error(ArgumentError)
+          end
         end
 
         describe :display_uri_for do
@@ -164,9 +180,17 @@ module AV
             uri_actual = Source::TIND.display_uri_for('19816')
             expect(uri_actual).to eq(uri_expected)
           end
+
+          it 'raises ArgumentError for a non-TIND ID' do
+            expect { Source::TIND.display_uri_for('b22139658') }.to raise_error(ArgumentError)
+          end
         end
 
         describe :record_for do
+          it 'raises ArgumentError for a non-TIND ID' do
+            expect { Source::TIND.record_for('b22139658') }.to raise_error(ArgumentError)
+          end
+
           it 'finds a MARC record' do
             marc_xml = File.read('spec/data/record-19816.xml')
             stub_request(:get, search_url).to_return(status: 200, body: marc_xml)
