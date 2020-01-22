@@ -5,6 +5,8 @@ module AV
     class Fields
       include AV::Constants
 
+      # TODO: include more title subfields, possibly (compare TIND and Millennium)
+      # TODO: clean up separator noise in 260 field (compare TIND and Millennium)
       TITLE = Field.new(label: 'Title', tag: TAG_TITLE_FIELD, order: 1, subfield_order: [:a])
       DESCRIPTION = Field.new(label: 'Description', tag: '520', order: 2, subfield_order: [:a])
       CREATOR_PERSONAL = Field.new(label: 'Creator', tag: '700', order: 2)
