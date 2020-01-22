@@ -87,6 +87,14 @@ module AV
     def configure(&block)
       class_eval(&block)
     end
+
+    def configured?
+      settings = %i[avplayer_base_uri millennium_base_uri tind_base_uri]
+      settings.each { |setting| return false unless Config.send(setting) }
+      true
+    rescue NameError
+      false
+    end
   end
 
 end

@@ -10,6 +10,28 @@ module AV
       Config.instance_variable_set(:@tind_base_uri, nil)
     end
 
+    describe(:configured?) do
+      it 'defaults to false' do
+        expect(AV.configured?).to eq(false)
+      end
+
+      it 'returns true if and only if all URIs are configured' do
+        settings = {
+          avplayer_base_uri: 'http://avplayer.example.edu',
+          millennium_base_uri: 'http://millennium.example.edu',
+          tind_base_uri: 'http://tind.example.edu'
+        }
+        settings.each { |setting, value| Config.send("#{setting}=", value) }
+        expect(AV.configured?).to eq(true)
+
+        settings.each do |setting, value|
+          Config.instance_variable_set("@#{setting}".to_sym, nil)
+          expect(AV.configured?).to eq(false)
+          Config.send("#{setting}=", value)
+        end
+      end
+    end
+
     describe :avplayer_base_uri= do
       it 'converts strings to URIs' do
         expected_uri = URI.parse('http://avplayer.example.edu')
