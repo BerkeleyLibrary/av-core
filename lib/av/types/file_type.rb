@@ -12,6 +12,10 @@ module AV
         def player_tag
           'audio'
         end
+
+        def label
+          'Audio'
+        end
       end
 
       new(:MP4, 'mp4') do
@@ -21,6 +25,10 @@ module AV
 
         def player_tag
           'video'
+        end
+
+        def label
+          'Video'
         end
       end
 

@@ -24,6 +24,15 @@ module AV
       metadata.ucb_access?
     end
 
+    def type_label
+      @type_label ||= begin
+        file_types = Set.new(tracks.map(&:file_type)).to_a.sort
+        file_types = AV::Types::FileType.to_a if file_types.empty?
+
+        file_types.map(&:label).join(' / ')
+      end
+    end
+
     def player_uri
       @player_uri ||= URI.join(AV::Config.avplayer_base_uri, "#{collection}/#{bib_number}")
     end

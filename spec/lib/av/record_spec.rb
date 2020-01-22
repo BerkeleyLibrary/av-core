@@ -44,6 +44,44 @@ module AV
       end
     end
 
+    describe :type_label do
+      it 'handles audio' do
+        t1 = Track.new(sort_order: 1, title: 'Part 1', path: 'MRCAudio/frost-read1.mp3')
+        t2 = Track.new(sort_order: 2, title: 'Part 2', path: 'MRCAudio/frost-read2.mp3')
+        record = Record.new(
+          collection: 'MRCAudio',
+          tracks: [t2, t1],
+          metadata: instance_double(Metadata)
+        )
+
+        expect(record.type_label).to eq('Audio')
+      end
+
+      it 'handles video' do
+        t1 = Track.new(sort_order: 1, title: 'Part 1', path: 'MRCAudio/frost-read1.mp4')
+        t2 = Track.new(sort_order: 2, title: 'Part 2', path: 'MRCAudio/frost-read2.mp4')
+        record = Record.new(
+          collection: 'MRCVideo',
+          tracks: [t2, t1],
+          metadata: instance_double(Metadata)
+        )
+
+        expect(record.type_label).to eq('Video')
+      end
+
+      it 'handles mixed records' do
+        t1 = Track.new(sort_order: 1, title: 'Part 1', path: 'MRCAudio/frost-read1.mp3')
+        t2 = Track.new(sort_order: 2, title: 'Part 2', path: 'MRCAudio/frost-read2.mp4')
+        record = Record.new(
+          collection: 'MRCAudioVideo',
+          tracks: [t2, t1],
+          metadata: instance_double(Metadata)
+        )
+
+        expect(record.type_label).to eq('Audio / Video')
+      end
+    end
+
     describe :description do
       it 'gets the description from the 520 tag' do
         search_url = 'http://oskicat.berkeley.edu/search~S1?/.b22139658/.b22139658/1%2C1%2C1%2CB/marc~b22139658'
