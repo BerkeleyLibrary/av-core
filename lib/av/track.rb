@@ -76,7 +76,7 @@ module AV
 
       def normalize_path(path)
         # Millennium hyphenation can introduce bogus spaces into paths
-        path && path.gsub(/ ?- ?/, '-')
+        path && path.gsub(/ ?- ?/, '-').strip
       end
     end
   end
