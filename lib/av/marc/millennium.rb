@@ -19,7 +19,7 @@ module AV
 
         def initialize(html)
           match_data = html.match(PRE_TAG_REGEXP)
-          raise ArgumentError, 'MARC <pre/> tag not found in HTML' unless match_data
+          raise AV::RecordNotFound, 'MARC <pre/> tag not found in HTML' unless match_data
 
           marc_txt = match_data[1].strip
           @marc_txt = CGI.unescape_html(marc_txt)
@@ -62,7 +62,7 @@ module AV
         end
 
         def finalize_current_field
-          raise 'No current field to finalize' unless current_field
+          raise 'No current field to finalize' unless current_field # should never happen
 
           current_field.subfields = finalize_subfields
           record.append(current_field)

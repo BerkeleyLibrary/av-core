@@ -62,13 +62,13 @@ module AV
       end
 
       def uri_from_rails_config(sym)
-        raise NameError, 'Rails is not defined' unless defined?(Rails)
+        raise NameError, "Can't read #{sym.inspect} from Rails config: Rails is not defined" unless defined?(Rails)
 
         application = Rails.application
-        raise ArgumentError, 'Rails.application is nil' unless application
+        raise ArgumentError, "Can't read #{sym.inspect} from Rails config: Rails.application is nil" unless application
 
         config = Rails.application.config
-        raise ArgumentError, 'Rails.application.config is nil' unless application
+        raise ArgumentError, "Can't read #{sym.inspect} from Rails config: Rails.application.config is nil" unless application
 
         result = config.send(sym)
         clean_uri(result)
