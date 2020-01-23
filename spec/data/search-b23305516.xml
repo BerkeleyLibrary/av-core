@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Search-Engine-Total-Number-Of-Results: 1 -->
+<collection xmlns="http://www.loc.gov/MARC21/slim">
+    <record>
+        <controlfield tag="001">19816</controlfield>
+        <controlfield tag="005">20190703231952.0</controlfield>
+        <datafield tag="035" ind1=" " ind2=" ">
+            <subfield code="a">(pacradio)00107</subfield>
+        </datafield>
+        <datafield tag="041" ind1=" " ind2=" ">
+            <subfield code="a">eng</subfield>
+        </datafield>
+        <datafield tag="245" ind1=" " ind2=" ">
+            <subfield code="a">Author Alice Walker reads the short story, Roselily</subfield>
+        </datafield>
+        <datafield tag="260" ind1=" " ind2=" ">
+            <subfield code="a">Los Angeles </subfield>
+            <subfield code="b">Pacifica Radio Archives</subfield>
+            <subfield code="c">1994.</subfield>
+        </datafield>
+        <datafield tag="269" ind1=" " ind2=" ">
+            <subfield code="a">1994</subfield>
+        </datafield>
+        <datafield tag="300" ind1=" " ind2=" ">
+            <subfield code="a">1 online resource.</subfield>
+        </datafield>
+        <datafield tag="336" ind1=" " ind2=" ">
+            <subfield code="a">Audio</subfield>
+        </datafield>
+        <datafield tag="520" ind1=" " ind2=" ">
+            <subfield code="a">Pulitzer Prize-winning author Alice Walker (1944 - ) reads her short story "Roselily" (written ca. 1967). Walker then talks with KPFA's Ginny Z. Berson about the story, how she wrote it about her first marriage to a civil rights attorney and how it questions the dominance of Christianity over all religions in the US. The story was dropped from a 10th grade English test by California state educators based on complaints from Christian conservatives in early 1994. The Traditional Values Coalition applied pressure based on what they read as "anti-religious" elements in the story.</subfield>
+        </datafield>
+        <datafield tag="536" ind1=" " ind2=" ">
+            <subfield code="a">Sponsored by the National Historical Publications and Records Commission at the National Archives and Records Administration as part of Pacifica's American Women Making History and Culture: 1963-1982 grant preservation project.</subfield>
+        </datafield>
+        <datafield tag="540" ind1=" " ind2=" ">
+            <subfield code="a">RESTRICTED.  Permissions, licensing requests, and all other inquiries should be directed in writing to: Director of the Archives, Pacifica Radio Archives, 3729 Cahuenga Blvd. West, North Hollywood, CA 91604, 800-735-0230 x 263, fax 818-506-1084, info@pacificaradioarchives.org, http://www.pacificaradioarchives.org</subfield>
+        </datafield>
+        <datafield tag="700" ind1="1" ind2=" ">
+            <subfield code="a">Berson, Ginny Z.</subfield>
+            <subfield code="e">interviewer.</subfield>
+        </datafield>
+        <datafield tag="700" ind1="1" ind2=" ">
+            <subfield code="a">Walker, Alice.</subfield>
+            <subfield code="e">interviewee.</subfield>
+        </datafield>
+        <datafield tag="710" ind1="2" ind2=" ">
+            <subfield code="a">Pacifica Radio Archive.</subfield>
+        </datafield>
+        <datafield tag="710" ind1="2" ind2=" ">
+            <subfield code="a">KPFA (Radio station : Berkeley, Calif.).</subfield>
+        </datafield>
+        <datafield tag="852" ind1=" " ind2=" ">
+            <subfield code="c">The Library</subfield>
+        </datafield>
+        <datafield tag="856" ind1="4" ind2="1">
+            <subfield code="u">http://oskicat.berkeley.edu/record=b23305516</subfield>
+            <subfield code="y">View library catalog record.</subfield>
+        </datafield>
+        <datafield tag="856" ind1="4" ind2="2">
+            <subfield code="u">http://servlet1.lib.berkeley.edu:8080/audio/stream.play.logic?coll=pacifica&amp;group=b23305516</subfield>
+            <subfield code="y">Play Audio for American Women Making History and Culture. Freely available for streaming.</subfield>
+        </datafield>
+        <datafield tag="901" ind1=" " ind2=" ">
+            <subfield code="m">b23305516</subfield>
+            <subfield code="o">947286769</subfield>
+        </datafield>
+        <datafield tag="903" ind1=" " ind2=" ">
+            <subfield code="b">m</subfield>
+        </datafield>
+        <datafield tag="980" ind1=" " ind2=" ">
+            <subfield code="a">pacradio</subfield>
+        </datafield>
+        <datafield tag="982" ind1=" " ind2=" ">
+            <subfield code="a">Pacifica Radio Archives</subfield>
+            <subfield code="b">Pacifica Radio Archives Social Activism Sound Recording Project</subfield>
+        </datafield>
+    </record>
+
+    
+</collection>

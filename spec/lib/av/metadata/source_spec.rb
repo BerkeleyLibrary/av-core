@@ -57,11 +57,11 @@ module AV
       end
 
       describe Source::MILLENNIUM do
-        attr_reader :search_url
+        attr_reader :record_url
 
         before(:each) do
           AV::Config.millennium_base_uri = 'http://oskicat.berkeley.edu/'
-          @search_url = 'http://oskicat.berkeley.edu/search~S1?/.b22139658/.b22139658/1%2C1%2C1%2CB/marc~b22139658'
+          @record_url = 'http://oskicat.berkeley.edu/search~S1?/.b22139658/.b22139658/1%2C1%2C1%2CB/marc~b22139658'
         end
 
         after(:each) do
@@ -70,7 +70,7 @@ module AV
 
         describe :marc_uri_for do
           it 'returns the search URI' do
-            uri_expected = URI.parse(search_url)
+            uri_expected = URI.parse(record_url)
             uri_actual = Source::MILLENNIUM.marc_uri_for('b22139658')
             expect(uri_actual).to eq(uri_expected)
           end
@@ -99,7 +99,7 @@ module AV
 
           it 'finds a MARC record' do
             marc_html = File.read('spec/data/b22139658.html')
-            stub_request(:get, search_url).to_return(status: 200, body: marc_html)
+            stub_request(:get, record_url).to_return(status: 200, body: marc_html)
 
             marc_record = Source::MILLENNIUM.record_for('b22139658')
             title = marc_record['245']
@@ -130,20 +130,20 @@ module AV
           end
 
           it "raises #{AV::RecordNotFound} if the record cannot be found" do
-            stub_request(:get, search_url).to_return(status: 404, body: '')
+            stub_request(:get, record_url).to_return(status: 404, body: '')
 
             expect { Source::MILLENNIUM.record_for('b22139658') }.to raise_error(AV::RecordNotFound)
           end
 
           it "raises #{AV::RecordNotFound} if the record cannot be parsed" do
-            stub_request(:get, search_url).to_return(status: 200, body: 'Something that is not a Millennium MARC HTML page')
+            stub_request(:get, record_url).to_return(status: 200, body: 'Something that is not a Millennium MARC HTML page')
 
             expect { Source::MILLENNIUM.record_for('b22139658') }.to raise_error(AV::RecordNotFound)
           end
 
           it "raises #{AV::RecordNotFound} if Millennium returns a weird HTTP status" do
             marc_html = File.read('spec/data/b22139658.html')
-            stub_request(:get, search_url).to_return(status: 207, body: marc_html)
+            stub_request(:get, record_url).to_return(status: 207, body: marc_html)
 
             expect { Source::MILLENNIUM.record_for('b22139658') }.to raise_error(AV::RecordNotFound)
           end
@@ -151,11 +151,11 @@ module AV
       end
 
       describe Source::TIND do
-        attr_reader :search_url
+        attr_reader :record_url
 
         before(:each) do
           AV::Config.tind_base_uri = 'https://digicoll.lib.berkeley.edu'
-          @search_url = 'https://digicoll.lib.berkeley.edu/record/19816/export/xm'
+          @record_url = 'https://digicoll.lib.berkeley.edu/record/19816/export/xm'
         end
 
         after(:each) do
@@ -164,7 +164,7 @@ module AV
 
         describe :marc_uri_for do
           it 'returns the search URI' do
-            uri_expected = URI.parse(search_url)
+            uri_expected = URI.parse(record_url)
             uri_actual = Source::TIND.marc_uri_for('19816')
             expect(uri_actual).to eq(uri_expected)
           end
@@ -193,7 +193,7 @@ module AV
 
           it 'finds a MARC record' do
             marc_xml = File.read('spec/data/record-19816.xml')
-            stub_request(:get, search_url).to_return(status: 200, body: marc_xml)
+            stub_request(:get, record_url).to_return(status: 200, body: marc_xml)
 
             marc_record = Source::TIND.record_for('19816')
             expect(marc_record).not_to be_nil
@@ -205,38 +205,94 @@ module AV
           end
 
           it "raises #{AV::RecordNotFound} if the record cannot be found" do
-            stub_request(:get, search_url).to_return(status: 404, body: '')
+            stub_request(:get, record_url).to_return(status: 404, body: '')
 
             expect { Source::TIND.record_for('19816') }.to raise_error(AV::RecordNotFound)
           end
 
           it "raises #{AV::RecordNotFound} if the record cannot be parsed" do
-            stub_request(:get, search_url).to_return(status: 200, body: '<? this is not valid MARCXML>')
+            stub_request(:get, record_url).to_return(status: 200, body: '<? this is not valid MARCXML>')
 
             expect { Source::TIND.record_for('19816') }.to raise_error(AV::RecordNotFound)
           end
 
           it "raises #{AV::RecordNotFound} if no records are returned" do
             empty_result = File.read('spec/data/record-empty-result.xml')
-            stub_request(:get, search_url).to_return(status: 200, body: empty_result)
+            stub_request(:get, record_url).to_return(status: 200, body: empty_result)
 
             expect { Source::TIND.record_for('19816') }.to raise_error(AV::RecordNotFound)
           end
 
           it "raises #{AV::RecordNotFound} on a redirect to login" do
             redirect_to_login = File.read('spec/data/record-redirect-to-login.html')
-            stub_request(:get, search_url).to_return(status: 200, body: redirect_to_login)
+            stub_request(:get, record_url).to_return(status: 200, body: redirect_to_login)
 
             expect { Source::TIND.record_for('19816') }.to raise_error(AV::RecordNotFound)
           end
 
           it "raises #{AV::RecordNotFound} if TIND returns a weird HTTP status" do
             marc_xml = File.read('spec/data/record-19816.xml')
-            stub_request(:get, search_url).to_return(status: 207, body: marc_xml)
+            stub_request(:get, record_url).to_return(status: 207, body: marc_xml)
 
             expect { Source::TIND.record_for('19816') }.to raise_error(AV::RecordNotFound)
           end
         end
+
+        describe :record_for_bib do
+          attr_reader :search_url
+
+          before(:each) do
+            @search_url = 'https://digicoll.lib.berkeley.edu/search?of=xm&p=901__m:%22b23305516%22'
+          end
+
+          it 'raises ArgumentError for a TIND ID' do
+            expect { Source::TIND.record_for_bib('19816') }.to raise_error(ArgumentError)
+          end
+
+          it 'returns a record' do
+            marc_xml = File.read('spec/data/search-b23305516.xml')
+            stub_request(:get, search_url).to_return(status: 200, body: marc_xml)
+
+            marc_record = Source::TIND.record_for_bib('b23305516')
+            expect(marc_record).not_to be_nil
+            expect(marc_record).to be_a(MARC::Record)
+
+            fields_001 = marc_record.fields('001')
+            expect(fields_001.size).to eq(1)
+            expect(fields_001[0].value).to eq('19816')
+
+            fields_901 = marc_record.fields('901')
+            expect(fields_901.size).to eq(1)
+
+            field_901 = fields_901[0]
+            expect(field_901.indicator1).to eq(' ')
+            expect(field_901.indicator2).to eq(' ')
+
+            subfield_m_value = field_901['m']
+            expect(subfield_m_value).to eq('b23305516')
+          end
+
+          it "raises #{AV::RecordNotFound} for an empty result" do
+            marc_xml = File.read('spec/data/record-empty-result.xml')
+            stub_request(:get, search_url).to_return(status: 200, body: marc_xml)
+
+            expect { Source::TIND.record_for_bib('b23305516') }.to raise_error(AV::RecordNotFound)
+          end
+
+          it "raises #{AV::RecordNotFound} for a redirect to login" do
+            marc_xml = File.read('spec/data/record-redirect-to-login.html')
+            stub_request(:get, search_url).to_return(status: 200, body: marc_xml)
+
+            expect { Source::TIND.record_for_bib('b23305516') }.to raise_error(AV::RecordNotFound)
+          end
+
+          it "raises #{AV::RecordNotFound} if the record cannot be found" do
+            stub_request(:get, search_url).to_return(status: 404)
+
+            expect { Source::TIND.record_for_bib('b23305516') }.to raise_error(AV::RecordNotFound)
+          end
+        end
+
       end
     end
   end

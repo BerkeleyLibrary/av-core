@@ -8,11 +8,44 @@ require 'av/marc/millennium'
 
 module AV
   class Metadata
+    # rubocop:disable Metrics/BlockLength
     class Source < TypesafeEnum::Base
       new :TIND do
         def record_for(tind_id)
           record_id = ensure_valid_id(tind_id)
-          Source.tind_record_for(record_id)
+          record = begin
+            xml = do_get(TIND.marc_uri_for(record_id))
+            AV::Marc.from_xml(xml)
+          rescue StandardError => e
+            raise AV::RecordNotFound, "Can't find TIND record for record ID #{record_id.inspect}: #{e.message}"
+          end
+          return record if record
+
+          raise AV::RecordNotFound, "No record returned for TIND ID #{record_id.inspect}"
+        end
+
+        def record_for_bib(bib_number)
+          record_id = Source::MILLENNIUM.ensure_valid_id(bib_number)
+
+          record = begin
+            marc_reader = records_for_bib(record_id)
+            marc_reader && marc_reader.first
+          rescue StandardError => e
+            raise AV::RecordNotFound, "Can't find TIND record for record ID #{record_id.inspect}: #{e.message}"
+          end
+          return record if record
+
+          raise AV::RecordNotFound, "No TIND records found for Millennium bib number #{bib_number}"
+        end
+
+        def records_for_bib(bib_number)
+          record_id = Source::MILLENNIUM.ensure_valid_id(bib_number)
+          search_uri = URI.join(Source::TIND.base_uri, '/search')
+          search_uri.query = URI.encode_www_form('p' => "901__m:\"#{record_id}\"", 'of' => 'xm')
+          xml = do_get(search_uri)
+          AV::Marc.all_from_xml(xml)
+        rescue StandardError => e
+          raise AV::RecordNotFound, "Can't find TIND records for Millennium bib number #{bib_number}: #{e.message}"
         end
 
         def marc_uri_for(tind_id)
@@ -29,7 +62,12 @@ module AV
       new :MILLENNIUM do
         def record_for(bib_number)
           record_id = ensure_valid_id(bib_number)
-          Source.millennium_record_for(record_id)
+          begin
+            html = do_get(MILLENNIUM.marc_uri_for(record_id)).scrub
+            AV::Marc::Millennium.marc_from_html(html)
+          rescue StandardError => e
+            raise AV::RecordNotFound, "Can't find Millennium record for bib number #{record_id}: #{e.message}"
+          end
         end
 
         def marc_uri_for(bib_number)
@@ -50,18 +88,6 @@ module AV
         raise ArgumentError, "Unsupported metadata source: #{self}"
       end
 
-      def record_for(_record_id)
-        raise NoMethodError, "Source #{value.inspect} must override Source.record_for"
-      end
-
-      def marc_uri_for(_record_id)
-        raise NoMethodError, "Source #{value.inspect} must override Source.marc_uri_for"
-      end
-
-      def display_uri_for(_record_id)
-        raise NoMethodError, "Source #{value.inspect} must override Source.display_uri_for"
-      end
-
       def ensure_valid_id(record_id)
         return record_id if Source.for_record_id(record_id) == self
 
@@ -77,51 +103,25 @@ module AV
 
           Source::TIND if record_id =~ TIND_RECORD_RE
         end
+      end
 
-        # Gets a MARC record from Millennium.
-        #
-        # @param bib_number [String] the bib number
-        # @return [MARC::Record] the MARC record for the specified bib number
-        def millennium_record_for(bib_number)
-          html = do_get(MILLENNIUM.marc_uri_for(bib_number)).scrub
-          AV::Marc::Millennium.marc_from_html(html)
-        rescue StandardError => e
-          raise AV::RecordNotFound, "Can't find Millennium record for bib number #{bib_number.inspect}: #{e.message}"
+      private
+
+      def log
+        AV.logger
+      end
+
+      def do_get(uri)
+        resp = RestClient.get(uri.to_s)
+        if resp.code != 200
+          log.error("GET #{uri} returned #{resp.code}: #{resp.body || 'nil'}")
+          raise(RestClient::RequestFailed.new(resp, resp.code).tap do |ex|
+            ex.message = "No record found at #{uri}; host returned #{resp.code}"
+          end)
         end
-
-        # Gets a MARC record from TIND.
-        #
-        # @param tind_id [String, Integer] the TIND record ID
-        # @return [MARC::Record] the MARC record for the specified TIND ID
-        def tind_record_for(tind_id)
-          record = begin
-            xml = do_get(TIND.marc_uri_for(tind_id))
-            AV::Marc.from_xml(xml)
-          rescue StandardError => e
-            raise AV::RecordNotFound, "Can't find TIND record for record ID #{tind_id.inspect}: #{e.message}"
-          end
-          return record if record
-
-          raise AV::RecordNotFound, "No record returned for TIND ID #{tind_id.inspect}"
-        end
-
-        private
-
-        def log
-          AV.logger
-        end
-
-        def do_get(uri)
-          resp = RestClient.get(uri.to_s)
-          if resp.code != 200
-            log.error("GET #{uri} returned #{resp.code}: #{resp.body || 'nil'}")
-            raise(RestClient::RequestFailed.new(resp, resp.code).tap do |ex|
-              ex.message = "No record found at #{uri}; host returned #{resp.code}"
-            end)
-          end
-          resp.body
-        end
+        resp.body
       end
     end
+    # rubocop:enable Metrics/BlockLength
   end
 end
