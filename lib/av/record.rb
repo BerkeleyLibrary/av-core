@@ -20,6 +20,10 @@ module AV
       metadata.bib_number
     end
 
+    def tind_id
+      metadata.tind_id
+    end
+
     def ucb_access?
       metadata.ucb_access?
     end

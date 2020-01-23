@@ -21,6 +21,12 @@ module AV
       @bib_number ||= find_bib_number
     end
 
+    def tind_id
+      return unless source == Source::TIND
+
+      record_id
+    end
+
     def marc_record
       @marc_record ||= source.record_for(record_id)
     end
