@@ -8,6 +8,7 @@ module AV
       Config.instance_variable_set(:@avplayer_base_uri, nil)
       Config.instance_variable_set(:@millennium_base_uri, nil)
       Config.instance_variable_set(:@tind_base_uri, nil)
+      Config.instance_variable_set(:@wowza_base_uri, nil)
     end
 
     describe(:configured?) do
@@ -19,7 +20,8 @@ module AV
         settings = {
           avplayer_base_uri: 'http://avplayer.example.edu',
           millennium_base_uri: 'http://millennium.example.edu',
-          tind_base_uri: 'http://tind.example.edu'
+          tind_base_uri: 'http://tind.example.edu',
+          wowza_base_uri: 'http://wowza.example.edu'
         }
         settings.each { |setting, value| Config.send("#{setting}=", value) }
         expect(AV.configured?).to eq(true)
@@ -57,6 +59,20 @@ module AV
         expected_uri = URI.parse('http://millennium.example.edu')
         Config.millennium_base_uri = expected_uri.to_s + '/'
         expect(Config.millennium_base_uri).to eq(expected_uri)
+      end
+    end
+
+    describe :wowza_base_uri= do
+      it 'converts strings to URIs' do
+        expected_uri = URI.parse('http://wowza.example.edu')
+        Config.wowza_base_uri = expected_uri.to_s
+        expect(Config.wowza_base_uri).to eq(expected_uri)
+      end
+
+      it 'strips trailing slashes' do
+        expected_uri = URI.parse('http://wowza.example.edu')
+        Config.wowza_base_uri = expected_uri.to_s + '/'
+        expect(Config.wowza_base_uri).to eq(expected_uri)
       end
     end
 

@@ -16,6 +16,10 @@ module AV
         @tind_base_uri ||= uri_from_rails_config(:tind_base_uri)
       end
 
+      def wowza_base_uri
+        @wowza_base_uri ||= uri_from_rails_config(:wowza_base_uri)
+      end
+
       # Sets the AV Player base URI
       #
       # @param [URI, String] uri the base URI
@@ -41,6 +45,15 @@ module AV
       # @raise URI::InvalidURIError if the URI cannot be parsed, or is not HTTP/HTTPS
       def tind_base_uri=(uri)
         @tind_base_uri = clean_uri(uri)
+      end
+
+      # Sets the Wowza base URI
+      #
+      # @param [URI, String] uri the base URI
+      # @return [URI] the URI
+      # @raise URI::InvalidURIError if the URI cannot be parsed, or is not HTTP/HTTPS
+      def wowza_base_uri=(uri)
+        @wowza_base_uri = clean_uri(uri)
       end
 
       private
@@ -89,7 +102,7 @@ module AV
     end
 
     def configured?
-      settings = %i[avplayer_base_uri millennium_base_uri tind_base_uri]
+      settings = %i[avplayer_base_uri millennium_base_uri tind_base_uri wowza_base_uri]
       settings.each { |setting| return false unless Config.send(setting) }
       true
     rescue NameError
