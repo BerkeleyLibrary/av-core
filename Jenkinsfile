@@ -21,7 +21,7 @@ pipeline {
       parallel {
         stage("RSpec") {
           steps {
-            sh 'bundle exec rake ci:setup:rspec spec'
+            sh 'rake ci:setup:rspec spec'
           }
 
           post {
@@ -42,7 +42,7 @@ pipeline {
 
         stage("Rubocop") {
           steps {
-            sh 'bundle exec rake rubocop'
+            sh 'rake rubocop'
           }
 
           post {
@@ -61,7 +61,7 @@ pipeline {
 
         stage("Audit") {
           steps {
-            sh 'bundle exec rake bundle:audit'
+            sh 'rake bundle:audit'
           }
         }
       }
