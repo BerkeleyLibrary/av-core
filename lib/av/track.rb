@@ -19,8 +19,11 @@ module AV
 
     def <=>(other)
       return 0 if equal?(other)
+      return unless other
 
       %i[sort_order title duration path].each do |attr|
+        return nil unless other.respond_to?(attr)
+
         order = send(attr) <=> other.send(attr)
         return order if order && order != 0
       end

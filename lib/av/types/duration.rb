@@ -30,8 +30,9 @@ module AV
       end
 
       def <=>(other)
-        return unless other
         return 0 if equal?(other)
+        return unless other
+        return unless other.respond_to?(:total_seconds)
 
         total_seconds <=> other.total_seconds
       end

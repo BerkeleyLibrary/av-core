@@ -46,6 +46,16 @@ module AV
         expect(t1 > t2).to eq(true)
         expect(t2 < t1).to eq(true)
       end
+
+      it 'returns nil for nil' do
+        track = Track.new(sort_order: 1, path: 'mrc/6927.mp4')
+        expect(track <=> nil).to be_nil
+      end
+
+      it 'returns nil for things that are not Tracks' do
+        track = Track.new(sort_order: 1, path: 'mrc/6927.mp4')
+        expect(track <=> track.to_s).to be_nil
+      end
     end
 
     describe :to_s do

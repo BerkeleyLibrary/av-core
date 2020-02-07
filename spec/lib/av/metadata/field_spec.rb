@@ -19,6 +19,16 @@ module AV
           expect(ff1 < ff2).to be_truthy
           expect(ff2 > ff1).to be_truthy
         end
+
+        it 'returns nil for nil' do
+          field = Field.new(order: 4, tag: '711', label: 'Meeting Name', subfields_separator: ', ', subfield_order: %i[a n d c])
+          expect(field <=> nil).to be_nil
+        end
+
+        it 'returns nil for things that are not Fields' do
+          field = Field.new(order: 4, tag: '711', label: 'Meeting Name', subfields_separator: ', ', subfield_order: %i[a n d c])
+          expect(field <=> field.to_s).to be_nil
+        end
       end
     end
   end

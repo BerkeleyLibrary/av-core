@@ -11,6 +11,16 @@ module AV
           expect(actual).not_to eq(0)
           expect(actual).to eq(v1.to_s <=> v2.to_s)
         end
+
+        it 'returns nil for nil' do
+          v = TextValue.new(tag: '956', label: 'test', lines: ['test'], order: 1)
+          expect(v <=> nil).to be_nil
+        end
+
+        it 'returns nil for things that are not Values' do
+          v = TextValue.new(tag: '956', label: 'test', lines: ['test'], order: 1)
+          expect(v <=> v.to_s).to be_nil
+        end
       end
     end
   end

@@ -57,6 +57,25 @@ module AV
           expect(duration).to be_nil
         end
       end
+
+      describe :<=> do
+        it 'returns 0 for equivalent durations' do
+          d1 = Duration.from_string('00:34:56')
+          d2 = Duration.new(hours: 0, minutes: 34, seconds: 56)
+          expect(d1 <=> d2).to eq(0)
+          expect(d2 <=> d1).to eq(0)
+        end
+
+        it 'returns nil for nil' do
+          d = Duration.from_string('00:34:56')
+          expect(d <=> nil).to be_nil
+        end
+
+        it 'returs nil for things that are not durations' do
+          d = Duration.from_string('00:34:56')
+          expect(d <=> d.to_s).to be_nil
+        end
+      end
     end
   end
 end
