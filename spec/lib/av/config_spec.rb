@@ -34,6 +34,41 @@ module AV
       end
     end
 
+    describe(:missing) do
+      it 'defaults to all settings' do
+        expect(Config.missing).to eq(%i[avplayer_base_uri millennium_base_uri tind_base_uri wowza_base_uri])
+      end
+
+      it 'returns an empty array if nothign is missing' do
+        settings = {
+          avplayer_base_uri: 'http://avplayer.example.edu',
+          millennium_base_uri: 'http://millennium.example.edu',
+          tind_base_uri: 'http://tind.example.edu',
+          wowza_base_uri: 'http://wowza.example.edu'
+        }
+        settings.each { |setting, value| Config.send("#{setting}=", value) }
+
+        expect(Config.missing).to eq([])
+      end
+
+      it 'returns the missing settings' do
+        settings = {
+          avplayer_base_uri: 'http://avplayer.example.edu',
+          millennium_base_uri: 'http://millennium.example.edu',
+          tind_base_uri: 'http://tind.example.edu',
+          wowza_base_uri: 'http://wowza.example.edu'
+        }
+        settings.each { |setting, value| Config.send("#{setting}=", value) }
+
+        expected = []
+        settings.keys.each do |setting|
+          Config.instance_variable_set("@#{setting}".to_sym, nil)
+          expected << setting
+          expect(Config.missing).to eq(expected)
+        end
+      end
+    end
+
     describe :avplayer_base_uri= do
       it 'converts strings to URIs' do
         expected_uri = URI.parse('http://avplayer.example.edu')

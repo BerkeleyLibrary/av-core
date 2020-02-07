@@ -56,6 +56,17 @@ module AV
         @wowza_base_uri = clean_uri(uri)
       end
 
+      # Returns the list of missing required settings.
+      # @return [Array<Symbol>] the missing settings.
+      def missing
+        [].tap do |unset|
+          settings = %i[avplayer_base_uri millennium_base_uri tind_base_uri wowza_base_uri]
+          settings.each do |setting|
+            unset << setting unless set?(setting)
+          end
+        end
+      end
+
       private
 
       # Returns a URI, with any trailing slash removed to simplify
@@ -86,6 +97,12 @@ module AV
         result = config.send(sym)
         clean_uri(result)
       end
+
+      def set?(setting)
+        Config.send(setting) && true
+      rescue NameError
+        false
+      end
     end
 
     private_class_method :new
@@ -102,12 +119,7 @@ module AV
     end
 
     def configured?
-      settings = %i[avplayer_base_uri millennium_base_uri tind_base_uri wowza_base_uri]
-      settings.each { |setting| return false unless Config.send(setting) }
-      true
-    rescue NameError
-      false
+      Config.missing.empty?
     end
   end
-
 end
