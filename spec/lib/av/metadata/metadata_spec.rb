@@ -2,16 +2,15 @@ require 'spec_helper'
 
 module AV
   describe Metadata do
+    before(:each) do
+      AV::Config.millennium_base_uri = 'http://oskicat.berkeley.edu/'
+    end
+
+    after(:each) do
+      AV::Config.instance_variable_set(:@millennium_base_uri, nil)
+    end
+
     describe :title do
-
-      before(:each) do
-        AV::Config.millennium_base_uri = 'http://oskicat.berkeley.edu/'
-      end
-
-      after(:each) do
-        AV::Config.instance_variable_set(:@millennium_base_uri, nil)
-      end
-
       it 'finds the title' do
         search_url = 'http://oskicat.berkeley.edu/search~S1?/.b22139658/.b22139658/1%2C1%2C1%2CB/marc~b22139658'
         stub_request(:get, search_url).to_return(status: 200, body: File.read('spec/data/b22139658.html'))
@@ -24,6 +23,24 @@ module AV
         marc_record.fields.delete_if { |f| f.tag == AV::Constants::TAG_TITLE_FIELD }
         metadata = Metadata.new(record_id: 'b22139658', source: Metadata::Source::MILLENNIUM, marc_record: marc_record)
         expect(metadata.title).to eq(Metadata::UNKNOWN_TITLE)
+      end
+    end
+
+    describe :ucb_access? do
+      it 'detects restricted audio' do
+        bib_number = 'b18538031'
+        stub_request(:get, Metadata::Source::MILLENNIUM.marc_uri_for(bib_number))
+          .to_return(status: 200, body: File.read("spec/data/#{bib_number}.html"))
+        metadata = Metadata.for_record(record_id: bib_number)
+        expect(metadata.ucb_access?).to eq(true)
+      end
+
+      it 'detects restricted video' do
+        bib_number = 'b25207857'
+        stub_request(:get, Metadata::Source::MILLENNIUM.marc_uri_for(bib_number))
+          .to_return(status: 200, body: File.read("spec/data/#{bib_number}.html"))
+        metadata = Metadata.for_record(record_id: bib_number)
+        expect(metadata.ucb_access?).to eq(true)
       end
     end
 

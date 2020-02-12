@@ -8,6 +8,7 @@ module AV
     include AV::Constants
 
     UNKNOWN_TITLE = 'Unknown title'.freeze
+    RESTRICTIONS = ['UCB access', 'UCB only'].freeze
 
     attr_reader :record_id, :source
 
@@ -48,8 +49,8 @@ module AV
 
     def ucb_access?
       @ucb_access ||= marc_record.fields(TAG_LINK_FIELD).any? do |data_field|
-        subfields = data_field.subfields
-        subfields.any? { |sf| sf.value.include?('UCB access') }
+        subfield_values = data_field.subfields.map(&:value)
+        subfield_values.any? { |v| RESTRICTIONS.any? { |restriction| v.include?(restriction) } }
       end
     end
 
