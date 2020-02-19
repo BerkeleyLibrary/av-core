@@ -20,9 +20,11 @@ module AV
           links = []
           all_subfield_values.each do |subfield_values|
             subfield_values.each do |value_group|
-              next unless value_group.key?(:y) && value_group.key?(:u)
+              body = value_group[:z] || value_group[:y]
+              url = value_group[:u]
+              next unless body && url
 
-              links << Link.new(body: value_group[:y], url: value_group[:u])
+              links << Link.new(body: body, url: url)
             end
           end
           LinkValue.new(tag: tag, label: label, links: links, order: order)
