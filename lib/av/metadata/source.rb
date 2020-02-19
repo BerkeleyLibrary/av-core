@@ -5,11 +5,14 @@ require 'av/logger'
 require 'av/record_not_found'
 require 'av/marc'
 require 'av/marc/millennium'
+require 'av/util'
 
 module AV
   class Metadata
     # rubocop:disable Metrics/BlockLength
     class Source < TypesafeEnum::Base
+      include AV::Util
+
       new :TIND do
         def record_for(tind_id)
           record_id = ensure_valid_id(tind_id)
@@ -63,7 +66,7 @@ module AV
         def record_for(bib_number)
           record_id = ensure_valid_id(bib_number)
           begin
-            html = do_get(MILLENNIUM.marc_uri_for(record_id)).scrub
+            html = do_get(MILLENNIUM.marc_uri_for(record_id))
             AV::Marc::Millennium.marc_from_html(html)
           rescue StandardError => e
             raise AV::RecordNotFound, "Can't find Millennium record for bib number #{record_id}: #{e.message}"
@@ -103,23 +106,6 @@ module AV
 
           Source::TIND if record_id =~ TIND_RECORD_RE
         end
-      end
-
-      private
-
-      def log
-        AV.logger
-      end
-
-      def do_get(uri)
-        resp = RestClient.get(uri.to_s)
-        if resp.code != 200
-          log.error("GET #{uri} returned #{resp.code}: #{resp.body || 'nil'}")
-          raise(RestClient::RequestFailed.new(resp, resp.code).tap do |ex|
-            ex.message = "No record found at #{uri}; host returned #{resp.code}"
-          end)
-        end
-        resp.body
       end
     end
     # rubocop:enable Metrics/BlockLength
