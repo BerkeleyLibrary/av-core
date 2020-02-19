@@ -7,6 +7,16 @@ module AV
   class Metadata
     include AV::Constants
 
+    SUBFIELD_PLAYER_URL = {
+      AV::Metadata::Source::MILLENNIUM => %w[856 4 0 u].freeze,
+      AV::Metadata::Source::TIND => %w[856 4 2 u].freeze
+    }.freeze
+
+    SUBFIELD_LINK_TEXT = {
+      AV::Metadata::Source::MILLENNIUM => %w[856 4 0 z].freeze,
+      AV::Metadata::Source::TIND => %w[856 4 2 y].freeze
+    }.freeze
+
     UNKNOWN_TITLE = 'Unknown title'.freeze
     RESTRICTIONS = ['UCB access', 'UCB only'].freeze
 
@@ -58,6 +68,23 @@ module AV
       @display_uri ||= Source::MILLENNIUM.display_uri_for(bib_number)
     end
 
+    def player_url
+      @player_url ||= unique_subfield_value(*SUBFIELD_PLAYER_URL[source])
+    end
+
+    def player_link_text
+      @player_link_text ||= unique_subfield_value(*SUBFIELD_LINK_TEXT[source])
+    end
+
+    class << self
+      def for_record(record_id:)
+        source = Source.for_record_id(record_id)
+        raise AV::RecordNotFound, "Unable to determine metadata source for record ID: #{record_id}" unless source
+
+        Metadata.new(record_id: record_id, source: source)
+      end
+    end
+
     private
 
     def ensure_catalog_link(values)
@@ -83,13 +110,26 @@ module AV
       nil
     end
 
-    class << self
-      def for_record(record_id:)
-        source = Source.for_record_id(record_id)
-        raise AV::RecordNotFound, "Unable to determine metadata source for record ID: #{record_id}" unless source
-
-        Metadata.new(record_id: record_id, source: source)
-      end
+    def unique_subfield_value(tag, ind1, ind2, subfield_code)
+      subfield = unique_subfield(tag, ind1, ind2, subfield_code)
+      subfield && subfield.value
     end
+
+    def unique_subfield(tag, ind1, ind2, subfield_code)
+      subfields = find_subfields(tag, ind2, ind1, subfield_code)
+      subfields.size.tap do |count|
+        warn("Record #{bib_number}: Expected one #{tag} #{ind1}#{ind2} #{subfield_code}, got #{count}") unless count == 1
+      end
+      subfields[0]
+    end
+
+    def find_subfields(tag, ind2, ind1, subfield_code)
+      find_fields(tag, ind1, ind2).flat_map { |df| df.find_all { |sf| sf.code == subfield_code } }
+    end
+
+    def find_fields(tag, ind1, ind2)
+      marc_record.fields(tag).select { |f| f.indicator1 == ind1 && f.indicator2 == ind2 }
+    end
+
   end
 end

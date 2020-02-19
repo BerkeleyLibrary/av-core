@@ -34,7 +34,7 @@ module AV
 
         link = marc_record['856']
         expect(link['z']).to eq('UC Berkeley online videos. Freely available.')
-        expect(link['u']).to eq('https://avplayer.lib.berkeley.edu/b18538031')
+        expect(link['u']).to eq('https://avplayer.lib.berkeley.edu/b22139658')
       end
 
       it 'handles long 856 links' do

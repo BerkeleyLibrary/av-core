@@ -77,5 +77,23 @@ module AV
         expect(link.url).to eq('http://oskicat.berkeley.edu/record=b22139658')
       end
     end
+
+    describe :player_url do
+      it 'finds the player_url' do
+        search_url = 'http://oskicat.berkeley.edu/search~S1?/.b22139658/.b22139658/1%2C1%2C1%2CB/marc~b22139658'
+        stub_request(:get, search_url).to_return(status: 200, body: File.read('spec/data/b22139658.html'))
+        metadata = Metadata.for_record(record_id: 'b22139658')
+        expect(metadata.player_url).to eq('https://avplayer.lib.berkeley.edu/b22139658')
+      end
+    end
+
+    describe :player_link_text do
+      it 'finds the player_link_text' do
+        search_url = 'http://oskicat.berkeley.edu/search~S1?/.b22139658/.b22139658/1%2C1%2C1%2CB/marc~b22139658'
+        stub_request(:get, search_url).to_return(status: 200, body: File.read('spec/data/b22139658.html'))
+        metadata = Metadata.for_record(record_id: 'b22139658')
+        expect(metadata.player_link_text).to eq('UC Berkeley online videos. Freely available.')
+      end
+    end
   end
 end
