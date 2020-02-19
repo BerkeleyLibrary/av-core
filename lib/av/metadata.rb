@@ -116,14 +116,14 @@ module AV
     end
 
     def unique_subfield(tag, ind1, ind2, subfield_code)
-      subfields = find_subfields(tag, ind2, ind1, subfield_code)
+      subfields = find_subfields(tag, ind1, ind2, subfield_code)
       subfields.size.tap do |count|
         warn("Record #{bib_number}: Expected one #{tag} #{ind1}#{ind2} #{subfield_code}, got #{count}") unless count == 1
       end
       subfields[0]
     end
 
-    def find_subfields(tag, ind2, ind1, subfield_code)
+    def find_subfields(tag, ind1, ind2, subfield_code)
       find_fields(tag, ind1, ind2).flat_map { |df| df.find_all { |sf| sf.code == subfield_code } }
     end
 
