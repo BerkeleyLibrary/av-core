@@ -20,7 +20,7 @@ module AV
           links = []
           all_subfield_values.each do |subfield_values|
             subfield_values.each do |value_group|
-              body = value_group[:z] || value_group[:y]
+              body = body_from(value_group)
               url = value_group[:u]
               next unless body && url
 
@@ -28,6 +28,21 @@ module AV
             end
           end
           LinkValue.new(tag: tag, label: label, links: links, order: order)
+        end
+
+        private
+
+        SUBFIELD_LINK_TEXT = :y
+        SUBFIELD_PUBLIC_NOTE = :z
+        SUBFIELD_MATERIALS_SPECD = '3'.to_sym
+
+        def body_from(value_group)
+          body = value_group[SUBFIELD_PUBLIC_NOTE] || value_group[SUBFIELD_LINK_TEXT]
+          materials_specified = value_group[SUBFIELD_MATERIALS_SPECD]
+          return body unless materials_specified
+          return materials_specified unless body
+
+          "#{materials_specified} #{body}"
         end
       end
     end

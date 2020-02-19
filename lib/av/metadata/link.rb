@@ -1,6 +1,8 @@
 module AV
   class Metadata
     class Link
+      include Comparable
+
       attr_reader :body
       attr_reader :url
 
@@ -11,6 +13,14 @@ module AV
 
       def to_s
         "[#{body}](#{url})"
+      end
+
+      def <=>(other)
+        return unless other
+        return 0 if equal?(other)
+        return nil unless other.is_a?(Link)
+
+        to_s <=> other.to_s
       end
     end
   end
