@@ -52,6 +52,16 @@ module AV
       end
     end
 
+    describe :title do
+      it 'collapses spaces after hyphens' do
+        bib_number = 'b22139647'
+        stub_request(:get, Metadata::Source::MILLENNIUM.marc_uri_for(bib_number))
+          .to_return(status: 200, body: File.read("spec/data/#{bib_number}.html"))
+        metadata = Metadata.for_record(record_id: bib_number)
+        expect(metadata.title).to eq('Europe and the nuclear arms race, with David Owen and co-host Prof. Thomas Barnes')
+      end
+    end
+
     describe :values do
       before(:each) do
         AV::Config.millennium_base_uri = 'http://oskicat.berkeley.edu/'

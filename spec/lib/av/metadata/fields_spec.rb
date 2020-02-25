@@ -107,10 +107,10 @@ module AV
           it 'parses the fields' do
             expected = [
               'Title (245): Wanda Coleman',
-              'Description (520): Poet Opal Palmer Adisa interviews writer/poet Wanda Coleman, author of Mad Dog, Black Lady, African Sleeping Sickness and Hand Dance, among other books. Coleman discusses when she found her poetic voice, talks about the function of poetry, her personal encounters with anti- Black discrimination, and about the reluctance of white liberals to discuss issues that affect the Black community. She also talks about the plight of the African American community in South Central Los Angeles. The poems Coleman reads are A civilized plague, David Polion, Notes of a cultural terrorist and Jazz wazz.',
+              'Description (520): Poet Opal Palmer Adisa interviews writer/poet Wanda Coleman, author of Mad Dog, Black Lady, African Sleeping Sickness and Hand Dance, among other books. Coleman discusses when she found her poetic voice, talks about the function of poetry, her personal encounters with anti-Black discrimination, and about the reluctance of white liberals to discuss issues that affect the Black community. She also talks about the plight of the African American community in South Central Los Angeles. The poems Coleman reads are A civilized plague, David Polion, Notes of a cultural terrorist and Jazz wazz.',
               'Creator (700): Coleman, Wanda. interviewee. Adisa, Opal Palmer. interviewer.',
               'Creator (710): Pacifica Radio Archive. KPFA (Radio station : Berkeley, Calif.).',
-              'Published (260): Los Angeles :, Pacifica Radio Archives, , 1993.',
+              'Published (260): Los Angeles :, Pacifica Radio Archives,, 1993.',
               'Extent (300): 1 online resource.',
               'Repository (533): Pacifica Radio Archives.',
               'Reproduction Note (533): Electronic reproduction.',
@@ -123,9 +123,8 @@ module AV
             aggregate_failures 'values' do
               expect(values.size).to eq(expected.size)
               expected.each_with_index do |x, i|
-                index = values.find_index { |v| v.to_s.gsub('|', '') == x }
-                expect(index).not_to be_nil, "Value #{x.inspect} not found"
-                expect(index).to eq(i), "Value #{x.inspect} found at #{index}, expected #{i}" if index
+                actual = values[i].to_s.gsub('|', '')
+                expect(actual).to eq(x)
               end
             end
           end
@@ -144,7 +143,7 @@ module AV
               'Description (520): Poet Opal Palmer Adisa interviews writer/poet Wanda Coleman, author of Mad Dog, Black Lady, African Sleeping Sickness and Hand Dance, among other books. Coleman discusses when she found her poetic voice, talks about the function of poetry, her personal encounters with anti-Black discrimination, and about the reluctance of white liberals to discuss issues that affect the Black community. She also talks about the plight of the African American community in South Central Los Angeles. The poems Coleman reads are A civilized plague, David Polion, Notes of a cultural terrorist and Jazz wazz.',
               'Creator (700): Coleman, Wanda. interviewee. Adisa, Opal Palmer. interviewer.',
               'Creator (710): Pacifica Radio Archive. KPFA (Radio station : Berkeley, Calif.).',
-              'Published (260): Los Angeles , Pacifica Radio Archives, 1993.',
+              'Published (260): Los Angeles, Pacifica Radio Archives, 1993.',
               'Full Collection Name (982): Pacifica Radio Archives Social Activism Sound Recording Project',
               'Type (336): Audio',
               'Extent (300): 1 online resource.',
@@ -160,9 +159,8 @@ module AV
             aggregate_failures 'values' do
               expect(values.size).to eq(expected.size)
               expected.each_with_index do |x, i|
-                index = values.find_index { |v| v.to_s.gsub('|', '') == x }
-                expect(index).not_to be_nil, "Value #{x.inspect} not found"
-                expect(index).to eq(i), "Value #{x.inspect} found at #{index}, expected #{i}" if index
+                actual = values[i].to_s.gsub('|', '')
+                expect(actual).to eq(x)
               end
             end
           end

@@ -77,6 +77,7 @@ module AV
       end
 
       class << self
+        include AV::Util
 
         # Extracts the subfield values from the specifed MARC data field.
         # @param data_field [MARC::DataField] the data field
@@ -87,7 +88,7 @@ module AV
             h.tap do |h1|
               code = sf.code.to_sym
               h1[code] ||= []
-              h1[code] << sf.value
+              h1[code] << tidy_value(sf.value)
             end
           end
           SubfieldGroups.new(by_code).ordered_by(subfield_order)

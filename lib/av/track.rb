@@ -51,6 +51,7 @@ module AV
 
     class << self
       include AV::Constants
+      include AV::Util
 
       def tracks_from(marc_record, collection:)
         [].tap do |tracks|
@@ -68,20 +69,17 @@ module AV
       private
 
       def from_group(group, collection:, sort_order:)
-        path = normalize_path(group[SUBFIELD_CODE_PATH])
-        title = group[SUBFIELD_CODE_TITLE]
+        title = tidy_value(group[SUBFIELD_CODE_TITLE])
+        path = tidy_value(group[SUBFIELD_CODE_PATH])
+        duration = tidy_value(group[SUBFIELD_CODE_DURATION])
         Track.new(
           sort_order: sort_order,
-          title: title && title.strip,
+          title: title,
           path: "#{collection}/#{path}",
-          duration: group[SUBFIELD_CODE_DURATION]
+          duration: duration
         )
       end
 
-      def normalize_path(path)
-        # Millennium hyphenation can introduce bogus spaces into paths
-        path && path.gsub(/ ?- ?/, '-').strip
-      end
     end
   end
 end

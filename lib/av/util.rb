@@ -26,6 +26,10 @@ module AV
       v1 < v2 ? -1 : 1
     end
 
+    def tidy_value(value)
+      value && value.gsub(/[[:space:]]*-[[:space:]]*/, '-').strip
+    end
+
     class << self
       include AV::Util
     end
