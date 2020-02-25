@@ -6,6 +6,7 @@ require 'av/marc/subfield_groups'
 module AV
   class Track
     include Comparable
+    include AV::Util
 
     attr_reader :sort_order, :title, :path, :duration, :file_type
 
@@ -24,8 +25,8 @@ module AV
       %i[sort_order title duration path].each do |attr|
         return nil unless other.respond_to?(attr)
 
-        order = send(attr) <=> other.send(attr)
-        return order if order && order != 0
+        o = compare_values(send(attr), other.send(attr))
+        return o if o && o != 0
       end
 
       0

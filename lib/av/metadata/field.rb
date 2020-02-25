@@ -8,6 +8,7 @@ module AV
     class Field
       include Comparable
       include AV::Constants
+      include AV::Util
 
       attr_reader :order, :label, :tag, :ind_1, :ind_2, :subfield_order, :subfields_separator
 
@@ -65,14 +66,6 @@ module AV
       end
 
       private
-
-      def compare_values(v1, v2)
-        return 0 if v1 == v2
-        return 1 if v1.nil?
-        return -1 if v2.nil?
-
-        v1 < v2 ? -1 : 1
-      end
 
       def all_subfield_groups(marc_record)
         data_fields = marc_record.fields(tag).select { |f| indicators_match?(f) }

@@ -2,6 +2,7 @@ module AV
   class Metadata
     class Value
       include Comparable
+      include AV::Util
 
       attr_reader :tag
       attr_reader :label
@@ -21,7 +22,7 @@ module AV
         %i[order tag label].each do |attr|
           return nil unless other.respond_to?(attr)
 
-          o = send(attr) <=> other.send(attr)
+          o = compare_values(send(attr), other.send(attr))
           return o if o && o != 0
         end
 

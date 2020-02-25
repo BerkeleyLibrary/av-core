@@ -100,7 +100,12 @@ module AV
 
         marc_record = AV::Marc::Millennium.marc_from_html(File.read('spec/data/b23161018.html'))
         tracks = Track.tracks_from(marc_record, collection: 'MRCAudio')
-        expect(tracks).to eq(expected_tracks)
+        expect(tracks.size).to eq(expected_tracks.size)
+        aggregate_failures 'tracks' do
+          tracks.each_with_index do |track, i|
+            expect(track).to eq(expected_tracks[i])
+          end
+        end
       end
 
       it 'handles records with no tracks' do
@@ -111,13 +116,18 @@ module AV
 
       it 'handles tracks with spaces' do
         expected_tracks = [
-          Track.new(sort_order: 0, title: 'Part 1', path: 'MRCAudio/frost-read1.mp3'),
-          Track.new(sort_order: 1, title: 'Part 2', path: 'MRCAudio/frost-read2.mp3')
+          Track.new(sort_order: 0, title: 'Part 1', path: 'MRCAudio/frost-read1.mp3', duration: AV::Types::Duration.from_string('01:02:29')),
+          Track.new(sort_order: 1, title: 'Part 2', path: 'MRCAudio/frost-read2.mp3', duration: AV::Types::Duration.from_string('00:28:58'))
         ]
 
         marc_record = AV::Marc::Millennium.marc_from_html(File.read('spec/data/b11082434.html'))
         tracks = Track.tracks_from(marc_record, collection: 'MRCAudio')
-        expect(tracks).to eq(expected_tracks)
+        expect(tracks.size).to eq(expected_tracks.size)
+        aggregate_failures 'tracks' do
+          tracks.each_with_index do |track, i|
+            expect(track).to eq(expected_tracks[i])
+          end
+        end
       end
     end
   end

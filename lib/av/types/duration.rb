@@ -41,16 +41,23 @@ module AV
         # @return [Duration] the duration, or nil
         def from_string(s)
           return nil unless s
-          raise ArgumentError, "Not a string: #{s.inspect}" unless s.is_a?(String)
 
-          md = DURATION_RE.match(s)
-          return nil unless md
+          value = clean_value(s)
+          return nil unless (md = DURATION_RE.match(value))
 
           Duration.new(
             hours: md[1].to_i,
             minutes: md[2].to_i,
             seconds: md[3].to_i
           )
+        end
+
+        private
+
+        def clean_value(value)
+          raise ArgumentError, "Not a string: #{value.inspect}" unless value.is_a?(String)
+
+          value.gsub(/[[:space:]]/, '')
         end
       end
     end

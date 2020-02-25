@@ -56,6 +56,14 @@ module AV
           duration = Duration.from_string('Not a duration')
           expect(duration).to be_nil
         end
+
+        it 'handles whitespace' do
+          duration = Duration.from_string('00: 23:44')
+          expect(duration).not_to be_nil
+          expect(duration.hours).to eq(0)
+          expect(duration.minutes).to eq(23)
+          expect(duration.seconds).to eq(44)
+        end
       end
 
       describe :<=> do

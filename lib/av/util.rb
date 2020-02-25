@@ -18,6 +18,14 @@ module AV
       body && body.scrub
     end
 
+    def compare_values(v1, v2)
+      return 0 if v1 == v2
+      return 1 if v1.nil?
+      return -1 if v2.nil?
+
+      v1 < v2 ? -1 : 1
+    end
+
     class << self
       include AV::Util
     end
