@@ -60,6 +60,7 @@ module AV
       end
     end
 
+    # TODO: do we need to check the 799s?
     describe :restrictions do
       it 'returns "UCB access"' do
         bib_number = 'b18538031'
