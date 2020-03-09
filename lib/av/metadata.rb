@@ -17,9 +17,6 @@ module AV
       AV::Metadata::Source::TIND => %w[856 4 2 y].freeze
     }.freeze
 
-    UNKNOWN_TITLE = 'Unknown title'.freeze
-    RESTRICTIONS = ['UCB access', 'UCB only'].freeze
-
     attr_reader :record_id, :source
 
     def initialize(record_id:, source:, marc_record: nil)
@@ -33,9 +30,7 @@ module AV
     end
 
     def tind_id
-      return unless source == Source::TIND
-
-      record_id
+      (source == Source::TIND) && record_id
     end
 
     def marc_record
@@ -58,10 +53,11 @@ module AV
     end
 
     def ucb_access?
-      @ucb_access ||= marc_record.fields(TAG_LINK_FIELD).any? do |data_field|
-        subfield_values = data_field.subfields.map(&:value)
-        subfield_values.any? { |v| RESTRICTIONS.any? { |restriction| v.include?(restriction) } }
-      end
+      restrictions != RESTRICTIONS_NONE
+    end
+
+    def restrictions
+      @restrictions ||= (restrictions_from_links || RESTRICTIONS_NONE)
     end
 
     def display_uri
@@ -86,6 +82,11 @@ module AV
     end
 
     private
+
+    def restrictions_from_links
+      link_field_values = marc_record.fields(TAG_LINK_FIELD).flat_map { |data_field| data_field.subfields.map(&:value) }
+      RESTRICTIONS.find { |r| link_field_values.any? { |v| v.include?(r) } }
+    end
 
     def ensure_catalog_link(values)
       return values if values.any? { |v| Fields::CATALOG_LINK.value?(v) }

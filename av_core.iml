@@ -7,7 +7,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="PROVIDED" name="addressable (v2.7.0, RVM: ruby-2.6.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="ast (v2.4.0, RVM: ruby-2.6.5) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="brakeman (v4.7.2, RVM: ruby-2.6.5) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="brakeman (v4.8.0, RVM: ruby-2.6.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="builder (v3.2.4, RVM: ruby-2.6.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bundle-audit (v0.1.0, RVM: ruby-2.6.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bundler (v2.1.4, RVM: ruby-2.6.5) [gem]" level="application" />
@@ -24,7 +24,7 @@
     <orderEntry type="library" scope="PROVIDED" name="http-accept (v1.7.0, RVM: ruby-2.6.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="http-cookie (v1.0.3, RVM: ruby-2.6.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="io-console (v0.5.4, RVM: ruby-2.6.5) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="irb (v1.2.1, RVM: ruby-2.6.5) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="irb (v1.2.3, RVM: ruby-2.6.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="jaro_winkler (v1.5.4, RVM: ruby-2.6.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="json (v2.3.0, RVM: ruby-2.6.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="listen (v3.1.5, RVM: ruby-2.6.5) [gem]" level="application" />
@@ -59,7 +59,7 @@
     <orderEntry type="library" scope="PROVIDED" name="unf (v0.1.4, RVM: ruby-2.6.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="unf_ext (v0.0.7.6, RVM: ruby-2.6.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="unicode-display_width (v1.6.0, RVM: ruby-2.6.5) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="webmock (v3.8.1, RVM: ruby-2.6.5) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="webmock (v3.8.2, RVM: ruby-2.6.5) [gem]" level="application" />
   </component>
   <component name="RModuleSettingsStorage">
     <LOAD_PATH number="2" string0="$MODULE_DIR$/lib" string1="$MODULE_DIR$/spec" />

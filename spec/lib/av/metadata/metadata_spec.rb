@@ -42,6 +42,56 @@ module AV
         metadata = Metadata.for_record(record_id: bib_number)
         expect(metadata.ucb_access?).to eq(true)
       end
+
+      it 'detects CalNet restrictions' do
+        bib_number = 'b24659129'
+        stub_request(:get, Metadata::Source::MILLENNIUM.marc_uri_for(bib_number))
+          .to_return(status: 200, body: File.read("spec/data/#{bib_number}.html"))
+        metadata = Metadata.for_record(record_id: bib_number)
+        expect(metadata.ucb_access?).to eq(true)
+      end
+
+      it 'detects unrestricted audio' do
+        bib_number = 'b20786580'
+        stub_request(:get, Metadata::Source::MILLENNIUM.marc_uri_for(bib_number))
+          .to_return(status: 200, body: File.read("spec/data/#{bib_number}.html"))
+        metadata = Metadata.for_record(record_id: bib_number)
+        expect(metadata.ucb_access?).to eq(false)
+      end
+    end
+
+    describe :restrictions do
+      it 'returns "UCB access"' do
+        bib_number = 'b18538031'
+        stub_request(:get, Metadata::Source::MILLENNIUM.marc_uri_for(bib_number))
+          .to_return(status: 200, body: File.read("spec/data/#{bib_number}.html"))
+        metadata = Metadata.for_record(record_id: bib_number)
+        expect(metadata.restrictions).to eq('UCB access')
+      end
+
+      it 'returns "UCB only"' do
+        bib_number = 'b25207857'
+        stub_request(:get, Metadata::Source::MILLENNIUM.marc_uri_for(bib_number))
+          .to_return(status: 200, body: File.read("spec/data/#{bib_number}.html"))
+        metadata = Metadata.for_record(record_id: bib_number)
+        expect(metadata.restrictions).to eq('UCB only')
+      end
+
+      it 'returns "Restricted to CalNet"' do
+        bib_number = 'b24659129'
+        stub_request(:get, Metadata::Source::MILLENNIUM.marc_uri_for(bib_number))
+          .to_return(status: 200, body: File.read("spec/data/#{bib_number}.html"))
+        metadata = Metadata.for_record(record_id: bib_number)
+        expect(metadata.restrictions).to eq('Restricted to CalNet')
+      end
+
+      it 'returns "Freely available" for unrestricted audio' do
+        bib_number = 'b20786580'
+        stub_request(:get, Metadata::Source::MILLENNIUM.marc_uri_for(bib_number))
+          .to_return(status: 200, body: File.read("spec/data/#{bib_number}.html"))
+        metadata = Metadata.for_record(record_id: bib_number)
+        expect(metadata.restrictions).to eq('Freely available')
+      end
     end
 
     describe :for_record do

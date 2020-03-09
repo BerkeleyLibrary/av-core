@@ -10,5 +10,10 @@ module AV
     SUBFIELD_CODE_PATH = :g
     SUBFIELD_CODE_TITLE = :t
     SUBFIELD_CODE_DURATION = :a
+
+    UNKNOWN_TITLE = 'Unknown title'.freeze
+
+    RESTRICTIONS = ['UCB access', 'UCB only', 'Restricted to CalNet'].freeze
+    RESTRICTIONS_NONE = 'Freely available'.freeze
   end
 end
