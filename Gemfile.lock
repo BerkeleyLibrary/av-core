@@ -4,7 +4,7 @@ PATH
     av_core (0.0.1)
       marc (~> 1.0)
       rest-client (~> 2.1)
-      typesafe_enum (~> 0.1.9)
+      typesafe_enum (~> 0.2)
 
 GEM
   remote: https://rubygems.org/
@@ -100,7 +100,7 @@ GEM
     simplecov-rcov (0.2.3)
       simplecov (>= 0.4.1)
     thor (0.20.3)
-    typesafe_enum (0.1.9)
+    typesafe_enum (0.2.0)
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.6)

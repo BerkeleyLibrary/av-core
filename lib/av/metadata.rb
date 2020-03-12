@@ -30,7 +30,7 @@ module AV
     end
 
     def tind_id
-      (source == Source::TIND) && record_id
+      record_id if source == Source::TIND
     end
 
     def marc_record
