@@ -2,10 +2,12 @@ require 'av/constants'
 require 'av/types/duration'
 require 'av/types/file_type'
 require 'av/marc/subfield_groups'
+require 'marc'
 
 module AV
   class Track
     include Comparable
+    include AV::Constants
     include AV::Util
 
     attr_reader :sort_order, :title, :path, :duration, :file_type
@@ -14,7 +16,7 @@ module AV
       @sort_order = sort_order
       @title = title
       @path = path
-      @duration = ensure_duration(duration)
+      @duration = duration_or_nil(duration)
       @file_type = AV::Types::FileType.for_path(path)
     end
 
@@ -37,13 +39,22 @@ module AV
         s << "#{sort_order}. " if sort_order
         s << "#{title}: " if title
         s << path
-        s << " (#{duration})"
+        s << " (#{duration})" if duration
+      end
+    end
+
+    # @return [Array<MARC::Subfield>]
+    def to_marc_subfields
+      [].tap do |subfields|
+        subfields << MARC::Subfield.new(SUBFIELD_CODE_DURATION, duration.to_s) if duration
+        subfields << MARC::Subfield.new(SUBFIELD_CODE_TITLE, title) if title
+        subfields << MARC::Subfield.new(SUBFIELD_CODE_PATH, path)
       end
     end
 
     private
 
-    def ensure_duration(duration)
+    def duration_or_nil(duration)
       return duration if duration.is_a?(AV::Types::Duration)
 
       AV::Types::Duration.from_string(duration)

@@ -73,6 +73,31 @@ module AV
       end
     end
 
+    describe :to_marc_subfields do
+      it 'returns the MARC subfields' do
+        track = Track.new(
+          sort_order: 0,
+          title: 'reel 1, part 1',
+          path: 'MRCAudio/C040790863_1.mp3',
+          duration: AV::Types::Duration.from_string('00:47:49')
+        )
+        marc_subfields = track.to_marc_subfields
+        expect(marc_subfields.size).to eq(3)
+
+        duration_subfield = marc_subfields[0]
+        expect(duration_subfield.code).to eq(AV::Constants::SUBFIELD_CODE_DURATION)
+        expect(duration_subfield.value).to eq(track.duration.to_s)
+
+        title_subfield = marc_subfields[1]
+        expect(title_subfield.code).to eq(AV::Constants::SUBFIELD_CODE_TITLE)
+        expect(title_subfield.value).to eq(track.title)
+
+        path_subfield = marc_subfields[2]
+        expect(path_subfield.code).to eq(AV::Constants::SUBFIELD_CODE_PATH)
+        expect(path_subfield.value).to eq(track.path)
+      end
+    end
+
     describe :tracks_from do
       it 'reads the tracks' do
         expected_tracks = [
