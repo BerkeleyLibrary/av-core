@@ -44,6 +44,19 @@ module AV
       end
     end
 
+    describe :player_link_text do
+      it 'returns the player link text' do
+        collection = 'MRCAudio'
+
+        player_link_text = 'MRC online audio. Freely available.'
+        metadata = instance_double(Metadata)
+        expect(metadata).to receive(:player_link_text).and_return(player_link_text)
+
+        record = Record.new(collection: collection, tracks: [], metadata: metadata)
+        expect(record.player_link_text).to eq(player_link_text)
+      end
+    end
+
     describe :type_label do
       it 'handles audio' do
         t1 = Track.new(sort_order: 1, title: 'Part 1', path: 'MRCAudio/frost-read1.mp3')

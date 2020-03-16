@@ -28,6 +28,10 @@ module AV
       metadata.ucb_access?
     end
 
+    def player_link_text
+      metadata.player_link_text
+    end
+
     def type_label
       @type_label ||= begin
         file_types = Set.new(tracks.map(&:file_type)).to_a.sort
