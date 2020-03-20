@@ -45,6 +45,10 @@ module AV
       @player_uri ||= URI.join(AV::Config.avplayer_base_uri, "#{collection}/#{bib_number}")
     end
 
+    def display_uri
+      metadata.display_uri
+    end
+
     def description
       @description ||= begin
         desc_value = metadata.values.find { |v| v.tag == '520' }

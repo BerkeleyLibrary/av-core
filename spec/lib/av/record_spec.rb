@@ -44,6 +44,20 @@ module AV
       end
     end
 
+    describe :display_uri do
+      it 'returns the display URI' do
+        collection = 'MRCAudio'
+        bib_number = 'b11082434'
+        expected_uri = URI.parse("http://oskicat.example.edu/record=#{bib_number}")
+
+        metadata = instance_double(Metadata)
+        expect(metadata).to receive(:display_uri).and_return(expected_uri)
+
+        record = Record.new(collection: collection, tracks: [], metadata: metadata)
+        expect(record.display_uri).to eq(expected_uri)
+      end
+    end
+
     describe :player_link_text do
       it 'returns the player link text' do
         collection = 'MRCAudio'
