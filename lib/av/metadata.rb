@@ -61,6 +61,7 @@ module AV
     end
 
     def display_uri
+      # TODO: what about TIND-only records?
       @display_uri ||= Source::MILLENNIUM.display_uri_for(bib_number)
     end
 
