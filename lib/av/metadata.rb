@@ -30,7 +30,9 @@ module AV
     end
 
     def tind_id
-      record_id if source == Source::TIND
+      return unless (tind_id_field = marc_record['001'])
+
+      tind_id_field.value
     end
 
     def marc_record
@@ -38,10 +40,7 @@ module AV
     end
 
     def values
-      @values ||= begin
-        values = Fields.values_from(marc_record)
-        ensure_catalog_link(values)
-      end
+      @values ||= Fields.values_from(marc_record).tap { |values| ensure_catalog_link(values) }
     end
 
     def title
@@ -61,8 +60,7 @@ module AV
     end
 
     def display_uri
-      # TODO: what about TIND-only records?
-      @display_uri ||= Source::MILLENNIUM.display_uri_for(bib_number)
+      @display_uri ||= source.display_uri_for(self)
     end
 
     def player_url

@@ -151,7 +151,7 @@ module AV
           collection: 'Pacifica',
           record_id: '(pacradio)01469'
         )
-        expect(record.tind_id).to eq('(pacradio)01469')
+        expect(record.tind_id).to eq('21178')
       end
     end
 

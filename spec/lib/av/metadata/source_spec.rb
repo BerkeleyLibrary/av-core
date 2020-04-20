@@ -1,5 +1,6 @@
 require 'spec_helper'
 
+# TODO: break some of this out into a Metadata::Reader spec
 module AV
   class Metadata
     describe Source do
@@ -12,34 +13,6 @@ module AV
 
       after(:each) do
         AV.instance_variable_set(:@logger, logger_orig)
-      end
-
-      describe :base_uri_for do
-        it 'raises ArgumentError for unconfigured sources' do
-          source = Source.allocate
-          expect { source.base_uri }.to raise_error(ArgumentError)
-        end
-      end
-
-      describe :record_for do
-        it 'raises NoMethodError for unconfigured sources' do
-          source = Source.allocate
-          expect { source.record_for('Lot 49') }.to raise_error(NoMethodError)
-        end
-      end
-
-      describe :marc_uri_for do
-        it 'raises NoMethodError for unconfigured sources' do
-          source = Source.allocate
-          expect { source.marc_uri_for('Lot 49') }.to raise_error(NoMethodError)
-        end
-      end
-
-      describe :display_uri_for do
-        it 'raises NoMethodError for unconfigured sources' do
-          source = Source.allocate
-          expect { source.display_uri_for('Lot 49') }.to raise_error(NoMethodError)
-        end
       end
 
       describe :source_for do
@@ -82,8 +55,17 @@ module AV
 
         describe :display_uri_for do
           it 'returns the record display page URI' do
+            marc_html = File.read('spec/data/b22139658.html')
+            stub_request(:get, record_url).to_return(status: 200, body: marc_html)
+
+            metadata = Metadata.new(
+              record_id: 'b22139658',
+              source: Source::MILLENNIUM,
+              marc_record: Source::MILLENNIUM.record_for('b22139658')
+            )
+
             uri_expected = URI.parse('http://oskicat.berkeley.edu/record=b22139658')
-            uri_actual = Source::MILLENNIUM.display_uri_for('b22139658')
+            uri_actual = Source::MILLENNIUM.display_uri_for(metadata)
             expect(uri_actual).to eq(uri_expected)
           end
 
@@ -172,8 +154,17 @@ module AV
 
         describe :display_uri_for do
           it 'returns the record display page URI' do
+            marc_xml = File.read('spec/data/record-(pacradio)00107.xml')
+            stub_request(:get, record_url).to_return(status: 200, body: marc_xml)
+
+            metadata = Metadata.new(
+              record_id: '(pacradio)00107',
+              source: Source::TIND,
+              marc_record: Source::TIND.record_for('(pacradio)00107')
+            )
+
             uri_expected = URI.parse('https://digicoll.lib.berkeley.edu/record/19816')
-            uri_actual = Source::TIND.display_uri_for('19816')
+            uri_actual = Source::TIND.display_uri_for(metadata)
             expect(uri_actual).to eq(uri_expected)
           end
 
