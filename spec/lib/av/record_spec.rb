@@ -143,27 +143,27 @@ module AV
       end
 
       it 'returns the TIND ID for TIND records' do
-        marc_xml = File.read('spec/data/record-21178.xml')
-        search_url = 'https://digicoll.lib.berkeley.edu/record/21178/export/xm'
+        marc_xml = File.read('spec/data/record-(pacradio)01469.xml')
+        search_url = 'https://digicoll.lib.berkeley.edu/search?p=035__a%3A%22%28pacradio%2901469%22&of=xm'
         stub_request(:get, search_url).to_return(status: 200, body: marc_xml)
 
         record = Record.from_metadata(
           collection: 'Pacifica',
-          record_id: '21178'
+          record_id: '(pacradio)01469'
         )
-        expect(record.tind_id).to eq('21178')
+        expect(record.tind_id).to eq('(pacradio)01469')
       end
     end
 
     describe :from_metadata do
       it 'loads the metadata' do
-        marc_xml = File.read('spec/data/record-21178.xml')
-        search_url = 'https://digicoll.lib.berkeley.edu/record/21178/export/xm'
+        marc_xml = File.read('spec/data/record-(pacradio)01469.xml')
+        search_url = 'https://digicoll.lib.berkeley.edu/search?p=035__a%3A%22%28pacradio%2901469%22&of=xm'
         stub_request(:get, search_url).to_return(status: 200, body: marc_xml)
 
         record = Record.from_metadata(
           collection: 'Pacifica',
-          record_id: '21178'
+          record_id: '(pacradio)01469'
         )
 
         tracks = record.tracks
@@ -207,21 +207,12 @@ module AV
       end
 
       it "raises #{AV::RecordNotFound} if the record cannot be found" do
-        search_url = 'https://digicoll.lib.berkeley.edu/record/21178/export/xm'
+        search_url = 'https://digicoll.lib.berkeley.edu/search?p=035__a%3A%22%28pacradio%2901469%22&of=xm'
         stub_request(:get, search_url).to_return(status: 404)
         expect do
           Record.from_metadata(
             collection: 'Pacifica',
-            record_id: '21178'
-          )
-        end.to raise_error(AV::RecordNotFound)
-      end
-
-      it "raises #{AV::RecordNotFound} for a record with a bad ID" do
-        expect do
-          Record.from_metadata(
-            collection: 'Pacifica',
-            record_id: 'abcdefg'
+            record_id: '(pacradio)01469'
           )
         end.to raise_error(AV::RecordNotFound)
       end
@@ -229,8 +220,8 @@ module AV
 
     describe :ucb_access? do
       it 'returns true for restricted, false for unrestricted' do
-        restricted = %w[b18538031 b24071548 4188 4959]
-        unrestricted = %w[b22139658 b23161018 19816 21178]
+        restricted = %w[b18538031 b24071548 (cityarts)00002 (cityarts)00773]
+        unrestricted = %w[b22139658 b23161018 (pacradio)00107 (pacradio)01469]
         (restricted + unrestricted).each do |record_id|
           source = Metadata::Source.for_record_id(record_id)
           test_data = 'spec/data/' + (source == Metadata::Source::TIND ? "record-#{record_id}.xml" : "#{record_id}.html")

@@ -7,7 +7,7 @@ module AV
       attr_reader :marc_record
 
       before(:all) do
-        @marc_record = MARC::XMLReader.new('spec/data/record-21178.xml').first
+        @marc_record = MARC::XMLReader.new('spec/data/record-(pacradio)01469.xml').first
       end
 
       describe :<=> do

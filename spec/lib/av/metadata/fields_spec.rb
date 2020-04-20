@@ -132,7 +132,7 @@ module AV
 
         describe :TIND do
           before(:each) do
-            marc_xml = File.read('spec/data/record-21178.xml')
+            marc_xml = File.read('spec/data/record-(pacradio)01469.xml')
             input = StringIO.new(marc_xml)
             @marc_record = MARC::XMLReader.new(input).first
           end

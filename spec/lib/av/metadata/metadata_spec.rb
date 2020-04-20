@@ -95,14 +95,6 @@ module AV
       end
     end
 
-    describe :for_record do
-      it "raises #{AV::RecordNotFound} for an ID with indeterminate source" do
-        expect do
-          Metadata.for_record(record_id: 'abcdefg')
-        end.to raise_error(AV::RecordNotFound)
-      end
-    end
-
     describe :title do
       it 'collapses spaces after hyphens' do
         bib_number = 'b22139647'

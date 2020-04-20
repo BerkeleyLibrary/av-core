@@ -48,11 +48,11 @@ module AV
         end
 
         it 'returns TIND for a TIND record number' do
-          expect(Source.for_record_id('12345678')).to be(Source::TIND)
+          expect(Source.for_record_id('(coll)12345')).to be(Source::TIND)
         end
 
-        it 'returns nil for a non-Millennium, non-TIND number' do
-          expect(Source.for_record_id('o12345678')).to be_nil
+        it 'returns TIND for an OCLC number' do
+          expect(Source.for_record_id('o12345678')).to be(Source::TIND)
         end
       end
 
@@ -155,7 +155,7 @@ module AV
 
         before(:each) do
           AV::Config.tind_base_uri = 'https://digicoll.lib.berkeley.edu'
-          @record_url = 'https://digicoll.lib.berkeley.edu/record/19816/export/xm'
+          @record_url = 'https://digicoll.lib.berkeley.edu/search?p=035__a%3A%22%28pacradio%2900107%22&of=xm'
         end
 
         after(:each) do
@@ -165,12 +165,8 @@ module AV
         describe :marc_uri_for do
           it 'returns the search URI' do
             uri_expected = URI.parse(record_url)
-            uri_actual = Source::TIND.marc_uri_for('19816')
+            uri_actual = Source::TIND.marc_uri_for('(pacradio)00107')
             expect(uri_actual).to eq(uri_expected)
-          end
-
-          it 'raises ArgumentError for a non-TIND ID' do
-            expect { Source::TIND.marc_uri_for('b22139658') }.to raise_error(ArgumentError)
           end
         end
 
@@ -187,15 +183,11 @@ module AV
         end
 
         describe :record_for do
-          it 'raises ArgumentError for a non-TIND ID' do
-            expect { Source::TIND.record_for('b22139658') }.to raise_error(ArgumentError)
-          end
-
           it 'finds a MARC record' do
-            marc_xml = File.read('spec/data/record-19816.xml')
+            marc_xml = File.read('spec/data/record-(pacradio)00107.xml')
             stub_request(:get, record_url).to_return(status: 200, body: marc_xml)
 
-            marc_record = Source::TIND.record_for('19816')
+            marc_record = Source::TIND.record_for('(pacradio)00107')
             expect(marc_record).not_to be_nil
             expect(marc_record).to be_a(MARC::Record)
 
@@ -207,34 +199,34 @@ module AV
           it "raises #{AV::RecordNotFound} if the record cannot be found" do
             stub_request(:get, record_url).to_return(status: 404, body: '')
 
-            expect { Source::TIND.record_for('19816') }.to raise_error(AV::RecordNotFound)
+            expect { Source::TIND.record_for('(pacradio)00107') }.to raise_error(AV::RecordNotFound)
           end
 
           it "raises #{AV::RecordNotFound} if the record cannot be parsed" do
             stub_request(:get, record_url).to_return(status: 200, body: '<? this is not valid MARCXML>')
 
-            expect { Source::TIND.record_for('19816') }.to raise_error(AV::RecordNotFound)
+            expect { Source::TIND.record_for('(pacradio)00107') }.to raise_error(AV::RecordNotFound)
           end
 
           it "raises #{AV::RecordNotFound} if no records are returned" do
             empty_result = File.read('spec/data/record-empty-result.xml')
             stub_request(:get, record_url).to_return(status: 200, body: empty_result)
 
-            expect { Source::TIND.record_for('19816') }.to raise_error(AV::RecordNotFound)
+            expect { Source::TIND.record_for('(pacradio)00107') }.to raise_error(AV::RecordNotFound)
           end
 
           it "raises #{AV::RecordNotFound} on a redirect to login" do
             redirect_to_login = File.read('spec/data/record-redirect-to-login.html')
             stub_request(:get, record_url).to_return(status: 200, body: redirect_to_login)
 
-            expect { Source::TIND.record_for('19816') }.to raise_error(AV::RecordNotFound)
+            expect { Source::TIND.record_for('(pacradio)00107') }.to raise_error(AV::RecordNotFound)
           end
 
           it "raises #{AV::RecordNotFound} if TIND returns a weird HTTP status" do
-            marc_xml = File.read('spec/data/record-19816.xml')
+            marc_xml = File.read('spec/data/record-(pacradio)00107.xml')
             stub_request(:get, record_url).to_return(status: 207, body: marc_xml)
 
-            expect { Source::TIND.record_for('19816') }.to raise_error(AV::RecordNotFound)
+            expect { Source::TIND.record_for('(pacradio)00107') }.to raise_error(AV::RecordNotFound)
           end
         end
 
@@ -246,7 +238,7 @@ module AV
           end
 
           it 'raises ArgumentError for a TIND ID' do
-            expect { Source::TIND.record_for_bib('19816') }.to raise_error(ArgumentError)
+            expect { Source::TIND.record_for_bib('(pacradio)00107') }.to raise_error(ArgumentError)
           end
 
           it 'returns a record' do

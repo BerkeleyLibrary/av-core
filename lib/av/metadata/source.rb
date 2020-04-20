@@ -7,24 +7,27 @@ require 'av/marc'
 require 'av/marc/millennium'
 require 'av/util'
 
+# TODO: clean up this class
 module AV
   class Metadata
     # rubocop:disable Metrics/BlockLength
     class Source < TypesafeEnum::Base
       include AV::Util
 
+      MILLENNIUM_RECORD_RE = /^b[0-9]+$/.freeze
+      OCLC_RECORD_RE = /^o[0-9]+$/.freeze
+
       new :TIND do
-        def record_for(tind_id)
-          record_id = ensure_valid_id(tind_id)
-          record = begin
-            xml = do_get(TIND.marc_uri_for(record_id))
-            AV::Marc.from_xml(xml)
+        def record_for(record_id)
+          begin
+            records = records_for_id(record_id)
+            record = records && records.first
+            return record if record
           rescue StandardError => e
             raise AV::RecordNotFound, "Can't find TIND record for record ID #{record_id.inspect}: #{e.message}"
           end
-          return record if record
 
-          raise AV::RecordNotFound, "No record returned for TIND ID #{record_id.inspect}"
+          raise AV::RecordNotFound, "No TIND records found for record id #{record_id}"
         end
 
         def record_for_bib(bib_number)
@@ -41,19 +44,36 @@ module AV
           raise AV::RecordNotFound, "No TIND records found for Millennium bib number #{bib_number}"
         end
 
+        def id_field_for(record_id)
+          return '901__m' if record_id =~ Source::MILLENNIUM_RECORD_RE
+          return '901__o' if record_id =~ Source::OCLC_RECORD_RE
+
+          '035__a'
+        end
+
+        def records_for_id(record_id)
+          id_field = id_field_for(record_id)
+          records_for(id_field, record_id)
+        end
+
         def records_for_bib(bib_number)
           record_id = Source::MILLENNIUM.ensure_valid_id(bib_number)
+          records_for('901__m', record_id)
+        end
+
+        def records_for(field, value)
           search_uri = URI.join(Source::TIND.base_uri, '/search')
-          search_uri.query = URI.encode_www_form('p' => "901__m:\"#{record_id}\"", 'of' => 'xm')
+          search_uri.query = URI.encode_www_form('p' => "#{field}:\"#{value}\"", 'of' => 'xm')
           xml = do_get(search_uri)
           AV::Marc.all_from_xml(xml)
         rescue StandardError => e
-          raise AV::RecordNotFound, "Can't find TIND records for Millennium bib number #{bib_number}: #{e.message}"
+          raise AV::RecordNotFound, "Can't find TIND records for field #{field.inspect}, value #{value.inspect}: #{e.message}"
         end
 
         def marc_uri_for(tind_id)
-          record_id = ensure_valid_id(tind_id)
-          URI.join(base_uri, "/record/#{record_id}/export/xm")
+          search_uri = URI.join(Source::TIND.base_uri, '/search')
+          search_uri.query = URI.encode_www_form('p' => "#{id_field_for(tind_id)}:\"#{tind_id}\"", 'of' => 'xm')
+          search_uri
         end
 
         def display_uri_for(tind_id)
@@ -98,13 +118,8 @@ module AV
       end
 
       class << self
-        MILLENNIUM_RECORD_RE = /^b[0-9]+$/.freeze
-        TIND_RECORD_RE = /^[0-9]+$/.freeze
-
         def for_record_id(record_id)
-          return Source::MILLENNIUM if record_id =~ MILLENNIUM_RECORD_RE
-
-          Source::TIND if record_id =~ TIND_RECORD_RE
+          record_id =~ Source::MILLENNIUM_RECORD_RE ? Source::MILLENNIUM : Source::TIND
         end
       end
     end

@@ -28,7 +28,7 @@ module AV
         end
 
         it 'reads an 856 y' do
-          marc_record = MARC::XMLReader.new('spec/data/record-4188.xml').first
+          marc_record = MARC::XMLReader.new('spec/data/record-(cityarts)00002.xml').first
 
           field = AV::Metadata::Field.new(
             label: 'Linked Resources',
