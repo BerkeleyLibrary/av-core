@@ -20,6 +20,15 @@ module AV
           expect(Source.for_record_id('b12345678')).to be(Source::MILLENNIUM)
         end
 
+        it 'returns MILLENNIUM for a Millennium bib number with check digit' do
+          expect(Source.for_record_id('b12345678a')).to be(Source::MILLENNIUM)
+        end
+
+        it "returns TIND for something that looks a little like a Millennium bib but isn't" do
+          expect(Source.for_record_id('b1234567')).to be(Source::TIND)
+          expect(Source.for_record_id('b123456789abcdef')).to be(Source::TIND)
+        end
+
         it 'returns TIND for a TIND record number' do
           expect(Source.for_record_id('(coll)12345')).to be(Source::TIND)
         end

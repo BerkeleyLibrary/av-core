@@ -1,7 +1,7 @@
 module AV
   class Metadata
     module Readers
-      MILLENNIUM_RECORD_RE = /^b[0-9]+$/.freeze
+      MILLENNIUM_RECORD_RE = /^b[0-9]{8}[0-9a-z]?$/.freeze
       OCLC_RECORD_RE = /^o[0-9]+$/.freeze
 
       module Millennium
