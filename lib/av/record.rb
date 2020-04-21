@@ -57,6 +57,14 @@ module AV
     end
 
     class << self
+      # Loads the metadata for the specified record and creates a record object from it.
+      #
+      # Note that for TIND records the record ID is *not* the TIND internal ID
+      # (MARC field 001) but rather the ID assigned by the UC Berkeley Library
+      # (MARC field 035).
+      #
+      # @param collection [String] The collection name (Wowza application id).
+      # @param record_id [String] The record ID.
       def from_metadata(collection:, record_id:)
         metadata = Metadata.for_record(record_id: record_id)
         Record.new(
