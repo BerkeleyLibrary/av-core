@@ -32,6 +32,20 @@ module AV
         end
       end
 
+      new(:MOV, 'mov') do
+        def mime_type
+          'video/quicktime'
+        end
+
+        def player_tag
+          'video'
+        end
+
+        def label
+          'Video'
+        end
+      end
+
       def extension
         ".#{value}"
       end

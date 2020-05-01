@@ -7,7 +7,8 @@ module AV
         it 'is correct' do
           expected = {
             FileType::MP3 => 'application/x-mpegURL',
-            FileType::MP4 => 'video/mp4'
+            FileType::MP4 => 'video/mp4',
+            FileType::MOV => 'video/quicktime'
           }
           expected.each do |t, mt_expected|
             expect(t.mime_type).to eq(mt_expected)
@@ -19,10 +20,24 @@ module AV
         it 'is correct' do
           expected = {
             FileType::MP3 => 'audio',
-            FileType::MP4 => 'video'
+            FileType::MP4 => 'video',
+            FileType::MOV => 'video'
           }
           expected.each do |t, pt_expected|
             expect(t.player_tag).to eq(pt_expected)
+          end
+        end
+      end
+
+      describe :label do
+        it 'is correct' do
+          expected = {
+            FileType::MP3 => 'Audio',
+            FileType::MP4 => 'Video',
+            FileType::MOV => 'Video'
+          }
+          expected.each do |t, pt_expected|
+            expect(t.label).to eq(pt_expected)
           end
         end
       end
@@ -42,6 +57,10 @@ module AV
 
         it 'identifies an MP4' do
           expect(FileType.for_path('foo.mp4')).to eq(AV::Types::FileType::MP4)
+        end
+
+        it 'identifies an MOV' do
+          expect(FileType.for_path('foo.mov')).to eq(AV::Types::FileType::MOV)
         end
 
         it 'rejects nil' do
