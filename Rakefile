@@ -28,4 +28,5 @@ task spec: 'spec:all'
 # ------------------------------------------------------------
 # Custom tasks
 
-task default: 'spec'
+desc 'Run tests, check test coverage, check code style'
+task default: %i[coverage rubocop]

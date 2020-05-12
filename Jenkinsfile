@@ -26,14 +26,14 @@ pipeline {
 
           post {
             always {
-              junit 'spec/reports/*.xml'
+              junit 'artifacts/reports/*.xml'
 
               publishHTML([
                 reportName: 'Code Coverage',
                 allowMissing: false,
                 alwaysLinkToLastBuild: false,
                 keepAll: true,
-                reportDir: 'spec/reports/rcov',
+                reportDir: 'artifacts/reports/rcov',
                 reportFiles: 'index.html',
               ])
             }
@@ -52,7 +52,7 @@ pipeline {
                 allowMissing: false,
                 alwaysLinkToLastBuild: false,
                 keepAll: true,
-                reportDir: 'spec/reports/rubocop',
+                reportDir: 'artifacts/reports/rubocop',
                 reportFiles: 'index.html',
               ])
             }
