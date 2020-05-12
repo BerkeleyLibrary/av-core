@@ -61,7 +61,7 @@ module AV
         settings.each { |setting, value| Config.send("#{setting}=", value) }
 
         expected = []
-        settings.keys.each do |setting|
+        settings.each_key do |setting|
           Config.instance_variable_set("@#{setting}".to_sym, nil)
           expected << setting
           expect(Config.missing).to eq(expected)
@@ -146,6 +146,7 @@ module AV
 
       describe :avplayer_base_uri do
         attr_reader :avplayer_base_uri
+
         before(:each) do
           @avplayer_base_uri = URI.parse('http://avplayer.example.edu')
           allow(config).to receive(:avplayer_base_uri).and_return(avplayer_base_uri.to_s)
@@ -164,6 +165,7 @@ module AV
 
       describe :millennium_base_uri do
         attr_reader :millennium_base_uri
+
         before(:each) do
           @millennium_base_uri = URI.parse('http://millennium.example.edu')
           allow(config).to receive(:millennium_base_uri).and_return(millennium_base_uri.to_s)

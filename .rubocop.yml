@@ -4,6 +4,10 @@ AllCops:
     - 'bin/**/*'
     - 'node_modules/**/*'
 
+# Added in RuboCop 0.83
+Layout/EmptyLinesAroundAttributeAccessor:
+  Enabled: true
+
 # Allow one line around block body (Layout/EmptyLines will still disallow two or more)
 Layout/EmptyLinesAroundBlockBody:
   Enabled: false
@@ -16,6 +20,10 @@ Layout/EmptyLinesAroundClassBody:
 Layout/EmptyLinesAroundModuleBody:
   Enabled: false
 
+# Reasonable line-length check; it's too easy for the cure to be worse than the disease
+Layout/LineLength:
+  Max: 150
+
 # Make indents consistent regardless of the lengths of variables and method names and whatnot
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
@@ -24,24 +32,28 @@ Layout/MultilineMethodCallIndentation:
 Layout/MultilineOperationIndentation:
   Enabled: false
 
-# Just because my 'begin' is badly indented doesn't mean I want the rest of my code to be
-Layout/RescueEnsureAlignment:
-  Enabled: false
+# Added in RuboCop 0.81
+Lint/RaiseException:
+  Enabled: true
 
-# Reasonable line-length check; it's too easy for the cure to be worse than the disease
-Metrics/LineLength:
-  Max: 150
+# Added in RuboCop 0.82
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
 
-# Confusing and weird
-Naming/VariableNumber:
-  Enabled: False
+# Added in RuboCop 0.81
+Lint/StructNewOverride:
+  Enabled: true
 
 # We meant to do that
 Naming/MemoizedInstanceVariableName:
   Enabled: False
 
 # It works in context, trust us
-Naming/UncommunicativeMethodParamName:
+Naming/MethodParameterName:
+  Enabled: False
+
+# Confusing and weird
+Naming/VariableNumber:
   Enabled: False
 
 # Do what's readable in the context you're in
@@ -52,16 +64,16 @@ Style/AccessModifierDeclarations:
 Style/AsciiComments:
   Enabled: false
 
-# Sometimes we want to distinguish hash parameters from keyword arguments
-Style/BracesAroundHashParameters:
-  Enabled: False
-
 # Seriously?
 Style/CommentedKeyword:
   Enabled: False
 
 # Disable problematic module documentation check (see https://github.com/bbatsov/rubocop/issues/947)
 Style/Documentation:
+  Enabled: false
+
+# Added in RuboCop 0.82
+Style/ExponentialNotation:
   Enabled: false
 
 # Adding more line noise to format strings will not improve them
@@ -72,18 +84,34 @@ Style/FormatStringToken:
 Style/FrozenStringLiteralComment:
   Enabled: false
 
-# `foo.positive?` is cute, but it's not actually more readable than `foo > 0`
-Style/NumericPredicate:
-  Enabled: false
+# Added in RuboCop 0.80
+Style/HashEachMethods:
+  Enabled: true
 
-# The semantics of `foo&.bar` are a lot less interchangeable with `foo && foo.bar` than RuboCop thinks
-Style/SafeNavigation:
-  Enabled: false
+# Added in RuboCop 0.80
+Style/HashTransformKeys:
+  Enabled: true
+
+# Added in RuboCop 0.80
+Style/HashTransformValues:
+  Enabled: true
 
 # Requiring the lambda() method just makes wordy calls wordier
 Style/Lambda:
   EnforcedStyle: literal
 
+# `foo.positive?` is cute, but it's not actually more readable than `foo > 0`
+Style/NumericPredicate:
+  Enabled: false
+
 # Unclear why it's a good idea to give parameters semantically meaningless names
 Style/SingleLineBlockParams:
+  Enabled: false
+
+# Added in RuboCop 0.83
+Style/SlicingWithRange:
+  Enabled: true
+
+# The semantics of `foo&.bar` are a lot less interchangeable with `foo && foo.bar` than RuboCop thinks
+Style/SafeNavigation:
   Enabled: false

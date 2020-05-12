@@ -67,7 +67,7 @@ module AV
           duration: AV::Types::Duration.from_string('00:40:12')
         }
         track_str = Track.new(track_params).to_s
-        track_params.values.each do |v|
+        track_params.each_value do |v|
           expect(track_str).to include(v.to_s)
         end
       end
