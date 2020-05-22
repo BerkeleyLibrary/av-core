@@ -32,6 +32,10 @@ Layout/MultilineMethodCallIndentation:
 Layout/MultilineOperationIndentation:
   Enabled: false
 
+# Added in RuboCop 0.84
+Lint/DeprecatedOpenSSLConstant:
+  Enabled: true
+
 # Added in RuboCop 0.81
 Lint/RaiseException:
   Enabled: true
