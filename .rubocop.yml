@@ -44,6 +44,10 @@ Lint/RaiseException:
 Layout/SpaceAroundMethodCallOperator:
   Enabled: true
 
+# Added in RuboCop 0.85
+Lint/MixedRegexpCaptureTypes:
+  Enabled: true
+
 # Added in RuboCop 0.81
 Lint/StructNewOverride:
   Enabled: true
@@ -107,6 +111,14 @@ Style/Lambda:
 # `foo.positive?` is cute, but it's not actually more readable than `foo > 0`
 Style/NumericPredicate:
   Enabled: false
+
+# Added in RuboCop 0.85
+Style/RedundantRegexpCharacterClass:
+  Enabled: true
+
+# Added in RuboCop 0.85
+Style/RedundantRegexpEscape:
+  Enabled: true
 
 # Unclear why it's a good idea to give parameters semantically meaningless names
 Style/SingleLineBlockParams:
