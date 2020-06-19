@@ -30,6 +30,13 @@ module AV
       value && value.gsub(/[[:space:]]*-[[:space:]]*/, '-').strip
     end
 
+    def uri_or_nil(url)
+      return unless url
+      return url if url.is_a?(URI)
+
+      URI.parse(url)
+    end
+
     class << self
       include AV::Util
     end

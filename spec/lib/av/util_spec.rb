@@ -8,6 +8,26 @@ module AV
       end
     end
 
+    describe :uri_or_nil do
+      it 'returns nil for nil' do
+        expect(AV::Util.uri_or_nil(nil)).to be_nil
+      end
+
+      it 'returns a URI object unchanged' do
+        uri = URI.parse('http://example.org/foo/bar')
+        expect(AV::Util.uri_or_nil(uri)).to be(uri)
+      end
+
+      it 'returns an equivalent URI for a URL string' do
+        url = 'http://example.org/foo/bar'
+        expect(AV::Util.uri_or_nil(url)).to eq(URI.parse(url))
+      end
+
+      it 'raises an error for garbage' do
+        expect { AV::Util.uri_or_nil('I am not a url') }.to raise_error(URI::InvalidURIError)
+      end
+    end
+
     describe :do_get do
       it 'accepts a string URL' do
         url = 'http://oskicat.berkeley.edu/search~S1?/.b11082434/.b11082434/1%2C1%2C1%2CB/marc~b11082434'
