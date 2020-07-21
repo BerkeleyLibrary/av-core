@@ -120,6 +120,11 @@ Style/RedundantRegexpCharacterClass:
 Style/RedundantRegexpEscape:
   Enabled: true
 
+# Don't be unnecessarily redundant
+Style/ReturnNil:
+  Enabled: true
+  EnforcedStyle: return
+
 # Unclear why it's a good idea to give parameters semantically meaningless names
 Style/SingleLineBlockParams:
   Enabled: false

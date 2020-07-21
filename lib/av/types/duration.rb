@@ -40,10 +40,10 @@ module AV
       class << self
         # @return [Duration] the duration, or nil
         def from_string(s)
-          return nil unless s
+          return unless s
 
           value = clean_value(s)
-          return nil unless (md = DURATION_RE.match(value))
+          return unless (md = DURATION_RE.match(value))
 
           Duration.new(
             hours: md[1].to_i,

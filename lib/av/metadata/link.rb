@@ -18,7 +18,7 @@ module AV
       def <=>(other)
         return unless other
         return 0 if equal?(other)
-        return nil unless other.is_a?(Link)
+        return unless other.is_a?(Link)
 
         to_s <=> other.to_s
       end
