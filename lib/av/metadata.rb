@@ -95,7 +95,7 @@ module AV
         tag: Fields::CATALOG_LINK.tag,
         label: Fields::CATALOG_LINK.label,
         order: Fields::CATALOG_LINK.order,
-        links: [Link.new(body: 'View library catalog record.', url: display_uri.to_s)]
+        links: [Link.new(body: source.catalog_link_text, url: display_uri.to_s)]
       )
       values.sort!
     end

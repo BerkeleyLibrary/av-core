@@ -108,10 +108,12 @@ module AV
     describe :values do
       before(:each) do
         AV::Config.millennium_base_uri = 'http://oskicat.berkeley.edu/'
+        AV::Config.tind_base_uri = 'https://digicoll.lib.berkeley.edu/'
       end
 
       after(:each) do
         AV::Config.instance_variable_set(:@millennium_base_uri, nil)
+        AV::Config.instance_variable_set(:@tind_base_uri, nil)
       end
 
       it 'injects the catalog URL if not present' do
@@ -126,8 +128,26 @@ module AV
         expect(links.size).to eq(1)
 
         link = links[0]
-        expect(link.body).to eq('View library catalog record.')
+        expect(link.body).to eq(Metadata::Source::MILLENNIUM.catalog_link_text)
         expect(link.url).to eq('http://oskicat.berkeley.edu/record=b22139658')
+      end
+
+      it 'works for TIND records' do
+        tind_035 = '(pacradio)01469'
+        marc_xml = File.read("spec/data/record-#{tind_035}.xml")
+        search_url = "https://digicoll.lib.berkeley.edu/search?p=035__a%3A%22#{CGI.escape(tind_035)}%22&of=xm"
+        stub_request(:get, search_url).to_return(status: 200, body: marc_xml)
+        metadata = Metadata.for_record(record_id: tind_035)
+
+        link_value = metadata.values.find { |v| Metadata::Fields::CATALOG_LINK.value?(v) }
+        expect(link_value).not_to be_nil
+
+        links = link_value.links
+        expect(links.size).to eq(1)
+
+        link = links[0]
+        expect(link.body).to eq(Metadata::Source::TIND.catalog_link_text)
+        expect(link.url).to eq("http://digicoll.lib.berkeley.edu/#{tind_035}")
       end
     end
 
