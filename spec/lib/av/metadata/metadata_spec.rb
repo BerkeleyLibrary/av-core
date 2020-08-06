@@ -165,7 +165,7 @@ module AV
 
         link = links[0]
         expect(link.body).to eq(Metadata::Source::TIND.catalog_link_text)
-        expect(link.url).to eq("https://digicoll.lib.berkeley.edu/record/21937")
+        expect(link.url).to eq('https://digicoll.lib.berkeley.edu/record/21937')
       end
     end
 
