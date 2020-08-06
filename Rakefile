@@ -9,23 +9,9 @@ File.expand_path('lib', __dir__).tap do |lib|
 end
 
 # ------------------------------------------------------------
-# RSpec
+# CI
 
-require 'rspec/core/rake_task'
-require 'ci/reporter/rake/rspec'
-
-ENV['CI_REPORTS'] ||= File.expand_path('artifacts', __dir__)
-
-namespace :spec do
-  desc 'Run all tests'
-  RSpec::Core::RakeTask.new(:all) do |task|
-    task.rspec_opts = %w[--color --format documentation --order default]
-    task.pattern = 'spec/**/*_spec.rb'
-  end
-end
-
-desc 'Run all tests'
-task spec: ['spec:all']
+ENV['RAILS_ENV'] = 'test' if ENV['CI']
 
 # ------------------------------------------------------------
 # Custom tasks

@@ -3,6 +3,6 @@ namespace :bundle do
   task :audit do
     require 'bundler/audit/cli'
     Bundler::Audit::CLI.start ['update']
-    Bundler::Audit::CLI.start ['check', '--ignore', 'CVE-2015-9284']
+    Bundler::Audit::CLI.start %w[check --ignore CVE-2015-9284]
   end
 end
