@@ -3,9 +3,9 @@
 dockerComposePipeline(
     stack: [template: 'postgres'],
     commands: [
-        'rake coverage',
-        'rake rubocop',
-        'rake bundle:audit'
+        'bundle exec rake coverage',
+        'bundle exec rake rubocop',
+        'bundle exec rake bundle:audit'
     ],
     artifacts: [
         junit   : 'artifacts/rspec/**/*.xml',
