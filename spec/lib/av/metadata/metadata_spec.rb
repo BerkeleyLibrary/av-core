@@ -132,7 +132,7 @@ module AV
         expect(link.url).to eq('http://oskicat.berkeley.edu/record=b22139658')
       end
 
-      it 'works for TIND records' do
+      it 'works for TIND records with OskiCat URLs' do
         tind_035 = '(pacradio)01469'
         marc_xml = File.read("spec/data/record-#{tind_035}.xml")
         search_url = "https://digicoll.lib.berkeley.edu/search?p=035__a%3A%22#{CGI.escape(tind_035)}%22&of=xm"
@@ -146,8 +146,26 @@ module AV
         expect(links.size).to eq(1)
 
         link = links[0]
+        expect(link.body).to eq('View library catalog record.')
+        expect(link.url).to eq('http://oskicat.berkeley.edu/record=b23305522')
+      end
+
+      it 'works for TIND-only records' do
+        tind_035 = 'physcolloquia-bk00169017b'
+        marc_xml = File.read("spec/data/record-#{tind_035}.xml")
+        search_url = "https://digicoll.lib.berkeley.edu/search?p=035__a%3A%22#{CGI.escape(tind_035)}%22&of=xm"
+        stub_request(:get, search_url).to_return(status: 200, body: marc_xml)
+        metadata = Metadata.for_record(record_id: tind_035)
+
+        link_value = metadata.values.find { |v| Metadata::Fields::CATALOG_LINK.value?(v) }
+        expect(link_value).not_to be_nil
+
+        links = link_value.links
+        expect(links.size).to eq(1)
+
+        link = links[0]
         expect(link.body).to eq(Metadata::Source::TIND.catalog_link_text)
-        expect(link.url).to eq("http://digicoll.lib.berkeley.edu/#{tind_035}")
+        expect(link.url).to eq("https://digicoll.lib.berkeley.edu/record/21937")
       end
     end
 

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<collection xmlns="http://www.loc.gov/MARC21/slim">
+<record>
+  <controlfield tag="001">21937</controlfield>
+  <controlfield tag="005">20200804090406.0</controlfield>
+  <datafield tag="035" ind1=" " ind2=" ">
+    <subfield code="a">physcolloquia-bk00169017b</subfield>
+  </datafield>
+  <datafield tag="041" ind1=" " ind2=" ">
+    <subfield code="a">eng</subfield>
+  </datafield>
+  <datafield tag="245" ind1=" " ind2=" ">
+    <subfield code="a">Particle Fever</subfield>
+    <subfield code="b">Physics Department screening</subfield>
+  </datafield>
+  <datafield tag="260" ind1=" " ind2=" ">
+    <subfield code="a">Berkeley, CA</subfield>
+    <subfield code="b">University of California, Berkeley, Dept. of Physics</subfield>
+    <subfield code="c">2014</subfield>
+  </datafield>
+  <datafield tag="269" ind1=" " ind2=" ">
+    <subfield code="a">2014</subfield>
+  </datafield>
+  <datafield tag="300" ind1=" " ind2=" ">
+    <subfield code="a">1 streaming video file</subfield>
+    <subfield code="b">digital, sd., col.</subfield>
+  </datafield>
+  <datafield tag="336" ind1=" " ind2=" ">
+    <subfield code="a">Video</subfield>
+  </datafield>
+  <datafield tag="500" ind1=" " ind2=" ">
+    <subfield code="a">Recorded at a colloquium held on September 12, 2014, sponsored by the Dept. of Physics, University of California, Berkeley.</subfield>
+  </datafield>
+  <datafield tag="500" ind1=" " ind2=" ">
+    <subfield code="a">originally produced as an .mts file in 2014</subfield>
+  </datafield>
+  <datafield tag="500" ind1=" " ind2=" ">
+    <subfield code="a">Speakers: Filmmakers Mark Levinson ("83) and Walter Murch; UCB particle physicists.</subfield>
+  </datafield>
+  <datafield tag="520" ind1=" " ind2=" ">
+    <subfield code="a">The UC Berkeley Physics Department presents a showing of Particle Fever, the documentary that brings to life the exciting search for the Higgs Boson! Following the screening, filmmakers Mark Levinson ('83), Walter Murch, and a panel of UC Berkeley particle physicists discuss the film and the science that inspired it. These physicists include Lawrence Hall, Marjorie Shapiro, Yasunori Nomura, Petr Horava, Beate Heinemann, and Surjeet Rajendran.</subfield>
+  </datafield>
+  <datafield tag="655" ind1=" " ind2=" ">
+    <subfield code="a">Lecture.</subfield>
+  </datafield>
+  <datafield tag="710" ind1="2" ind2=" ">
+    <subfield code="a">University of California, Berkeley. Dept. of Physics</subfield>
+  </datafield>
+  <datafield tag="852" ind1=" " ind2=" ">
+    <subfield code="c">Physics Library</subfield>
+  </datafield>
+  <datafield tag="856" ind1="4" ind2="2">
+    <subfield code="u">https://avplayer.lib.berkeley.edu/Video-Public-Physics/physcolloquia-bk00169017b</subfield>
+    <subfield code="y">UC Berkeley Library Online Video Collection.</subfield>
+  </datafield>
+  <datafield tag="901" ind1=" " ind2=" ">
+    <subfield code="a">ark:/28722/bk00169017b</subfield>
+  </datafield>
+  <datafield tag="902" ind1=" " ind2=" ">
+    <subfield code="d">2020-05-21</subfield>
+    <subfield code="n">ADP</subfield>
+  </datafield>
+  <datafield tag="903" ind1=" " ind2=" ">
+    <subfield code="b">m</subfield>
+  </datafield>
+  <datafield tag="980" ind1=" " ind2=" ">
+    <subfield code="a">Physics Colloquia</subfield>
+  </datafield>
+  <datafield tag="982" ind1=" " ind2=" ">
+    <subfield code="a">Physics Colloquia</subfield>
+    <subfield code="b">Physics Colloquia</subfield>
+  </datafield>
+  <datafield tag="998" ind1=" " ind2=" ">
+    <subfield code="a">01:02:35</subfield>
+    <subfield code="g">colloquia/9-12-14ParticleFever.mp4</subfield>
+  </datafield>
+</record>
+</collection>
