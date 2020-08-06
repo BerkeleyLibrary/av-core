@@ -24,6 +24,10 @@ module AV
       metadata.tind_id
     end
 
+    def record_id
+      metadata.record_id
+    end
+
     def ucb_access?
       metadata.ucb_access?
     end
@@ -42,7 +46,7 @@ module AV
     end
 
     def player_uri
-      @player_uri ||= URI.join(AV::Config.avplayer_base_uri, "#{collection}/#{bib_number}")
+      @player_uri ||= URI.join(AV::Config.avplayer_base_uri, "#{collection}/#{record_id}")
     end
 
     def display_uri

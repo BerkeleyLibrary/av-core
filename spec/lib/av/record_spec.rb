@@ -30,12 +30,37 @@ module AV
     end
 
     describe :player_uri do
+      it 'returns a player URI based on the bib number for Millennium records' do
+        bib_number = 'b22139658'
+        search_url = "http://oskicat.berkeley.edu/search~S1?/.#{bib_number}/.#{bib_number}/1%2C1%2C1%2CB/marc~#{bib_number}"
+        stub_request(:get, search_url).to_return(status: 200, body: File.read("spec/data/#{bib_number}.html"))
+
+        collection = 'MRCVideo'
+        record = Record.from_metadata(collection: collection, record_id: bib_number)
+
+        expected_uri = URI.parse("https://avplayer.lib.berkeley.edu/#{collection}/#{bib_number}")
+        expect(record.player_uri).to eq(expected_uri)
+      end
+
+      it 'returns a player URI based on the record ID for TIND records' do
+        tind_035 = '(pacradio)01469'
+        marc_xml = File.read("spec/data/record-#{tind_035}.xml")
+        search_url = "https://digicoll.lib.berkeley.edu/search?p=035__a%3A%22#{CGI.escape(tind_035)}%22&of=xm"
+        stub_request(:get, search_url).to_return(status: 200, body: marc_xml)
+
+        collection = 'Pacifica'
+        record = Record.from_metadata(collection: collection, record_id: tind_035)
+
+        expected_uri = URI.parse("https://avplayer.lib.berkeley.edu/#{collection}/#{tind_035}")
+        expect(record.player_uri).to eq(expected_uri)
+      end
+
       it 'generates the player URI' do
         collection = 'MRCAudio'
         bib_number = 'b11082434'
 
         metadata = instance_double(Metadata)
-        expect(metadata).to receive(:bib_number).and_return(bib_number)
+        expect(metadata).to receive(:record_id).and_return(bib_number)
 
         record = Record.new(collection: collection, tracks: [], metadata: metadata)
 
