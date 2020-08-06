@@ -15,7 +15,7 @@ module AV
         AV.instance_variable_set(:@logger, logger_orig)
       end
 
-      describe :source_for do
+      describe :for_record_id do
         it 'returns MILLENNIUM for a Millennium bib number' do
           expect(Source.for_record_id('b12345678')).to be(Source::MILLENNIUM)
         end
@@ -35,6 +35,35 @@ module AV
 
         it 'returns TIND for an OCLC number' do
           expect(Source.for_record_id('o12345678')).to be(Source::TIND)
+        end
+      end
+
+      describe :catalog_link_text do
+        it 'returns Millennium text for a Millennium record' do
+          expect(Source::MILLENNIUM.catalog_link_text).to eq(Source::LINK_TEXT_MILLENNIUM)
+        end
+
+        it 'returns TIND text for a TIND record' do
+          expect(Source::TIND.catalog_link_text).to eq(Source::LINK_TEXT_TIND)
+        end
+
+        it 'raises an error for an unknown source' do
+          source = Source.allocate
+          expect { source.catalog_link_text }.to raise_error(ArgumentError)
+        end
+      end
+
+      describe :reader do
+        it 'returns Millennium reader for a Millennium source' do
+          expect(Source::MILLENNIUM.reader).to be(Readers::Millennium)
+        end
+
+        it 'returns TIND reader for a TIND record' do
+          expect(Source::TIND.reader).to be(Readers::TIND)
+        end
+        it 'raises an error for an unknown source' do
+          source = Source.allocate
+          expect { source.reader }.to raise_error(ArgumentError)
         end
       end
 

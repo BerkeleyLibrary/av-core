@@ -8,12 +8,14 @@ require 'av/marc/millennium'
 require 'av/util'
 require 'av/metadata/readers'
 
-# TODO: clean up this class
 module AV
   class Metadata
     class Source < TypesafeEnum::Base
       new :TIND
       new :MILLENNIUM
+
+      LINK_TEXT_MILLENNIUM = 'View library catalog record.'.freeze
+      LINK_TEXT_TIND = 'View record in Berkeley Library Digital Collections.'.freeze
 
       class << self
         def for_record_id(record_id)
@@ -22,7 +24,17 @@ module AV
       end
 
       def reader
-        self == MILLENNIUM ? Readers::Millennium : Readers::TIND
+        return Readers::Millennium if self == MILLENNIUM
+        return Readers::TIND if self == TIND
+
+        raise ArgumentError, "Unsupported metadata source: #{self}"
+      end
+
+      def catalog_link_text
+        return LINK_TEXT_MILLENNIUM if self == MILLENNIUM
+        return LINK_TEXT_TIND if self == TIND
+
+        raise ArgumentError, "Unsupported metadata source: #{self}"
       end
 
       def record_for(record_id)
