@@ -167,6 +167,20 @@ module AV
         expect(link.body).to eq(Metadata::Source::TIND.catalog_link_text)
         expect(link.url).to eq('https://digicoll.lib.berkeley.edu/record/21937')
       end
+
+      describe :each_value do
+        it 'returns the values' do
+          tind_035 = 'physcolloquia-bk00169017b'
+          marc_xml = File.read("spec/data/record-#{tind_035}.xml")
+          search_url = "https://digicoll.lib.berkeley.edu/search?p=035__a%3A%22#{CGI.escape(tind_035)}%22&of=xm"
+          stub_request(:get, search_url).to_return(status: 200, body: marc_xml)
+          metadata = Metadata.for_record(record_id: tind_035)
+
+          expected_values = metadata.values
+          actual_values = metadata.each_value.to_a
+          expect(actual_values).to eq(expected_values)
+        end
+      end
     end
 
     describe :player_url do

@@ -43,6 +43,10 @@ module AV
       @values ||= Fields.values_from(marc_record).tap { |values| ensure_catalog_link(values) }
     end
 
+    def each_value
+      Enumerator.new { |y| values.each { |v| y << v } }
+    end
+
     def title
       @title ||= begin
         title_field = values.find { |v| v.tag == TAG_TITLE_FIELD }
