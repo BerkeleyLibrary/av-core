@@ -58,6 +58,18 @@ module AV
           end
         end
       end
+
+      it 'returns nil for errors when ignore_errors is true' do
+        aggregate_failures 'responses' do
+          [207, 400, 401, 403, 404, 405, 418, 451, 500, 503].each do |code|
+            url = "http://example.edu/#{code}"
+            stub_request(:get, url).to_return(status: url)
+
+            body = AV::Util.do_get(url, ignore_errors: true)
+            expect(body).to be_nil
+          end
+        end
+      end
     end
   end
 end

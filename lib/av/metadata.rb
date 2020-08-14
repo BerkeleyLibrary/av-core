@@ -30,9 +30,7 @@ module AV
     end
 
     def tind_id
-      return unless (tind_id_field = marc_record['001'])
-
-      tind_id_field.value
+      (tind_id_field = marc_record['001']) && tind_id_field.value
     end
 
     def marc_record

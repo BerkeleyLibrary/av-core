@@ -6,16 +6,12 @@ module AV
       AV.logger
     end
 
-    def do_get(uri)
-      resp = RestClient.get(uri.to_s)
-      if resp.code != 200
-        log.error("GET #{uri} returned #{resp.code}: #{resp.body || 'nil'}")
-        raise(RestClient::RequestFailed.new(resp, resp.code).tap do |ex|
-          ex.message = "GET #{uri} failed; host returned #{resp.code}"
-        end)
-      end
+    def do_get(uri, ignore_errors: false)
+      resp = get_or_raise(uri)
       body = resp.body
       body && body.scrub
+    rescue RestClient::Exception
+      raise unless ignore_errors
     end
 
     def compare_values(v1, v2)
@@ -39,6 +35,18 @@ module AV
 
     class << self
       include AV::Util
+    end
+
+    private
+
+    def get_or_raise(uri)
+      resp = RestClient.get(uri.to_s)
+      return resp if resp.code == 200
+
+      log.error("GET #{uri} returned #{resp.code}: #{resp.body || 'nil'}")
+      raise(RestClient::RequestFailed.new(resp, resp.code).tap do |ex|
+        ex.message = "GET #{uri} failed; host returned #{resp.code}"
+      end)
     end
   end
 end
