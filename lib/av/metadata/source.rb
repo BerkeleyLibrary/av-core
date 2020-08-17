@@ -15,7 +15,7 @@ module AV
       new :MILLENNIUM
 
       LINK_TEXT_MILLENNIUM = 'View library catalog record.'.freeze
-      LINK_TEXT_TIND = 'View record in Berkeley Library Digital Collections.'.freeze
+      LINK_TEXT_TIND = 'View record in Digital Collections.'.freeze
 
       class << self
         def for_record_id(record_id)
