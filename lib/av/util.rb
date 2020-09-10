@@ -1,4 +1,5 @@
 require 'av/logger'
+require 'rest-client'
 
 module AV
   module Util
