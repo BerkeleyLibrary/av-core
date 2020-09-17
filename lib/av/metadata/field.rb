@@ -43,6 +43,7 @@ module AV
       end
 
       # @param other [Field] the Field to compare
+      # rubocop:disable Metrics/CyclomaticComplexity
       def <=>(other)
         return unless other
         return 0 if equal?(other)
@@ -56,6 +57,7 @@ module AV
 
         compare_values(subfield_order&.join, other.subfield_order&.join)
       end
+      # rubocop:enable Metrics/CyclomaticComplexity
 
       # @param other [Field] the Reader to compare
       # @return [Boolean] true if `self` represents the same MARC tag/field/subfields as the specified `other`, false otherwise

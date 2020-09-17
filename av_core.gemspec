@@ -18,6 +18,8 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
 
+  spec.required_ruby_version = '>= 2.6.0'
+
   spec.add_dependency 'marc', '~> 1.0'
   spec.add_dependency 'rest-client', '~> 2.1'
   spec.add_dependency 'typesafe_enum', '~> 0.2'
@@ -30,7 +32,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'listen', '>= 3.0.5', '< 3.2'
   spec.add_development_dependency 'rake', '>= 13.0'
   spec.add_development_dependency 'rspec-support'
-  spec.add_development_dependency 'rubocop', '0.85.1'
+  spec.add_development_dependency 'rubocop', '0.91.0'
   spec.add_development_dependency 'simplecov', '~> 0.16.1'
   spec.add_development_dependency 'simplecov-rcov'
   spec.add_development_dependency 'webmock'

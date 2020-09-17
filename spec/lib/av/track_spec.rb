@@ -13,12 +13,10 @@ module AV
     end
 
     describe :<=> do
-      # rubocop:disable Lint/UselessComparison
       it 'treats object as equal to itself' do
         track = Track.new(sort_order: 2, title: 'Part 2', path: 'frost-read2.mp3')
         expect(track == track).to eq(true)
       end
-      # rubocop:enable Lint/UselessComparison
 
       it 'treats object as equal to identical object' do
         t1 = Track.new(sort_order: 2, title: 'Part 2', path: 'frost-read2.mp3')
