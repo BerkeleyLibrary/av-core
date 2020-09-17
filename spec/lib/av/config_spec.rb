@@ -78,7 +78,7 @@ module AV
 
       it 'strips trailing slashes' do
         expected_uri = URI.parse('http://avplayer.example.edu')
-        Config.avplayer_base_uri = expected_uri.to_s + '/'
+        Config.avplayer_base_uri = "#{expected_uri}/"
         expect(Config.avplayer_base_uri).to eq(expected_uri)
       end
     end
@@ -92,7 +92,7 @@ module AV
 
       it 'strips trailing slashes' do
         expected_uri = URI.parse('http://millennium.example.edu')
-        Config.millennium_base_uri = expected_uri.to_s + '/'
+        Config.millennium_base_uri = "#{expected_uri}/"
         expect(Config.millennium_base_uri).to eq(expected_uri)
       end
     end
@@ -106,7 +106,7 @@ module AV
 
       it 'strips trailing slashes' do
         expected_uri = URI.parse('http://wowza.example.edu')
-        Config.wowza_base_uri = expected_uri.to_s + '/'
+        Config.wowza_base_uri = "#{expected_uri}/"
         expect(Config.wowza_base_uri).to eq(expected_uri)
       end
     end
@@ -120,7 +120,7 @@ module AV
 
       it 'strips trailing slashes' do
         expected_uri = URI.parse('http://tind.example.edu')
-        Config.tind_base_uri = expected_uri.to_s + '/'
+        Config.tind_base_uri = "#{expected_uri}/"
         expect(Config.tind_base_uri).to eq(expected_uri)
       end
     end

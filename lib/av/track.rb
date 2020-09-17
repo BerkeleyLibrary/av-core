@@ -12,7 +12,7 @@ module AV
 
     attr_reader :sort_order, :title, :path, :duration, :file_type
 
-    def initialize(sort_order:, title: nil, path:, duration: nil)
+    def initialize(sort_order:, path:, title: nil, duration: nil)
       @sort_order = sort_order
       @title = title
       @path = path

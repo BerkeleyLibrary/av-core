@@ -1,4 +1,5 @@
 require 'marc'
+require 'av/util'
 
 module AV
   module Marc

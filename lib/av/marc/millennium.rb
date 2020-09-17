@@ -72,7 +72,7 @@ module AV
         end
 
         def add_text(text)
-          self.current_text = current_text ? current_text + ' ' + text : text
+          self.current_text = current_text ? "#{current_text} #{text}" : text
         end
 
         def finalize_subfields

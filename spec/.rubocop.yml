@@ -17,3 +17,11 @@ Metrics/ModuleLength:
 
 Metrics/MethodLength:
   Enabled: false
+
+############################################################
+# Added in Rubocop 0.89
+
+# Sometimes we're testing the operator
+Lint/BinaryOperatorWithIdenticalOperands:
+  Enabled: false
+  
