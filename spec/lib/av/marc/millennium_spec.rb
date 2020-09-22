@@ -42,6 +42,13 @@ module AV
         link = marc_record['856']
         expect(link['u']).to eq('http://servlet1.lib.berkeley.edu:8080/audio/stream.play.logic?coll=music&group=b23161018')
       end
+
+      # TODO: sort this out in a way that doesn't bork filenames with spaces
+      xit 'handles wrapped 998 filenames' do
+        marc_record = Millennium.marc_from_html(File.read('spec/data/b25742488.html'))
+        df_998 = marc_record['998']
+        expect(df_998['g']).to eq('Monumental_Crossroads_DSL_Hosted_Streaming_92Gf726T7a.mov')
+      end
     end
   end
 end

@@ -46,6 +46,24 @@ module AV
         end
       end
 
+      new(:UNKNOWN, nil) do
+        def mime_type
+          'application/octet-stream'
+        end
+
+        def player_tag
+          'object'
+        end
+
+        def label
+          'Unknown'
+        end
+
+        def extension
+          nil
+        end
+      end
+
       def extension
         ".#{value}"
       end
@@ -58,13 +76,14 @@ module AV
         # Returns the AV file type for the specified path
         #
         # @param path [String]
-        # @return [AvFileType] The file type
-        # @raise ArgumentError if the file type is not known or cannot be determined
+        # @return [FileType] The file type, or FileType::UNKNOWN if the type cannot be determined
         def for_path(path)
-          raise ArgumentError, "Can't determine type of nil path" unless path
+          extension = path && File.extname(path)
+          by_extension[extension] || FileType::UNKNOWN
+        end
 
-          FileType.each { |t| return t if path.end_with?(t.extension) }
-          raise ArgumentError, "Unknown/unsupported file type: #{path}"
+        def by_extension
+          @by_extension ||= FileType.map { |t| [t.extension, t] }.to_h
         end
       end
     end

@@ -63,12 +63,13 @@ module AV
           expect(FileType.for_path('foo.mov')).to eq(AV::Types::FileType::MOV)
         end
 
-        it 'rejects nil' do
-          expect { FileType.for_path(nil) }.to raise_error(ArgumentError)
+        it 'returns UNKNOWN for nil' do
+          # noinspection RubyYardParamTypeMatch
+          expect(FileType.for_path(nil)).to eq(AV::Types::FileType::UNKNOWN)
         end
 
-        it 'rejects unknown types' do
-          expect { FileType.for_path('foo.txt') }.to raise_error(ArgumentError)
+        it 'returns UNKNOWN for unknown types' do
+          expect(FileType.for_path('foo.txt')).to eq(AV::Types::FileType::UNKNOWN)
         end
       end
     end

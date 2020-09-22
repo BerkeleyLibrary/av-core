@@ -78,9 +78,14 @@ module AV
         def finalize_subfields
           current_field.subfields = current_text.scan(SUBFIELD_REGEXP).map do |identifier, value|
             code = identifier ? identifier[1] : 'a'
-            value = value.gsub(/[[:space:]]/, '') if value.start_with?('http')
-            MARC::Subfield.new(code, value)
+            MARC::Subfield.new(code, clean_subfield_value(value))
           end
+        end
+
+        def clean_subfield_value(value)
+          return value.gsub(/[[:space:]]/, '') if value.start_with?('http')
+
+          value
         end
       end
     end

@@ -152,6 +152,16 @@ module AV
           end
         end
       end
+
+      it 'handles tracks with garbage filenames' do
+        marc_record = AV::Marc::Millennium.marc_from_html(File.read('spec/data/b25742488.html'))
+        tracks = Track.tracks_from(marc_record, collection: 'Video-UCBOnly-MRC')
+        expect(tracks.size).to eq(1)
+
+        expected_track = Track.new(sort_order: 0, path: 'Video-UCBOnly-MRC/Monumental_Crossroads_DSL_Hosted_Streaming_92Gf726T7a.mo v')
+        expect(tracks[0]).to eq(expected_track)
+        expect(tracks[0].file_type).to eq(AV::Types::FileType::UNKNOWN)
+      end
     end
   end
 end
