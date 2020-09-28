@@ -8,7 +8,8 @@ module AV
           expected = {
             FileType::MP3 => 'application/x-mpegURL',
             FileType::MP4 => 'video/mp4',
-            FileType::MOV => 'video/quicktime'
+            FileType::MOV => 'video/quicktime',
+            FileType::UNKNOWN => 'application/octet-stream'
           }
           expected.each do |t, mt_expected|
             expect(t.mime_type).to eq(mt_expected)
@@ -21,7 +22,8 @@ module AV
           expected = {
             FileType::MP3 => 'audio',
             FileType::MP4 => 'video',
-            FileType::MOV => 'video'
+            FileType::MOV => 'video',
+            FileType::UNKNOWN => 'object'
           }
           expected.each do |t, pt_expected|
             expect(t.player_tag).to eq(pt_expected)
@@ -34,7 +36,8 @@ module AV
           expected = {
             FileType::MP3 => 'Audio',
             FileType::MP4 => 'Video',
-            FileType::MOV => 'Video'
+            FileType::MOV => 'Video',
+            FileType::UNKNOWN => 'Unknown'
           }
           expected.each do |t, pt_expected|
             expect(t.label).to eq(pt_expected)
