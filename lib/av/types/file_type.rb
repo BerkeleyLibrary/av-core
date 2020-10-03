@@ -3,6 +3,7 @@ require 'typesafe_enum'
 module AV
   module Types
     class FileType < TypesafeEnum::Base
+      # TODO: simplify this, parameterize constructor
 
       new(:MP3, 'mp3') do
         def mime_type
@@ -37,6 +38,10 @@ module AV
           'video/quicktime'
         end
 
+        def prefix
+          FileType::MP4.prefix
+        end
+
         def player_tag
           'video'
         end
@@ -46,7 +51,8 @@ module AV
         end
       end
 
-      new(:UNKNOWN, nil) do
+      # TODO: fix TypesafeEnum to support explicit nil values
+      new(:UNKNOWN) do
         def mime_type
           'application/octet-stream'
         end
@@ -66,6 +72,10 @@ module AV
 
       def extension
         ".#{value}"
+      end
+
+      def prefix
+        value
       end
 
       def to_s

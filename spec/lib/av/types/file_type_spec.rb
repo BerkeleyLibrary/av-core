@@ -31,6 +31,20 @@ module AV
         end
       end
 
+      describe :prefix do
+        it 'is correct' do
+          expected = {
+            FileType::MP3 => 'mp3',
+            FileType::MP4 => 'mp4',
+            FileType::MOV => 'mp4',
+            FileType::UNKNOWN => 'unknown'
+          }
+          expected.each do |t, prefix_expected|
+            expect(t.prefix).to eq(prefix_expected)
+          end
+        end
+      end
+
       describe :label do
         it 'is correct' do
           expected = {
