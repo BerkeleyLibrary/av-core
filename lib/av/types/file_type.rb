@@ -4,6 +4,10 @@ module AV
   module Types
     class FileType < TypesafeEnum::Base
       # TODO: simplify this, parameterize constructor
+      #
+      # TODO: stop assuming 1:1 extension:FileType mapping
+      #       support additional MP4 extensions:
+      #       .mp4, .f4v, .mov, .m4a, .m4v, .mp4a, .mp4v, .3gp, .3g2
 
       new(:MP3, 'mp3') do
         def mime_type
