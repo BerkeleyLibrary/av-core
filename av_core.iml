@@ -57,7 +57,7 @@
     <orderEntry type="library" scope="PROVIDED" name="simplecov-html (v0.10.2, RVM: ruby-2.6.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="simplecov-rcov (v0.2.3, RVM: ruby-2.6.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="thor (v1.0.1, RVM: ruby-2.6.5) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="typesafe_enum (v0.2.2, RVM: ruby-2.6.5) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="typesafe_enum (v0.3.0, RVM: ruby-2.6.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="unf (v0.1.4, RVM: ruby-2.6.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="unf_ext (v0.0.7.7, RVM: ruby-2.6.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="unicode-display_width (v1.7.0, RVM: ruby-2.6.5) [gem]" level="application" />

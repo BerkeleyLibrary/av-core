@@ -8,7 +8,6 @@ module AV
           expected = {
             FileType::MP3 => 'application/x-mpegURL',
             FileType::MP4 => 'video/mp4',
-            FileType::MOV => 'video/quicktime',
             FileType::UNKNOWN => 'application/octet-stream'
           }
           expected.each do |t, mt_expected|
@@ -22,7 +21,6 @@ module AV
           expected = {
             FileType::MP3 => 'audio',
             FileType::MP4 => 'video',
-            FileType::MOV => 'video',
             FileType::UNKNOWN => 'object'
           }
           expected.each do |t, pt_expected|
@@ -36,7 +34,6 @@ module AV
           expected = {
             FileType::MP3 => 'mp3',
             FileType::MP4 => 'mp4',
-            FileType::MOV => 'mp4',
             FileType::UNKNOWN => 'unknown'
           }
           expected.each do |t, prefix_expected|
@@ -50,7 +47,6 @@ module AV
           expected = {
             FileType::MP3 => 'Audio',
             FileType::MP4 => 'Video',
-            FileType::MOV => 'Video',
             FileType::UNKNOWN => 'Unknown'
           }
           expected.each do |t, pt_expected|
@@ -73,11 +69,9 @@ module AV
         end
 
         it 'identifies an MP4' do
-          expect(FileType.for_path('foo.mp4')).to eq(AV::Types::FileType::MP4)
-        end
-
-        it 'identifies an MOV' do
-          expect(FileType.for_path('foo.mov')).to eq(AV::Types::FileType::MOV)
+          %w[.mp4 .f4v .mov .m4a .m4v .mp4a .mp4v .3gp .3g2].each do |ext|
+            expect(FileType.for_path("foo#{ext}")).to eq(AV::Types::FileType::MP4)
+          end
         end
 
         it 'returns UNKNOWN for nil' do
@@ -88,6 +82,15 @@ module AV
         it 'returns UNKNOWN for unknown types' do
           expect(FileType.for_path('foo.txt')).to eq(AV::Types::FileType::UNKNOWN)
         end
+      end
+
+      describe :new do
+        # rubocop: disable Lint/ConstantDefinitionInBlock
+        it "doesn't allow duplicate extensions" do
+          expect { class FileType; new(:QT, 'video', 'video/qt', extensions: ['.mov']); end }
+            .to raise_error(ArgumentError, /.mov/)
+        end
+        # rubocop: enable Lint/ConstantDefinitionInBlock
       end
     end
   end
