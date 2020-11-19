@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 
-@Library('jenkins-workflow-scripts@master')
+@Library('jenkins-workflow-scripts@master') _
 
 dockerComposePipeline(
     commands: [
