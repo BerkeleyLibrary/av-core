@@ -15,7 +15,7 @@ module AV
         "#{label} (#{tag}): #{links && links.map(&:to_s).join(' ')}"
       end
 
-      def has_link?(body: /.*/s, url: /.*/s)
+      def any_link?(body: /.*/s, url: /.*/s)
         links.any? { |link| link.match?(body: body, url: url) }
       end
 

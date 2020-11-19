@@ -88,8 +88,9 @@ module AV
       RESTRICTIONS.find { |r| link_field_values.any? { |v| v.include?(r) } }
     end
 
+    # rubocop:disable Metrics/AbcSize
     def ensure_catalog_link(values)
-      return values if values.any? { |v| Fields::CATALOG_LINK.value?(v) && v.has_link?(body: source.catalog_link_text) }
+      return values if values.any? { |v| Fields::CATALOG_LINK.value?(v) && v.any_link?(body: source.catalog_link_text) }
       return values unless bib_number
 
       values << LinkValue.new(
@@ -100,6 +101,7 @@ module AV
       )
       values.sort!
     end
+    # rubocop:enable Metrics/AbcSize
 
     def find_bib_number
       return record_id if source == Source::MILLENNIUM
