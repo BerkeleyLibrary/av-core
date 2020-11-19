@@ -9,11 +9,9 @@ RUN apk --no-cache --update upgrade && \
         ca-certificates \
         git \
         libc6-compat \
-        nodejs \
         openssl \
         tzdata \
         xz-libs \
-        yarn \
     && rm -rf /var/cache/apk/*
 
 WORKDIR /opt/app
@@ -29,8 +27,7 @@ RUN apk --update --no-cache add \
         build-base \
         coreutils \
         git \
-        postgresql-dev && \
-    rm -rf /var/cache/apk/*
+    && rm -rf /var/cache/apk/*
 
 # The base image ships bundler 1.17.2, but we want something more recent
 RUN gem install bundler -v 2.1.4
@@ -56,3 +53,5 @@ COPY --from=development /usr/local/bundle /usr/local/bundle
 # slimmed-down production image.
 RUN bundle config set deployment 'true'
 RUN bundle install --local --path=/usr/local/bundle
+
+CMD rake

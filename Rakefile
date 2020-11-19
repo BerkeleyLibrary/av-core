@@ -17,4 +17,4 @@ ENV['RAILS_ENV'] = 'test' if ENV['CI']
 # Custom tasks
 
 desc 'Run tests, check test coverage, check code style'
-task default: %i[coverage rubocop]
+task default: %i[coverage rubocop bundle:audit gem]
