@@ -10,11 +10,11 @@ dockerComposePipeline(
         'bundle exec rake gem'
     ],
     artifacts: [
-        junit   : 'artifacts/rspec/**/*.xml',
-        html    : [
+        junit: 'artifacts/rspec/**/*.xml',
+        html : [
             'Code Coverage': 'artifacts/rcov',
             'RuboCop'      : 'artifacts/rubocop'
         ],
-        raw: 'artifacts/**/*.gem'
+        raw  : ['artifacts/**/*.gem']
     ]
 )
