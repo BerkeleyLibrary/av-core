@@ -89,7 +89,7 @@ module AV
     end
 
     def ensure_catalog_link(values)
-      return values if values.any? { |v| Fields::CATALOG_LINK.value?(v) }
+      return values if values.any? { |v| Fields::CATALOG_LINK.value?(v) && v.has_link?(body: source.catalog_link_text) }
       return values unless bib_number
 
       values << LinkValue.new(

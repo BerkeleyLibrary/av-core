@@ -22,6 +22,18 @@ module AV
 
         to_s <=> other.to_s
       end
+
+      def match?(body: /.*/s, url: /.*/s)
+        matches?(body, self.body) && matches?(url, self.url)
+      end
+
+      private
+
+      def matches?(expected, actual)
+        return actual.to_s =~ expected if expected.is_a?(Regexp)
+
+        actual.to_s == expected.to_s
+      end
     end
   end
 end

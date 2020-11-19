@@ -15,6 +15,10 @@ module AV
         "#{label} (#{tag}): #{links && links.map(&:to_s).join(' ')}"
       end
 
+      def has_link?(body: /.*/s, url: /.*/s)
+        links.any? { |link| link.match?(body: body, url: url) }
+      end
+
       class << self
         def from_subfield_values(all_subfield_values, tag:, label:, order:)
           links = []

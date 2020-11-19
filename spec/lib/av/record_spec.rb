@@ -217,7 +217,8 @@ module AV
             'Usage Statement (540): RESTRICTED.  Permissions, licensing requests, and all other inquiries should be directed in writing to: Director of the Archives, Pacifica Radio Archives, 3729 Cahuenga Blvd. West, North Hollywood, CA 91604, 800-735-0230 x 263, fax 818-506-1084, info@pacificaradioarchives.org, http://www.pacificaradioarchives.org',
             'Collection (982): Pacifica Radio Archives',
             'Tracks (998): PRA_NHPRC1_AZ1084_00_000_00.mp3 00:54:03',
-            'Linked Resources (856): [View library catalog record.](http://oskicat.berkeley.edu/record=b23305522)'
+            'Linked Resources (856): [View library catalog record.](http://oskicat.berkeley.edu/record=b23305522)',
+            'Linked Resources (856): [View record in Digital Collections.](https://digicoll.lib.berkeley.edu/record/21178)'
           ]
           expect(values.size).to eq(expected.size)
           aggregate_failures 'fields' do
