@@ -1,7 +1,5 @@
 #!/usr/bin/env groovy
 
-@Library('jenkins-workflow-scripts@master') _
-
 dockerComposePipeline(
     commands: [
         'bundle exec rake coverage',
