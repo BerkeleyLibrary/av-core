@@ -43,16 +43,11 @@ module AV
           TIND_ID_FIELD = '035__a'.freeze
 
           def record_for(record_id)
-            marc_uri = marc_uri_for(record_id)
-            begin
-              records = records_for(marc_uri)
-              record = records && records.first
-              return record if record
-            rescue StandardError => e
-              raise record_not_found(record_id, marc_uri, e.message)
-            end
-
-            raise record_not_found(record_id, marc_uri, 'no records returned')
+            first_record_for(record_id)
+          rescue AV::RecordNotFound
+            raise
+          rescue StandardError => e
+            raise record_not_found(record_id, e.message)
           end
 
           def marc_uri_for(record_id)
@@ -71,13 +66,18 @@ module AV
 
           private
 
-          def records_for(marc_uri)
+          def first_record_for(record_id)
+            marc_uri = marc_uri_for(record_id)
             xml = do_get(marc_uri)
-            AV::Marc.all_from_xml(xml)
+            records = AV::Marc.all_from_xml(xml)
+            record = records && records.first
+            return record if record
+
+            raise record_not_found(record_id, "GET #{marc_uri} returned: #{xml}")
           end
 
-          def record_not_found(record_id, marc_uri, details)
-            AV::RecordNotFound.new("Can't find TIND record for ID #{record_id.inspect} at MARC URI #{marc_uri}: #{details}")
+          def record_not_found(record_id, details)
+            AV::RecordNotFound.new("Can't find TIND record for ID #{record_id.inspect} at MARC URI #{marc_uri_for(record_id)}: #{details}")
           end
 
           def base_uri

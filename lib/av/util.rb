@@ -42,12 +42,15 @@ module AV
 
     def get_or_raise(uri)
       resp = RestClient.get(uri.to_s)
-      return resp if resp.code == 200
+      begin
+        return resp if resp.code == 200
 
-      log.error("GET #{uri} returned #{resp.code}: #{resp.body || 'nil'}")
-      raise(RestClient::RequestFailed.new(resp, resp.code).tap do |ex|
-        ex.message = "GET #{uri} failed; host returned #{resp.code}"
-      end)
+        raise RestClient::RequestFailed.new(resp, resp.code).tap do |ex|
+          ex.message = "GET #{uri} failed; host returned #{resp.code}: #{resp.body || 'no response body'}"
+        end
+      ensure
+        log.info("GET #{uri} returned #{resp.code}")
+      end
     end
   end
 end
