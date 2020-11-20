@@ -45,9 +45,8 @@ module AV
       begin
         return resp if resp.code == 200
 
-        raise RestClient::RequestFailed.new(resp, resp.code).tap do |ex|
-          ex.message = "GET #{uri} failed; host returned #{resp.code}: #{resp.body || 'no response body'}"
-        end
+        msg = "GET #{uri} failed; host returned #{resp.code}: #{resp.body || 'no response body'}"
+        raise(RestClient::RequestFailed.new(resp, resp.code).tap { |ex| ex.message = msg })
       ensure
         log.info("GET #{uri} returned #{resp.code}")
       end

@@ -52,7 +52,7 @@ module AV
         aggregate_failures 'responses' do
           [207, 400, 401, 403, 404, 405, 418, 451, 500, 503].each do |code|
             url = "http://example.edu/#{code}"
-            stub_request(:get, url).to_return(status: url)
+            stub_request(:get, url).to_return(status: code)
 
             expect { AV::Util.do_get(url) }.to raise_error(RestClient::Exception)
           end
