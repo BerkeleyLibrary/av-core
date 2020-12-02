@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Search-Engine-Total-Number-Of-Results: 1 -->
+<collection xmlns="http://www.loc.gov/MARC21/slim">
+  <record>
+    <controlfield tag="001">22513</controlfield>
+    <controlfield tag="005">20201201154531.0</controlfield>
+    <datafield tag="035" ind1=" " ind2=" ">
+      <subfield code="a">(miscmat)00615</subfield>
+    </datafield>
+    <datafield tag="041" ind1="0" ind2="7">
+      <subfield code="a">ynn</subfield>
+      <subfield code="2">iso639-3</subfield>
+    </datafield>
+    <datafield tag="245" ind1=" " ind2=" ">
+      <subfield code="a">Excerpt From Cylinder 14-1679: Description of Fishing Original</subfield>
+    </datafield>
+    <datafield tag="260" ind1=" " ind2=" ">
+      <subfield code="b">Phoebe A. Hearst Museum of Anthropology </subfield>
+      <subfield code="c">September 1, 1911</subfield>
+    </datafield>
+    <datafield tag="269" ind1=" " ind2=" ">
+      <subfield code="a">1911-09-01</subfield>
+    </datafield>
+    <datafield tag="336" ind1=" " ind2=" ">
+      <subfield code="a">Audio</subfield>
+    </datafield>
+    <datafield tag="500" ind1=" " ind2=" ">
+      <subfield code="a"> Ishi (c. 1861 – March 25, 1916) was a native Californian from the Yahi tribe, and the last surviving member of his culture. “Ishi” is Yahi for man, and was the name given to him by Kroeber and his colleagues. Ishi became acquainted with Alfred Kroeber in 1911, after being discovered in Oroville and brought back to San Francisco. During his time at the UC anthropology museum, he was recorded on 148 wax cylinders totaling 5 hours and 41 minutes. As the last member of his tribe, his wax cylinder recordings are important tools for researching the lost Yahi language. </subfield>
+    </datafield>
+    <datafield tag="520" ind1=" " ind2=" ">
+      <subfield code="a">An excerpt from a recording of Ishi describing fishing.</subfield>
+    </datafield>
+    <datafield tag="856" ind1="4" ind2="2">
+      <subfield code="u">https://avplayer.lib.berkeley.edu/irene/(miscmat)00307</subfield>
+      <subfield code="y">Play Audio</subfield>
+    </datafield>
+    <datafield tag="980" ind1=" " ind2=" ">
+      <subfield code="a">Miscmat</subfield>
+    </datafield>
+    <datafield tag="998" ind1=" " ind2=" ">
+      <subfield code="a">00:01:00</subfield>
+      <subfield code="g">14-1679_excerpt.mp3</subfield>
+    </datafield>
+  </record>
+</collection>

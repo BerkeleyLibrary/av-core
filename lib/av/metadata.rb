@@ -88,10 +88,8 @@ module AV
       RESTRICTIONS.find { |r| link_field_values.any? { |v| v.include?(r) } }
     end
 
-    # rubocop:disable Metrics/AbcSize
     def ensure_catalog_link(values)
       return values if values.any? { |v| Fields::CATALOG_LINK.value?(v) && v.any_link?(body: source.catalog_link_text) }
-      return values unless bib_number
 
       values << LinkValue.new(
         tag: Fields::CATALOG_LINK.tag,
@@ -101,13 +99,12 @@ module AV
       )
       values.sort!
     end
-    # rubocop:enable Metrics/AbcSize
 
     def find_bib_number
       return record_id if source == Source::MILLENNIUM
 
       marc_record.each_by_tag(TAG_TIND_CATALOG_ID) do |data_field|
-        subfield_m = data_field.find { |sf| sf.code = SUBFIELD_CODE_MILLENNIUM_ID }
+        subfield_m = data_field.find { |sf| sf.code == SUBFIELD_CODE_MILLENNIUM_ID }
         return subfield_m.value if subfield_m
       end
       nil

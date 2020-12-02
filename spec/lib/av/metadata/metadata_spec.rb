@@ -121,15 +121,39 @@ module AV
         stub_request(:get, search_url).to_return(status: 200, body: File.read('spec/data/b22139658.html'))
         metadata = Metadata.for_record(record_id: 'b22139658')
 
-        link_value = metadata.values.find { |v| Metadata::Fields::CATALOG_LINK.value?(v) }
-        expect(link_value).not_to be_nil
+        catalog_links = metadata.values.select { |v| Metadata::Fields::CATALOG_LINK.value?(v) }.map(&:links).flatten
+        expected_links = [
+          Metadata::Link.new(body: Metadata::Source::MILLENNIUM.catalog_link_text, url: 'http://oskicat.berkeley.edu/record=b22139658')
+        ]
+        expect(catalog_links).to contain_exactly(*expected_links)
+      end
 
-        links = link_value.links
-        expect(links.size).to eq(1)
+      it 'injects a TIND URL if not present (1/2)' do
+        tind_035 = '(miscmat)00615'
+        marc_xml = File.read("spec/data/record-#{tind_035}.xml")
+        search_url = "https://digicoll.lib.berkeley.edu/search?p=035__a%3A%22#{CGI.escape(tind_035)}%22&of=xm"
+        stub_request(:get, search_url).to_return(status: 200, body: marc_xml)
+        metadata = Metadata.for_record(record_id: tind_035)
 
-        link = links[0]
-        expect(link.body).to eq(Metadata::Source::MILLENNIUM.catalog_link_text)
-        expect(link.url).to eq('http://oskicat.berkeley.edu/record=b22139658')
+        catalog_links = metadata.values.select { |v| Metadata::Fields::CATALOG_LINK.value?(v) }.map(&:links).flatten
+        expected_links = [
+          Metadata::Link.new(body: Metadata::Source::TIND.catalog_link_text, url: 'https://digicoll.lib.berkeley.edu/record/22513')
+        ]
+        expect(catalog_links).to contain_exactly(*expected_links)
+      end
+
+      it 'injects a TIND URL if not present (2/2)' do
+        tind_035 = 'physcolloquia-bk00169017b'
+        marc_xml = File.read("spec/data/record-#{tind_035}.xml")
+        search_url = "https://digicoll.lib.berkeley.edu/search?p=035__a%3A%22#{CGI.escape(tind_035)}%22&of=xm"
+        stub_request(:get, search_url).to_return(status: 200, body: marc_xml)
+        metadata = Metadata.for_record(record_id: tind_035)
+
+        catalog_links = metadata.values.select { |v| Metadata::Fields::CATALOG_LINK.value?(v) }.map(&:links).flatten
+        expected_links = [
+          Metadata::Link.new(body: Metadata::Source::TIND.catalog_link_text, url: 'https://digicoll.lib.berkeley.edu/record/21937')
+        ]
+        expect(catalog_links).to contain_exactly(*expected_links)
       end
 
       it 'works for TIND records with OskiCat URLs' do
@@ -139,15 +163,11 @@ module AV
         stub_request(:get, search_url).to_return(status: 200, body: marc_xml)
         metadata = Metadata.for_record(record_id: tind_035)
 
-        link_value = metadata.values.find { |v| Metadata::Fields::CATALOG_LINK.value?(v) }
-        expect(link_value).not_to be_nil
-
-        links = link_value.links
-        expect(links.size).to eq(1)
-
-        link = links[0]
-        expect(link.body).to eq('View library catalog record.')
-        expect(link.url).to eq('http://oskicat.berkeley.edu/record=b23305522')
+        expected_links = [
+          Metadata::Link.new(body: 'View library catalog record.', url: 'http://oskicat.berkeley.edu/record=b23305522'),
+          Metadata::Link.new(body: Metadata::Source::TIND.catalog_link_text, url: 'https://digicoll.lib.berkeley.edu/record/21178')
+        ]
+        expect(metadata.values.select { |v| Metadata::Fields::CATALOG_LINK.value?(v) }.map(&:links).flatten).to contain_exactly(*expected_links)
       end
 
       it 'works for TIND-only records' do
@@ -157,15 +177,10 @@ module AV
         stub_request(:get, search_url).to_return(status: 200, body: marc_xml)
         metadata = Metadata.for_record(record_id: tind_035)
 
-        link_value = metadata.values.find { |v| Metadata::Fields::CATALOG_LINK.value?(v) }
-        expect(link_value).not_to be_nil
-
-        links = link_value.links
-        expect(links.size).to eq(1)
-
-        link = links[0]
-        expect(link.body).to eq(Metadata::Source::TIND.catalog_link_text)
-        expect(link.url).to eq('https://digicoll.lib.berkeley.edu/record/21937')
+        expected_links = [
+          Metadata::Link.new(body: Metadata::Source::TIND.catalog_link_text, url: 'https://digicoll.lib.berkeley.edu/record/21937')
+        ]
+        expect(metadata.values.select { |v| Metadata::Fields::CATALOG_LINK.value?(v) }.map(&:links).flatten).to contain_exactly(*expected_links)
       end
 
       describe :each_value do
