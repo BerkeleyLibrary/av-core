@@ -3,7 +3,7 @@ require 'spec_helper'
 module AV
   module Marc
     describe SubfieldGroups do
-      describe :by_index do
+      describe :to_a do
         it 'transposes the values' do
           sv = SubfieldGroups.new(
             a: [1, 3, 5],
@@ -15,7 +15,7 @@ module AV
             { a: 3, b: 4, c: 9 },
             { a: 5, b: 6 }
           ]
-          expect(sv.by_index).to eq(expected)
+          expect(sv.to_a).to eq(expected)
         end
       end
 
@@ -32,7 +32,7 @@ module AV
             { c: 9, b: 4, a: 3 },
             { b: 6, a: 5 }
           ]
-          sv2.by_index.each_with_index do |h_actual, i|
+          sv2.to_a.each_with_index do |h_actual, i|
             h_expected = expected[i]
             expect(h_actual).to eq(h_expected)
 
