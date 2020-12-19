@@ -1,5 +1,5 @@
 require 'av/constants'
-require 'av/marc/subfield_groups'
+require 'av/marc/util'
 require 'av/metadata/link_value'
 require 'av/metadata/text_value'
 
@@ -10,10 +10,10 @@ module AV
       include AV::Constants
       include AV::Util
 
-      attr_reader :order, :label, :tag, :ind_1, :ind_2, :subfield_order, :subfields_separator
+      attr_reader :order, :label, :tag, :ind_1, :ind_2, :subfield_order, :subfields_separator, :allow_ragged
 
       # rubocop:disable Metrics/ParameterLists
-      def initialize(order:, label:, tag:, ind_1: nil, ind_2: nil, subfield_order: nil, subfields_separator: nil)
+      def initialize(order:, label:, tag:, ind_1: nil, ind_2: nil, subfield_order: nil, subfields_separator: nil, allow_ragged: true)
         @order = order
         @label = label
         @tag = tag
@@ -21,13 +21,14 @@ module AV
         @ind_2 = ind_2
         @subfield_order = subfield_order
         @subfields_separator = subfields_separator || ' '
+        @allow_ragged = allow_ragged
       end
       # rubocop:enable Metrics/ParameterLists
 
       # @param marc_record [MARC::Record]
       # @return [Metadata::Fields::Value]
       def value_from(marc_record)
-        all_subfield_values = all_subfield_groups(marc_record)
+        all_subfield_values = subfield_values_from(marc_record)
         return if all_subfield_values.empty?
 
         case tag
@@ -36,6 +37,15 @@ module AV
         else
           TextValue.from_subfield_values(all_subfield_values, tag: tag, label: label, order: order, subfields_separator: subfields_separator)
         end
+      end
+
+      # Reads all MARC datafields with this Field's tag and indicators and extracts groups of
+      # related subfields, in the order specified for this field
+      #
+      # @return [Array<Hash<Symbol, String>>] a flat list of each group of related subfields, by code
+      def subfield_values_from(marc_record)
+        data_fields = marc_record.fields(tag).select { |f| indicators_match?(f) }
+        data_fields.flat_map { |df| AV::Marc::Util.group_subfield_values(df, order: subfield_order) }
       end
 
       def value?(value)
@@ -68,14 +78,6 @@ module AV
       end
 
       private
-
-      def all_subfield_groups(marc_record)
-        data_fields = marc_record.fields(tag).select { |f| indicators_match?(f) }
-        data_fields.inject([]) do |all_groups, df|
-          groups = AV::Marc::SubfieldGroups.from_data_field(df, subfield_order)
-          groups.empty? ? all_groups : all_groups << groups
-        end
-      end
 
       def indicators_match?(data_field)
         return false if ind_1 && ind_1 != data_field.indicator1

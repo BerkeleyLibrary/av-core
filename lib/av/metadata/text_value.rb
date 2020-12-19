@@ -15,13 +15,9 @@ module AV
       end
 
       class << self
+        # @param all_subfield_values [Array<Hash<Symbol, String>>]
         def from_subfield_values(all_subfield_values, tag:, label:, order:, subfields_separator:)
-          lines = []
-          all_subfield_values.each do |subfield_values|
-            subfield_values.each do |code_to_value|
-              lines << code_to_value.values.join(subfields_separator)
-            end
-          end
+          lines = all_subfield_values.map { |vv| vv.values.join(subfields_separator) }
           TextValue.new(tag: tag, label: label, lines: lines, order: order)
         end
       end

@@ -1,7 +1,7 @@
 require 'av/constants'
 require 'av/types/duration'
 require 'av/types/file_type'
-require 'av/marc/subfield_groups'
+require 'av/marc/util'
 require 'marc'
 
 module AV
@@ -43,6 +43,10 @@ module AV
       end
     end
 
+    def inspect
+      "\#<#{self.class.name}:#{format('%016x', 2 * object_id)} #{self}>"
+    end
+
     # @return [Array<MARC::Subfield>]
     def to_marc_subfields
       [].tap do |subfields|
@@ -64,13 +68,17 @@ module AV
       include AV::Constants
       include AV::Util
 
+      TRACKS_FIELD = AV::Metadata::Fields::TRACKS
+      LABELS = {
+        SUBFIELD_CODE_DURATION => 'duration',
+        SUBFIELD_CODE_TITLE => 'title',
+        SUBFIELD_CODE_PATH => 'path'
+      }.freeze
+
       def tracks_from(marc_record, collection:)
         [].tap do |tracks|
-          marc_record.each_by_tag(TAG_TRACK_FIELD) do |df|
-            subfield_values = AV::Marc::SubfieldGroups.from_data_field(df)
-            subfield_values.each do |group|
-              next unless group.key?(SUBFIELD_CODE_PATH)
-
+          marc_record.each_by_tag(TRACKS_FIELD.tag) do |df|
+            group_subfield_values(df).each do |group|
               tracks << from_group(group, collection: collection, sort_order: tracks.size)
             end
           end
@@ -78,6 +86,28 @@ module AV
       end
 
       private
+
+      def group_subfield_values(df)
+        values_by_code = values_from(df.subfields)
+        AV::Marc::Util.group_values_by_code(values_by_code, order: TRACKS_FIELD.subfield_order)
+      end
+
+      def values_from(subfields)
+        values_by_code = AV::Marc::Util.values_by_code(subfields)
+        return {} unless (paths = values_by_code[SUBFIELD_CODE_PATH])
+
+        values_by_code.reject do |code, values|
+          (values.size != paths.size).tap do |mismatch|
+            warn_inconsistency(code, values, paths.size) if mismatch
+          end
+        end
+      end
+
+      def warn_inconsistency(code, values, expected_size)
+        msg = "Dropping inconsistent track info for subfield #{code} (#{LABELS[code]}): " \
+                "expected #{expected_size} values, got #{values.size} (#{values})"
+        log.warn(msg)
+      end
 
       def from_group(group, collection:, sort_order:)
         title = tidy_value(group[SUBFIELD_CODE_TITLE])

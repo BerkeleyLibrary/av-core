@@ -12,6 +12,17 @@ module AV
       end
     end
 
+    describe :inspect do
+      it 'does something useful' do
+        track = Track.new(sort_order: 0, title: 'Part 1', path: 'MRCAudio/frost-read1.mp3', duration: AV::Types::Duration.from_string('01:02:29'))
+        result = track.inspect
+        expect(result).to include(Track.name)
+        encoded_id = (2 * track.object_id).to_s(16) # what the default inspect() does
+        expect(result).to include(encoded_id)
+        expect(result).to include(track.to_s)
+      end
+    end
+
     describe :<=> do
       it 'treats object as equal to itself' do
         track = Track.new(sort_order: 2, title: 'Part 2', path: 'frost-read2.mp3')
@@ -190,6 +201,40 @@ module AV
         ]
 
         marc_record = AV::Marc.from_xml(File.read('spec/data/record-ungrouped-998-subfields.xml'))
+        tracks = Track.tracks_from(marc_record, collection: 'MRCAudio')
+        expect(tracks.size).to eq(expected_tracks.size)
+        aggregate_failures 'tracks' do
+          tracks.each_with_index do |track, i|
+            expect(track).to eq(expected_tracks[i])
+          end
+        end
+      end
+
+      it 'discards title and duration info for a single 998 with ragged subfields' do
+        expected_tracks = [
+          Track.new(sort_order: 0, path: 'MRCAudio/C040790863_1.mp3'),
+          Track.new(sort_order: 1, path: 'MRCAudio/C040790960_1.mp3'),
+          Track.new(sort_order: 2, path: 'MRCAudio/C040791061_1.mp3'),
+          Track.new(sort_order: 3, path: 'MRCAudio/C040791168_1.mp3'),
+          Track.new(sort_order: 4, path: 'MRCAudio/C040790872_1.mp3'),
+          Track.new(sort_order: 5, path: 'MRCAudio/C040790979_1.mp3'),
+          Track.new(sort_order: 6, path: 'MRCAudio/C040791070_1.mp3'),
+          Track.new(sort_order: 7, path: 'MRCAudio/C040791177_1.mp3'),
+          Track.new(sort_order: 8, path: 'MRCAudio/C040790881_1.mp3'),
+          Track.new(sort_order: 9, path: 'MRCAudio/C040790988.mp3'),
+          Track.new(sort_order: 10, path: 'MRCAudio/C040791089.mp3'),
+          Track.new(sort_order: 11, path: 'MRCAudio/C040791186.mp3'),
+          Track.new(sort_order: 12, path: 'MRCAudio/C040790890_1.mp3'),
+          Track.new(sort_order: 13, path: 'MRCAudio/C040790997_1.mp3'),
+          Track.new(sort_order: 14, path: 'MRCAudio/C040791098_1.mp3'),
+          Track.new(sort_order: 15, path: 'MRCAudio/C040790906_1.mp3'),
+          Track.new(sort_order: 16, path: 'MRCAudio/C040791007_1.mp3'),
+          Track.new(sort_order: 17, path: 'MRCAudio/C040791104_1.mp3'),
+          Track.new(sort_order: 18, path: 'MRCAudio/C040791195_1.mp3'),
+          Track.new(sort_order: 19, path: 'MRCAudio/C040791201_1.mp3')
+        ]
+
+        marc_record = AV::Marc.from_xml(File.read('spec/data/record-ragged-998-subfields.xml'))
         tracks = Track.tracks_from(marc_record, collection: 'MRCAudio')
         expect(tracks.size).to eq(expected_tracks.size)
         aggregate_failures 'tracks' do

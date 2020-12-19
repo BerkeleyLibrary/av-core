@@ -1,8 +1,10 @@
 # ------------------------------------------------------------
 # Simplecov
 
-require 'colorize'
-require 'simplecov' if ENV['COVERAGE']
+if ENV['COVERAGE']
+  require 'colorize'
+  require 'simplecov'
+end
 
 # ------------------------------------------------------------
 # RSpec

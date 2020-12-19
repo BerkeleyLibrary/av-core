@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Search-Engine-Total-Number-Of-Results: 1 -->
+<collection xmlns="http://www.loc.gov/MARC21/slim">
+  <record>
+    <datafield ind1=' ' ind2=' ' tag='040'>
+      <subfield code='a'>CUY</subfield>
+      <subfield code='c'>CUY</subfield>
+    </datafield>
+    <datafield ind1='1' ind2='0' tag='100'>
+      <subfield code='a'>MacLeod, Donald,</subfield>
+      <subfield code='d'>1916-1982.</subfield>
+    </datafield>
+    <datafield ind1='1' ind2='0' tag='245'>
+      <subfield code='a'>Instructional tape</subfield>
+      <subfield code='h'>[electronic resource] :</subfield>
+      <subfield code='b'>piobareachd /</subfield>
+      <subfield code='c'>Donald MacLeod.</subfield>
+    </datafield>
+    <datafield ind1=' ' ind2=' ' tag='260'>
+      <subfield code='a'>[Britain :</subfield>
+      <subfield code='b'>s.n.,</subfield>
+      <subfield code='c'>196-?]</subfield>
+    </datafield>
+    <datafield ind1=' ' ind2=' ' tag='300'>
+      <subfield code='a'>20 streaming audio files.</subfield>
+    </datafield>
+    <datafield ind1=' ' ind2=' ' tag='500'>
+      <subfield code='a'>Lessons and demonstrations in playing Scottish bagpipe music.</subfield>
+    </datafield>
+    <datafield ind1=' ' ind2=' ' tag='500'>
+      <subfield code='a'>Reels 1 and 5, 7 in.; reel 1, 3 3/4 ips.</subfield>
+    </datafield>
+    <datafield ind1=' ' ind2=' ' tag='500'>
+      <subfield code='a'>Includes table of contents (manuscript) in each container.</subfield>
+    </datafield>
+    <datafield ind1=' ' ind2=' ' tag='533'>
+      <subfield code='a'>Electronic reproduction.</subfield>
+      <subfield code='b'>San Francisco, Calif. :</subfield>
+      <subfield code='c'>Digital Revolution,</subfield>
+      <subfield code='d'>2014.</subfield>
+    </datafield>
+    <datafield ind1=' ' ind2=' ' tag='534'>
+      <subfield code='p'>Original version:</subfield>
+      <subfield code='e'>20 sound tape reels : analog, 7 1/2 ips ; 5-7 in.</subfield>
+    </datafield>
+    <datafield ind1=' ' ind2=' ' tag='538'>
+      <subfield code='a'>System requirements: Streaming audio player and an internet connection.</subfield>
+    </datafield>
+    <datafield ind1=' ' ind2=' ' tag='538'>
+      <subfield code='a'>Mode of access: World Wide Web.</subfield>
+    </datafield>
+    <datafield ind1=' ' ind2=' ' tag='588'>
+      <subfield code='a'>Description based on sound recording record.</subfield>
+    </datafield>
+    <datafield ind1=' ' ind2='0' tag='650'>
+      <subfield code='a'>Pibrochs.</subfield>
+    </datafield>
+    <datafield ind1=' ' ind2='0' tag='650'>
+      <subfield code='a'>Music</subfield>
+      <subfield code='z'>Scotland.</subfield>
+    </datafield>
+    <datafield ind1='0' ind2=' ' tag='799'>
+      <subfield code='a'>Music Library audio tapes.</subfield>
+      <subfield code='5'>CU</subfield>
+    </datafield>
+    <datafield ind1='4' ind2='2' tag='856'>
+      <subfield code='u'>https://avplayer.lib.berkeley.edu/music/b23161018</subfield>
+      <subfield code='y'>Music Library Audio Tapes. Freely available for streaming.</subfield>
+    </datafield>
+    <datafield ind1=' ' ind2=' ' tag='956'>
+      <subfield code='a'>20151210</subfield>
+      <subfield code='b'>Music Audio Tapes MUSI_Project_Bib_Records.out.marc</subfield>
+    </datafield>
+    <datafield ind1=' ' ind2=' ' tag='957'>
+      <subfield code='a'>OCLC xref loaded 20151220</subfield>
+    </datafield>
+    <datafield ind1=' ' ind2=' ' tag='998'>
+      <!-- no titles -->
+      "<subfield code='a'>00:47:49</subfield>",
+      "<subfield code='g'>C040790863_1.mp3</subfield>",
+      "<subfield code='a'>00:23:29</subfield>",
+      "<subfield code='t'>reel 2, part 1</subfield>",
+      "<subfield code='g'>C040790960_1.mp3</subfield>",
+      "<subfield code='a'>00:22:56</subfield>",
+      "<subfield code='g'>C040791061_1.mp3</subfield>",
+      "<subfield code='a'>00:21:46</subfield>",
+      "<subfield code='g'>C040791168_1.mp3</subfield>",
+      "<subfield code='a'>00:24:19</subfield>",
+      "<subfield code='g'>C040790872_1.mp3</subfield>",
+      "<subfield code='a'>00:24:18</subfield>",
+      "<subfield code='g'>C040790979_1.mp3</subfield>",
+      "<subfield code='a'>00:24:18</subfield>",
+      "<subfield code='g'>C040791070_1.mp3</subfield>",
+      "<subfield code='a'>00:23:23</subfield>",
+      "<subfield code='g'>C040791177_1.mp3</subfield>",
+      "<subfield code='a'>00:20:01</subfield>",
+      "<subfield code='g'>C040790881_1.mp3</subfield>",
+      "<subfield code='a'>00:22:38</subfield>",
+      "<subfield code='g'>C040790988.mp3</subfield>",
+      <!-- no durations -->
+      "<subfield code='t'>reel 11</subfield>",
+      "<subfield code='g'>C040791089.mp3</subfield>",
+      "<subfield code='t'>reel 12</subfield>",
+      "<subfield code='g'>C040791186.mp3</subfield>",
+      "<subfield code='t'>reel 13, part 1</subfield>",
+      "<subfield code='g'>C040790890_1.mp3</subfield>",
+      "<subfield code='t'>reel 14, part 1</subfield>",
+      "<subfield code='g'>C040790997_1.mp3</subfield>",
+      "<subfield code='t'>reel 15, part 1</subfield>",
+      "<subfield code='g'>C040791098_1.mp3</subfield>",
+      "<subfield code='t'>reel 16, part 1</subfield>",
+      "<subfield code='g'>C040790906_1.mp3</subfield>",
+      "<subfield code='t'>reel 17, part 1</subfield>",
+      "<subfield code='g'>C040791007_1.mp3</subfield>",
+      "<subfield code='t'>reel 18, part 1</subfield>",
+      "<subfield code='g'>C040791104_1.mp3</subfield>",
+      "<subfield code='t'>reel 19, part 1</subfield>",
+      "<subfield code='g'>C040791195_1.mp3</subfield>",
+      "<subfield code='t'>reel 20, part 1</subfield>",
+      "<subfield code='g'>C040791201_1.mp3</subfield>"
+    </datafield>
+  </record>
+</collection>

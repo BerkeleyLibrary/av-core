@@ -20,16 +20,12 @@ module AV
       end
 
       class << self
+        # @param all_subfield_values [Array<Hash<Symbol, String>>]
         def from_subfield_values(all_subfield_values, tag:, label:, order:)
-          links = []
-          all_subfield_values.each do |subfield_values|
-            subfield_values.each do |value_group|
-              body = body_from(value_group)
-              url = value_group[:u]
-              next unless body && url
+          links = all_subfield_values.map do |vv|
+            next unless (url = vv[:u]) && (body = body_from(vv))
 
-              links << Link.new(body: body, url: url)
-            end
+            Link.new(body: body, url: url)
           end
           LinkValue.new(tag: tag, label: label, links: links, order: order)
         end

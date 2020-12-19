@@ -7,5 +7,5 @@ ENV['CI_REPORTS'] = 'artifacts/rspec'
 desc 'Run all specs in spec directory, with coverage'
 task coverage: ['ci:setup:rspec'] do
   ENV['COVERAGE'] ||= 'true'
-  Rake::Task[:spec].invoke
+  Rake::Task['spec:all'].invoke
 end
