@@ -8,9 +8,9 @@ module AV
 
     SUBFIELD_CODE_MILLENNIUM_ID = 'm'.freeze
 
-    SUBFIELD_CODE_PATH = :g
-    SUBFIELD_CODE_TITLE = :t
     SUBFIELD_CODE_DURATION = :a
+    SUBFIELD_CODE_TITLE = :t
+    SUBFIELD_CODE_PATH = :g
 
     UNKNOWN_TITLE = 'Unknown title'.freeze
 

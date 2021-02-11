@@ -13,7 +13,7 @@
     <datafield ind1='1' ind2='0' tag='245'>
       <subfield code='a'>Instructional tape</subfield>
       <subfield code='h'>[electronic resource] :</subfield>
-      <subfield code='b'>piobareachd / </subfield>
+      <subfield code='b'>piobareachd /</subfield>
       <subfield code='c'>Donald MacLeod.</subfield>
     </datafield>
     <datafield ind1=' ' ind2=' ' tag='260'>
@@ -36,7 +36,7 @@
     <datafield ind1=' ' ind2=' ' tag='533'>
       <subfield code='a'>Electronic reproduction.</subfield>
       <subfield code='b'>San Francisco, Calif. :</subfield>
-      <subfield code='c'>Digital Revolution, </subfield>
+      <subfield code='c'>Digital Revolution,</subfield>
       <subfield code='d'>2014.</subfield>
     </datafield>
     <datafield ind1=' ' ind2=' ' tag='534'>
@@ -74,105 +74,87 @@
     <datafield ind1=' ' ind2=' ' tag='957'>
       <subfield code='a'>OCLC xref loaded 20151220</subfield>
     </datafield>
+    <!-- no titles -->
     <datafield ind1=' ' ind2=' ' tag='998'>
-      <subfield code='a'>00:47:49</subfield>
-      <subfield code='t'>reel 1, part 1</subfield>
-      <subfield code='g'>C040790863_1.mp3</subfield>
+      "<subfield code='a'>00:47:49</subfield>",
+      "<subfield code='g'>C040790863_1.mp3</subfield>",
     </datafield>
     <datafield ind1=' ' ind2=' ' tag='998'>
-      <subfield code='a'>00:23:29</subfield>
-      <subfield code='t'>reel 2, part 1</subfield>
-      <subfield code='g'>C040790960_1.mp3</subfield>
+      "<subfield code='a'>00:23:29</subfield>",
+      "<subfield code='g'>C040790960_1.mp3</subfield>",
     </datafield>
     <datafield ind1=' ' ind2=' ' tag='998'>
-      <subfield code='a'>00:22:56</subfield>
-      <subfield code='t'>reel 3, part 1 </subfield>
-      <subfield code='g'>C040791061_1.mp3</subfield>
+      "<subfield code='a'>00:22:56</subfield>",
+      "<subfield code='g'>C040791061_1.mp3</subfield>",
     </datafield>
     <datafield ind1=' ' ind2=' ' tag='998'>
-      <subfield code='a'>00:21:46</subfield>
-      <subfield code='t'>reel 4, part 1 </subfield>
-      <subfield code='g'>C040791168_1.mp3</subfield>
+      "<subfield code='a'>00:21:46</subfield>",
+      "<subfield code='g'>C040791168_1.mp3</subfield>",
     </datafield>
     <datafield ind1=' ' ind2=' ' tag='998'>
-      <subfield code='a'>00:24:19</subfield>
-      <subfield code='t'>reel 5, part 1 </subfield>
-      <subfield code='g'>C040790872_1.mp3</subfield>
+      "<subfield code='a'>00:24:19</subfield>",
+      "<subfield code='g'>C040790872_1.mp3</subfield>",
     </datafield>
     <datafield ind1=' ' ind2=' ' tag='998'>
-      <subfield code='a'>00:24:18</subfield>
-      <subfield code='t'>reel 6, part 1 </subfield>
-      <subfield code='g'>C040790979_1.mp3</subfield>
+      "<subfield code='a'>00:24:18</subfield>",
+      "<subfield code='g'>C040790979_1.mp3</subfield>",
     </datafield>
     <datafield ind1=' ' ind2=' ' tag='998'>
-      <subfield code='a'>00:24:18</subfield>
-      <subfield code='t'>reel 7, part 1 </subfield>
-      <subfield code='g'>C040791070_1.mp3</subfield>
+      "<subfield code='a'>00:24:18</subfield>",
+      "<subfield code='g'>C040791070_1.mp3</subfield>",
     </datafield>
     <datafield ind1=' ' ind2=' ' tag='998'>
-      <subfield code='a'>00:23:23</subfield>
-      <subfield code='t'>reel 8, part 1 </subfield>
-      <subfield code='g'>C040791177_1.mp3</subfield>
+      "<subfield code='a'>00:23:23</subfield>",
+      "<subfield code='g'>C040791177_1.mp3</subfield>",
     </datafield>
     <datafield ind1=' ' ind2=' ' tag='998'>
-      <subfield code='a'>00:20:01</subfield>
-      <subfield code='t'>reel 9, part 1 </subfield>
-      <subfield code='g'>C040790881_1.mp3</subfield>
+      "<subfield code='a'>00:20:01</subfield>",
+      "<subfield code='g'>C040790881_1.mp3</subfield>",
     </datafield>
     <datafield ind1=' ' ind2=' ' tag='998'>
-      <subfield code='a'>00:22:38</subfield>
-      <subfield code='t'>reel 10</subfield>
-      <subfield code='g'>C040790988.mp3</subfield>
+      "<subfield code='a'>00:22:38</subfield>",
+      "<subfield code='g'>C040790988.mp3</subfield>",
+    </datafield>
+    <!-- no durations -->
+    <datafield ind1=' ' ind2=' ' tag='998'>
+      "<subfield code='t'>reel 11</subfield>",
+      "<subfield code='g'>C040791089.mp3</subfield>",
     </datafield>
     <datafield ind1=' ' ind2=' ' tag='998'>
-      <subfield code='a'>00: 23:44</subfield>
-      <subfield code='t'>reel 11</subfield>
-      <subfield code='g'>C040791089.mp3</subfield>
+      "<subfield code='t'>reel 12</subfield>",
+      "<subfield code='g'>C040791186.mp3</subfield>",
     </datafield>
     <datafield ind1=' ' ind2=' ' tag='998'>
-      <subfield code='a'>00:22:27</subfield>
-      <subfield code='t'>reel 12 </subfield>
-      <subfield code='g'>C040791186.mp3</subfield>
+      "<subfield code='t'>reel 13, part 1</subfield>",
+      "<subfield code='g'>C040790890_1.mp3</subfield>",
     </datafield>
     <datafield ind1=' ' ind2=' ' tag='998'>
-      <subfield code='a'>00:21:57</subfield>
-      <subfield code='t'>reel 13, part 1 </subfield>
-      <subfield code='g'>C040790890_1.mp3</subfield>
+      "<subfield code='t'>reel 14, part 1</subfield>",
+      "<subfield code='g'>C040790997_1.mp3</subfield>",
     </datafield>
     <datafield ind1=' ' ind2=' ' tag='998'>
-      <subfield code='a'>00:44:28</subfield>
-      <subfield code='t'>reel 14, part 1 </subfield>
-      <subfield code='g'>C040790997_1.mp3</subfield>
+      "<subfield code='t'>reel 15, part 1</subfield>",
+      "<subfield code='g'>C040791098_1.mp3</subfield>",
     </datafield>
     <datafield ind1=' ' ind2=' ' tag='998'>
-      <subfield code='a'>00:44:33</subfield>
-      <subfield code='t'>reel 15, part 1 </subfield>
-      <subfield code='g'>C040791098_1.mp3</subfield>
+      "<subfield code='t'>reel 16, part 1</subfield>",
+      "<subfield code='g'>C040790906_1.mp3</subfield>",
     </datafield>
     <datafield ind1=' ' ind2=' ' tag='998'>
-      <subfield code='a'>00:44:01</subfield>
-      <subfield code='t'>reel 16, part 1 </subfield>
-      <subfield code='g'>C040790906_1.mp3</subfield>
+      "<subfield code='t'>reel 17, part 1</subfield>",
+      "<subfield code='g'>C040791007_1.mp3</subfield>",
     </datafield>
     <datafield ind1=' ' ind2=' ' tag='998'>
-      <subfield code='a'>00:46:58</subfield>
-      <subfield code='t'>reel 17, part 1 </subfield>
-      <subfield code='g'>C040791007_1.mp3</subfield>
+      "<subfield code='t'>reel 18, part 1</subfield>",
+      "<subfield code='g'>C040791104_1.mp3</subfield>",
     </datafield>
     <datafield ind1=' ' ind2=' ' tag='998'>
-      <subfield code='a'>00:42:49</subfield>
-      <subfield code='t'>reel 18, part 1 </subfield>
-      <subfield code='g'>C040791104_1.mp3</subfield>
+      "<subfield code='t'>reel 19, part 1</subfield>",
+      "<subfield code='g'>C040791195_1.mp3</subfield>",
     </datafield>
     <datafield ind1=' ' ind2=' ' tag='998'>
-      <subfield code='a'>00:44:35</subfield>
-      <subfield code='t'>reel 19, part 1 </subfield>
-      <subfield code='g'>C040791195_1.mp3</subfield>
-    </datafield>
-    <datafield ind1=' ' ind2=' ' tag='998'>
-      <subfield code='a'>00:40:12</subfield>
-      <subfield code='t'>reel 20, part 1 </subfield>
-      <subfield code='g'>C040791201_1.mp3</subfield>
+      "<subfield code='t'>reel 20, part 1</subfield>",
+      "<subfield code='g'>C040791201_1.mp3</subfield>"
     </datafield>
   </record>
 </collection>

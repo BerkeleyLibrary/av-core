@@ -17,8 +17,6 @@ module AV
         track = Track.new(sort_order: 0, title: 'Part 1', path: 'MRCAudio/frost-read1.mp3', duration: AV::Types::Duration.from_string('01:02:29'))
         result = track.inspect
         expect(result).to include(Track.name)
-        encoded_id = (2 * track.object_id).to_s(16) # what the default inspect() does
-        expect(result).to include(encoded_id)
         expect(result).to include(track.to_s)
       end
     end
@@ -176,7 +174,7 @@ module AV
         end
       end
 
-      it 'reads tracks from a single 998 with subfields not grouped by track' do
+      it 'accepts disordered fields in multiple 998s' do
         expected_tracks = [
           Track.new(sort_order: 0, title: 'reel 1, part 1', path: 'MRCAudio/C040790863_1.mp3', duration: AV::Types::Duration.from_string('00:47:49')),
           Track.new(sort_order: 1, title: 'reel 2, part 1', path: 'MRCAudio/C040790960_1.mp3', duration: AV::Types::Duration.from_string('00:23:29')),
@@ -200,7 +198,7 @@ module AV
           Track.new(sort_order: 19, title: 'reel 20, part 1', path: 'MRCAudio/C040791201_1.mp3', duration: AV::Types::Duration.from_string('00:40:12'))
         ]
 
-        marc_record = AV::Marc.from_xml(File.read('spec/data/record-ungrouped-998-subfields.xml'))
+        marc_record = AV::Marc.from_xml(File.read('spec/data/record-multiple-998s-disordered.xml'))
         tracks = Track.tracks_from(marc_record, collection: 'MRCAudio')
         expect(tracks.size).to eq(expected_tracks.size)
         aggregate_failures 'tracks' do
@@ -210,28 +208,62 @@ module AV
         end
       end
 
-      it 'discards title and duration info for a single 998 with ragged subfields' do
+      it 'accepts ragged subfields in multiple 998s' do
         expected_tracks = [
-          Track.new(sort_order: 0, path: 'MRCAudio/C040790863_1.mp3'),
-          Track.new(sort_order: 1, path: 'MRCAudio/C040790960_1.mp3'),
-          Track.new(sort_order: 2, path: 'MRCAudio/C040791061_1.mp3'),
-          Track.new(sort_order: 3, path: 'MRCAudio/C040791168_1.mp3'),
-          Track.new(sort_order: 4, path: 'MRCAudio/C040790872_1.mp3'),
-          Track.new(sort_order: 5, path: 'MRCAudio/C040790979_1.mp3'),
-          Track.new(sort_order: 6, path: 'MRCAudio/C040791070_1.mp3'),
-          Track.new(sort_order: 7, path: 'MRCAudio/C040791177_1.mp3'),
-          Track.new(sort_order: 8, path: 'MRCAudio/C040790881_1.mp3'),
-          Track.new(sort_order: 9, path: 'MRCAudio/C040790988.mp3'),
-          Track.new(sort_order: 10, path: 'MRCAudio/C040791089.mp3'),
-          Track.new(sort_order: 11, path: 'MRCAudio/C040791186.mp3'),
-          Track.new(sort_order: 12, path: 'MRCAudio/C040790890_1.mp3'),
-          Track.new(sort_order: 13, path: 'MRCAudio/C040790997_1.mp3'),
-          Track.new(sort_order: 14, path: 'MRCAudio/C040791098_1.mp3'),
-          Track.new(sort_order: 15, path: 'MRCAudio/C040790906_1.mp3'),
-          Track.new(sort_order: 16, path: 'MRCAudio/C040791007_1.mp3'),
-          Track.new(sort_order: 17, path: 'MRCAudio/C040791104_1.mp3'),
-          Track.new(sort_order: 18, path: 'MRCAudio/C040791195_1.mp3'),
-          Track.new(sort_order: 19, path: 'MRCAudio/C040791201_1.mp3')
+          Track.new(sort_order: 0, path: 'MRCAudio/C040790863_1.mp3', duration: AV::Types::Duration.from_string('00:47:49')),
+          Track.new(sort_order: 1, path: 'MRCAudio/C040790960_1.mp3', duration: AV::Types::Duration.from_string('00:23:29')),
+          Track.new(sort_order: 2, path: 'MRCAudio/C040791061_1.mp3', duration: AV::Types::Duration.from_string('00:22:56')),
+          Track.new(sort_order: 3, path: 'MRCAudio/C040791168_1.mp3', duration: AV::Types::Duration.from_string('00:21:46')),
+          Track.new(sort_order: 4, path: 'MRCAudio/C040790872_1.mp3', duration: AV::Types::Duration.from_string('00:24:19')),
+          Track.new(sort_order: 5, path: 'MRCAudio/C040790979_1.mp3', duration: AV::Types::Duration.from_string('00:24:18')),
+          Track.new(sort_order: 6, path: 'MRCAudio/C040791070_1.mp3', duration: AV::Types::Duration.from_string('00:24:18')),
+          Track.new(sort_order: 7, path: 'MRCAudio/C040791177_1.mp3', duration: AV::Types::Duration.from_string('00:23:23')),
+          Track.new(sort_order: 8, path: 'MRCAudio/C040790881_1.mp3', duration: AV::Types::Duration.from_string('00:20:01')),
+          Track.new(sort_order: 9, path: 'MRCAudio/C040790988.mp3', duration: AV::Types::Duration.from_string('00:22:38')),
+          Track.new(sort_order: 10, title: 'reel 11', path: 'MRCAudio/C040791089.mp3'),
+          Track.new(sort_order: 11, title: 'reel 12', path: 'MRCAudio/C040791186.mp3'),
+          Track.new(sort_order: 12, title: 'reel 13, part 1', path: 'MRCAudio/C040790890_1.mp3'),
+          Track.new(sort_order: 13, title: 'reel 14, part 1', path: 'MRCAudio/C040790997_1.mp3'),
+          Track.new(sort_order: 14, title: 'reel 15, part 1', path: 'MRCAudio/C040791098_1.mp3'),
+          Track.new(sort_order: 15, title: 'reel 16, part 1', path: 'MRCAudio/C040790906_1.mp3'),
+          Track.new(sort_order: 16, title: 'reel 17, part 1', path: 'MRCAudio/C040791007_1.mp3'),
+          Track.new(sort_order: 17, title: 'reel 18, part 1', path: 'MRCAudio/C040791104_1.mp3'),
+          Track.new(sort_order: 18, title: 'reel 19, part 1', path: 'MRCAudio/C040791195_1.mp3'),
+          Track.new(sort_order: 19, title: 'reel 20, part 1', path: 'MRCAudio/C040791201_1.mp3')
+        ]
+
+        marc_record = AV::Marc.from_xml(File.read('spec/data/record-ragged-998s-multiple-fields.xml'))
+        tracks = Track.tracks_from(marc_record, collection: 'MRCAudio')
+        expect(tracks.size).to eq(expected_tracks.size)
+        aggregate_failures 'tracks' do
+          tracks.each_with_index do |track, i|
+            expect(track).to eq(expected_tracks[i])
+          end
+        end
+      end
+
+      it 'accepts ragged subfields in a single 998 if ordered correctly' do
+        expected_tracks = [
+          Track.new(sort_order: 0, path: 'MRCAudio/C040790863_1.mp3', duration: AV::Types::Duration.from_string('00:47:49')),
+          Track.new(sort_order: 1, path: 'MRCAudio/C040790960_1.mp3', duration: AV::Types::Duration.from_string('00:23:29')),
+          Track.new(sort_order: 2, path: 'MRCAudio/C040791061_1.mp3', duration: AV::Types::Duration.from_string('00:22:56')),
+          Track.new(sort_order: 3, path: 'MRCAudio/C040791168_1.mp3', duration: AV::Types::Duration.from_string('00:21:46')),
+          Track.new(sort_order: 4, path: 'MRCAudio/C040790872_1.mp3', duration: AV::Types::Duration.from_string('00:24:19')),
+          Track.new(sort_order: 5, path: 'MRCAudio/C040790979_1.mp3', duration: AV::Types::Duration.from_string('00:24:18')),
+          Track.new(sort_order: 6, path: 'MRCAudio/C040791070_1.mp3', duration: AV::Types::Duration.from_string('00:24:18')),
+          Track.new(sort_order: 7, path: 'MRCAudio/C040791177_1.mp3', duration: AV::Types::Duration.from_string('00:23:23')),
+          Track.new(sort_order: 8, path: 'MRCAudio/C040790881_1.mp3', duration: AV::Types::Duration.from_string('00:20:01')),
+          Track.new(sort_order: 9, path: 'MRCAudio/C040790988.mp3', duration: AV::Types::Duration.from_string('00:22:38')),
+          Track.new(sort_order: 10, title: 'reel 11', path: 'MRCAudio/C040791089.mp3'),
+          Track.new(sort_order: 11, title: 'reel 12', path: 'MRCAudio/C040791186.mp3'),
+          Track.new(sort_order: 12, title: 'reel 13, part 1', path: 'MRCAudio/C040790890_1.mp3'),
+          Track.new(sort_order: 13, title: 'reel 14, part 1', path: 'MRCAudio/C040790997_1.mp3'),
+          Track.new(sort_order: 14, title: 'reel 15, part 1', path: 'MRCAudio/C040791098_1.mp3'),
+          Track.new(sort_order: 15, title: 'reel 16, part 1', path: 'MRCAudio/C040790906_1.mp3'),
+          Track.new(sort_order: 16, title: 'reel 17, part 1', path: 'MRCAudio/C040791007_1.mp3'),
+          Track.new(sort_order: 17, title: 'reel 18, part 1', path: 'MRCAudio/C040791104_1.mp3'),
+          Track.new(sort_order: 18, title: 'reel 19, part 1', path: 'MRCAudio/C040791195_1.mp3'),
+          Track.new(sort_order: 19, title: 'reel 20, part 1', path: 'MRCAudio/C040791201_1.mp3')
         ]
 
         marc_record = AV::Marc.from_xml(File.read('spec/data/record-ragged-998-subfields.xml'))

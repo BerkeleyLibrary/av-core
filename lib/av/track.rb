@@ -36,15 +36,15 @@ module AV
 
     def to_s
       ''.tap do |s|
-        s << "#{sort_order}. " if sort_order
-        s << "#{title}: " if title
+        s << "#{sort_order}: " if sort_order
         s << path
+        s << " #{title.inspect}" if title
         s << " (#{duration})" if duration
       end
     end
 
     def inspect
-      "\#<#{self.class.name}:#{format('%016x', 2 * object_id)} #{self}>"
+      "\#<#{self.class.name} #{self}>"
     end
 
     # @return [Array<MARC::Subfield>]
@@ -75,38 +75,45 @@ module AV
         SUBFIELD_CODE_PATH => 'path'
       }.freeze
 
+      # Note that if multiple tracks are encoded in the same 998 field, the
+      # subfields **must** be in the order :a, :t, :g (duration, title, path),
+      # as documented in {https://docs.google.com/document/d/1gRWsaSoerSvadNlYR-zbYOjgj0geLxV41bBC0rm5nHE/edit
+      # "How to add media to the AV System"}.
+      #
+      # This is **not** the same as the display order set in {AV::Metadata::Fields::TRACKS}.
+      #
+      # @param marc_record [MARC::Record] the MARC record
+      # @param collection [String] the collection
       def tracks_from(marc_record, collection:)
-        [].tap do |tracks|
-          marc_record.each_by_tag(TRACKS_FIELD.tag) do |df|
-            group_subfield_values(df).each do |group|
-              tracks << from_group(group, collection: collection, sort_order: tracks.size)
-            end
+        track_fields_from(marc_record).each_with_object([]) do |df, tracks|
+          if single_track?(df)
+            group = df.subfields.map { |sf| [sf.code.to_sym, sf.value] }.to_h
+            tracks << from_group(group, collection: collection, sort_order: tracks.size)
+          else
+            add_multiple_tracks(df, tracks, collection)
           end
         end
       end
 
       private
 
-      def group_subfield_values(df)
-        values_by_code = values_from(df.subfields)
-        AV::Marc::Util.group_values_by_code(values_by_code, order: TRACKS_FIELD.subfield_order)
+      def single_track?(df)
+        df.subfields.map { |sf| sf.code.to_sym }.count(SUBFIELD_CODE_PATH) == 1
       end
 
-      def values_from(subfields)
-        values_by_code = AV::Marc::Util.values_by_code(subfields)
-        return {} unless (paths = values_by_code[SUBFIELD_CODE_PATH])
+      def track_fields_from(marc_record)
+        marc_record.fields.select { |df| df.tag == TRACKS_FIELD.tag }
+      end
 
-        values_by_code.reject do |code, values|
-          (values.size != paths.size).tap do |mismatch|
-            warn_inconsistency(code, values, paths.size) if mismatch
-          end
+      def add_multiple_tracks(df, tracks, collection)
+        group = nil
+        df.subfields.each do |sf|
+          (group ||= {})[sf.code.to_sym] = sf.value
+          next unless sf.code.to_sym == SUBFIELD_CODE_PATH
+
+          tracks << from_group(group, collection: collection, sort_order: tracks.size)
+          group = nil
         end
-      end
-
-      def warn_inconsistency(code, values, expected_size)
-        msg = "Dropping inconsistent track info for subfield #{code} (#{LABELS[code]}): " \
-                "expected #{expected_size} values, got #{values.size} (#{values})"
-        log.warn(msg)
       end
 
       def from_group(group, collection:, sort_order:)

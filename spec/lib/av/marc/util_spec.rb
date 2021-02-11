@@ -4,16 +4,22 @@ require 'marc'
 module AV
   module Marc
     module Util
-      describe :group_subfield_values do
-        attr_reader :df
-        attr_reader :original_groups
-
-        before(:each) do
-          @df = MARC::DataField.new('999')
-          @original_groups = [
+      describe :grouped_subfield_values do
+        let(:df) { MARC::DataField.new('999') }
+        let(:original_groups) do
+          [
             { b: '2', a: '1', c: '7' },
             { b: '4', a: '3', c: '9' },
             { b: '6', a: '5', c: '10' }
+          ]
+        end
+
+        let(:order) { %i[c b a] }
+        let(:ordered_groups) do
+          [
+            { c: '7', b: '2', a: '1' },
+            { c: '9', b: '4', a: '3' },
+            { c: '10', b: '6', a: '5' }
           ]
         end
 
@@ -24,66 +30,115 @@ module AV
             end
           end
 
-          describe :to_a do
-            it 'returns the groups' do
-              groups = Util.group_subfield_values(df)
-              expect(groups.to_a).to eq(original_groups)
-              groups.to_a.each_with_index do |actual, i|
-                expect(actual.keys).to eq(original_groups[i].keys)
-                expect(actual.values).to eq(original_groups[i].values)
-              end
-            end
+          it 'returns the groups' do
+            groups = Util.group_subfield_values(df)
+            expect(groups).to eq(original_groups)
           end
 
-          describe :ordered_by do
-            it 'reorders the groups' do
-              expected = [
-                { c: '7', b: '2', a: '1' },
-                { c: '9', b: '4', a: '3' },
-                { c: '10', b: '6', a: '5' }
-              ]
-              reordered = Util.group_subfield_values(df, order: %i[c b a])
-              reordered.to_a.each_with_index do |actual, i|
-                expect(actual.keys).to eq(expected[i].keys)
-                expect(actual.values).to eq(expected[i].values)
-              end
+          it 'reorders the groups' do
+            reordered = Util.group_subfield_values(df, order: order)
+            # Hash equality doesn't check order, so we do it by hand
+            reordered.each_with_index do |actual, i|
+              expected = ordered_groups[i]
+              expect(actual.keys).to eq(expected.keys), "#{i}: expected: #{expected}, got: #{actual}"
+              expect(actual.values).to eq(expected.values), "#{i}: expected: #{expected}, got: #{actual}"
             end
           end
         end
 
-        describe 'grouped by code' do
+        describe 'pre-grouped by code' do
           before(:each) do
-            all_codes = original_groups.flat_map(&:keys).uniq
-            all_codes.each do |c|
-              original_groups.each do |g|
-                next unless (v = g[c])
-
-                df.subfields << MARC::Subfield.new(c, v)
-              end
+            {
+              b: %w[2 4 6],
+              a: %w[1 3 5],
+              c: %w[7 9 10]
+            }.each do |c, vv|
+              vv.each { |v| df.subfields << MARC::Subfield.new(c, v) }
             end
           end
 
-          describe :to_a do
-            it 'groups the values' do
-              groups = Util.group_subfield_values(df)
-              expect(groups.to_a).to eq(original_groups)
+          it 'groups the values' do
+            groups = Util.group_subfield_values(df)
+            expect(groups).to eq(original_groups)
+          end
+
+          it 'reorders the groups' do
+            reordered = Util.group_subfield_values(df, order: order)
+            # Hash equality doesn't check order, so we do it by hand
+            reordered.each_with_index do |actual, i|
+              expected = ordered_groups[i]
+              expect(actual.keys).to eq(expected.keys), "#{i}: expected: #{expected}, got: #{actual}"
+              expect(actual.values).to eq(expected.values), "#{i}: expected: #{expected}, got: #{actual}"
+            end
+          end
+        end
+
+        describe 'inconsistent order' do
+          let(:inconsistent_groups) do
+            [
+              { a: '1', b: '2', c: '7' },
+              { b: '4', a: '3', c: '9' },
+              { c: '10', a: '5', b: '6' }
+            ]
+          end
+
+          before(:each) do
+            inconsistent_groups.each do |g|
+              g.each { |c, v| df.subfields << MARC::Subfield.new(c, v) }
             end
           end
 
-          describe :ordered_by do
-            it 'reorders the groups' do
-              expected = [
-                { c: '7', b: '2', a: '1' },
-                { c: '9', b: '4', a: '3' },
-                { c: '10', b: '6', a: '5' }
-              ]
-              reordered = Util.group_subfield_values(df, order: %i[c b a])
-              expect(reordered.to_a).to eq(expected), "expected: #{expected}\n     got: #{reordered}"
-              # Hash equality doesn't check order, so we do it by hand
-              reordered.to_a.each_with_index do |actual, i|
-                expect(actual.keys).to eq(expected[i].keys), "#{i}: expected: #{expected[i]}\n       got: #{actual}"
-                expect(actual.values).to eq(expected[i].values), "#{i}: expected: #{expected[i]}\n       got: #{actual}"
-              end
+          it 'groups the values' do
+            groups = Util.group_subfield_values(df)
+            expect(groups).to eq(inconsistent_groups)
+          end
+
+          it 'reorders the groups' do
+            reordered = Util.group_subfield_values(df, order: order)
+            # Hash equality doesn't check order, so we do it by hand
+            reordered.each_with_index do |actual, i|
+              expected = ordered_groups[i]
+              expect(actual.keys).to eq(expected.keys), "#{i}: expected: #{expected}, got: #{actual}"
+              expect(actual.values).to eq(expected.values), "#{i}: expected: #{expected}, got: #{actual}"
+            end
+          end
+        end
+
+        describe 'ragged groups' do
+          let(:ragged_groups) do
+            [{ a: '1' }, { b: '2' }, { c: '7' }, { b: '4' }, { c: '9' }, { a: '5' }, { b: '6' }]
+          end
+          let(:ragged_reordered) do
+            [
+              { c: '7', b: '2', a: '1' },
+              { c: '9', b: '4', a: '5' },
+              { b: '6' }
+            ]
+          end
+
+          before(:each) do
+            ragged_groups.each do |g|
+              g.each { |c, v| df.subfields << MARC::Subfield.new(c, v) }
+            end
+          end
+
+          it 'groups the values' do
+            expected = [
+              { a: '1', b: '2', c: '7' },
+              { a: '5', b: '4', c: '9' },
+              { b: '6' }
+            ]
+            groups = Util.group_subfield_values(df)
+            expect(groups).to eq(expected)
+          end
+
+          it 'reorders the values' do
+            reordered = Util.group_subfield_values(df, order: order)
+            # Hash equality doesn't check order, so we do it by hand
+            reordered.each_with_index do |actual, i|
+              expected = ragged_reordered[i]
+              expect(actual.keys).to eq(expected.keys), "#{i}: expected: #{expected}, got: #{actual}"
+              expect(actual.values).to eq(expected.values), "#{i}: expected: #{expected}, got: #{actual}"
             end
           end
         end
