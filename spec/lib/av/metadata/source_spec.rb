@@ -46,20 +46,6 @@ module AV
         end
       end
 
-      describe :_reader do
-        it 'returns Millennium reader for a Millennium source' do
-          expect(Source::MILLENNIUM._reader).to be(Readers::Millennium)
-        end
-
-        it 'returns TIND reader for a TIND record' do
-          expect(Source::TIND._reader).to be(Readers::TIND)
-        end
-        it 'raises an error for an unknown source' do
-          source = Source.allocate
-          expect { source._reader }.to raise_error(ArgumentError)
-        end
-      end
-
       describe Source::MILLENNIUM do
         attr_reader :record_url
 
