@@ -4,9 +4,7 @@ module AV
       include Comparable
       include AV::Util
 
-      attr_reader :tag
-      attr_reader :label
-      attr_reader :order
+      attr_reader :tag, :label, :order
 
       def initialize(tag:, label:, order:)
         @tag = tag

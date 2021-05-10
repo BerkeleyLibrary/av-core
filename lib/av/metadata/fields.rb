@@ -21,7 +21,7 @@ module AV
       DEFAULT_FIELDS = [TITLE, DESCRIPTION, CREATOR_PERSONAL, CREATOR_CORPORATE, TRACKS, CATALOG_LINK].freeze
 
       JSON_REQUIRED_FIELDS = %w[visible params labels order].freeze
-      TAG_RE = /([0-9]{3})([a-z0-9_%])([a-z0-9_%])([a-z0-9_%]?)/.freeze
+      TAG_RE = /([0-9]{3})([a-z0-9_%])([a-z0-9_%])([a-z0-9_%]?)/
 
       class << self
 

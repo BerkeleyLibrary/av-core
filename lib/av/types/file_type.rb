@@ -33,11 +33,7 @@ module AV
       # ############################################################
       # Accessors and instance methods
 
-      attr_reader :player_tag
-      attr_reader :mime_type
-      attr_reader :label
-      attr_reader :prefix
-      attr_reader :extensions
+      attr_reader :player_tag, :mime_type, :label, :prefix, :extensions
 
       def to_s
         value.to_s

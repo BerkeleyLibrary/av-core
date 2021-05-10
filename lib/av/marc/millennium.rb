@@ -16,7 +16,7 @@ module AV
 
         attr_reader :marc_txt
 
-        PRE_TAG_REGEXP = %r{<pre>(((?!</pre>).)*)</pre>}m.freeze
+        PRE_TAG_REGEXP = %r{<pre>(((?!</pre>).)*)</pre>}m
 
         def initialize(html)
           match_data = html.match(PRE_TAG_REGEXP)
@@ -37,12 +37,10 @@ module AV
 
         private
 
-        TAG_REGEXP = /([0-9]{3}) ([0-9 ])([0-9 ]) (.*)/.freeze
-        SUBFIELD_REGEXP = /(\|[^ ])?([^|]+)/.freeze
+        TAG_REGEXP = /([0-9]{3}) ([0-9 ])([0-9 ]) (.*)/
+        SUBFIELD_REGEXP = /(\|[^ ])?([^|]+)/
 
-        attr_accessor :record
-        attr_accessor :current_field
-        attr_accessor :current_text
+        attr_accessor :record, :current_field, :current_text
 
         def process_line(line)
           tag_match_data = line.match(TAG_REGEXP)

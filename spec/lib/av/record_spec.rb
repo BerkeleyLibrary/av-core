@@ -250,7 +250,7 @@ module AV
         unrestricted = %w[b22139658 b23161018 (pacradio)00107 (pacradio)01469]
         (restricted + unrestricted).each do |record_id|
           source = Metadata::Source.for_record_id(record_id)
-          test_data = "spec/data/#{(source == Metadata::Source::TIND ? "record-#{record_id}.xml" : "#{record_id}.html")}"
+          test_data = "spec/data/#{source == Metadata::Source::TIND ? "record-#{record_id}.xml" : "#{record_id}.html"}"
           stub_request(:get, source.marc_uri_for(record_id)).to_return(status: 200, body: File.read(test_data))
         end
 

@@ -3,7 +3,7 @@ module AV
     class Duration
       include Comparable
 
-      DURATION_RE = /^([0-9]{1,2})?:?([0-9]{2}):?([0-9]{2})$/.freeze
+      DURATION_RE = /^([0-9]{1,2})?:?([0-9]{2}):?([0-9]{2})$/
 
       attr_reader :total_seconds
 

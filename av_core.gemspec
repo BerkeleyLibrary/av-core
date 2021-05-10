@@ -36,8 +36,10 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'listen', '>= 3.0.5', '< 3.2'
   spec.add_development_dependency 'rake', '~> 13.0'
   spec.add_development_dependency 'rspec-support', '~> 3.9'
-  spec.add_development_dependency 'rubocop', '~> 0.91.0'
-  spec.add_development_dependency 'simplecov', '~> 0.16.1'
+  spec.add_development_dependency 'rubocop', '~> 1.12'
+  spec.add_development_dependency 'rubocop-rake', '~> 0.5'
+  spec.add_development_dependency 'rubocop-rspec', '~> 2.2'
+  spec.add_development_dependency 'simplecov', '~> 0.21'
   spec.add_development_dependency 'simplecov-rcov', '~> 0.2'
   spec.add_development_dependency 'webmock', '~> 3.8'
 end

@@ -3,8 +3,7 @@ module AV
     class Link
       include Comparable
 
-      attr_reader :body
-      attr_reader :url
+      attr_reader :body, :url
 
       def initialize(body:, url:)
         @body = body

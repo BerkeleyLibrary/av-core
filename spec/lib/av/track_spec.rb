@@ -73,7 +73,7 @@ module AV
           path: 'MRCAudio/C040791201_1.mp3',
           duration: AV::Types::Duration.from_string('00:40:12')
         }
-        track_str = Track.new(track_params).to_s
+        track_str = Track.new(**track_params).to_s
         track_params.each_value do |v|
           expect(track_str).to include(v.to_s)
         end
