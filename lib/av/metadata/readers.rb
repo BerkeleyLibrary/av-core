@@ -8,6 +8,7 @@ module AV
         class << self
           include AV::Util
 
+          # @return [MARC::Record] the MARC record
           def record_for(record_id)
             marc_uri = marc_uri_for(record_id)
             begin
@@ -42,6 +43,7 @@ module AV
           OCLC_ID_FIELD = '901__o'.freeze
           TIND_ID_FIELD = '035__a'.freeze
 
+          # @return [MARC::Record] the MARC record
           def record_for(record_id)
             first_record_for(record_id)
           rescue AV::RecordNotFound
@@ -66,11 +68,13 @@ module AV
 
           private
 
+          # @return [MARC::Record] the MARC record
           def first_record_for(record_id)
             marc_uri = marc_uri_for(record_id)
             xml = do_get(marc_uri)
             records = AV::Marc.all_from_xml(xml)
             record = records && records.first
+            # noinspection RubyYardReturnMatch
             return record if record
 
             raise record_not_found(record_id, "GET #{marc_uri} returned: #{xml}")

@@ -6,6 +6,7 @@ module AV
     class Millennium
 
       class << self
+        # @return [MARC::Record] The extracted record
         def marc_from_html(html)
           MarcBuilder.new(html).build
         end

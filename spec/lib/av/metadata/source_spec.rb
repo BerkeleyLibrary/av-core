@@ -53,17 +53,17 @@ module AV
         end
       end
 
-      describe :reader do
+      describe :_reader do
         it 'returns Millennium reader for a Millennium source' do
-          expect(Source::MILLENNIUM.reader).to be(Readers::Millennium)
+          expect(Source::MILLENNIUM._reader).to be(Readers::Millennium)
         end
 
         it 'returns TIND reader for a TIND record' do
-          expect(Source::TIND.reader).to be(Readers::TIND)
+          expect(Source::TIND._reader).to be(Readers::TIND)
         end
         it 'raises an error for an unknown source' do
           source = Source.allocate
-          expect { source.reader }.to raise_error(ArgumentError)
+          expect { source._reader }.to raise_error(ArgumentError)
         end
       end
 
@@ -256,61 +256,6 @@ module AV
             stub_request(:get, record_url).to_return(status: 207, body: marc_xml)
 
             expect { Source::TIND.record_for('(pacradio)00107') }.to raise_error(AV::RecordNotFound)
-          end
-        end
-
-        describe :record_for_bib do
-          attr_reader :search_url
-
-          before(:each) do
-            @search_url = 'https://digicoll.lib.berkeley.edu/search?of=xm&p=901__m:%22b23305516%22'
-          end
-
-          it 'raises ArgumentError for a TIND ID' do
-            expect { Source::TIND.record_for_bib('(pacradio)00107') }.to raise_error(ArgumentError)
-          end
-
-          it 'returns a record' do
-            marc_xml = File.read('spec/data/search-b23305516.xml')
-            stub_request(:get, search_url).to_return(status: 200, body: marc_xml)
-
-            marc_record = Source::TIND.record_for_bib('b23305516')
-            expect(marc_record).not_to be_nil
-            expect(marc_record).to be_a(MARC::Record)
-
-            fields_001 = marc_record.fields('001')
-            expect(fields_001.size).to eq(1)
-            expect(fields_001[0].value).to eq('19816')
-
-            fields_901 = marc_record.fields('901')
-            expect(fields_901.size).to eq(1)
-
-            field_901 = fields_901[0]
-            expect(field_901.indicator1).to eq(' ')
-            expect(field_901.indicator2).to eq(' ')
-
-            subfield_m_value = field_901['m']
-            expect(subfield_m_value).to eq('b23305516')
-          end
-
-          it "raises #{AV::RecordNotFound} for an empty result" do
-            marc_xml = File.read('spec/data/record-empty-result.xml')
-            stub_request(:get, search_url).to_return(status: 200, body: marc_xml)
-
-            expect { Source::TIND.record_for_bib('b23305516') }.to raise_error(AV::RecordNotFound)
-          end
-
-          it "raises #{AV::RecordNotFound} for a redirect to login" do
-            marc_xml = File.read('spec/data/record-redirect-to-login.html')
-            stub_request(:get, search_url).to_return(status: 200, body: marc_xml)
-
-            expect { Source::TIND.record_for_bib('b23305516') }.to raise_error(AV::RecordNotFound)
-          end
-
-          it "raises #{AV::RecordNotFound} if the record cannot be found" do
-            stub_request(:get, search_url).to_return(status: 404)
-
-            expect { Source::TIND.record_for_bib('b23305516') }.to raise_error(AV::RecordNotFound)
           end
         end
 

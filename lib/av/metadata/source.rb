@@ -23,7 +23,8 @@ module AV
         end
       end
 
-      def reader
+      # TODO: remove this
+      def _reader
         return Readers::Millennium if self == MILLENNIUM
         return Readers::TIND if self == TIND
 
@@ -37,33 +38,31 @@ module AV
         raise ArgumentError, "Unsupported metadata source: #{self}"
       end
 
+      # @return [MARC::Record] the MARC record
       def record_for(record_id)
         record_id = ensure_valid_id(record_id)
-        reader.record_for(record_id)
+        # noinspection RubyYardReturnMatch
+        _reader.record_for(record_id)
       end
 
       def display_uri_for(metadata)
         record_id = record_id_from(metadata)
-        reader.display_uri_for(record_id)
+        _reader.display_uri_for(record_id)
       end
 
+      # TODO: this is only used in testing
       def marc_uri_for(record_id)
         record_id = ensure_valid_id(record_id)
-        reader.marc_uri_for(record_id)
+        _reader.marc_uri_for(record_id)
       end
 
-      def record_for_bib(bib_number)
-        bib_number = MILLENNIUM.ensure_valid_id(bib_number)
-        reader.record_for(bib_number) # TIND can detect and handle Millennium bibs
-      end
+      private
 
       def ensure_valid_id(record_id)
         return record_id if Source.for_record_id(record_id) == self
 
         raise ArgumentError, "Not a valid record ID for source #{value.inspect}: #{record_id}"
       end
-
-      private
 
       def record_id_from(metadata)
         return metadata.bib_number if self == MILLENNIUM && metadata.respond_to?(:bib_number)
