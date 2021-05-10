@@ -2,12 +2,6 @@ require 'spec_helper'
 
 module AV
   describe Util do
-    describe :log do
-      it 'returns the logger' do
-        expect(AV::Util.log).to be(AV.logger)
-      end
-    end
-
     describe :uri_or_nil do
       it 'returns nil for nil' do
         expect(AV::Util.uri_or_nil(nil)).to be_nil

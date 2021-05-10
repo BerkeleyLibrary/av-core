@@ -4,15 +4,8 @@ require 'spec_helper'
 module AV
   class Metadata
     describe Source do
-      attr_reader :logger_orig
-
       before(:each) do
-        @logger_orig = AV.instance_variable_get(:@logger)
-        AV.instance_variable_set(:@logger, Logger.new(File::NULL))
-      end
-
-      after(:each) do
-        AV.instance_variable_set(:@logger, logger_orig)
+        allow(UCBLIT::Logging).to receive(:logger).and_return(Logger.new(File::NULL))
       end
 
       describe :for_record_id do

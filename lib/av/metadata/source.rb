@@ -1,7 +1,6 @@
 require 'rest_client'
 require 'typesafe_enum'
 require 'av/config'
-require 'av/logger'
 require 'av/record_not_found'
 require 'av/marc'
 require 'av/marc/millennium'

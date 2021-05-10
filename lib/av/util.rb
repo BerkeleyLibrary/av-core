@@ -1,11 +1,9 @@
-require 'av/logger'
 require 'rest-client'
+require 'ucblit/logging'
 
 module AV
   module Util
-    def log
-      AV.logger
-    end
+    include UCBLIT::Logging
 
     def do_get(uri, ignore_errors: false)
       resp = get_or_raise(uri)
@@ -48,7 +46,7 @@ module AV
         msg = "GET #{uri} failed; host returned #{resp.code}: #{resp.body || 'no response body'}"
         raise(RestClient::RequestFailed.new(resp, resp.code).tap { |ex| ex.message = msg })
       ensure
-        log.info("GET #{uri} returned #{resp.code}")
+        logger.info("GET #{uri} returned #{resp.code}")
       end
     end
   end
