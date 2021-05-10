@@ -4,6 +4,12 @@ module AV
 
   class Config
     class << self
+      DEFAULT_ALMA_INSTITUTION_ID = '6532'.freeze
+
+      def alma_institution_id
+        @alma_institution_id ||= (value_from_rails_config(:alma_institution_id) || 6532)
+      end
+
       def avplayer_base_uri
         @avplayer_base_uri ||= uri_from_rails_config(:avplayer_base_uri)
       end
@@ -85,17 +91,18 @@ module AV
         uri.tap { |u| u.path.delete_suffix('/') }
       end
 
+      def value_from_rails_config(sym)
+        return unless defined?(Rails)
+        return unless (application = Rails.application)
+        return unless (config = application.config)
+
+        config.send(sym)
+      end
+
       def uri_from_rails_config(sym)
-        raise NameError, "Can't read #{sym.inspect} from Rails config: Rails is not defined" unless defined?(Rails)
+        raise ArgumentError, "Rails.application.#{sym} not set" unless (val = value_from_rails_config(sym))
 
-        application = Rails.application
-        raise ArgumentError, "Can't read #{sym.inspect} from Rails config: Rails.application is nil" unless application
-
-        config = Rails.application.config
-        raise ArgumentError, "Can't read #{sym.inspect} from Rails config: Rails.application.config is nil" unless application
-
-        result = config.send(sym)
-        clean_uri(result)
+        clean_uri(val)
       end
 
       def set?(setting)
