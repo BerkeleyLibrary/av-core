@@ -90,9 +90,34 @@ module AV
         end
 
         it 'filters out duplicate fields' do
-          num_542u = Fields.all.count { |r| r.tag == '542' && r.subfield_order == [:u] }
-          expect(num_542u).to eq(1)
+          all = {}
+          Fields.all.each do |f|
+            key = [f.tag]
+            key << f.ind_1 if f.ind_1
+            key << f.ind_2 if f.ind_2
+            (all[key.join] ||= []) << f
+          end
+
+          dups = {}
+          all.each do |k, ff|
+            if ff.size > 1
+              dups[k] = ff.map { |f| "(#{f.order}) #{f.label}" }
+            end
+          end
+
+          dups.each do |k, ff|
+            puts k
+            ff.each { |f| puts "\t#{f}" }
+          end
+          expect(dups).to be_empty
+
+          # expect(Fields.all.map(&:label).uniq.size).to eq(Fields.all.size)
+          # all_fields = {}
+          # Fields.all.each do |f|
+          #   all_fields[f.label]
+          # end
         end
+
       end
 
       describe :fields_from do
