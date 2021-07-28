@@ -1,7 +1,7 @@
 # =============================================================================
 # Target: base
 
-FROM ruby:2.6.5-alpine AS base
+FROM ruby:3.0.2-alpine AS base
 
 RUN apk --no-cache --update upgrade && \
     apk --no-cache add \
@@ -28,9 +28,6 @@ RUN apk --update --no-cache add \
         coreutils \
         git \
     && rm -rf /var/cache/apk/*
-
-# The base image ships bundler 1.17.2, but we want something more recent
-RUN gem install bundler -v 2.1.4
 
 # Copy codebase to WORKDIR. Unlike application projects, for a gem project
 # we need to do this before running `bundle install`, in order for the gem
