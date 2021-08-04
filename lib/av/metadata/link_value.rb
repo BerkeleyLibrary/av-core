@@ -34,7 +34,7 @@ module AV
 
         SUBFIELD_LINK_TEXT = :y
         SUBFIELD_PUBLIC_NOTE = :z
-        SUBFIELD_MATERIALS_SPECD = :"3"
+        SUBFIELD_MATERIALS_SPECD = :'3'
 
         def body_from(value_group)
           body = value_group[SUBFIELD_PUBLIC_NOTE] || value_group[SUBFIELD_LINK_TEXT]

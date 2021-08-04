@@ -42,6 +42,18 @@ module AV
         expect(result).to eq(body.scrub)
       end
 
+      it 'sends a Chrome user-agent header' do
+        expected_ua = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36'
+
+        url = 'http://oskicat.berkeley.edu/search~S1?/.b11082434/.b11082434/1%2C1%2C1%2CB/marc~b11082434'
+        body = File.read('spec/data/b11082434.html')
+        stub_request(:get, url).with(headers: { 'User-Agent' => expected_ua }).to_return(status: 200, body: body)
+
+        uri = URI.parse(url)
+        result = AV::Util.do_get(uri)
+        expect(result).to eq(body.scrub)
+      end
+
       it "raises #{RestClient::Exception} in the event of an invalid response" do
         aggregate_failures 'responses' do
           [207, 400, 401, 403, 404, 405, 418, 451, 500, 503].each do |code|

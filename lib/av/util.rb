@@ -38,8 +38,10 @@ module AV
 
     private
 
+    FAKE_CHROME_USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36'.freeze
+
     def get_or_raise(uri)
-      resp = RestClient.get(uri.to_s)
+      resp = RestClient.get(uri.to_s, user_agent: FAKE_CHROME_USER_AGENT)
       begin
         return resp if resp.code == 200
 
