@@ -1,8 +1,11 @@
 require 'rest-client'
 require 'ucblit/logging'
+require 'av/core/module_info'
 
 module AV
   module Util
+    DEFAULT_USER_AGENT = "#{Core::ModuleInfo::NAME} #{Core::ModuleInfo::VERSION} (#{Core::ModuleInfo::HOMEPAGE})".freeze
+
     include UCBLIT::Logging
 
     def do_get(uri, ignore_errors: false)
@@ -38,10 +41,8 @@ module AV
 
     private
 
-    FAKE_CHROME_USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36'.freeze
-
     def get_or_raise(uri)
-      resp = RestClient.get(uri.to_s, user_agent: FAKE_CHROME_USER_AGENT)
+      resp = RestClient.get(uri.to_s, user_agent: DEFAULT_USER_AGENT)
       begin
         return resp if resp.code == 200
 

@@ -42,8 +42,8 @@ module AV
         expect(result).to eq(body.scrub)
       end
 
-      it 'sends a Chrome user-agent header' do
-        expected_ua = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36'
+      it 'sends a custom user-agent header' do
+        expected_ua = Util::DEFAULT_USER_AGENT
 
         url = 'http://oskicat.berkeley.edu/search~S1?/.b11082434/.b11082434/1%2C1%2C1%2CB/marc~b11082434'
         body = File.read('spec/data/b11082434.html')
