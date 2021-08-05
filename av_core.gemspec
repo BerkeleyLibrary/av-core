@@ -3,7 +3,8 @@ File.expand_path('lib', __dir__).tap do |lib|
 end
 
 ruby_version_file = File.expand_path('.ruby-version', __dir__)
-ruby_version = File.read(ruby_version_file).strip
+ruby_version_exact = File.read(ruby_version_file).strip
+ruby_minor_version = ruby_version_exact.gsub(/^(\d+\.\d+).*/, '\1')
 
 require 'av/core/module_info'
 
@@ -21,7 +22,7 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
 
-  spec.required_ruby_version = ">= #{ruby_version}"
+  spec.required_ruby_version = ">= #{ruby_minor_version}"
 
   spec.add_dependency 'marc', '~> 1.0'
   spec.add_dependency 'rest-client', '~> 2.1'
