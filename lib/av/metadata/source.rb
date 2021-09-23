@@ -1,6 +1,7 @@
 require 'rest_client'
 require 'typesafe_enum'
 require 'av/config'
+require 'av/constants'
 require 'av/record_not_found'
 require 'av/marc'
 require 'av/marc/millennium'
@@ -18,7 +19,7 @@ module AV
 
       class << self
         def for_record_id(record_id)
-          record_id =~ Readers::MILLENNIUM_RECORD_RE ? Source::MILLENNIUM : Source::TIND
+          record_id =~ AV::Constants::MILLENNIUM_RECORD_RE ? Source::MILLENNIUM : Source::TIND
         end
       end
 

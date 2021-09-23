@@ -1,15 +1,25 @@
 require 'uri'
 
 module AV
-
   class Config
-    DEFAULT_ALMA_INSTITUTION_ID = '6532'.freeze
     REQUIRED_SETTINGS = %i[avplayer_base_uri millennium_base_uri tind_base_uri wowza_base_uri].freeze
 
     class << self
 
+      # TODO: separate Config::Alma object?
       def alma_institution_id
-        @alma_institution_id ||= (value_from_rails_config(:alma_institution_id) || 6532)
+        # UC Berkeley = 6532
+        @alma_institution_id ||= value_from_rails_config(:alma_institution_id)
+      end
+
+      def alma_domain
+        # UC Berkeley = berkeley.alma.exlibrisgroup.com
+        @alma_domain ||= value_from_rails_config(:alma_domain)
+      end
+
+      def alma_institution_code
+        # UC Berkeley = 01UCS_BER
+        @alma_institution_code ||= value_from_rails_config(:alma_institution_code)
       end
 
       def avplayer_base_uri

@@ -1,13 +1,14 @@
 require 'typesafe_enum'
+require 'av/constants'
 
 module AV
   class RecordId
     # ------------------------------------------------------------
     # Constants
 
-    ALMA_RE = /^[0-9]{15,17}$/
-    MILL_RE = /^b(?<digits>[0-9]{8})(?<check>[0-9ax])?$/
-    OCLC_RE = /^o[0-9]+$/
+    ALMA_RE = AV::Constants::ALMA_RECORD_RE
+    MILL_RE = AV::Constants::MILLENNIUM_RECORD_RE
+    OCLC_RE = AV::Constants::OCLC_RECORD_RE
 
     # ------------------------------------------------------------
     # Fields
@@ -93,7 +94,7 @@ module AV
       class << self
         def for_id(id_str)
           return unless id_str
-          return Type::Alma if ALMA_RE =~ id_str && id_str.ends_with?(AV::Config.alma_institution_id)
+          return Type::Alma if ALMA_RE =~ id_str
           return Type::Millennium if MILL_RE =~ id_str
           return Type::OCLC if OCLC_RE =~ id_str
 
