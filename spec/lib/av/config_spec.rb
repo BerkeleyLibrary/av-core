@@ -39,7 +39,7 @@ module AV
         expect(Config.missing).to eq(%i[avplayer_base_uri millennium_base_uri tind_base_uri wowza_base_uri])
       end
 
-      it 'returns an empty array if nothign is missing' do
+      it 'returns an empty array if nothing is missing' do
         settings = {
           avplayer_base_uri: 'http://avplayer.example.edu',
           millennium_base_uri: 'http://millennium.example.edu',

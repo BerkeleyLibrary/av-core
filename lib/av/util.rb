@@ -1,12 +1,12 @@
 require 'rest-client'
-require 'ucblit/logging'
+require 'berkeley_library/logging'
 require 'av/core/module_info'
 
 module AV
   module Util
     DEFAULT_USER_AGENT = "#{Core::ModuleInfo::NAME} #{Core::ModuleInfo::VERSION} (#{Core::ModuleInfo::HOMEPAGE})".freeze
 
-    include UCBLIT::Logging
+    include BerkeleyLibrary::Logging
 
     def do_get(uri, ignore_errors: false)
       resp = get_or_raise(uri)

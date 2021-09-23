@@ -5,7 +5,7 @@ module AV
   class Metadata
     describe Source do
       before(:each) do
-        allow(UCBLIT::Logging).to receive(:logger).and_return(Logger.new(File::NULL))
+        allow(BerkeleyLibrary::Logging).to receive(:logger).and_return(Logger.new(File::NULL))
       end
 
       describe :for_record_id do

@@ -3,8 +3,10 @@ require 'uri'
 module AV
 
   class Config
+    DEFAULT_ALMA_INSTITUTION_ID = '6532'.freeze
+    REQUIRED_SETTINGS = %i[avplayer_base_uri millennium_base_uri tind_base_uri wowza_base_uri]
+
     class << self
-      DEFAULT_ALMA_INSTITUTION_ID = '6532'.freeze
 
       def alma_institution_id
         @alma_institution_id ||= (value_from_rails_config(:alma_institution_id) || 6532)
@@ -66,7 +68,7 @@ module AV
       # @return [Array<Symbol>] the missing settings.
       def missing
         [].tap do |unset|
-          settings = %i[avplayer_base_uri millennium_base_uri tind_base_uri wowza_base_uri]
+          settings = REQUIRED_SETTINGS
           settings.each do |setting|
             unset << setting unless set?(setting)
           end
@@ -81,7 +83,7 @@ module AV
       # @return [URI] the URI
       # @raise URI::InvalidURIError if the URI cannot be parsed, or is not HTTP/HTTPS
       def clean_uri(url)
-        uri = url.is_a?(URI) ? url : URI.parse(url)
+        uri = url.is_a?(URI) ? url : URI.parse(url.to_s)
 
         uri.scheme.tap do |scheme|
           raise URI::InvalidURIError, 'URL must have a scheme' unless scheme
@@ -91,18 +93,24 @@ module AV
         uri.tap { |u| u.path.delete_suffix('/') }
       end
 
-      def value_from_rails_config(sym)
-        return unless defined?(Rails)
-        return unless (application = Rails.application)
-        return unless (config = application.config)
+      def uri_from_rails_config(sym)
+        return unless (config = rails_config)
 
-        config.send(sym)
+        result = config.send(sym)
+        clean_uri(result)
       end
 
-      def uri_from_rails_config(sym)
-        raise ArgumentError, "Rails.application.#{sym} not set" unless (val = value_from_rails_config(sym))
+      # Gets the specified value from the Rails configuraiton
+      # @return [Object, nil] the value, or nil if there is no Rails configuration or the value is not set
+      def value_from_rails_config(sym)
+        rails_config.send(sym)
+      end
 
-        clean_uri(val)
+      def rails_config
+        return unless defined?(Rails)
+        return unless (application = Rails.application)
+
+        application.config
       end
 
       def set?(setting)
