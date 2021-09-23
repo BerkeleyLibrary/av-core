@@ -4,7 +4,7 @@ module AV
 
   class Config
     DEFAULT_ALMA_INSTITUTION_ID = '6532'.freeze
-    REQUIRED_SETTINGS = %i[avplayer_base_uri millennium_base_uri tind_base_uri wowza_base_uri]
+    REQUIRED_SETTINGS = %i[avplayer_base_uri millennium_base_uri tind_base_uri wowza_base_uri].freeze
 
     class << self
 

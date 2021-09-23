@@ -100,9 +100,7 @@ module AV
 
           dups = {}
           all.each do |k, ff|
-            if ff.size > 1
-              dups[k] = ff.map { |f| "(#{f.order}) #{f.label}" }
-            end
+            dups[k] = ff.map { |f| "(#{f.order}) #{f.label}" } if ff.size > 1
           end
 
           dups.each do |k, ff|
