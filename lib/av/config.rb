@@ -1,4 +1,4 @@
-require 'uri'
+require 'berkeley_library/util/uris'
 
 module AV
   class Config
@@ -87,20 +87,16 @@ module AV
 
       private
 
-      # Returns a URI, with any trailing slash removed to simplify
-      # concatenation
+      # Returns a URI
       # @param [URI, String] url the base URL
       # @return [URI] the URI
       # @raise URI::InvalidURIError if the URI cannot be parsed, or is not HTTP/HTTPS
       def clean_uri(url)
-        uri = url.is_a?(URI) ? url : URI.parse(url.to_s)
-
-        uri.scheme.tap do |scheme|
-          raise URI::InvalidURIError, 'URL must have a scheme' unless scheme
+        BerkeleyLibrary::Util::URIs.uri_or_nil(url).tap do |uri|
+          raise URI::InvalidURIError, 'url cannot be nil' unless uri
+          raise URI::InvalidURIError, 'URL must have a scheme' unless (scheme = uri.scheme)
           raise URI::InvalidURIError, 'URL must be HTTP or HTTPS' unless scheme.start_with?('http')
         end
-
-        uri.tap { |u| u.path.delete_suffix('/') }
       end
 
       def uri_from_rails_config(sym)

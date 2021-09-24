@@ -22,12 +22,14 @@ module AV
 
         def marc_uri_for(record_id)
           ensure_valid_id(record_id)
-          URI.join(base_uri, "search~S1?/.#{record_id}/.#{record_id}/1%2C1%2C1%2CB/marc~#{record_id}")
+          query_string = "/.#{record_id}/.#{record_id}/1%2C1%2C1%2CB/marc~#{record_id}"
+          URIs.append(base_uri, 'search~S1', '?', query_string)
         end
 
         def _display_uri_for(record_id)
           ensure_valid_id(record_id)
-          URI.join(base_uri, "record=#{record_id}")
+          # this looks like a query string, but isn't
+          URIs.append(base_uri, "record=#{record_id}")
         end
 
         private

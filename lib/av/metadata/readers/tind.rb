@@ -24,17 +24,16 @@ module AV
         def marc_uri_for(record_id)
           ensure_valid_id(record_id)
           id_field = id_field_for(record_id)
-          URI.join(base_uri, '/search').tap do |search_uri|
-            search_uri.query = URI.encode_www_form(
-              'p' => "#{id_field}:\"#{record_id}\"",
-              'of' => 'xm'
-            )
-          end
+          query_string = URI.encode_www_form(
+            'p' => "#{id_field}:\"#{record_id}\"",
+            'of' => 'xm'
+          )
+          URIs.append(base_uri, 'search', '?', query_string)
         end
 
         def _display_uri_for(record_id)
           ensure_valid_id(record_id)
-          URI.join(base_uri, "/record/#{record_id}")
+          URIs.append(base_uri, 'record', record_id)
         end
 
         private

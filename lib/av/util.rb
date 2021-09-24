@@ -1,19 +1,17 @@
 require 'rest-client'
 require 'berkeley_library/logging'
+require 'berkeley_library/util'
 require 'av/core/module_info'
 
 module AV
   module Util
+    include BerkeleyLibrary::Logging
+    include BerkeleyLibrary::Util
+
     DEFAULT_USER_AGENT = "#{Core::ModuleInfo::NAME} #{Core::ModuleInfo::VERSION} (#{Core::ModuleInfo::HOMEPAGE})".freeze
 
-    include BerkeleyLibrary::Logging
-
-    def do_get(uri, ignore_errors: false)
-      resp = get_or_raise(uri)
-      body = resp.body
-      body && body.scrub
-    rescue RestClient::Exception
-      raise unless ignore_errors
+    def do_get(uri)
+      URIs.get(uri, headers: { user_agent: DEFAULT_USER_AGENT })
     end
 
     def compare_values(v1, v2)
@@ -28,29 +26,9 @@ module AV
       value && value.gsub(/[[:space:]]*-[[:space:]]*/, '-').strip
     end
 
-    def uri_or_nil(url)
-      return unless url
-      return url if url.is_a?(URI)
-
-      URI.parse(url)
-    end
-
     class << self
       include AV::Util
     end
 
-    private
-
-    def get_or_raise(uri)
-      resp = RestClient.get(uri.to_s, user_agent: DEFAULT_USER_AGENT)
-      begin
-        return resp if resp.code == 200
-
-        msg = "GET #{uri} failed; host returned #{resp.code}: #{resp.body || 'no response body'}"
-        raise(RestClient::RequestFailed.new(resp, resp.code).tap { |ex| ex.message = msg })
-      ensure
-        logger.info("GET #{uri} returned #{resp.code}")
-      end
-    end
   end
 end

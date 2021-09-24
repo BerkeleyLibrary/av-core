@@ -39,6 +39,11 @@ module AV
         raise ArgumentError, "#{bib_number} check digit invalid: expected #{check_digit}, got #{check_str}"
       end
 
+      def strip_check_digit(bib_number)
+        digit_str, _ = split_bib(bib_number)
+        "b#{digit_str}"
+      end
+
       private
 
       def split_bib(bib_number)

@@ -1,9 +1,13 @@
+require 'berkeley_library/util'
+
 require 'av/track'
 require 'av/metadata'
 require 'av/metadata/source'
 
 module AV
   class Record
+    include BerkeleyLibrary::Util
+
     attr_reader :collection, :tracks, :metadata
 
     def initialize(collection:, tracks:, metadata:)
@@ -46,7 +50,7 @@ module AV
     end
 
     def player_uri
-      @player_uri ||= URI.join(AV::Config.avplayer_base_uri, "#{collection}/#{record_id}")
+      @player_uri ||= URIs.append(AV::Config.avplayer_base_uri, collection, record_id)
     end
 
     def display_uri
