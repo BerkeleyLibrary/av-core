@@ -95,6 +95,7 @@ module AV
             key = [f.tag]
             key << f.ind_1 if f.ind_1
             key << f.ind_2 if f.ind_2
+            key << f.subfield_order if f.subfield_order
             (all[key.join] ||= []) << f
           end
 
