@@ -27,6 +27,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'berkeley_library-logging', '~> 0.2'
   spec.add_dependency 'berkeley_library-marc', '~> 0.2', '>= 0.2.1'
   spec.add_dependency 'berkeley_library-util', '~> 0.1', '>= 0.1.1'
+  spec.add_dependency 'ruby-marc-spec', '~> 0.1', '>= 0.1.1'
   spec.add_dependency 'typesafe_enum', '~> 0.3'
 
   spec.add_development_dependency 'brakeman', '~> 4.9'
@@ -39,7 +40,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rails', '~> 6.0'
   spec.add_development_dependency 'rake', '~> 13.0'
   spec.add_development_dependency 'rspec-support', '~> 3.9'
-  spec.add_development_dependency 'rubocop', '~> 1.18'
+  spec.add_development_dependency 'rubocop', '1.18'
   spec.add_development_dependency 'rubocop-rake', '~> 0.5'
   spec.add_development_dependency 'rubocop-rspec', '~> 2.2'
   spec.add_development_dependency 'simplecov', '~> 0.21'

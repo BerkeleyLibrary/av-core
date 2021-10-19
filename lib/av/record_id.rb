@@ -40,7 +40,7 @@ module AV
       end
 
       def strip_check_digit(bib_number)
-        digit_str, _ = split_bib(bib_number)
+        digit_str, = split_bib(bib_number)
         "b#{digit_str}"
       end
 

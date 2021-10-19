@@ -18,12 +18,20 @@ module AV
       return 0 if v1 == v2
       return 1 if v1.nil?
       return -1 if v2.nil?
+      # TODO: better array comparison
+      return compare_values(v1.to_s, v2.to_s) unless v1.respond_to?(:<)
 
       v1 < v2 ? -1 : 1
     end
 
     def tidy_value(value)
       value && value.gsub(/[[:space:]]*-[[:space:]]*/, '-').strip
+    end
+
+    def class_name(t)
+      return class_name(t.class) unless t.is_a?(Class) || t.is_a?(Module)
+
+      t.name.sub(/^.*::/, '')
     end
 
     class << self

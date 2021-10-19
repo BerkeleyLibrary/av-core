@@ -58,10 +58,7 @@ module AV
     end
 
     def description
-      @description ||= begin
-        desc_value = metadata.values.find { |v| v.tag == '520' }
-        desc_value ? desc_value.lines.join(' ').gsub(/[[:space:]]+/, ' ').strip : ''
-      end
+      metadata.description
     end
 
     class << self

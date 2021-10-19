@@ -2,6 +2,8 @@ require 'spec_helper'
 
 module AV
   describe Metadata do
+    let(:mil_source) { Metadata::Source::MILLENNIUM }
+
     before(:each) do
       AV::Config.millennium_base_uri = 'http://oskicat.berkeley.edu/'
     end
@@ -21,7 +23,7 @@ module AV
       it 'returns UNKNOWN_TITLE if the title cannot be found' do
         marc_record = Marc::Millennium.marc_from_html(File.read('spec/data/b22139658.html'))
         marc_record.fields.delete_if { |f| f.tag == AV::Constants::TAG_TITLE_FIELD }
-        metadata = Metadata.new(record_id: 'b22139658', source: Metadata::Source::MILLENNIUM, marc_record: marc_record)
+        metadata = Metadata.new(record_id: 'b22139658', source: mil_source, marc_record: marc_record)
         expect(metadata.title).to eq(Metadata::UNKNOWN_TITLE)
       end
     end
@@ -29,7 +31,7 @@ module AV
     describe :ucb_access? do
       it 'detects restricted audio' do
         bib_number = 'b18538031'
-        stub_request(:get, Metadata::Source::MILLENNIUM.marc_uri_for(bib_number))
+        stub_request(:get, mil_source.marc_uri_for(bib_number))
           .to_return(status: 200, body: File.read("spec/data/#{bib_number}.html"))
         metadata = Metadata.for_record(record_id: bib_number)
         expect(metadata.ucb_access?).to eq(true)
@@ -37,7 +39,7 @@ module AV
 
       it 'detects restricted video' do
         bib_number = 'b25207857'
-        stub_request(:get, Metadata::Source::MILLENNIUM.marc_uri_for(bib_number))
+        stub_request(:get, mil_source.marc_uri_for(bib_number))
           .to_return(status: 200, body: File.read("spec/data/#{bib_number}.html"))
         metadata = Metadata.for_record(record_id: bib_number)
         expect(metadata.ucb_access?).to eq(true)
@@ -45,15 +47,15 @@ module AV
 
       it 'detects CalNet restrictions' do
         bib_number = 'b24659129'
-        stub_request(:get, Metadata::Source::MILLENNIUM.marc_uri_for(bib_number))
+        stub_request(:get, mil_source.marc_uri_for(bib_number))
           .to_return(status: 200, body: File.read("spec/data/#{bib_number}.html"))
         metadata = Metadata.for_record(record_id: bib_number)
         expect(metadata.ucb_access?).to eq(true)
       end
 
       it 'detects unrestricted audio' do
-        bib_number = 'b20786580'
-        stub_request(:get, Metadata::Source::MILLENNIUM.marc_uri_for(bib_number))
+        bib_number = 'b23161018'
+        stub_request(:get, mil_source.marc_uri_for(bib_number))
           .to_return(status: 200, body: File.read("spec/data/#{bib_number}.html"))
         metadata = Metadata.for_record(record_id: bib_number)
         expect(metadata.ucb_access?).to eq(false)
@@ -64,7 +66,7 @@ module AV
     describe :restrictions do
       it 'returns "UCB access"' do
         bib_number = 'b18538031'
-        stub_request(:get, Metadata::Source::MILLENNIUM.marc_uri_for(bib_number))
+        stub_request(:get, mil_source.marc_uri_for(bib_number))
           .to_return(status: 200, body: File.read("spec/data/#{bib_number}.html"))
         metadata = Metadata.for_record(record_id: bib_number)
         expect(metadata.restrictions).to eq('UCB access')
@@ -72,7 +74,7 @@ module AV
 
       it 'returns "UCB only"' do
         bib_number = 'b25207857'
-        stub_request(:get, Metadata::Source::MILLENNIUM.marc_uri_for(bib_number))
+        stub_request(:get, mil_source.marc_uri_for(bib_number))
           .to_return(status: 200, body: File.read("spec/data/#{bib_number}.html"))
         metadata = Metadata.for_record(record_id: bib_number)
         expect(metadata.restrictions).to eq('UCB only')
@@ -80,15 +82,15 @@ module AV
 
       it 'returns "Restricted to CalNet"' do
         bib_number = 'b24659129'
-        stub_request(:get, Metadata::Source::MILLENNIUM.marc_uri_for(bib_number))
+        stub_request(:get, mil_source.marc_uri_for(bib_number))
           .to_return(status: 200, body: File.read("spec/data/#{bib_number}.html"))
         metadata = Metadata.for_record(record_id: bib_number)
         expect(metadata.restrictions).to eq('Restricted to CalNet')
       end
 
       it 'returns "Freely available" for unrestricted audio' do
-        bib_number = 'b20786580'
-        stub_request(:get, Metadata::Source::MILLENNIUM.marc_uri_for(bib_number))
+        bib_number = 'b23161018'
+        stub_request(:get, mil_source.marc_uri_for(bib_number))
           .to_return(status: 200, body: File.read("spec/data/#{bib_number}.html"))
         metadata = Metadata.for_record(record_id: bib_number)
         expect(metadata.restrictions).to eq('Freely available')
@@ -98,7 +100,7 @@ module AV
     describe :title do
       it 'collapses spaces after hyphens' do
         bib_number = 'b22139647'
-        stub_request(:get, Metadata::Source::MILLENNIUM.marc_uri_for(bib_number))
+        stub_request(:get, mil_source.marc_uri_for(bib_number))
           .to_return(status: 200, body: File.read("spec/data/#{bib_number}.html"))
         metadata = Metadata.for_record(record_id: bib_number)
         expect(metadata.title).to eq('Europe and the nuclear arms race, with David Owen and co-host Prof. Thomas Barnes')
@@ -116,71 +118,95 @@ module AV
         AV::Config.instance_variable_set(:@tind_base_uri, nil)
       end
 
-      it 'injects the catalog URL if not present' do
-        search_url = 'http://oskicat.berkeley.edu/search~S1?/.b22139658/.b22139658/1%2C1%2C1%2CB/marc~b22139658'
-        stub_request(:get, search_url).to_return(status: 200, body: File.read('spec/data/b22139658.html'))
-        metadata = Metadata.for_record(record_id: 'b22139658')
+      describe 'catalog link injection' do
 
-        catalog_links = metadata.values.select { |v| Metadata::Fields::CATALOG_LINK.value?(v) }.map(&:links).flatten
-        expected_links = [
-          Metadata::Link.new(body: Metadata::Source::MILLENNIUM.catalog_link_text, url: 'http://oskicat.berkeley.edu/record=b22139658')
-        ]
-        expect(catalog_links).to contain_exactly(*expected_links)
-      end
+        it 'injects the catalog URL if not present' do
+          search_url = 'http://oskicat.berkeley.edu/search~S1?/.b22139658/.b22139658/1%2C1%2C1%2CB/marc~b22139658'
+          stub_request(:get, search_url).to_return(status: 200, body: File.read('spec/data/b22139658.html'))
+          metadata = Metadata.for_record(record_id: 'b22139658')
 
-      it 'injects a TIND URL if not present (1/2)' do
-        tind_035 = '(miscmat)00615'
-        marc_xml = File.read("spec/data/record-#{tind_035}.xml")
-        search_url = "https://digicoll.lib.berkeley.edu/search?p=035__a%3A%22#{CGI.escape(tind_035)}%22&of=xm"
-        stub_request(:get, search_url).to_return(status: 200, body: marc_xml)
-        metadata = Metadata.for_record(record_id: tind_035)
+          catalog_value = metadata.values_by_field[Metadata::Fields::CATALOG_LINK]
+          expected_links = [
+            Metadata::Link.new(
+              url: 'http://oskicat.berkeley.edu/record=b22139658',
+              body: mil_source.catalog_link_text
+            )
+          ]
+          expect(catalog_value.entries).to contain_exactly(*expected_links)
+        end
 
-        catalog_links = metadata.values.select { |v| Metadata::Fields::CATALOG_LINK.value?(v) }.map(&:links).flatten
-        expected_links = [
-          Metadata::Link.new(body: Metadata::Source::TIND.catalog_link_text, url: 'https://digicoll.lib.berkeley.edu/record/22513')
-        ]
-        expect(catalog_links).to contain_exactly(*expected_links)
-      end
+        it 'injects a TIND URL if not present (1/2)' do
+          tind_035 = '(miscmat)00615'
+          marc_xml = File.read("spec/data/record-#{tind_035}.xml")
+          search_url = "https://digicoll.lib.berkeley.edu/search?p=035__a%3A%22#{CGI.escape(tind_035)}%22&of=xm"
+          stub_request(:get, search_url).to_return(status: 200, body: marc_xml)
+          metadata = Metadata.for_record(record_id: tind_035)
 
-      it 'injects a TIND URL if not present (2/2)' do
-        tind_035 = 'physcolloquia-bk00169017b'
-        marc_xml = File.read("spec/data/record-#{tind_035}.xml")
-        search_url = "https://digicoll.lib.berkeley.edu/search?p=035__a%3A%22#{CGI.escape(tind_035)}%22&of=xm"
-        stub_request(:get, search_url).to_return(status: 200, body: marc_xml)
-        metadata = Metadata.for_record(record_id: tind_035)
+          catalog_value = metadata.values_by_field[Metadata::Fields::CATALOG_LINK]
+          expected_links = [
+            Metadata::Link.new(
+              url: 'https://digicoll.lib.berkeley.edu/record/22513',
+              body: Metadata::Source::TIND.catalog_link_text
+            )
+          ]
+          expect(catalog_value.entries).to contain_exactly(*expected_links)
+        end
 
-        catalog_links = metadata.values.select { |v| Metadata::Fields::CATALOG_LINK.value?(v) }.map(&:links).flatten
-        expected_links = [
-          Metadata::Link.new(body: Metadata::Source::TIND.catalog_link_text, url: 'https://digicoll.lib.berkeley.edu/record/21937')
-        ]
-        expect(catalog_links).to contain_exactly(*expected_links)
-      end
+        it 'injects a TIND URL if not present (2/2)' do
+          tind_035 = 'physcolloquia-bk00169017b'
+          marc_xml = File.read("spec/data/record-#{tind_035}.xml")
+          search_url = "https://digicoll.lib.berkeley.edu/search?p=035__a%3A%22#{CGI.escape(tind_035)}%22&of=xm"
+          stub_request(:get, search_url).to_return(status: 200, body: marc_xml)
+          metadata = Metadata.for_record(record_id: tind_035)
 
-      it 'works for TIND records with OskiCat URLs' do
-        tind_035 = '(pacradio)01469'
-        marc_xml = File.read("spec/data/record-#{tind_035}.xml")
-        search_url = "https://digicoll.lib.berkeley.edu/search?p=035__a%3A%22#{CGI.escape(tind_035)}%22&of=xm"
-        stub_request(:get, search_url).to_return(status: 200, body: marc_xml)
-        metadata = Metadata.for_record(record_id: tind_035)
+          catalog_value = metadata.values_by_field[Metadata::Fields::CATALOG_LINK]
+          expected_links = [
+            Metadata::Link.new(
+              url: 'https://digicoll.lib.berkeley.edu/record/21937',
+              body: Metadata::Source::TIND.catalog_link_text
+            )
+          ]
+          expect(catalog_value.entries).to contain_exactly(*expected_links)
+        end
 
-        expected_links = [
-          Metadata::Link.new(body: 'View library catalog record.', url: 'http://oskicat.berkeley.edu/record=b23305522'),
-          Metadata::Link.new(body: Metadata::Source::TIND.catalog_link_text, url: 'https://digicoll.lib.berkeley.edu/record/21178')
-        ]
-        expect(metadata.values.select { |v| Metadata::Fields::CATALOG_LINK.value?(v) }.map(&:links).flatten).to contain_exactly(*expected_links)
-      end
+        it 'works for TIND records with OskiCat URLs' do
+          tind_035 = '(pacradio)01469'
+          marc_xml = File.read("spec/data/record-#{tind_035}.xml")
+          search_url = "https://digicoll.lib.berkeley.edu/search?p=035__a%3A%22#{CGI.escape(tind_035)}%22&of=xm"
+          stub_request(:get, search_url).to_return(status: 200, body: marc_xml)
+          metadata = Metadata.for_record(record_id: tind_035)
 
-      it 'works for TIND-only records' do
-        tind_035 = 'physcolloquia-bk00169017b'
-        marc_xml = File.read("spec/data/record-#{tind_035}.xml")
-        search_url = "https://digicoll.lib.berkeley.edu/search?p=035__a%3A%22#{CGI.escape(tind_035)}%22&of=xm"
-        stub_request(:get, search_url).to_return(status: 200, body: marc_xml)
-        metadata = Metadata.for_record(record_id: tind_035)
+          catalog_value = metadata.values_by_field[Metadata::Fields::CATALOG_LINK]
+          expected_links = [
+            Metadata::Link.new(
+              url: 'http://oskicat.berkeley.edu/record=b23305522',
+              body: 'View library catalog record.'
+            ),
+            Metadata::Link.new(
+              url: 'https://digicoll.lib.berkeley.edu/record/21178',
+              body: Metadata::Source::TIND.catalog_link_text
+            )
+          ]
+          expect(catalog_value.entries).to contain_exactly(*expected_links)
+        end
 
-        expected_links = [
-          Metadata::Link.new(body: Metadata::Source::TIND.catalog_link_text, url: 'https://digicoll.lib.berkeley.edu/record/21937')
-        ]
-        expect(metadata.values.select { |v| Metadata::Fields::CATALOG_LINK.value?(v) }.map(&:links).flatten).to contain_exactly(*expected_links)
+        it 'works for TIND-only records' do
+          tind_035 = 'physcolloquia-bk00169017b'
+          marc_xml = File.read("spec/data/record-#{tind_035}.xml")
+          search_url = "https://digicoll.lib.berkeley.edu/search?p=035__a%3A%22#{CGI.escape(tind_035)}%22&of=xm"
+          stub_request(:get, search_url).to_return(status: 200, body: marc_xml)
+          metadata = Metadata.for_record(record_id: tind_035)
+
+          catalog_value = metadata.values_by_field[Metadata::Fields::CATALOG_LINK]
+          expected_links = [
+            Metadata::Link.new(
+              body: Metadata::Source::TIND.catalog_link_text,
+              url: 'https://digicoll.lib.berkeley.edu/record/21937'
+            )
+          ]
+          expect(catalog_value.entries).to contain_exactly(*expected_links)
+        end
+
       end
 
       describe :each_value do
@@ -191,7 +217,7 @@ module AV
           stub_request(:get, search_url).to_return(status: 200, body: marc_xml)
           metadata = Metadata.for_record(record_id: tind_035)
 
-          expected_values = metadata.values
+          expected_values = metadata.values_by_field.values
           actual_values = metadata.each_value.to_a
           expect(actual_values).to eq(expected_values)
         end

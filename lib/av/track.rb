@@ -66,9 +66,8 @@ module AV
 
     class << self
       include AV::Constants
-      include AV::Util
+      include AV::Marc::Util
 
-      TRACKS_FIELD = AV::Metadata::Fields::TRACKS
       LABELS = {
         SUBFIELD_CODE_DURATION => 'duration',
         SUBFIELD_CODE_TITLE => 'title',
@@ -80,51 +79,59 @@ module AV
       # as documented in {https://docs.google.com/document/d/1gRWsaSoerSvadNlYR-zbYOjgj0geLxV41bBC0rm5nHE/edit
       # "How to add media to the AV System"}.
       #
-      # This is **not** the same as the display order set in {AV::Metadata::Fields::TRACKS}.
-      #
       # @param marc_record [MARC::Record] the MARC record
       # @param collection [String] the collection
       def tracks_from(marc_record, collection:)
-        track_fields_from(marc_record).each_with_object([]) do |df, tracks|
-          if single_track?(df)
-            group = df.subfields.map { |sf| [sf.code.to_sym, sf.value] }.to_h
-            tracks << from_group(group, collection: collection, sort_order: tracks.size)
-          else
-            add_multiple_tracks(df, tracks, collection)
+        track_fields = marc_record.fields(TAG_TRACK_FIELD)
+        track_fields.each_with_object([]) do |df, all_tracks|
+          value_groups = group_values(df.subfields)
+          value_groups.each do |group|
+            all_tracks << from_value_group(group, collection: collection, sort_order: all_tracks.size)
           end
         end
       end
 
       private
 
-      def single_track?(df)
-        df.subfields.map { |sf| sf.code.to_sym }.count(SUBFIELD_CODE_PATH) == 1
+      def group_values(subfields)
+        filtered = subfields.select { |sf| SUBFIELD_CODES_TRACKS.include?(sf.code.to_sym) }
+        group_subfields(filtered).map { |sfg| to_value_group(sfg) }
       end
 
-      def track_fields_from(marc_record)
-        marc_record.fields.select { |df| df.tag == TRACKS_FIELD.tag }
+      def group_subfields(subfields)
+        single_track = subfields.lazy.select { |sf| sf.code.to_sym == SUBFIELD_CODE_PATH }.one?
+        return [group_together(subfields)] if single_track
+
+        group_on_paths(subfields)
       end
 
-      def add_multiple_tracks(df, tracks, collection)
-        group = nil
-        df.subfields.each do |sf|
-          (group ||= {})[sf.code.to_sym] = sf.value
-          next unless sf.code.to_sym == SUBFIELD_CODE_PATH
+      def group_together(subfields)
+        subfields.each_with_object({}) { |sf, grp| grp[sf.code.to_sym] = sf }
+      end
 
-          tracks << from_group(group, collection: collection, sort_order: tracks.size)
-          group = nil
+      def group_on_paths(subfields)
+        current_group = {}
+        subfields.each_with_object([]) do |subfield, groups|
+          code_sym = subfield.code.to_sym
+
+          current_group[code_sym] = subfield
+          if code_sym == SUBFIELD_CODE_PATH
+            groups << current_group
+            current_group = {}
+          end
         end
       end
 
-      def from_group(group, collection:, sort_order:)
-        title = tidy_value(group[SUBFIELD_CODE_TITLE])
-        path = tidy_value(group[SUBFIELD_CODE_PATH])
-        duration = tidy_value(group[SUBFIELD_CODE_DURATION])
+      def to_value_group(subfield_group)
+        subfield_group.transform_values { |sf| tidy_value(sf.value) }
+      end
+
+      def from_value_group(group, collection:, sort_order:)
         Track.new(
           sort_order: sort_order,
-          title: title,
-          path: "#{collection}/#{path}",
-          duration: duration
+          title: group[SUBFIELD_CODE_TITLE],
+          path: "#{collection}/#{group[SUBFIELD_CODE_PATH]}",
+          duration: group[SUBFIELD_CODE_DURATION]
         )
       end
 

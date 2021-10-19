@@ -36,20 +36,20 @@ module AV
       @marc_record ||= source.record_for(record_id)
     end
 
-    def values
-      @values ||= Fields.values_from(marc_record).tap { |values| ensure_catalog_link(values) }
+    def values_by_field
+      @values_by_field ||= Fields.default_values_from(marc_record).tap { |values| ensure_catalog_link(values) }
     end
 
-    def each_value
-      Enumerator.new { |y| values.each { |v| y << v } }
+    def each_value(&block)
+      values_by_field.each_value(&block)
     end
 
     def title
-      @title ||= begin
-        title_field = values.find { |v| v.tag == TAG_TITLE_FIELD }
-        first_title_value = title_field && title_field.lines.first
-        first_title_value || UNKNOWN_TITLE
-      end
+      @title ||= (title_value = values_by_field[Fields::TITLE]) ? title_value.entries.first : UNKNOWN_TITLE
+    end
+
+    def description
+      @description ||= (desc_value = values_by_field[Fields::DESCRIPTION]) ? desc_value.as_string : ''
     end
 
     def ucb_access?
@@ -88,16 +88,17 @@ module AV
       RESTRICTIONS.find { |r| link_field_values.any? { |v| v.include?(r) } }
     end
 
-    def ensure_catalog_link(values)
-      return values if values.any? { |v| Fields::CATALOG_LINK.value?(v) && v.any_link?(body: source.catalog_link_text) }
+    def ensure_catalog_link(values_by_field)
+      catalog_value = values_by_field[Fields::CATALOG_LINK]
+      return if catalog_value && catalog_value.includes_link?(source.catalog_link_text)
 
-      values << LinkValue.new(
-        tag: Fields::CATALOG_LINK.tag,
-        label: Fields::CATALOG_LINK.label,
-        order: Fields::CATALOG_LINK.order,
-        links: [Link.new(body: source.catalog_link_text, url: display_uri.to_s)]
-      )
-      values.sort!
+      catalog_link = Link.new(url: display_uri.to_s, body: source.catalog_link_text)
+
+      if catalog_value
+        catalog_value.entries << catalog_link
+      else
+        values_by_field[Fields::CATALOG_LINK] = Value.link_value(Fields::CATALOG_LINK, catalog_link)
+      end
     end
 
     def find_bib_number
