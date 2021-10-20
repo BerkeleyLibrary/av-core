@@ -101,6 +101,20 @@ module AV
           end
         end
 
+        describe :bib_number do
+          it 'finds the bib number' do
+            mms_id = '991054360089706532'
+            marc_record = MARC::XMLReader.new("spec/data/alma/#{mms_id}-sru.xml").first
+
+            metadata = Metadata.new(
+              record_id: mms_id,
+              source: Source::ALMA,
+              marc_record: marc_record
+            )
+            expect(metadata.bib_number).to eq('b25716973')
+          end
+        end
+
         describe :record_for do
           it 'loads a record from an MMS ID' do
             mms_id = '991054360089706532'
@@ -128,6 +142,10 @@ module AV
               end
             end
           end
+
+          it 'raises ArgumentError for the wrong type of ID' do
+            expect { Source::ALMA.record_for('(pacradio)00107') }.to raise_error(AV::RecordNotFound)
+          end
         end
       end
 
@@ -140,7 +158,7 @@ module AV
         end
 
         after(:each) do
-          AV::Config.instance_variable_set(:@millennium_base_uri, nil)
+          Config.send(:clear!)
         end
 
         describe :marc_uri_for do
@@ -243,7 +261,7 @@ module AV
         end
 
         after(:each) do
-          AV::Config.instance_variable_set(:@tind_base_uri, nil)
+          Config.send(:clear!)
         end
 
         describe :marc_uri_for do

@@ -1,6 +1,6 @@
 require 'spec_helper'
 require 'uri'
-
+require 'ostruct'
 module AV
   describe Config do
 
@@ -34,6 +34,36 @@ module AV
             Config.send("#{setting}=", value)
           end
         end
+      end
+
+      it 'reads values from a Rails config if present' do
+        settings = {
+          avplayer_base_uri: URI.parse('http://avplayer.example.edu'),
+          alma_sru_host: 'berkeley.alma.exlibrisgroup.com',
+          alma_primo_host: 'search.library.berkeley.edu',
+          alma_institution_code: '01UCS_BER',
+          alma_permalink_key: 'iqob43',
+          millennium_base_uri: URI.parse('http://millennium.example.edu'),
+          tind_base_uri: URI.parse('http://tind.example.edu'),
+          wowza_base_uri: URI.parse('http://wowza.example.edu')
+        }
+        rails_config = OpenStruct.new(settings)
+
+        # Mock Rails config
+        expect(defined?(Rails)).to be_nil # just to be sure
+        Object.send(:const_set, 'Rails', OpenStruct.new)
+        Rails.application = OpenStruct.new
+        Rails.application.config = rails_config
+
+        aggregate_failures do
+          settings.each do |setting, v|
+            expect(Config.send(setting)).to eq(v)
+          end
+        end
+
+        expect(AV.configured?).to eq(true)
+      ensure
+        Object.send(:remove_const, 'Rails')
       end
     end
 

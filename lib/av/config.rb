@@ -207,8 +207,6 @@ module AV
 
       def set?(setting)
         !Config.send(setting).nil?
-      rescue NameError
-        false
       end
 
       def clear!

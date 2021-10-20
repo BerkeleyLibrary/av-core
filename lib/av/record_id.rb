@@ -3,6 +3,9 @@ require 'av/constants'
 
 module AV
   class RecordId
+    include AV::Util
+    include Comparable
+
     # ------------------------------------------------------------
     # Constants
 
@@ -68,14 +71,14 @@ module AV
     end
 
     # ------------------------------------------------------------
-    # Object overrides
+    # Comparable
 
-    def eql?(other)
-      self.class == other.class &&
-        id == other.id &&
-        type == other.type
+    def <=>(other)
+      compare_by_attributes(self, other, :id, :type)
     end
-    alias :== eql?
+
+    # ------------------------------------------------------------
+    # Object overrides
 
     def hash
       [id, type].hash

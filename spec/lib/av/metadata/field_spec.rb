@@ -47,6 +47,16 @@ module AV
         expected_link = AV::Metadata::Link.new(url: 'http://oskicat.berkeley.edu/record=b23305522', body: 'View library catalog record.')
         expect(value.entries).to contain_exactly(expected_link)
       end
+
+      describe :hash do
+        it 'returns the same hash for identical Fields' do
+          f1 = Field.new(order: 2, label: 'Description', spec: '520$a')
+          f2 = Field.new(order: 2, label: 'Description', spec: '520$a')
+          expect(f1).to eq(f2) # just to be sure
+
+          expect(f1.hash).to eq(f2.hash)
+        end
+      end
     end
   end
 end

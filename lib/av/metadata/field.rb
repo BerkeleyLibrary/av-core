@@ -65,25 +65,25 @@ module AV
         "#<#{class_name(self)} #{self}>"
       end
 
+      def hash
+        sort_attrs.map { |a| send(a) }.hash
+      end
+
       # ------------------------------
       # Comparable
 
       def <=>(other)
-        return unless other.is_a?(Field)
-        return 0 if equal?(other)
-
-        %i[order tag query subfields_separator label].each do |attr|
-          o = compare_values(send(attr), other.send(attr))
-          return o if o != 0
-        end
-
-        compare_values(subfield_order&.join, other.subfield_order&.join)
+        compare_by_attributes(self, other, *sort_attrs)
       end
 
       # ------------------------------------------------------------
       # Private
 
       private
+
+      def sort_attrs
+        %i[order tag query subfields_separator label subfield_order]
+      end
 
       def subfield_groups_from_result(marc_result)
         return marc_result.map { |r| subfield_groups_from_result(r) }.flatten if marc_result.is_a?(Array)

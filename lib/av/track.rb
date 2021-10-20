@@ -21,17 +21,7 @@ module AV
     end
 
     def <=>(other)
-      return 0 if equal?(other)
-      return unless other
-
-      %i[sort_order title duration path].each do |attr|
-        return nil unless other.respond_to?(attr)
-
-        o = compare_values(send(attr), other.send(attr))
-        return o if o && o != 0
-      end
-
-      0
+      compare_by_attributes(self, other, :sort_order, :title, :duration, :path)
     end
 
     def to_s

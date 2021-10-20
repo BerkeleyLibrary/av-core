@@ -57,19 +57,7 @@ module AV
 
       # @param other [Value] the Value to compare
       def <=>(other)
-        return unless other
-        return 0 if equal?(other)
-
-        %i[order tag entries label].each do |attr|
-          return nil unless other.respond_to?(attr)
-
-          v1 = send(attr)
-          v2 = other.send(attr)
-          o = compare_values(v1, v2)
-          return o if o && o != 0
-        end
-
-        to_s <=> other.to_s
+        compare_by_attributes(self, other, :order, :tag, :entries, :label)
       end
 
       # ------------------------------------------------------------
@@ -125,6 +113,7 @@ module AV
         end
 
       end
+
     end
   end
 end

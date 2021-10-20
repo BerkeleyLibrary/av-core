@@ -9,9 +9,7 @@ module AV
     end
 
     after(:each) do
-      Config.instance_variable_set(:@millennium_base_uri, nil)
-      Config.instance_variable_set(:@tind_base_uri, nil)
-      Config.instance_variable_set(:@avplayer_base_uri, nil)
+      Config.send(:clear!)
     end
 
     describe :new do

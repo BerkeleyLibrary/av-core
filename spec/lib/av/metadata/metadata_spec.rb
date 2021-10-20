@@ -9,7 +9,7 @@ module AV
     end
 
     after(:each) do
-      AV::Config.instance_variable_set(:@millennium_base_uri, nil)
+      Config.send(:clear!)
     end
 
     describe :title do
@@ -114,8 +114,7 @@ module AV
       end
 
       after(:each) do
-        AV::Config.instance_variable_set(:@millennium_base_uri, nil)
-        AV::Config.instance_variable_set(:@tind_base_uri, nil)
+        Config.send(:clear!)
       end
 
       describe 'catalog link injection' do

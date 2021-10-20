@@ -77,22 +77,26 @@ module AV
       def tind_bib_number(marc_record)
         tag = TAG_TIND_CATALOG_ID
         code = SUBFIELD_CODE_TIND_BIB_NUMBER
-        find_subfield_value(marc_record, tag, code)
+        bib_from_marc(marc_record, tag, code)
       end
 
       def alma_bib_number(marc_record)
         tag = TAG_ALMA_MIGRATION_INFO
         code = SUBFIELD_CODE_ALMA_BIB_NUMBER
-        find_subfield_value(marc_record, tag, code)
+        bib_from_marc(marc_record, tag, code)
+      end
+
+      def bib_from_marc(marc_record, tag, code)
+        bib_number = find_subfield_value(marc_record, tag, code)
+        bib_number && RecordId.strip_check_digit(bib_number)
       end
 
       # TODO: Use marc/spec
       def find_subfield_value(marc_record, tag, code)
-        bib_number = marc_record.fields(tag).filter_map do |df|
-          sf = df.find { |sf| sf.code == code }
-          sf.value if sf
+        marc_record.fields(tag).filter_map do |df|
+          subfield = df.find { |sf| sf.code == code }
+          subfield.value if subfield
         end.first
-        bib_number && RecordId.strip_check_digit(bib_number)
       end
     end
   end

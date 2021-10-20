@@ -31,7 +31,7 @@ module AV
           return "alma.mms_id=#{record_id}" if id_type == RecordId::Type::ALMA
           return millennium_query_value(record_id) if id_type == RecordId::Type::MILLENNIUM
 
-          raise ArgumentError, "Don't know how to construct Alma SRU query for #{id_type} id #{record_id}"
+          raise ArgumentError, "Invalid record type: #{id_type}"
         end
 
         def millennium_query_value(bib_number)

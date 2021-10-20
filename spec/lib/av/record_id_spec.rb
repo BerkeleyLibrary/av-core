@@ -2,6 +2,24 @@ require 'spec_helper'
 
 module AV
   describe RecordId do
+
+    describe :hash do
+      it 'returns the same hash for identical objects' do
+        id1 = RecordId.new('991054360089706532')
+        id2 = RecordId.new('991054360089706532')
+        expect(id1.hash).to eq(id2.hash)
+      end
+    end
+
+    describe :inspect do
+      it 'includes the ID and type' do
+        mms_id = '991054360089706532'
+        id = RecordId.new(mms_id)
+        expect(id.inspect).to include(mms_id)
+        expect(id.inspect).to include(id.type.to_s)
+      end
+    end
+
     describe :ensure_check_digit do
       let(:expected_check_digits_by_bib) do
         infile = 'spec/data/record_id/bibs_with_check_digits.txt'
