@@ -37,7 +37,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'dotenv', '~> 2.7'
   spec.add_development_dependency 'irb', '~> 1.2' # workaroundfor https://github.com/bundler/bundler/issues/6929
   spec.add_development_dependency 'listen', '>= 3.0.5', '< 3.2'
-  spec.add_development_dependency 'rails', '~> 6.0'
   spec.add_development_dependency 'rake', '~> 13.0'
   spec.add_development_dependency 'rspec-support', '~> 3.9'
   spec.add_development_dependency 'rubocop', '1.18'
