@@ -24,7 +24,7 @@ module AV
     RESTRICTIONS_NONE = 'Freely available'.freeze
 
     # '99' is the Alma prefix for a Metadata Management System ID
-    ALMA_RECORD_RE = /^(?<type>99)[0-9]{9,11}(?<institution>[0-9]{4})$/
+    ALMA_RECORD_RE = /^(?<type>99)[0-9]{9,12}(?<institution>[0-9]{4})$/
     MILLENNIUM_RECORD_RE = /^b(?<digits>[0-9]{8})(?<check>[0-9ax])?$/
     OCLC_RECORD_RE = /^o[0-9]+$/
   end

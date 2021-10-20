@@ -18,6 +18,7 @@ module AV
 
     attr_reader :record_id, :source
 
+    # TODO: can we stop passing in record ID / stop lazy-loading MARC?
     def initialize(record_id:, source:, marc_record: nil)
       @record_id = record_id
       @source = source
@@ -25,7 +26,7 @@ module AV
     end
 
     def bib_number
-      return @bib_number if instance_variable_set(:@bib_number)
+      return @bib_number if instance_variable_defined?(:@bib_number)
 
       @bib_number = source.find_bib_number(self)
     end
@@ -90,7 +91,7 @@ module AV
     private
 
     def id_001
-      return @id_001 if instance_variable_set(:@id_001)
+      return @id_001 if instance_variable_defined?(:@id_001)
       return (@id_001 = nil) unless (cf_001 = marc_record['001'])
 
       @id_001 = RecordId.ensure_record_id(cf_001.value)

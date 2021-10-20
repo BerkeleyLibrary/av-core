@@ -13,7 +13,7 @@ module AV
     class Source < TypesafeEnum::Base
       include AV::Constants
 
-      new(:ALMA) { singleton_class.include(Readers::Alma)}
+      new(:ALMA) { singleton_class.include(Readers::Alma) }
       new(:TIND) { singleton_class.include(Readers::TIND) }
       new(:MILLENNIUM) { singleton_class.include(Readers::Millennium) }
 
@@ -91,7 +91,7 @@ module AV
         bib_number = marc_record.fields(tag).filter_map do |df|
           sf = df.find { |sf| sf.code == code }
           sf.value if sf
-        end
+        end.first
         bib_number && RecordId.strip_check_digit(bib_number)
       end
     end

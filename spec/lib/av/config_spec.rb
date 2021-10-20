@@ -5,10 +5,7 @@ module AV
   describe Config do
 
     after(:each) do
-      Config.instance_variable_set(:@avplayer_base_uri, nil)
-      Config.instance_variable_set(:@millennium_base_uri, nil)
-      Config.instance_variable_set(:@tind_base_uri, nil)
-      Config.instance_variable_set(:@wowza_base_uri, nil)
+      Config.send(:clear!)
     end
 
     describe(:configured?) do
@@ -16,9 +13,13 @@ module AV
         expect(AV.configured?).to eq(false)
       end
 
-      it 'returns true if and only if all URIs are configured' do
+      it 'returns true if and only if all values are configured' do
         settings = {
           avplayer_base_uri: 'http://avplayer.example.edu',
+          alma_sru_host: 'berkeley.alma.exlibrisgroup.com',
+          alma_primo_host: 'search.library.berkeley.edu',
+          alma_institution_code: '01UCS_BER',
+          alma_permalink_key: 'iqob43',
           millennium_base_uri: 'http://millennium.example.edu',
           tind_base_uri: 'http://tind.example.edu',
           wowza_base_uri: 'http://wowza.example.edu'
@@ -26,22 +27,28 @@ module AV
         settings.each { |setting, value| Config.send("#{setting}=", value) }
         expect(AV.configured?).to eq(true)
 
-        settings.each do |setting, value|
-          Config.instance_variable_set("@#{setting}".to_sym, nil)
-          expect(AV.configured?).to eq(false)
-          Config.send("#{setting}=", value)
+        aggregate_failures do
+          settings.each do |setting, value|
+            Config.instance_variable_set("@#{setting}".to_sym, nil)
+            expect(AV.configured?).to eq(false), "Clearing #{setting} did not set configured? to false"
+            Config.send("#{setting}=", value)
+          end
         end
       end
     end
 
     describe(:missing) do
       it 'defaults to all settings' do
-        expect(Config.missing).to eq(%i[avplayer_base_uri millennium_base_uri tind_base_uri wowza_base_uri])
+        expect(Config.missing).to eq(Config::REQUIRED_SETTINGS)
       end
 
       it 'returns an empty array if nothing is missing' do
         settings = {
           avplayer_base_uri: 'http://avplayer.example.edu',
+          alma_sru_host: 'berkeley.alma.exlibrisgroup.com',
+          alma_primo_host: 'search.library.berkeley.edu',
+          alma_institution_code: '01UCS_BER',
+          alma_permalink_key: 'iqob43',
           millennium_base_uri: 'http://millennium.example.edu',
           tind_base_uri: 'http://tind.example.edu',
           wowza_base_uri: 'http://wowza.example.edu'
@@ -54,6 +61,10 @@ module AV
       it 'returns the missing settings' do
         settings = {
           avplayer_base_uri: 'http://avplayer.example.edu',
+          alma_sru_host: 'berkeley.alma.exlibrisgroup.com',
+          alma_primo_host: 'search.library.berkeley.edu',
+          alma_institution_code: '01UCS_BER',
+          alma_permalink_key: 'iqob43',
           millennium_base_uri: 'http://millennium.example.edu',
           tind_base_uri: 'http://tind.example.edu',
           wowza_base_uri: 'http://wowza.example.edu'
@@ -80,6 +91,15 @@ module AV
         expected_uri = URI.parse('http://avplayer.example.edu')
         Config.avplayer_base_uri = "#{expected_uri}/"
         expect(Config.avplayer_base_uri).to eq(expected_uri)
+      end
+    end
+
+    describe :alma_sru_host= do
+      it 'sets the hostname' do
+        expected_host = 'alma.example.org'
+        Config.alma_sru_host = expected_host
+        expect(Config.alma_sru_host).to eq(expected_host)
+        expect(Config.alma_sru_base_uri.host).to eq(expected_host)
       end
     end
 

@@ -29,6 +29,10 @@ module AV
         it 'returns TIND for an OCLC number' do
           expect(Source.for_record_id('o12345678')).to be(Source::TIND)
         end
+
+        it 'returns ALMA for an Alma MMS ID' do
+          expect(Source.for_record_id('991054360089706532')).to be(Source::ALMA)
+        end
       end
 
       describe :catalog_link_text do
@@ -39,9 +43,95 @@ module AV
         it 'returns TIND text for a TIND record' do
           expect(Source::TIND.catalog_link_text).to eq(Source::LINK_TEXT_TIND)
         end
+
+        it 'returns Alma text for an Alma record' do
+          expect(Source::ALMA.catalog_link_text).to eq(Source::LINK_TEXT_ALMA)
+        end
       end
 
-      describe Source::MILLENNIUM do
+      describe 'ALMA' do
+        attr_reader :sru_url_base, :permalink_base
+
+        before(:each) do
+          AV::Config.alma_sru_host = 'berkeley.alma.exlibrisgroup.com'
+          AV::Config.alma_institution_code = '01UCS_BER'
+          AV::Config.alma_primo_host = 'search.library.berkeley.edu'
+          AV::Config.alma_permalink_key = 'iqob43'
+
+          @sru_url_base = 'https://berkeley.alma.exlibrisgroup.com/view/sru/01UCS_BER?version=1.2&operation=searchRetrieve&query='
+          @permalink_base = 'https://search.library.berkeley.edu/permalink/01UCS_BER/iqob43/alma'
+        end
+
+        describe :marc_uri_for do
+          it 'returns the search URI for an Alma MMS ID' do
+            mms_id = '991054360089706532'
+            url_expected = "#{sru_url_base}alma.mms_id%3D#{mms_id}"
+            uri_expected = URI.parse(url_expected)
+            uri_actual = Source::ALMA.marc_uri_for(mms_id)
+            expect(uri_actual).to eq(uri_expected)
+          end
+
+          it 'returns the search URI for a Millennium bib number with or without check digit' do
+            full_bib = 'b257169738'
+            url_expected = "#{sru_url_base}alma.other_system_number%3DUCB-#{full_bib}-01ucs_ber"
+            uri_expected = URI.parse(url_expected)
+            aggregate_failures do
+              %w[b25716973 b257169738 b25716973a].each do |bib|
+                uri_actual = Source::ALMA.marc_uri_for(bib)
+                expect(uri_actual).to eq(uri_expected)
+              end
+            end
+          end
+        end
+
+        describe :display_uri_for do
+          it 'returns the Primo permalink' do
+            mms_id = '991054360089706532'
+            marc_record = MARC::XMLReader.new("spec/data/alma/#{mms_id}-sru.xml").first
+            uri_expected = URI.parse("#{permalink_base}#{mms_id}")
+
+            metadata = Metadata.new(
+              record_id: mms_id,
+              source: Source::ALMA,
+              marc_record: marc_record
+            )
+
+            uri_actual = Source::ALMA.display_uri_for(metadata)
+            expect(uri_actual).to eq(uri_expected)
+          end
+        end
+
+        describe :record_for do
+          it 'loads a record from an MMS ID' do
+            mms_id = '991054360089706532'
+            marc_xml_path = "spec/data/alma/#{mms_id}-sru.xml"
+            sru_url = "#{sru_url_base}alma.mms_id%3D#{mms_id}"
+            marc_xml = File.read(marc_xml_path)
+            stub_request(:get, sru_url).to_return(status: 200, body: marc_xml)
+
+            marc_record = Source::ALMA.record_for(mms_id)
+            expect(marc_record).to eq(MARC::XMLReader.new(marc_xml_path).first)
+          end
+
+          it 'loads a record from a bib number' do
+            short_bib = 'b25716973'
+            full_bib = RecordId.ensure_check_digit(short_bib)
+            marc_xml_path = "spec/data/alma/#{short_bib}-sru.xml"
+            marc_xml = File.read(marc_xml_path)
+            sru_url = "#{sru_url_base}alma.other_system_number%3DUCB-#{full_bib}-01ucs_ber"
+            stub_request(:get, sru_url).to_return(status: 200, body: marc_xml)
+
+            aggregate_failures do
+              %w[b25716973 b257169738 b25716973a].each do |bib|
+                marc_record = Source::ALMA.record_for(bib)
+                expect(marc_record).to eq(MARC::XMLReader.new(marc_xml_path).first)
+              end
+            end
+          end
+        end
+      end
+
+      describe 'MILLENNIUM' do
         attr_reader :record_url
 
         before(:each) do
@@ -144,7 +234,7 @@ module AV
         end
       end
 
-      describe Source::TIND do
+      describe 'TIND' do
         attr_reader :record_url
 
         before(:each) do
