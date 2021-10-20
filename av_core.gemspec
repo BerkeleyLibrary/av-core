@@ -18,7 +18,7 @@ Gem::Specification.new do |spec|
   spec.version = AV::Core::ModuleInfo::VERSION
   spec.homepage = AV::Core::ModuleInfo::HOMEPAGE
 
-  spec.files = `git ls-files -z`.split("\x0")
+  spec.files = `git ls-files -z -- ':!:Dockerfile' ':!:docker-compose.yml'`.split("\x0")
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
 
