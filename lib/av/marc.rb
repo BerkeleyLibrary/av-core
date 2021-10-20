@@ -6,9 +6,9 @@ module AV
       # Parses MARCXML.
       #
       # @param xml [String] the XML to parse
-      # @return [MARC::Record] the MARC record from the specified XML
+      # @return [MARC::Record, nil] the MARC record from the specified XML
       def from_xml(xml)
-        # noinspection RubyYardReturnMatch
+        # noinspection RubyYardReturnMatch,RubyMismatchedReturnType
         all_from_xml(xml).first
       end
 

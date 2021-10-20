@@ -22,6 +22,10 @@ module AV
         @alma_institution_code ||= value_from_rails_config(:alma_institution_code)
       end
 
+      def alma_sru_base_uri
+        @alma_base_uri ||= URIs.append("https://#{alma_domain}/view/sru/", alma_institution_code)
+      end
+
       def avplayer_base_uri
         @avplayer_base_uri ||= uri_from_rails_config(:avplayer_base_uri)
       end

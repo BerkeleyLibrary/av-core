@@ -2,11 +2,16 @@ module AV
   module Constants
     TAG_TITLE_FIELD = '245'.freeze
     TAG_LINK_FIELD = '856'.freeze
-    TAG_TIND_CATALOG_ID = '901'.freeze
     TAG_TRACK_FIELD = '998'.freeze
     TAG_TIND_ID = '001'.freeze
 
-    SUBFIELD_CODE_MILLENNIUM_ID = 'm'.freeze
+    # TODO: use marc/spec
+    TAG_TIND_CATALOG_ID = '901'.freeze
+    SUBFIELD_CODE_TIND_BIB_NUMBER = 'm'.freeze
+
+    # TODO: use marc/spec
+    TAG_ALMA_MIGRATION_INFO = '996'.freeze
+    SUBFIELD_CODE_ALMA_BIB_NUMBER = 'a'.freeze
 
     SUBFIELD_CODE_DURATION = :a
     SUBFIELD_CODE_TITLE = :t

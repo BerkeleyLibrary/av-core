@@ -39,11 +39,6 @@ module AV
         it 'returns TIND text for a TIND record' do
           expect(Source::TIND.catalog_link_text).to eq(Source::LINK_TEXT_TIND)
         end
-
-        it 'raises an error for an unknown source' do
-          source = Source.allocate
-          expect { source.catalog_link_text }.to raise_error(ArgumentError)
-        end
       end
 
       describe Source::MILLENNIUM do
@@ -185,8 +180,17 @@ module AV
             expect(uri_actual).to eq(uri_expected)
           end
 
-          it 'raises ArgumentError for a non-TIND ID' do
-            expect { Source::TIND.display_uri_for('b22139658') }.to raise_error(ArgumentError)
+          it 'raises ArgumentError for the wrong type of record' do
+            marc_xml = File.read('spec/data/alma/b20786580-sru.xml')
+            marc_record = AV::Marc.from_xml(marc_xml)
+
+            metadata = Metadata.new(
+              record_id: '(pacradio)00107',
+              source: Source::ALMA,
+              marc_record: marc_record
+            )
+
+            expect { Source::TIND.display_uri_for(metadata) }.to raise_error(ArgumentError)
           end
         end
 

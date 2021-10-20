@@ -25,11 +25,17 @@ module AV
     end
 
     def bib_number
-      @bib_number ||= find_bib_number
+      return @bib_number if instance_variable_set(:@bib_number)
+
+      @bib_number = source.find_bib_number(self)
     end
 
     def tind_id
-      (tind_id_field = marc_record['001']) && tind_id_field.value
+      id_001 if source == Source::TIND
+    end
+
+    def alma_id
+      id_001 if source == Source::ALMA
     end
 
     def marc_record
@@ -83,6 +89,13 @@ module AV
 
     private
 
+    def id_001
+      return @id_001 if instance_variable_set(:@id_001)
+      return (@id_001 = nil) unless (cf_001 = marc_record['001'])
+
+      @id_001 = RecordId.ensure_record_id(cf_001.value)
+    end
+
     def restrictions_from_links
       link_field_values = marc_record.fields(TAG_LINK_FIELD).flat_map { |data_field| data_field.subfields.map(&:value) }
       RESTRICTIONS.find { |r| link_field_values.any? { |v| v.include?(r) } }
@@ -99,16 +112,6 @@ module AV
       else
         values_by_field[Fields::CATALOG_LINK] = Value.link_value(Fields::CATALOG_LINK, catalog_link)
       end
-    end
-
-    def find_bib_number
-      return record_id if source == Source::MILLENNIUM
-
-      marc_record.each_by_tag(TAG_TIND_CATALOG_ID) do |data_field|
-        subfield_m = data_field.find { |sf| sf.code == SUBFIELD_CODE_MILLENNIUM_ID }
-        return subfield_m.value if subfield_m
-      end
-      nil
     end
 
     def unique_subfield_value(tag, ind1, ind2, subfield_code)

@@ -27,6 +27,12 @@ module AV
     # Class methods
 
     class << self
+      def ensure_record_id(record_id)
+        return record_id if record_id.is_a?(RecordId)
+
+        RecordId.new(record_id)
+      end
+
       def ensure_check_digit(bib_number)
         digit_str, check_str = split_bib(bib_number)
 
@@ -47,7 +53,7 @@ module AV
       private
 
       def split_bib(bib_number)
-        raise ArgumentError, "Not a Millennium bib number: #{bib_number.inspect}" unless bib_number && (md = MILL_RE.match(bib_number))
+        raise ArgumentError, "Not a MILLENNIUM bib number: #{bib_number.inspect}" unless bib_number && (md = MILL_RE.match(bib_number))
 
         %i[digits check].map { |part| md[part] }
       end
@@ -76,7 +82,7 @@ module AV
     end
 
     def to_s
-      "#{type}:#{id}"
+      id
     end
 
     def inspect
@@ -87,8 +93,8 @@ module AV
     # Helper classes
 
     class Type < TypesafeEnum::Base
-      new :Alma
-      new :Millennium
+      new :ALMA
+      new :MILLENNIUM
       new :OCLC
       new :TIND
 
@@ -99,8 +105,8 @@ module AV
       class << self
         def for_id(id_str)
           return unless id_str
-          return Type::Alma if ALMA_RE =~ id_str
-          return Type::Millennium if MILL_RE =~ id_str
+          return Type::ALMA if ALMA_RE =~ id_str
+          return Type::MILLENNIUM if MILL_RE =~ id_str
           return Type::OCLC if OCLC_RE =~ id_str
 
           Type::TIND

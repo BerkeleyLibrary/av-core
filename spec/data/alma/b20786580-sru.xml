@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><searchRetrieveResponse xmlns="http://www.loc.gov/zing/srw/">
+  <version>1.2</version>
+  <numberOfRecords>1</numberOfRecords>
+  <records>
+    <record>
+      <recordSchema>marcxml</recordSchema>
+      <recordPacking>xml</recordPacking>
+      <recordData>
+        <record xmlns="http://www.loc.gov/MARC21/slim">
+          <leader>01754ngm a2200265   4500</leader>
+          <controlfield tag="001">991005939359706532</controlfield>
+          <controlfield tag="005">20210907142744.0</controlfield>
+          <controlfield tag="007">cr cn|||||||||</controlfield>
+          <controlfield tag="007">vz czaz||</controlfield>
+          <controlfield tag="008">131125s2010    cau           o   v|eng d</controlfield>
+          <datafield ind1=" " ind2=" " tag="035">
+            <subfield code="a">(CUY)UCB-b207865802-01ucs_ber</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="035">
+            <subfield code="a">(OCoLC)864425217</subfield>
+            <subfield code="9">ExL</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="035">
+            <subfield code="a">(EXLNZ-01UCS_NETWORK)9915213295606531</subfield>
+          </datafield>
+          <datafield ind1="1" ind2=" " tag="100">
+            <subfield code="a">Oakland family.</subfield>
+          </datafield>
+          <datafield ind1="0" ind2="0" tag="245">
+            <subfield code="a">Iraqi Refugee Interview of Oakland family</subfield>
+            <subfield code="h">[electronic resource].</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="260">
+            <subfield code="a">[Hayward, CA :</subfield>
+            <subfield code="b">Citizens Reach Out,</subfield>
+            <subfield code="c">2010]</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="300">
+            <subfield code="a">3 video files (1 hour, 26 min., 50 sec.)</subfield>
+          </datafield>
+          <datafield ind1="1" ind2=" " tag="490">
+            <subfield code="a">Iraqi refugee interviews</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="518">
+            <subfield code="a">Interview conducted on: 7/10/2010.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="520">
+            <subfield code="a">This is the story of a family with extreme medical problems caught in the war and unable to receive medical care in Iraq any longer. They make it to the USA and find themselves living in a dangerous neighborhood and trying to learn the medical procedures to get care. This family spoke no English. They ranged in age from mother and sister in their 40’s to their daughters in their 20’s and a son 12. They all suffered a genetic blood disease. Because of their disease they had to go regularly to get blood transfusions and other medical care in Iraq. It became impossible to function after the US invasion as transportation shut down, and the hospitals had no medical supplies to offer them. They finally were able to immigrate to the U.S. They told us that many people who had severe health problems before the war either died or managed to find a country to take them.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="0" tag="650">
+            <subfield code="a">Iraq War, 2003-2011</subfield>
+            <subfield code="x">Refugees</subfield>
+            <subfield code="v">Interviews.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="0" tag="650">
+            <subfield code="a">Political refugees</subfield>
+            <subfield code="z">Iraq</subfield>
+            <subfield code="v">Interviews.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="0" tag="650">
+            <subfield code="a">Refugees</subfield>
+            <subfield code="z">Iraq</subfield>
+            <subfield code="v">Interviews.</subfield>
+          </datafield>
+          <datafield ind1="1" ind2=" " tag="700">
+            <subfield code="a">Shapiro, Ruth.</subfield>
+          </datafield>
+          <datafield ind1="1" ind2=" " tag="700">
+            <subfield code="a">Friend, Ruth.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="0" tag="830">
+            <subfield code="a">Iraqi refugee interviews.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="955">
+            <subfield code="a">20131125</subfield>
+            <subfield code="b">Citizens Reach Out</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1="4" ind2="0" tag="956">
+            <subfield code="z">Citizens Reach Out Iraqi refugee interviews. Freely available for streaming.</subfield>
+            <subfield code="u">https://avplayer.lib.berkeley.edu/Video-Public-CitizensReachOut/b20786580</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1="0" ind2=" " tag="973">
+            <subfield code="a">Citizens Reach Out. Iraqi refugee interviews.</subfield>
+            <subfield code="5">CU</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="996">
+            <subfield code="a">b207865802</subfield>
+            <subfield code="b">Updated: 11-22-20</subfield>
+            <subfield code="c">Created: 11-25-13</subfield>
+            <subfield code="d">CatDate: 11-25-13</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="998">
+            <subfield code="a">00:26:35</subfield>
+            <subfield code="t">Part 1</subfield>
+            <subfield code="g">CRO00001_Oakland_Family_1.mp4</subfield>
+            <subfield code="a">00:21:24</subfield>
+            <subfield code="t">Part 2</subfield>
+            <subfield code="g">CRO00001_Oakland_Family_2.mp4</subfield>
+            <subfield code="a">00:38:51</subfield>
+            <subfield code="t">Part 3</subfield>
+            <subfield code="g">CRO00001_Oakland_Family_3.mp4</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="AVE">
+            <subfield code="8">531004455860006532</subfield>
+            <subfield code="e">Available</subfield>
+            <subfield code="n">Citizens Reach Out Iraqi refugee interviews. Freely available for streaming.</subfield>
+          </datafield>
+        </record>
+      </recordData>
+      <recordIdentifier>991005939359706532</recordIdentifier>
+      <recordPosition>1</recordPosition>
+    </record>
+  </records>
+  <extraResponseData xmlns:xb="http://www.exlibris.com/repository/search/xmlbeans/">
+    <xb:exact>true</xb:exact>
+    <xb:responseDate>2021-10-19T17:03:09-0700</xb:responseDate>
+  </extraResponseData>
+</searchRetrieveResponse>
