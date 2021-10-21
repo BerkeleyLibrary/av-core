@@ -10,8 +10,11 @@ module AV
 
     DEFAULT_USER_AGENT = "#{Core::ModuleInfo::NAME} #{Core::ModuleInfo::VERSION} (#{Core::ModuleInfo::HOMEPAGE})".freeze
 
-    def do_get(uri)
-      URIs.get(uri, headers: { user_agent: DEFAULT_USER_AGENT })
+    def do_get(uri, ignore_errors: false)
+      body = URIs.get(uri, headers: { user_agent: DEFAULT_USER_AGENT })
+      body && body.scrub
+    rescue RestClient::Exception
+      raise unless ignore_errors
     end
 
     # rubocop:disable Metrics/CyclomaticComplexity
