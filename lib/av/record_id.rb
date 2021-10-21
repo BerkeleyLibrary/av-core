@@ -51,7 +51,7 @@ module AV
       private
 
       def split_bib(bib_number)
-        raise ArgumentError, "Not a MILLENNIUM bib number: #{bib_number.inspect}" unless (md = MILLENNIUM_RECORD_RE.match(bib_number.to_s))
+        raise ArgumentError, "Not a Millennium bib number: #{bib_number.inspect}" unless (md = MILLENNIUM_RECORD_RE.match(bib_number.to_s))
 
         %i[digits check].map { |part| md[part] }
       end

@@ -20,7 +20,6 @@ module AV
           alma_primo_host: 'search.library.berkeley.edu',
           alma_institution_code: '01UCS_BER',
           alma_permalink_key: 'iqob43',
-          millennium_base_uri: 'http://millennium.example.edu',
           tind_base_uri: 'http://tind.example.edu',
           wowza_base_uri: 'http://wowza.example.edu'
         }
@@ -43,7 +42,6 @@ module AV
           alma_primo_host: 'search.library.berkeley.edu',
           alma_institution_code: '01UCS_BER',
           alma_permalink_key: 'iqob43',
-          millennium_base_uri: URI.parse('http://millennium.example.edu'),
           tind_base_uri: URI.parse('http://tind.example.edu'),
           wowza_base_uri: URI.parse('http://wowza.example.edu')
         }
@@ -79,7 +77,6 @@ module AV
           alma_primo_host: 'search.library.berkeley.edu',
           alma_institution_code: '01UCS_BER',
           alma_permalink_key: 'iqob43',
-          millennium_base_uri: 'http://millennium.example.edu',
           tind_base_uri: 'http://tind.example.edu',
           wowza_base_uri: 'http://wowza.example.edu'
         }
@@ -95,7 +92,6 @@ module AV
           alma_primo_host: 'search.library.berkeley.edu',
           alma_institution_code: '01UCS_BER',
           alma_permalink_key: 'iqob43',
-          millennium_base_uri: 'http://millennium.example.edu',
           tind_base_uri: 'http://tind.example.edu',
           wowza_base_uri: 'http://wowza.example.edu'
         }
@@ -130,20 +126,6 @@ module AV
         Config.alma_sru_host = expected_host
         expect(Config.alma_sru_host).to eq(expected_host)
         expect(Config.alma_sru_base_uri.host).to eq(expected_host)
-      end
-    end
-
-    describe :millennium_base_uri= do
-      it 'converts strings to URIs' do
-        expected_uri = URI.parse('http://millennium.example.edu')
-        Config.millennium_base_uri = expected_uri.to_s
-        expect(Config.millennium_base_uri).to eq(expected_uri)
-      end
-
-      it 'strips trailing slashes' do
-        expected_uri = URI.parse('http://millennium.example.edu')
-        Config.millennium_base_uri = "#{expected_uri}/"
-        expect(Config.millennium_base_uri).to eq(expected_uri)
       end
     end
 
@@ -210,25 +192,6 @@ module AV
           expected_avplayer_uri = URI.parse('https://avplayer-other.example.edu')
           Config.avplayer_base_uri = expected_avplayer_uri
           expect(Config.avplayer_base_uri).to eq(expected_avplayer_uri)
-        end
-      end
-
-      describe :millennium_base_uri do
-        attr_reader :millennium_base_uri
-
-        before(:each) do
-          @millennium_base_uri = URI.parse('http://millennium.example.edu')
-          allow(config).to receive(:millennium_base_uri).and_return(millennium_base_uri.to_s)
-        end
-
-        it 'falls back to the Rails config, if available' do
-          expect(Config.millennium_base_uri).to eq(millennium_base_uri)
-        end
-
-        it 'prefers the explicitly configured URI' do
-          expected_millennium_uri = URI.parse('https://millennium-other.example.edu')
-          Config.millennium_base_uri = expected_millennium_uri
-          expect(Config.millennium_base_uri).to eq(expected_millennium_uri)
         end
       end
 

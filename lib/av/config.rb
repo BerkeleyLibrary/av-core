@@ -9,7 +9,6 @@ module AV
       alma_primo_host
       alma_institution_code
       alma_permalink_key
-      millennium_base_uri
       tind_base_uri
       wowza_base_uri
     ].freeze
@@ -48,10 +47,6 @@ module AV
 
       def avplayer_base_uri
         @avplayer_base_uri ||= uri_from_rails_config(:avplayer_base_uri)
-      end
-
-      def millennium_base_uri
-        @millennium_base_uri ||= uri_from_rails_config(:millennium_base_uri)
       end
 
       def tind_base_uri
@@ -121,15 +116,6 @@ module AV
 
         sru_uri = primo_permalink_base_uri_for('example.org', 'XXX', permalink_key) # Catch bad URIs early
         @alma_permalink_key = sru_uri.path.split('/').last
-      end
-
-      # Sets the Millennium base URI
-      #
-      # @param [URI, String] uri the base URI
-      # @return [URI] the URI
-      # @raise URI::InvalidURIError if the URI cannot be parsed, or is not HTTP/HTTPS
-      def millennium_base_uri=(uri)
-        @millennium_base_uri = clean_uri(uri)
       end
 
       # Sets the TIND base URI
