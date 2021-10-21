@@ -27,3 +27,37 @@ end
 # Code under test
 
 require 'av/core'
+
+# ------------------------------------------------------------
+# Utility methods
+
+def sru_url_base
+  'https://berkeley.alma.exlibrisgroup.com/view/sru/01UCS_BER?version=1.2&operation=searchRetrieve&query='
+end
+
+def permalink_base
+  'https://search.library.berkeley.edu/permalink/01UCS_BER/iqob43/alma'
+end
+
+def alma_sru_url_for(record_id)
+  return "#{sru_url_base}alma.mms_id%3D#{record_id}" unless AV::RecordId::Type.for_id(record_id) == AV::RecordId::Type::MILLENNIUM
+
+  full_bib = AV::RecordId.ensure_check_digit(record_id)
+  "#{sru_url_base}alma.other_system_number%3DUCB-#{full_bib}-01ucs_ber"
+end
+
+def alma_sru_data_path_for(record_id)
+  "spec/data/alma/#{record_id}-sru.xml"
+end
+
+def stub_sru_request(record_id)
+  sru_url = alma_sru_url_for(record_id)
+  marc_xml_path = alma_sru_data_path_for(record_id)
+
+  stub_request(:get, sru_url).to_return(status: 200, body: File.read(marc_xml_path))
+end
+
+def alma_marc_record_for(record_id)
+  marc_xml_path = alma_sru_data_path_for(record_id)
+  MARC::XMLReader.new(marc_xml_path).first
+end

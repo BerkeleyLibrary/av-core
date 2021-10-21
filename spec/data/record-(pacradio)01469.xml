@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Search-Engine-Total-Number-Of-Results: 1 -->
 <collection xmlns="http://www.loc.gov/MARC21/slim">
     <record>
         <controlfield tag="001">21178</controlfield>
-        <controlfield tag="005">20190703232011.0</controlfield>
+        <controlfield tag="005">20210722142703.0</controlfield>
         <datafield tag="035" ind1=" " ind2=" ">
             <subfield code="a">(pacradio)01469</subfield>
         </datafield>
@@ -53,13 +52,13 @@
         <datafield tag="852" ind1=" " ind2=" ">
             <subfield code="c">The Library</subfield>
         </datafield>
-        <datafield tag="856" ind1="4" ind2="1">
+        <datafield tag="856" ind1="4" ind2="2">
+            <subfield code="u">https://avplayer.lib.berkeley.edu/Pacifica/b23305522</subfield>
+            <subfield code="y">Play Audio for American Women Making History and Culture. Freely available for streaming.</subfield>
+        </datafield>
+        <datafield tag="856" ind1="4" ind2="0">
             <subfield code="u">http://oskicat.berkeley.edu/record=b23305522</subfield>
             <subfield code="y">View library catalog record.</subfield>
-        </datafield>
-        <datafield tag="856" ind1="4" ind2="2">
-            <subfield code="u">http://servlet1.lib.berkeley.edu:8080/audio/stream.play.logic?coll=pacifica&amp;group=b23305522</subfield>
-            <subfield code="y">Play Audio for American Women Making History and Culture. Freely available for streaming.</subfield>
         </datafield>
         <datafield tag="901" ind1=" " ind2=" ">
             <subfield code="m">b23305522</subfield>
@@ -75,11 +74,9 @@
             <subfield code="a">Pacifica Radio Archives</subfield>
             <subfield code="b">Pacifica Radio Archives Social Activism Sound Recording Project</subfield>
         </datafield>
-        <datafield ind1="0" ind2="0" tag="998">
+        <datafield tag="998" ind1=" " ind2=" ">
             <subfield code="a">00:54:03</subfield>
             <subfield code="g">PRA_NHPRC1_AZ1084_00_000_00.mp3</subfield>
         </datafield>
     </record>
-
-    
 </collection>

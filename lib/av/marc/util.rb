@@ -96,9 +96,10 @@ module AV
 
       def group_by_code(subfields_by_code, order)
         order.each_with_object([]) do |code, groups|
-          next unless (subfields = subfields_by_code[code.to_sym])
+          csym = code.to_sym
+          next unless (subfields = subfields_by_code[csym])
 
-          subfields.each_with_index { |v, i| (groups[i] ||= {})[code] = v }
+          subfields.each_with_index { |v, i| (groups[i] ||= {})[csym] = v }
         end
       end
 

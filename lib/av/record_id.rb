@@ -7,13 +7,6 @@ module AV
     include Comparable
 
     # ------------------------------------------------------------
-    # Constants
-
-    ALMA_RE = AV::Constants::ALMA_RECORD_RE
-    MILL_RE = AV::Constants::MILLENNIUM_RECORD_RE
-    OCLC_RE = AV::Constants::OCLC_RECORD_RE
-
-    # ------------------------------------------------------------
     # Fields
 
     attr_reader :id, :type
@@ -30,6 +23,8 @@ module AV
     # Class methods
 
     class << self
+      include AV::Constants
+
       def ensure_record_id(record_id)
         return record_id if record_id.is_a?(RecordId)
 
@@ -56,7 +51,7 @@ module AV
       private
 
       def split_bib(bib_number)
-        raise ArgumentError, "Not a MILLENNIUM bib number: #{bib_number.inspect}" unless bib_number.is_a?(String) && (md = MILL_RE.match(bib_number))
+        raise ArgumentError, "Not a MILLENNIUM bib number: #{bib_number.inspect}" unless (md = MILLENNIUM_RECORD_RE.match(bib_number.to_s))
 
         %i[digits check].map { |part| md[part] }
       end
@@ -106,11 +101,14 @@ module AV
       end
 
       class << self
-        def for_id(id_str)
-          return unless id_str
-          return Type::ALMA if ALMA_RE =~ id_str
-          return Type::MILLENNIUM if MILL_RE =~ id_str
-          return Type::OCLC if OCLC_RE =~ id_str
+        include AV::Constants
+
+        def for_id(id)
+          return unless id
+          return id.type if id.is_a?(RecordId)
+          return Type::ALMA if ALMA_RECORD_RE =~ id
+          return Type::MILLENNIUM if MILLENNIUM_RECORD_RE =~ id
+          return Type::OCLC if OCLC_RECORD_RE =~ id
 
           Type::TIND
         end

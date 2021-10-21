@@ -4,7 +4,7 @@ require 'av/record_not_found'
 module AV
   class Metadata
     module Readers
-      module XmlBase
+      module Base
         include AV::Util
 
         # @return [MARC::Record] the MARC record

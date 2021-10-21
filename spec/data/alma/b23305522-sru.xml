@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><searchRetrieveResponse xmlns="http://www.loc.gov/zing/srw/">
+  <version>1.2</version>
+  <numberOfRecords>1</numberOfRecords>
+  <records>
+    <record>
+      <recordSchema>marcxml</recordSchema>
+      <recordPacking>xml</recordPacking>
+      <recordData>
+        <record xmlns="http://www.loc.gov/MARC21/slim">
+          <leader>02265nim a2200301   4500</leader>
+          <controlfield tag="001">991035377279706532</controlfield>
+          <controlfield tag="005">20210907135238.0</controlfield>
+          <controlfield tag="007">cr |||||||||||</controlfield>
+          <controlfield tag="007">sd |||||||||||</controlfield>
+          <controlfield tag="008">160422s1993    caunnnngo      || n eng d</controlfield>
+          <datafield ind1=" " ind2=" " tag="035">
+            <subfield code="a">(CUY)UCB-b233055228-01ucs_ber</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="035">
+            <subfield code="a">(OCoLC)947286899</subfield>
+            <subfield code="9">ExL</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="035">
+            <subfield code="a">(CaNhPRA)AZ1084</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="035">
+            <subfield code="a">(EXLNZ-01UCS_NETWORK)9913378412806531</subfield>
+          </datafield>
+          <datafield ind1="0" ind2="0" tag="245">
+            <subfield code="a">Wanda Coleman</subfield>
+            <subfield code="h">[electronic resource] /</subfield>
+            <subfield code="c">interviewed by Opal Palmer Adisa</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="260">
+            <subfield code="a">Los Angeles :</subfield>
+            <subfield code="b">Pacifica Radio Archives,</subfield>
+            <subfield code="c">1993.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="300">
+            <subfield code="a">1 online resource.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="518">
+            <subfield code="a">Originally broadcast on: KPFA, ca. 1993.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="520">
+            <subfield code="a">Poet Opal Palmer Adisa interviews writer/poet Wanda Coleman, author of Mad Dog, Black Lady, African Sleeping Sickness and Hand Dance, among other books. Coleman discusses when she found her poetic voice, talks about the function of poetry, her personal encounters with anti-Black discrimination, and about the reluctance of white liberals to discuss issues that affect the Black community. She also talks about the plight of the African American community in South Central Los Angeles. The poems Coleman reads are A civilized plague, David Polion, Notes of a cultural terrorist and Jazz wazz.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="533">
+            <subfield code="a">Electronic reproduction.</subfield>
+            <subfield code="b">North Hollywood, CA :</subfield>
+            <subfield code="c">Pacifica Radio Archives.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="534">
+            <subfield code="p">Original version:</subfield>
+            <subfield code="e">1 reel (54 min.) : 7 1/2 ips. mono.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="540">
+            <subfield code="3">Recorded audio program:</subfield>
+            <subfield code="a">RESTRICTED.</subfield>
+            <subfield code="b">Permissions, licensing requests, and all other inquiries should be directed in writing to: Director of the Archives, Pacifica Radio Archives, 3729 Cahuenga Blvd. West, North Hollywood, CA 91604, 800-735-0230 x 263, fax 818-506-1084, info@pacificaradioarchives.org, http://www.pacificaradioarchives.org</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="588">
+            <subfield code="a">Description based on data supplied from Pacifica Radio Archives excel file.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="536">
+            <subfield code="a">Sponsored by the National Historical Publications and Records Commission at the National Archives and Records Administration as part of Pacifica's American Women Making History and Culture: 1963-1982 grant preservation project.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="690">
+            <subfield code="a">California</subfield>
+            <subfield code="x">Poetry.</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="690">
+            <subfield code="a">African American women poets.</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="690">
+            <subfield code="a">Adisa, Opal Palmer, 1954-</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="690">
+            <subfield code="a">Coleman, Wanda.</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1="1" ind2=" " tag="700">
+            <subfield code="a">Coleman, Wanda.</subfield>
+            <subfield code="e">interviewee.</subfield>
+          </datafield>
+          <datafield ind1="1" ind2=" " tag="700">
+            <subfield code="a">Adisa, Opal Palmer.</subfield>
+            <subfield code="e">interviewer.</subfield>
+          </datafield>
+          <datafield ind1="2" ind2=" " tag="710">
+            <subfield code="a">Pacifica Radio Archive.</subfield>
+          </datafield>
+          <datafield ind1="2" ind2=" " tag="710">
+            <subfield code="a">KPFA (Radio station : Berkeley, Calif.).</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="0" tag="830">
+            <subfield code="a">American women making history and culture.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="955">
+            <subfield code="a">20160422</subfield>
+            <subfield code="b">Pacifica Radio Archive American Women_OSKI_20160404.xlsx</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1="4" ind2="0" tag="956">
+            <subfield code="z">American Women Making History and Culture. Freely available for streaming.</subfield>
+            <subfield code="u">https://avplayer.lib.berkeley.edu/Pacifica/b23305522</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1="0" ind2=" " tag="973">
+            <subfield code="a">Pacifica Radio Archives social activism sound recording  project.</subfield>
+            <subfield code="5">CU</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="996">
+            <subfield code="a">b233055228</subfield>
+            <subfield code="b">Updated: 02-02-20</subfield>
+            <subfield code="c">Created: 04-22-16</subfield>
+            <subfield code="d">CatDate: 04-22-16</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="998">
+            <subfield code="a">00:54:03</subfield>
+            <subfield code="g">PRA_NHPRC1_AZ1084_00_000_00.mp3</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="AVE">
+            <subfield code="8">531003633530006532</subfield>
+            <subfield code="e">Available</subfield>
+            <subfield code="n">American Women Making History and Culture. Freely available for streaming.</subfield>
+          </datafield>
+        </record>
+      </recordData>
+      <recordIdentifier>991035377279706532</recordIdentifier>
+      <recordPosition>1</recordPosition>
+    </record>
+  </records>
+  <extraResponseData xmlns:xb="http://www.exlibris.com/repository/search/xmlbeans/">
+    <xb:exact>true</xb:exact>
+    <xb:responseDate>2021-10-21T15:08:09-0700</xb:responseDate>
+  </extraResponseData>
+</searchRetrieveResponse>

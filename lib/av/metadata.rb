@@ -6,16 +6,6 @@ module AV
   class Metadata
     include AV::Constants
 
-    SUBFIELD_PLAYER_URL = {
-      AV::Metadata::Source::MILLENNIUM => %w[856 4 0 u].freeze,
-      AV::Metadata::Source::TIND => %w[856 4 2 u].freeze
-    }.freeze
-
-    SUBFIELD_LINK_TEXT = {
-      AV::Metadata::Source::MILLENNIUM => %w[856 4 0 z].freeze,
-      AV::Metadata::Source::TIND => %w[856 4 2 y].freeze
-    }.freeze
-
     attr_reader :record_id, :source
 
     # TODO: can we stop passing in record ID / stop lazy-loading MARC?
@@ -64,7 +54,7 @@ module AV
     end
 
     def restrictions
-      @restrictions ||= (restrictions_from_links || RESTRICTIONS_NONE)
+      @restrictions ||= (player_link_restrictions || RESTRICTIONS_NONE)
     end
 
     def display_uri
@@ -72,11 +62,11 @@ module AV
     end
 
     def player_url
-      @player_url ||= unique_subfield_value(*SUBFIELD_PLAYER_URL[source])
+      player_link.url if player_link
     end
 
     def player_link_text
-      @player_link_text ||= unique_subfield_value(*SUBFIELD_LINK_TEXT[source])
+      player_link.body if player_link
     end
 
     class << self
@@ -90,6 +80,10 @@ module AV
 
     private
 
+    def player_link
+      @player_link ||= source.player_link_for(marc_record)
+    end
+
     def id_001
       return @id_001 if instance_variable_defined?(:@id_001)
       return (@id_001 = nil) unless (cf_001 = marc_record['001'])
@@ -97,9 +91,9 @@ module AV
       @id_001 = RecordId.ensure_record_id(cf_001.value)
     end
 
-    def restrictions_from_links
-      link_field_values = marc_record.fields(TAG_LINK_FIELD).flat_map { |data_field| data_field.subfields.map(&:value) }
-      RESTRICTIONS.find { |r| link_field_values.any? { |v| v.include?(r) } }
+    def player_link_restrictions
+      link_text = player_link_text.downcase
+      RESTRICTIONS.find { |r| link_text.include?(r.downcase) }
     end
 
     def ensure_catalog_link(values_by_field)
@@ -113,27 +107,6 @@ module AV
       else
         values_by_field[Fields::CATALOG_LINK] = Value.link_value(Fields::CATALOG_LINK, catalog_link)
       end
-    end
-
-    def unique_subfield_value(tag, ind1, ind2, subfield_code)
-      subfield = unique_subfield(tag, ind1, ind2, subfield_code)
-      subfield && subfield.value
-    end
-
-    def unique_subfield(tag, ind1, ind2, subfield_code)
-      subfields = find_subfields(tag, ind1, ind2, subfield_code)
-      subfields.size.tap do |count|
-        warn("Record #{bib_number}: Expected one #{tag} #{ind1}#{ind2} #{subfield_code}, got #{count}") unless count == 1
-      end
-      subfields[0]
-    end
-
-    def find_subfields(tag, ind1, ind2, subfield_code)
-      find_fields(tag, ind1, ind2).flat_map { |df| df.find_all { |sf| sf.code == subfield_code } }
-    end
-
-    def find_fields(tag, ind1, ind2)
-      marc_record.fields(tag).select { |f| f.indicator1 == ind1 && f.indicator2 == ind2 }
     end
 
   end

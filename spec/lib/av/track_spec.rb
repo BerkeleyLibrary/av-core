@@ -2,6 +2,7 @@ require 'spec_helper'
 
 module AV
   describe Track do
+
     describe :file_type do
       it 'extrapolates from path' do
         track = Track.new(sort_order: 2, title: 'Part 2', path: 'frost-read2.mp3')
@@ -130,7 +131,8 @@ module AV
           Track.new(sort_order: 19, title: 'reel 20, part 1', path: 'MRCAudio/C040791201_1.mp3', duration: AV::Types::Duration.from_string('00:40:12'))
         ]
 
-        marc_record = AV::Marc::Millennium.marc_from_html(File.read('spec/data/b23161018.html'))
+        bib_number = 'b23161018'
+        marc_record = alma_marc_record_for(bib_number)
         tracks = Track.tracks_from(marc_record, collection: 'MRCAudio')
         expect(tracks.size).to eq(expected_tracks.size)
         aggregate_failures 'tracks' do
@@ -277,7 +279,10 @@ module AV
       end
 
       it 'handles records with no tracks' do
-        marc_record = AV::Marc::Millennium.marc_from_html(File.read('spec/data/b23161018-unmigrated.html'))
+        bib_number = 'b23161018'
+        marc_record = alma_marc_record_for(bib_number)
+        marc_record.fields.reject! { |df| df.tag == AV::Constants::TAG_TRACK_FIELD }
+
         tracks = Track.tracks_from(marc_record, collection: 'MRCAudio')
         expect(tracks).to eq([])
       end
@@ -288,7 +293,9 @@ module AV
           Track.new(sort_order: 1, title: 'Part 2', path: 'MRCAudio/frost-read2.mp3', duration: AV::Types::Duration.from_string('00:28:58'))
         ]
 
-        marc_record = AV::Marc::Millennium.marc_from_html(File.read('spec/data/b11082434.html'))
+        bib_number = 'b11082434'
+        marc_record = alma_marc_record_for(bib_number)
+
         tracks = Track.tracks_from(marc_record, collection: 'MRCAudio')
         expect(tracks.size).to eq(expected_tracks.size)
         aggregate_failures 'tracks' do
@@ -296,16 +303,6 @@ module AV
             expect(track).to eq(expected_tracks[i])
           end
         end
-      end
-
-      it 'handles tracks with garbage filenames' do
-        marc_record = AV::Marc::Millennium.marc_from_html(File.read('spec/data/b25742488.html'))
-        tracks = Track.tracks_from(marc_record, collection: 'Video-UCBOnly-MRC')
-        expect(tracks.size).to eq(1)
-
-        expected_track = Track.new(sort_order: 0, path: 'Video-UCBOnly-MRC/Monumental_Crossroads_DSL_Hosted_Streaming_92Gf726T7a.mo v')
-        expect(tracks[0]).to eq(expected_track)
-        expect(tracks[0].file_type).to eq(AV::Types::FileType::UNKNOWN)
       end
     end
   end

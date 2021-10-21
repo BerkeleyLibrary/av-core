@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><searchRetrieveResponse xmlns="http://www.loc.gov/zing/srw/">
+  <version>1.2</version>
+  <numberOfRecords>1</numberOfRecords>
+  <records>
+    <record>
+      <recordSchema>marcxml</recordSchema>
+      <recordPacking>xml</recordPacking>
+      <recordData>
+        <record xmlns="http://www.loc.gov/MARC21/slim">
+          <leader>01682nim a22002892a 4500</leader>
+          <controlfield tag="001">991042518099706532</controlfield>
+          <controlfield tag="005">20210907150626.0</controlfield>
+          <controlfield tag="007">cr nnannnaucuu</controlfield>
+          <controlfield tag="008">171013s2016    caunnnngs      nn n eng d</controlfield>
+          <datafield ind1=" " ind2=" " tag="035">
+            <subfield code="a">(CUY)UCB-b240715482-01ucs_ber</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="035">
+            <subfield code="a">(OCoLC)1006429847</subfield>
+            <subfield code="9">ExL</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="035">
+            <subfield code="a">(EXLNZ-01UCS_NETWORK)9913737959306531</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="040">
+            <subfield code="a">CUY</subfield>
+            <subfield code="c">CUY</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="046">
+            <subfield code="k">20160126</subfield>
+          </datafield>
+          <datafield ind1="0" ind2="0" tag="245">
+            <subfield code="a">Interview with Joyce Carol Oates, January 26, 2016</subfield>
+            <subfield code="h">[electronic resource].</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="260">
+            <subfield code="a">[San Francisco :</subfield>
+            <subfield code="b">City Arts &amp; Lectures, Inc.,</subfield>
+            <subfield code="c">2016]</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="300">
+            <subfield code="a">1 audio file (1 hour, 25 min., 35 sec.)</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="500">
+            <subfield code="a">Event venue: Nourse Theater.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="500">
+            <subfield code="a">Joyce Carol Oates: National Book Award-winning novelist, short story writer, and poet. Her works include them, We Were the Mulvaneys, Them, Blonde, Black Water, and The Lost Landscape: A Writer's Memoir.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="500">
+            <subfield code="a">Robert Hass: Former Poet Laureate of US and author of the collections Field Guide, Sun Under Wood, The Apple Trees at Olema and many more.</subfield>
+          </datafield>
+          <datafield ind1="2" ind2=" " tag="535">
+            <subfield code="a">The Bancroft Library, University of California, Berkeley,</subfield>
+            <subfield code="b">Berkeley, CA 94720-6000;</subfield>
+            <subfield code="c">USA;</subfield>
+            <subfield code="d">phone: 510-642-6481, fax: 510-642-7589, email: bancref@library.berkeley.edu, URL: http://bancroft.berkeley.edu/</subfield>
+            <subfield code="g">cau</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="538">
+            <subfield code="a">Mode of access: World Wide Web.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="540">
+            <subfield code="3">Recorded audio program:</subfield>
+            <subfield code="a">RESTRICTED.</subfield>
+            <subfield code="b">Reproduction or quotation only by permission of the interviewee and interviewer. Inquiries concerning these materials should be directed, in writing, to the Head of Public Services, The Bancroft Library.</subfield>
+          </datafield>
+          <datafield ind1="1" ind2=" " tag="592">
+            <subfield code="c">Gift;</subfield>
+            <subfield code="a">City Arts and Lectures, Inc.;</subfield>
+            <subfield code="d">October, 2017.</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1="1" ind2="0" tag="600">
+            <subfield code="a">Oates, Joyce</subfield>
+            <subfield code="v">Interviews.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="7" tag="655">
+            <subfield code="a">Interviews.</subfield>
+            <subfield code="2">aat</subfield>
+          </datafield>
+          <datafield ind1="1" ind2=" " tag="700">
+            <subfield code="a">Hass, Robert,</subfield>
+            <subfield code="e">interviewer.</subfield>
+          </datafield>
+          <datafield ind1="1" ind2=" " tag="700">
+            <subfield code="a">Oates, Joyce,</subfield>
+            <subfield code="e">interviewee.</subfield>
+          </datafield>
+          <datafield ind1="2" ind2=" " tag="710">
+            <subfield code="a">City Arts &amp; Lectures, Inc.,</subfield>
+            <subfield code="e">sponsor.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="955">
+            <subfield code="a">20171013</subfield>
+            <subfield code="b">City Arts cityarts_20171013.mrc</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1="4" ind2="0" tag="956">
+            <subfield code="z">City Arts and Lectures. UCB access.</subfield>
+            <subfield code="u">https://avplayer.lib.berkeley.edu/City/b24071548</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1="0" ind2=" " tag="973">
+            <subfield code="a">City arts and lectures UCB access.</subfield>
+            <subfield code="5">CU</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="996">
+            <subfield code="a">b240715482</subfield>
+            <subfield code="b">Updated: 02-23-20</subfield>
+            <subfield code="c">Created: 10-13-17</subfield>
+            <subfield code="d">CatDate: 10-13-17</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="998">
+            <subfield code="a">01:25:35</subfield>
+            <subfield code="g">CA01693.mp3</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="AVE">
+            <subfield code="8">53999311430006532</subfield>
+            <subfield code="e">Available</subfield>
+            <subfield code="n">City Arts and Lectures. UCB access.</subfield>
+          </datafield>
+        </record>
+      </recordData>
+      <recordIdentifier>991042518099706532</recordIdentifier>
+      <recordPosition>1</recordPosition>
+    </record>
+  </records>
+  <extraResponseData xmlns:xb="http://www.exlibris.com/repository/search/xmlbeans/">
+    <xb:exact>true</xb:exact>
+    <xb:responseDate>2021-10-21T14:21:36-0700</xb:responseDate>
+  </extraResponseData>
+</searchRetrieveResponse>

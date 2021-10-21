@@ -20,7 +20,8 @@ module AV
 
     UNKNOWN_TITLE = 'Unknown title'.freeze
 
-    RESTRICTIONS = ['UCB access', 'UCB only', 'Restricted to CalNet'].freeze
+    # TODO: do we still need 'UCB only'?
+    RESTRICTIONS = ['Requires CalNet', 'Restricted to CalNet', 'UCB access', 'UCB only'].map(&:freeze).freeze
     RESTRICTIONS_NONE = 'Freely available'.freeze
 
     # '99' is the Alma prefix for a Metadata Management System ID
@@ -29,4 +30,3 @@ module AV
     OCLC_RECORD_RE = /^o[0-9]+$/
   end
 end
-# https://avplayer.ucblib.org/music/b23161018

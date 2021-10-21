@@ -4,7 +4,6 @@ require 'av/config'
 require 'av/constants'
 require 'av/record_not_found'
 require 'av/marc'
-require 'av/marc/millennium'
 require 'av/util'
 require 'av/metadata/readers'
 
@@ -15,17 +14,14 @@ module AV
 
       new(:ALMA) { singleton_class.include(Readers::Alma) }
       new(:TIND) { singleton_class.include(Readers::TIND) }
-      new(:MILLENNIUM) { singleton_class.include(Readers::Millennium) }
 
       LINK_TEXT_ALMA = 'View library catalog record.'.freeze # TODO: is this right?
-      LINK_TEXT_MILLENNIUM = 'View library catalog record.'.freeze
       LINK_TEXT_TIND = 'View record in Digital Collections.'.freeze
 
       class << self
         def for_record_id(record_id)
           id_type = RecordId.ensure_record_id(record_id).type
-          return ALMA if id_type == RecordId::Type::ALMA
-          return MILLENNIUM if id_type == RecordId::Type::MILLENNIUM
+          return ALMA if [RecordId::Type::ALMA, RecordId::Type::MILLENNIUM].include?(id_type)
 
           TIND
         end
@@ -37,7 +33,6 @@ module AV
 
       def catalog_link_text
         return LINK_TEXT_ALMA if self == ALMA
-        return LINK_TEXT_MILLENNIUM if self == MILLENNIUM
         return LINK_TEXT_TIND if self == TIND
       end
 
@@ -51,7 +46,16 @@ module AV
       def find_bib_number(metadata)
         return alma_bib_number(metadata.marc_record) if self == Source::ALMA
         return tind_bib_number(metadata.marc_record) if self == Source::TIND
-        return metadata.record_id if self == Source::MILLENNIUM
+      end
+
+      def player_link_field
+        return AV::Metadata::Fields::PLAYER_LINK_ALMA if self == ALMA
+        return AV::Metadata::Fields::PLAYER_LINK_TIND if self == TIND
+      end
+
+      def player_link_for(marc_record)
+        value = player_link_field.value_from(marc_record)
+        value.entries.find { |e| e.is_a?(AV::Metadata::Link) }
       end
 
       private
@@ -63,15 +67,7 @@ module AV
 
       def canonical_record_id_accessor
         return :alma_id if self == ALMA
-        return :bib_number if self == MILLENNIUM
         return :tind_id if self == TIND
-      end
-
-      def ensure_valid_id(record_id)
-        rec_id = RecordId.ensure_record_id(record_id)
-        return rec_id if Source.for_record_id(rec_id) == self
-
-        raise ArgumentError, "Not a valid record ID for source #{value.inspect}: #{record_id}"
       end
 
       def tind_bib_number(marc_record)

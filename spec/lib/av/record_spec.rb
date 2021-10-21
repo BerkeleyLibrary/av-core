@@ -6,6 +6,10 @@ module AV
       Config.avplayer_base_uri = 'https://avplayer.lib.berkeley.edu'
       Config.millennium_base_uri = 'http://oskicat.berkeley.edu/'
       Config.tind_base_uri = 'https://digicoll.lib.berkeley.edu'
+      Config.alma_sru_host = 'berkeley.alma.exlibrisgroup.com'
+      Config.alma_institution_code = '01UCS_BER'
+      Config.alma_primo_host = 'search.library.berkeley.edu'
+      Config.alma_permalink_key = 'iqob43'
     end
 
     after(:each) do
@@ -30,8 +34,7 @@ module AV
     describe :player_uri do
       it 'returns a player URI based on the bib number for Millennium records' do
         bib_number = 'b22139658'
-        search_url = "http://oskicat.berkeley.edu/search~S1?/.#{bib_number}/.#{bib_number}/1%2C1%2C1%2CB/marc~#{bib_number}"
-        stub_request(:get, search_url).to_return(status: 200, body: File.read("spec/data/#{bib_number}.html"))
+        stub_sru_request(bib_number)
 
         collection = 'MRCVideo'
         record = Record.from_metadata(collection: collection, record_id: bib_number)
@@ -134,34 +137,22 @@ module AV
 
     describe :description do
       it 'gets the description from the 520 tag' do
-        search_url = 'http://oskicat.berkeley.edu/search~S1?/.b22139658/.b22139658/1%2C1%2C1%2CB/marc~b22139658'
-        stub_request(:get, search_url).to_return(status: 200, body: File.read('spec/data/b22139658.html'))
+        bib_number = 'b22139658'
+        stub_sru_request(bib_number)
 
-        desc_text = <<~DESC
-          An American propaganda documentary created "to inform and
-          impress on American citizens the true nature and the true
-          magnitude of those forces that are working within our
-          nation for its overthrow...and the destruction of our
-          educational system." Film covers the July 1969 California
-          Revolutionary Conference and other demonstrations, warning
-          against the activities of Students for a Democratic
-          Society, the Black Panthers, student protestors and
-          Vietnam War demonstrators as they promote a "socialist/
-          communist overthrow of the U.S. government," taking as
-          their mentor Chairman Mao Tse-Tung.
-        DESC
-        expected_desc = desc_text.gsub(/[[:space:]]+/, ' ').strip
+        marc_record = alma_marc_record_for(bib_number)
+        expected_desc = marc_record['520']['a']
 
-        record = Record.from_metadata(collection: 'MRCVideo', record_id: 'b22139658')
+        record = Record.from_metadata(collection: 'MRCVideo', record_id: bib_number)
         expect(record.description).to eq(expected_desc)
       end
     end
 
     describe :tind_id do
       it 'returns nil for Millennium records' do
-        search_url = 'http://oskicat.berkeley.edu/search~S1?/.b22139658/.b22139658/1%2C1%2C1%2CB/marc~b22139658'
-        stub_request(:get, search_url).to_return(status: 200, body: File.read('spec/data/b22139658.html'))
-        record = Record.from_metadata(collection: 'MRCVideo', record_id: 'b22139658')
+        bib_number = 'b22139658'
+        stub_sru_request(bib_number)
+        record = Record.from_metadata(collection: 'MRCVideo', record_id: bib_number)
         expect(record.tind_id).to be_nil
       end
 
@@ -216,7 +207,7 @@ module AV
             'Usage Statement (540): RESTRICTED.  Permissions, licensing requests, and all other inquiries should be directed in writing to: Director of the Archives, Pacifica Radio Archives, 3729 Cahuenga Blvd. West, North Hollywood, CA 91604, 800-735-0230 x 263, fax 818-506-1084, info@pacificaradioarchives.org, http://www.pacificaradioarchives.org',
             'Collection (982): Pacifica Radio Archives',
             'Tracks (998): PRA_NHPRC1_AZ1084_00_000_00.mp3 00:54:03',
-            'Linked Resources (856): [View library catalog record.](http://oskicat.berkeley.edu/record=b23305522) [View record in Digital Collections.](https://digicoll.lib.berkeley.edu/record/21178)'
+            'Linked Resources (856): [View record in Digital Collections.](https://digicoll.lib.berkeley.edu/record/21178)'
           ]
           expect(values.size).to eq(expected.size)
           aggregate_failures 'fields' do
@@ -248,8 +239,12 @@ module AV
         unrestricted = %w[b22139658 b23161018 (pacradio)00107 (pacradio)01469]
         (restricted + unrestricted).each do |record_id|
           source = Metadata::Source.for_record_id(record_id)
-          test_data = "spec/data/#{source == Metadata::Source::TIND ? "record-#{record_id}.xml" : "#{record_id}.html"}"
-          stub_request(:get, source.marc_uri_for(record_id)).to_return(status: 200, body: File.read(test_data))
+          if source == Metadata::Source::TIND
+            test_data = "spec/data/record-#{record_id}.xml"
+            stub_request(:get, source.marc_uri_for(record_id)).to_return(status: 200, body: File.read(test_data))
+          else
+            stub_sru_request(record_id)
+          end
         end
 
         aggregate_failures 'restrictions' do

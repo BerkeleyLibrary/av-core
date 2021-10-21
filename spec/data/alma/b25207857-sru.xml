@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><searchRetrieveResponse xmlns="http://www.loc.gov/zing/srw/">
+  <version>1.2</version>
+  <numberOfRecords>1</numberOfRecords>
+  <records>
+    <record>
+      <recordSchema>marcxml</recordSchema>
+      <recordPacking>xml</recordPacking>
+      <recordData>
+        <record xmlns="http://www.loc.gov/MARC21/slim">
+          <leader>02473cgm a2200541 i 4500</leader>
+          <controlfield tag="001">991052517809706532</controlfield>
+          <controlfield tag="005">20210907130200.0</controlfield>
+          <controlfield tag="006">g068            vl</controlfield>
+          <controlfield tag="007">cr |||||||||||</controlfield>
+          <controlfield tag="008">191202t20192019cau068        o   vleng c</controlfield>
+          <datafield ind1="1" ind2=" " tag="024">
+            <subfield code="a">728614105002</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="035">
+            <subfield code="a">(CUY)UCB-b252078573-01ucs_ber</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="035">
+            <subfield code="a">(OCoLC)1130051646</subfield>
+            <subfield code="9">ExL</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="035">
+            <subfield code="a">(EXLNZ-01UCS_NETWORK)9913467627206531</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="040">
+            <subfield code="a">CUY</subfield>
+            <subfield code="c">CUY</subfield>
+          </datafield>
+          <datafield ind1="0" ind2=" " tag="041">
+            <subfield code="a">eng</subfield>
+            <subfield code="a">ara</subfield>
+            <subfield code="j">eng</subfield>
+            <subfield code="j">spa</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="042">
+            <subfield code="a">pcc</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="043">
+            <subfield code="a">a-iq---</subfield>
+            <subfield code="a">n-us---</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="046">
+            <subfield code="k">2019</subfield>
+          </datafield>
+          <datafield ind1="0" ind2="0" tag="245">
+            <subfield code="a">From Baghdad to The Bay</subfield>
+            <subfield code="h">[electronic resource] /</subfield>
+            <subfield code="c">a film by Erin Palmquist.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="257">
+            <subfield code="a">United States.</subfield>
+            <subfield code="2">naf</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="1" tag="264">
+            <subfield code="a">[San Francisco, California] :</subfield>
+            <subfield code="b">[Erin Palmquist],</subfield>
+            <subfield code="c">[2019]</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="4" tag="264">
+            <subfield code="c">©2019</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="300">
+            <subfield code="a">1 online resource (1 videodisc (68 min.) : sound, color)</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="336">
+            <subfield code="a">two-dimensional moving image</subfield>
+            <subfield code="b">tdi</subfield>
+            <subfield code="2">rdacontent</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="337">
+            <subfield code="a">video</subfield>
+            <subfield code="b">v</subfield>
+            <subfield code="2">rdamedia</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="338">
+            <subfield code="a">videodisc</subfield>
+            <subfield code="b">vd</subfield>
+            <subfield code="2">rdacarrier</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="340">
+            <subfield code="d">burning.</subfield>
+            <subfield code="2">rdapm</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="344">
+            <subfield code="a">digital</subfield>
+            <subfield code="2">rdatr</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="344">
+            <subfield code="b">optical</subfield>
+            <subfield code="2">rdarm</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="344">
+            <subfield code="g">stereo</subfield>
+            <subfield code="2">rdacpc</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="346">
+            <subfield code="b">NTSC</subfield>
+            <subfield code="2">rdabs</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="347">
+            <subfield code="a">video file</subfield>
+            <subfield code="2">rdaft</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="347">
+            <subfield code="b">DVD video</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="347">
+            <subfield code="e">all regions</subfield>
+            <subfield code="2">rdare</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="380">
+            <subfield code="a">Motion picture.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="500">
+            <subfield code="a">Originally produced in the United States as a motion picture in 2019.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="500">
+            <subfield code="a">Wide screen.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="508">
+            <subfield code="a">Director, producer, cinematographer, Erin Palmquist ; editors, Eli Olson, Andrew Gersh ; music, WIlliam Ryan Fritch ; co producers, Neva Tassan and Jennifer Huang.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="520">
+            <subfield code="a">"From Baghdad to The Bay is a documentary that follows the journey of an Iraqi refugee and former translator for the US military. Wrongfully accused of being a double agent, tortured by the U.S., and ostracized from his family and country, Ghazwan Alsharif struggles to rebuild his life in the United States while coming out as an openly gay man."--From Baghdad to The Bay WWW site, viewed October 3, 2019.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="533">
+            <subfield code="a">Electronic reproduction.</subfield>
+            <subfield code="b">[Berkeley, Calif. :</subfield>
+            <subfield code="c">Media Resources Center,</subfield>
+            <subfield code="d">2019]</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="546">
+            <subfield code="a">English and Arabic with optional English or Spanish subtitles.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="588">
+            <subfield code="a">Description based on physical version record.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="0" tag="650">
+            <subfield code="a">Iraq War, 2003-2011</subfield>
+            <subfield code="x">Refugees.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="0" tag="650">
+            <subfield code="a">Refugees</subfield>
+            <subfield code="z">California</subfield>
+            <subfield code="z">San Francisco.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="0" tag="650">
+            <subfield code="a">Gay men</subfield>
+            <subfield code="z">Iraq.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="0" tag="650">
+            <subfield code="a">Gay men</subfield>
+            <subfield code="z">California</subfield>
+            <subfield code="z">San Francisco.</subfield>
+          </datafield>
+          <datafield ind1="1" ind2=" " tag="700">
+            <subfield code="a">Palmquist, Erin,</subfield>
+            <subfield code="e">film director,</subfield>
+            <subfield code="e">film producer,</subfield>
+            <subfield code="e">director of photography.</subfield>
+          </datafield>
+          <datafield ind1="0" ind2=" " tag="776">
+            <subfield code="i">Original (manifestation):</subfield>
+            <subfield code="t">From Baghdad to The Bay</subfield>
+            <subfield code="w">(OCoLC)1121597320</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="955">
+            <subfield code="a">20191202</subfield>
+            <subfield code="b">MRC Videos mrc_videos_to_process_112719_minted.xls</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1="4" ind2="0" tag="956">
+            <subfield code="z">UC Berkeley online videos. UCB access.</subfield>
+            <subfield code="u">https://avplayer.lib.berkeley.edu/Video-UCBOnly-MRC/b25207857</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1="0" ind2=" " tag="973">
+            <subfield code="a">MRC videos UCB access.</subfield>
+            <subfield code="5">CU</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="996">
+            <subfield code="a">b252078573</subfield>
+            <subfield code="b">Updated: 11-22-20</subfield>
+            <subfield code="c">Created: 12-02-19</subfield>
+            <subfield code="d">CatDate: 12-02-19</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="998">
+            <subfield code="a">01:08:24</subfield>
+            <subfield code="t">No subtitles</subfield>
+            <subfield code="g">DVDZ4534_FromBaghdad_0.mp4</subfield>
+            <subfield code="a">01:08:24</subfield>
+            <subfield code="t">English subtitles</subfield>
+            <subfield code="g">DVDZ4534_FromBaghdad_1.mp4</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="AVE">
+            <subfield code="8">531003935840006532</subfield>
+            <subfield code="e">Available</subfield>
+            <subfield code="n">UC Berkeley online videos. UCB access.</subfield>
+          </datafield>
+        </record>
+      </recordData>
+      <recordIdentifier>991052517809706532</recordIdentifier>
+      <recordPosition>1</recordPosition>
+    </record>
+  </records>
+  <extraResponseData xmlns:xb="http://www.exlibris.com/repository/search/xmlbeans/">
+    <xb:exact>true</xb:exact>
+    <xb:responseDate>2021-10-21T11:42:58-0700</xb:responseDate>
+  </extraResponseData>
+</searchRetrieveResponse>

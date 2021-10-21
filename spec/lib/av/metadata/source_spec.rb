@@ -9,12 +9,12 @@ module AV
       end
 
       describe :for_record_id do
-        it 'returns MILLENNIUM for a Millennium bib number' do
-          expect(Source.for_record_id('b12345678')).to be(Source::MILLENNIUM)
+        it 'returns ALMA for a Millennium bib number' do
+          expect(Source.for_record_id('b12345678')).to be(Source::ALMA)
         end
 
-        it 'returns MILLENNIUM for a Millennium bib number with check digit' do
-          expect(Source.for_record_id('b12345678a')).to be(Source::MILLENNIUM)
+        it 'returns ALMA for a Millennium bib number with check digit' do
+          expect(Source.for_record_id('b12345678a')).to be(Source::ALMA)
         end
 
         it "returns TIND for something that looks a little like a Millennium bib but isn't" do
@@ -36,10 +36,6 @@ module AV
       end
 
       describe :catalog_link_text do
-        it 'returns Millennium text for a Millennium record' do
-          expect(Source::MILLENNIUM.catalog_link_text).to eq(Source::LINK_TEXT_MILLENNIUM)
-        end
-
         it 'returns TIND text for a TIND record' do
           expect(Source::TIND.catalog_link_text).to eq(Source::LINK_TEXT_TIND)
         end
@@ -50,16 +46,15 @@ module AV
       end
 
       describe 'ALMA' do
-        attr_reader :sru_url_base, :permalink_base
 
         before(:each) do
-          AV::Config.alma_sru_host = 'berkeley.alma.exlibrisgroup.com'
-          AV::Config.alma_institution_code = '01UCS_BER'
-          AV::Config.alma_primo_host = 'search.library.berkeley.edu'
-          AV::Config.alma_permalink_key = 'iqob43'
-
-          @sru_url_base = 'https://berkeley.alma.exlibrisgroup.com/view/sru/01UCS_BER?version=1.2&operation=searchRetrieve&query='
-          @permalink_base = 'https://search.library.berkeley.edu/permalink/01UCS_BER/iqob43/alma'
+          Config.avplayer_base_uri = 'https://avplayer.lib.berkeley.edu'
+          Config.millennium_base_uri = 'http://oskicat.berkeley.edu/'
+          Config.tind_base_uri = 'https://digicoll.lib.berkeley.edu'
+          Config.alma_sru_host = 'berkeley.alma.exlibrisgroup.com'
+          Config.alma_institution_code = '01UCS_BER'
+          Config.alma_primo_host = 'search.library.berkeley.edu'
+          Config.alma_permalink_key = 'iqob43'
         end
 
         describe :marc_uri_for do
@@ -98,6 +93,18 @@ module AV
 
             uri_actual = Source::ALMA.display_uri_for(metadata)
             expect(uri_actual).to eq(uri_expected)
+          end
+
+          it 'raises ArgumentError for a TIND identifier' do
+            marc_xml = File.read('spec/data/record-(pacradio)00107.xml')
+
+            metadata = Metadata.new(
+              record_id: '(pacradio)00107',
+              source: Source::TIND,
+              marc_record: AV::Marc.from_xml(marc_xml)
+            )
+
+            expect { Source::ALMA.display_uri_for(metadata) }.to raise_error(ArgumentError)
           end
         end
 
@@ -145,109 +152,6 @@ module AV
 
           it 'raises ArgumentError for the wrong type of ID' do
             expect { Source::ALMA.record_for('(pacradio)00107') }.to raise_error(AV::RecordNotFound)
-          end
-        end
-      end
-
-      describe 'MILLENNIUM' do
-        attr_reader :record_url
-
-        before(:each) do
-          AV::Config.millennium_base_uri = 'http://oskicat.berkeley.edu/'
-          @record_url = 'http://oskicat.berkeley.edu/search~S1?/.b22139658/.b22139658/1%2C1%2C1%2CB/marc~b22139658'
-        end
-
-        after(:each) do
-          Config.send(:clear!)
-        end
-
-        describe :marc_uri_for do
-          it 'returns the search URI' do
-            uri_expected = URI.parse(record_url)
-            uri_actual = Source::MILLENNIUM.marc_uri_for('b22139658')
-            expect(uri_actual).to eq(uri_expected)
-          end
-
-          it 'raises ArgumentError for a non-Millennium ID' do
-            expect { Source::MILLENNIUM.marc_uri_for('19816') }.to raise_error(ArgumentError)
-          end
-        end
-
-        describe :display_uri_for do
-          it 'returns the record display page URI' do
-            marc_html = File.read('spec/data/b22139658.html')
-            stub_request(:get, record_url).to_return(status: 200, body: marc_html)
-
-            metadata = Metadata.new(
-              record_id: 'b22139658',
-              source: Source::MILLENNIUM,
-              marc_record: Source::MILLENNIUM.record_for('b22139658')
-            )
-
-            uri_expected = URI.parse('http://oskicat.berkeley.edu/record=b22139658')
-            uri_actual = Source::MILLENNIUM.display_uri_for(metadata)
-            expect(uri_actual).to eq(uri_expected)
-          end
-
-          it 'raises ArgumentError for a non-Millennium ID' do
-            expect { Source::MILLENNIUM.display_uri_for('19816') }.to raise_error(ArgumentError)
-          end
-        end
-
-        describe :record_for do
-          it 'raises ArgumentError for a non-Millennium ID' do
-            expect { Source::MILLENNIUM.record_for('19816') }.to raise_error(ArgumentError)
-          end
-
-          it 'finds a MARC record' do
-            marc_html = File.read('spec/data/b22139658.html')
-            stub_request(:get, record_url).to_return(status: 200, body: marc_html)
-
-            marc_record = Source::MILLENNIUM.record_for('b22139658')
-            title = marc_record['245']
-            expect(title['a']).to eq('Communists on campus')
-            expect(title['h']).to eq('[electronic resource] /')
-            expect(title['c']).to eq('presented by the National Education Program, Searcy, Arkansas ; writer and producer, Sidney O. Fields.')
-
-            expected_summary = <<~TEXT
-              An American propaganda documentary created "to inform and
-              impress on American citizens the true nature and the true
-              magnitude of those forces that are working within our
-              nation for its overthrow...and the destruction of our
-              educational system." Film covers the July 1969 California
-              Revolutionary Conference and other demonstrations, warning
-              against the activities of Students for a Democratic
-              Society, the Black Panthers, student protestors and
-              Vietnam War demonstrators as they promote a "socialist/
-              communist overthrow of the U.S. government," taking as
-              their mentor Chairman Mao Tse-Tung.
-            TEXT
-            expected_summary = expected_summary.gsub("\n", ' ').strip
-
-            summary = marc_record['520']
-            expect(summary['a']).to eq(expected_summary)
-
-            personal_names = marc_record.fields('700')
-            expect(personal_names.size).to eq(27)
-          end
-
-          it "raises #{AV::RecordNotFound} if the record cannot be found" do
-            stub_request(:get, record_url).to_return(status: 404, body: '')
-
-            expect { Source::MILLENNIUM.record_for('b22139658') }.to raise_error(AV::RecordNotFound)
-          end
-
-          it "raises #{AV::RecordNotFound} if the record cannot be parsed" do
-            stub_request(:get, record_url).to_return(status: 200, body: 'Something that is not a Millennium MARC HTML page')
-
-            expect { Source::MILLENNIUM.record_for('b22139658') }.to raise_error(AV::RecordNotFound)
-          end
-
-          it "raises #{AV::RecordNotFound} if Millennium returns a weird HTTP status" do
-            marc_html = File.read('spec/data/b22139658.html')
-            stub_request(:get, record_url).to_return(status: 207, body: marc_html)
-
-            expect { Source::MILLENNIUM.record_for('b22139658') }.to raise_error(AV::RecordNotFound)
           end
         end
       end

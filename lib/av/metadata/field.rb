@@ -86,13 +86,17 @@ module AV
       end
 
       def subfield_groups_from_result(marc_result)
-        return marc_result.map { |r| subfield_groups_from_result(r) }.flatten if marc_result.is_a?(Array)
+        if marc_result.is_a?(Array)
+          return [] if marc_result.empty?
+          return marc_result.map { |r| subfield_groups_from_result(r) }.flatten unless marc_result[0].is_a?(MARC::Subfield)
+        end
 
         subfields = subfields_from_result(marc_result)
         group_subfields(subfields, order: subfield_order)
       end
 
       def subfields_from_result(marc_result)
+        return marc_result if marc_result.is_a?(Array) && marc_result[0].is_a?(MARC::Subfield)
         return [marc_result] if marc_result.is_a?(MARC::Subfield)
         return [] unless marc_result.respond_to?(:subfields)
 

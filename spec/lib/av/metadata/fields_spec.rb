@@ -5,6 +5,7 @@ require 'marc'
 module AV
   class Metadata
     describe Fields do
+
       describe :standard_fields do
         it 'parses the config' do
           expected_fields = [
@@ -99,9 +100,9 @@ module AV
       end
 
       describe :default_values_from do
-        it 'reads a Millennium record' do
-          marc_html = File.read('spec/data/b23305522.html')
-          marc_record = AV::Marc::Millennium.marc_from_html(marc_html)
+        it 'reads an Alma record' do
+          bib_number = 'b23305522'
+          marc_record = alma_marc_record_for(bib_number)
 
           fields = Fields.default_fields.each_with_object({}) do |f, ff|
             ff[f.spec] = f
@@ -155,8 +156,7 @@ module AV
             '536' => "Grant Information (536): Sponsored by the National Historical Publications and Records Commission at the National Archives and Records Administration as part of Pacifica's American Women Making History and Culture: 1963-1982 grant preservation project.",
             '540$a' => 'Usage Statement (540): RESTRICTED.  Permissions, licensing requests, and all other inquiries should be directed in writing to: Director of the Archives, Pacifica Radio Archives, 3729 Cahuenga Blvd. West, North Hollywood, CA 91604, 800-735-0230 x 263, fax 818-506-1084, info@pacificaradioarchives.org, http://www.pacificaradioarchives.org',
             '982$a' => 'Collection (982): Pacifica Radio Archives',
-            '998' => 'Tracks (998): PRA_NHPRC1_AZ1084_00_000_00.mp3 00:54:03',
-            '856{^1=\4}{^2=\1}' => 'Linked Resources (856): [View library catalog record.](http://oskicat.berkeley.edu/record=b23305522)'
+            '998' => 'Tracks (998): PRA_NHPRC1_AZ1084_00_000_00.mp3 00:54:03'
           }.each_with_object({}) do |(k, v), x|
             field = fields[k]
             x[field] = v

@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><searchRetrieveResponse xmlns="http://www.loc.gov/zing/srw/">
+  <version>1.2</version>
+  <numberOfRecords>1</numberOfRecords>
+  <records>
+    <record>
+      <recordSchema>marcxml</recordSchema>
+      <recordPacking>xml</recordPacking>
+      <recordData>
+        <record xmlns="http://www.loc.gov/MARC21/slim">
+          <leader>04038ngm a2200757Ia 4500</leader>
+          <controlfield tag="001">991010948099706532</controlfield>
+          <controlfield tag="005">20210907141837.0</controlfield>
+          <controlfield tag="007">vz czaz||</controlfield>
+          <controlfield tag="007">cr cn|||||||||</controlfield>
+          <controlfield tag="008">000314p20142000cau055        o   v|eng d</controlfield>
+          <datafield ind1=" " ind2=" " tag="035">
+            <subfield code="a">(CUY)UCB-b221396585-01ucs_ber</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="035">
+            <subfield code="a">(OCoLC)902613031</subfield>
+            <subfield code="9">ExL</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="035">
+            <subfield code="a">(EXLNZ-01UCS_NETWORK)9914970734706531</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="040">
+            <subfield code="a">CUY</subfield>
+            <subfield code="c">CUY</subfield>
+          </datafield>
+          <datafield ind1="0" ind2="0" tag="245">
+            <subfield code="a">Communists on campus</subfield>
+            <subfield code="h">[electronic resource] /</subfield>
+            <subfield code="c">presented by the National Education Program, Searcy, Arkansas ; writer and producer, Sidney O. Fields.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="260">
+            <subfield code="a">Burbank, Calif. :</subfield>
+            <subfield code="b">Hollywood's Attic,</subfield>
+            <subfield code="c">[2000?]</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="300">
+            <subfield code="a">1 streaming video file (55 min.)</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="500">
+            <subfield code="a">Originally produced in the 1970's.</subfield>
+          </datafield>
+          <datafield ind1="0" ind2=" " tag="511">
+            <subfield code="a">Mike Klonsky, Bernadine Dohrn, Mark Rudd, Rap Brown, Bobby Seale, David Hilliard, Herbert Aptheker, Tom Hayden, Mario Savio, Gus Hall, Bettina Aptheker, Eldridge Cleaver, Archie Brown, Jeff Jones, Marie W. Johnson, Roberta Alexander, Carol Henry, Ora Williams, Marlene Dixon, Ray "Masai" Hewitt, Don Cox, Huey P. Newton, William Kunstler, Charles Garry, Noel Ignatin, Roscoe Proctor, Kenny Horsten, Bob Avakian, Andy Stapp, Angela Davis, Donald Kalish, Sergei Pavlov.</subfield>
+          </datafield>
+          <datafield ind1="0" ind2=" " tag="511">
+            <subfield code="a">Commentator: Walter H. Judd (Nat. Ed. Program)</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="520">
+            <subfield code="a">An American propaganda documentary created "to inform and impress on American citizens the true nature and the true magnitude of those forces that are working within our nation for its overthrow...and the destruction of our educational system." Film covers the July 1969 California Revolutionary Conference and other demonstrations, warning against the activities of Students for a Democratic Society, the Black Panthers, student protestors and Vietnam War demonstrators as they promote a "socialist/communist overthrow of the U.S. government," taking as their mentor Chairman Mao Tse-Tung.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="533">
+            <subfield code="a">Electronic reproduction.</subfield>
+            <subfield code="b">[Berkeley, Calif. :</subfield>
+            <subfield code="c">Library Applications &amp; Publishing,</subfield>
+            <subfield code="d">2014]</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="538">
+            <subfield code="a">Mode of access: World Wide Web.</subfield>
+          </datafield>
+          <datafield ind1="1" ind2="0" tag="600">
+            <subfield code="a">Mao, Zedong,</subfield>
+            <subfield code="d">1893-1976</subfield>
+            <subfield code="x">Influence.</subfield>
+          </datafield>
+          <datafield ind1="2" ind2="0" tag="610">
+            <subfield code="a">Students for a Democratic Society (U.S.)</subfield>
+            <subfield code="x">History</subfield>
+            <subfield code="y">20th century.</subfield>
+          </datafield>
+          <datafield ind1="2" ind2="0" tag="610">
+            <subfield code="a">Black Panther Party</subfield>
+            <subfield code="x">History.</subfield>
+          </datafield>
+          <datafield ind1="2" ind2="0" tag="610">
+            <subfield code="a">Communist Party of America</subfield>
+            <subfield code="x">History.</subfield>
+          </datafield>
+          <datafield ind1="2" ind2="0" tag="610">
+            <subfield code="a">American Serviceman's Union</subfield>
+            <subfield code="x">History.</subfield>
+          </datafield>
+          <datafield ind1="2" ind2="0" tag="611">
+            <subfield code="a">California Revolutionary Conference</subfield>
+            <subfield code="d">(1969)</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="0" tag="650">
+            <subfield code="a">Propaganda, American.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="0" tag="650">
+            <subfield code="a">Anti-communist movements</subfield>
+            <subfield code="z">United States</subfield>
+            <subfield code="x">History</subfield>
+            <subfield code="y">20th century.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="0" tag="650">
+            <subfield code="a">Student movements</subfield>
+            <subfield code="z">United States</subfield>
+            <subfield code="x">History</subfield>
+            <subfield code="y">20th century.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="0" tag="650">
+            <subfield code="a">College students</subfield>
+            <subfield code="z">United States</subfield>
+            <subfield code="x">Political activity</subfield>
+            <subfield code="x">History</subfield>
+            <subfield code="y">20th century.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="0" tag="650">
+            <subfield code="a">Vietnam War, 1961-1975</subfield>
+            <subfield code="x">Protest movements</subfield>
+            <subfield code="z">United States.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="0" tag="650">
+            <subfield code="a">Black power</subfield>
+            <subfield code="z">United States</subfield>
+            <subfield code="x">History</subfield>
+            <subfield code="y">20th century.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="0" tag="650">
+            <subfield code="a">Communism</subfield>
+            <subfield code="z">United States</subfield>
+            <subfield code="x">History</subfield>
+            <subfield code="y">20th century.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="0" tag="650">
+            <subfield code="a">Radicalism</subfield>
+            <subfield code="z">United States</subfield>
+            <subfield code="x">History</subfield>
+            <subfield code="y">20th century.</subfield>
+          </datafield>
+          <datafield ind1="1" ind2=" " tag="700">
+            <subfield code="a">Fields, Sidney O.</subfield>
+          </datafield>
+          <datafield ind1="1" ind2=" " tag="700">
+            <subfield code="a">Judd, Walter H.,</subfield>
+            <subfield code="d">1898-1994.</subfield>
+          </datafield>
+          <datafield ind1="1" ind2=" " tag="700">
+            <subfield code="a">Klonsky, Michael.</subfield>
+          </datafield>
+          <datafield ind1="1" ind2=" " tag="700">
+            <subfield code="a">Dohrn, Bernardine.</subfield>
+          </datafield>
+          <datafield ind1="1" ind2=" " tag="700">
+            <subfield code="a">Rudd, Mark.</subfield>
+          </datafield>
+          <datafield ind1="1" ind2=" " tag="700">
+            <subfield code="a">Seale, Bobby,</subfield>
+            <subfield code="d">1936-</subfield>
+          </datafield>
+          <datafield ind1="1" ind2=" " tag="700">
+            <subfield code="a">Hilliard, David.</subfield>
+          </datafield>
+          <datafield ind1="1" ind2=" " tag="700">
+            <subfield code="a">Aptheker, Herbert,</subfield>
+            <subfield code="d">1915-2003.</subfield>
+          </datafield>
+          <datafield ind1="1" ind2=" " tag="700">
+            <subfield code="a">Hayden, Tom.</subfield>
+          </datafield>
+          <datafield ind1="1" ind2=" " tag="700">
+            <subfield code="a">Savio, Mario.</subfield>
+          </datafield>
+          <datafield ind1="1" ind2=" " tag="700">
+            <subfield code="a">Hall, Gus.</subfield>
+          </datafield>
+          <datafield ind1="1" ind2=" " tag="700">
+            <subfield code="a">Aptheker, Bettina.</subfield>
+          </datafield>
+          <datafield ind1="1" ind2=" " tag="700">
+            <subfield code="a">Cleaver, Eldridge,</subfield>
+            <subfield code="d">1935-1998.</subfield>
+          </datafield>
+          <datafield ind1="1" ind2=" " tag="700">
+            <subfield code="a">Brown, Archie,</subfield>
+            <subfield code="d">1938-</subfield>
+          </datafield>
+          <datafield ind1="1" ind2=" " tag="700">
+            <subfield code="a">Jones, Jeff.</subfield>
+          </datafield>
+          <datafield ind1="1" ind2=" " tag="700">
+            <subfield code="a">Williams, Ora Lee Bates,</subfield>
+            <subfield code="d">1926-</subfield>
+          </datafield>
+          <datafield ind1="1" ind2=" " tag="700">
+            <subfield code="a">Dixon, Marlene,</subfield>
+            <subfield code="d">1936-</subfield>
+          </datafield>
+          <datafield ind1="1" ind2=" " tag="700">
+            <subfield code="a">Newton, Huey P.</subfield>
+          </datafield>
+          <datafield ind1="1" ind2=" " tag="700">
+            <subfield code="a">Kunstler, William M.</subfield>
+            <subfield code="q">(William Moses),</subfield>
+            <subfield code="d">1919-1995.</subfield>
+          </datafield>
+          <datafield ind1="1" ind2=" " tag="700">
+            <subfield code="a">Avakian, Bob.</subfield>
+          </datafield>
+          <datafield ind1="1" ind2=" " tag="700">
+            <subfield code="a">Stapp, Andy.</subfield>
+          </datafield>
+          <datafield ind1="1" ind2=" " tag="700">
+            <subfield code="a">Davis, Angela Y.</subfield>
+            <subfield code="q">(Angela Yvonne),</subfield>
+            <subfield code="d">1944-</subfield>
+          </datafield>
+          <datafield ind1="1" ind2=" " tag="700">
+            <subfield code="a">Alexander, Roberta Sue,</subfield>
+            <subfield code="d">1943-</subfield>
+          </datafield>
+          <datafield ind1="1" ind2=" " tag="700">
+            <subfield code="a">Garry, Charles R.,</subfield>
+            <subfield code="d">1909-</subfield>
+          </datafield>
+          <datafield ind1="1" ind2=" " tag="700">
+            <subfield code="a">Proctor, Roscoe.</subfield>
+          </datafield>
+          <datafield ind1="1" ind2=" " tag="700">
+            <subfield code="a">Johnson, Marie W.</subfield>
+          </datafield>
+          <datafield ind1="1" ind2=" " tag="700">
+            <subfield code="a">Henry, Carol.</subfield>
+          </datafield>
+          <datafield ind1="2" ind2=" " tag="710">
+            <subfield code="a">National Education Program (U.S.)</subfield>
+          </datafield>
+          <datafield ind1="2" ind2=" " tag="710">
+            <subfield code="a">Hollywood's Attic (Firm)</subfield>
+          </datafield>
+          <datafield ind1="0" ind2=" " tag="776">
+            <subfield code="i">Electronic reproduction of videorecording:</subfield>
+            <subfield code="t">Communists on campus</subfield>
+            <subfield code="w">(OCoLC)43814831</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="955">
+            <subfield code="a">20140512</subfield>
+            <subfield code="b">MRC Videos streaming_master_lis_130416.xls</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1="4" ind2="0" tag="956">
+            <subfield code="z">UC Berkeley online videos. Freely available.</subfield>
+            <subfield code="u">https://avplayer.lib.berkeley.edu/Video-Public-MRC/b22139658</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1="0" ind2=" " tag="973">
+            <subfield code="a">MRC videos UCB access.</subfield>
+            <subfield code="5">CU</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="996">
+            <subfield code="a">b221396585</subfield>
+            <subfield code="b">Updated: 11-22-20</subfield>
+            <subfield code="c">Created: 01-28-15</subfield>
+            <subfield code="d">CatDate: 01-28-15</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="998">
+            <subfield code="a">01:07:25</subfield>
+            <subfield code="g">6927.mp4</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="AVE">
+            <subfield code="8">531004331050006532</subfield>
+            <subfield code="e">Available</subfield>
+            <subfield code="n">UC Berkeley online videos. Freely available.</subfield>
+          </datafield>
+        </record>
+      </recordData>
+      <recordIdentifier>991010948099706532</recordIdentifier>
+      <recordPosition>1</recordPosition>
+    </record>
+  </records>
+  <extraResponseData xmlns:xb="http://www.exlibris.com/repository/search/xmlbeans/">
+    <xb:exact>true</xb:exact>
+    <xb:responseDate>2021-10-21T11:42:56-0700</xb:responseDate>
+  </extraResponseData>
+</searchRetrieveResponse>

@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><searchRetrieveResponse xmlns="http://www.loc.gov/zing/srw/">
+  <version>1.2</version>
+  <numberOfRecords>1</numberOfRecords>
+  <records>
+    <record>
+      <recordSchema>marcxml</recordSchema>
+      <recordPacking>xml</recordPacking>
+      <recordData>
+        <record xmlns="http://www.loc.gov/MARC21/slim">
+          <leader>03131ngm a2200577Ki 4500</leader>
+          <controlfield tag="001">991054510639706532</controlfield>
+          <controlfield tag="005">20210907130705.0</controlfield>
+          <controlfield tag="006">m     o  c</controlfield>
+          <controlfield tag="007">cr cna||||||||</controlfield>
+          <controlfield tag="007">vz czazuu</controlfield>
+          <controlfield tag="008">200924t20192018ne 054        o   vleng^^</controlfield>
+          <datafield ind1=" " ind2=" " tag="035">
+            <subfield code="a">(CUY)UCB-b25742488x-01ucs_ber</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="035">
+            <subfield code="a">(OCoLC)1197637089</subfield>
+            <subfield code="9">ExL</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="035">
+            <subfield code="a">(EXLNZ-01UCS_NETWORK)9913490989006531</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="040">
+            <subfield code="a">CUY</subfield>
+            <subfield code="b">eng</subfield>
+            <subfield code="e">rda</subfield>
+            <subfield code="e">pn</subfield>
+            <subfield code="c">CUY</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="043">
+            <subfield code="a">n-usu--</subfield>
+            <subfield code="a">n-us---</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="4" tag="050">
+            <subfield code="a">E487</subfield>
+            <subfield code="b">.M668 2020</subfield>
+          </datafield>
+          <datafield ind1="0" ind2="0" tag="245">
+            <subfield code="a">Monumental crossroads :</subfield>
+            <subfield code="b">the fight for Southern heritage /</subfield>
+            <subfield code="c">Gander Yonder Pictures presents ; a Tim Van Den Hoff film ; executive producers, Carly Viator, Anita Farhat ; directed and produced by Tim Van Den Hoff.</subfield>
+          </datafield>
+          <datafield ind1="3" ind2="0" tag="246">
+            <subfield code="a">Fight for Southern heritage</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="1" tag="264">
+            <subfield code="a">[Rotterdam, Netherlands] :</subfield>
+            <subfield code="b">Gander Yonder Pictures,</subfield>
+            <subfield code="c">{2019]</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="2" tag="264">
+            <subfield code="a">[Berkeley, California] :</subfield>
+            <subfield code="b">[The UC Berkeley Library],</subfield>
+            <subfield code="c">[2020]</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="4" tag="264">
+            <subfield code="c">©2018</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="300">
+            <subfield code="a">1 streaming video file (54 min.) :</subfield>
+            <subfield code="b">digital, sound, color with black and white sequences</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="336">
+            <subfield code="a">two-dimensional moving image</subfield>
+            <subfield code="b">tdi</subfield>
+            <subfield code="2">rdacontent</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="337">
+            <subfield code="a">computer</subfield>
+            <subfield code="b">c</subfield>
+            <subfield code="2">rdamedia</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="338">
+            <subfield code="a">online resource</subfield>
+            <subfield code="b">cr</subfield>
+            <subfield code="2">rdacarrier</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="344">
+            <subfield code="a">digital</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="347">
+            <subfield code="a">Video file 2 rda</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="500">
+            <subfield code="a">Originally produced as a documentary film in 2018.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="506">
+            <subfield code="a">Access restricted by licensing agreement.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="508">
+            <subfield code="a">Director of photography, Ruben Hamelink ; editor, Erik Vermunt ; original music, Jan De Bruijn.</subfield>
+          </datafield>
+          <datafield ind1="0" ind2=" " tag="511">
+            <subfield code="a">Narrator not credited.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="520">
+            <subfield code="a">"Throughout the South of the United States, tempers flare up as confederate monuments are targeted for removal. During a 6000 mile road trip through the former Confederacy, this documentary explores the legacy of Southern Heritage. A myriad of supporters and opponents is met along the way: White, Black, North and South. Each with their own view on what's worth remembering and preserving. Is there a way past these crossroads?"--IMDb</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="533">
+            <subfield code="a">Electronic reproduction.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="533">
+            <subfield code="a">Streaming video.</subfield>
+            <subfield code="b">Berkeley, California :</subfield>
+            <subfield code="c">The UC Berkeley Library,</subfield>
+            <subfield code="d">[2020].</subfield>
+            <subfield code="e">54 min.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="546">
+            <subfield code="a">Optional closed captions.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="588">
+            <subfield code="a">Online resource; title from opening screen (viewed September 24, 2020).</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="0" tag="650">
+            <subfield code="a">Memorial rites and ceremonies</subfield>
+            <subfield code="z">United States.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="0" tag="650">
+            <subfield code="a">Soldiers' monuments</subfield>
+            <subfield code="z">United States.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="0" tag="650">
+            <subfield code="a">Ethnology</subfield>
+            <subfield code="z">Southern States.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="0" tag="651">
+            <subfield code="a">United States</subfield>
+            <subfield code="x">History</subfield>
+            <subfield code="y">Civil War, 1861-1865.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="0" tag="651">
+            <subfield code="a">Confederate States of America</subfield>
+            <subfield code="x">History</subfield>
+            <subfield code="v">Sources.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="0" tag="651">
+            <subfield code="a">United States</subfield>
+            <subfield code="x">History</subfield>
+            <subfield code="y">Civil War, 1861-1865</subfield>
+            <subfield code="v">Sources.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="7" tag="655">
+            <subfield code="a">Documentary films.</subfield>
+            <subfield code="2">lcgft</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="7" tag="655">
+            <subfield code="a">Video recordings for the hearing impaired.</subfield>
+            <subfield code="2">lcgft</subfield>
+          </datafield>
+          <datafield ind1="1" ind2=" " tag="700">
+            <subfield code="a">Den Hoff, Tim van,</subfield>
+            <subfield code="e">film director,</subfield>
+            <subfield code="e">film producer.</subfield>
+          </datafield>
+          <datafield ind1="1" ind2=" " tag="700">
+            <subfield code="a">Hamelink, Ruben,</subfield>
+            <subfield code="e">cinematographer.</subfield>
+          </datafield>
+          <datafield ind1="1" ind2=" " tag="700">
+            <subfield code="a">Vermunt, Erik,</subfield>
+            <subfield code="e">film editor.</subfield>
+          </datafield>
+          <datafield ind1="1" ind2=" " tag="700">
+            <subfield code="a">Bruijn, Jan de</subfield>
+            <subfield code="c">(Composer),</subfield>
+            <subfield code="e">composer (expression)</subfield>
+          </datafield>
+          <datafield ind1="2" ind2=" " tag="710">
+            <subfield code="a">Gander Yonder Pictures (Firm),</subfield>
+            <subfield code="e">production company.</subfield>
+          </datafield>
+          <datafield ind1="2" ind2=" " tag="710">
+            <subfield code="a">University of California, Berkeley,</subfield>
+            <subfield code="e">issuing body.</subfield>
+          </datafield>
+          <datafield ind1="0" ind2="8" tag="776">
+            <subfield code="i">Videodisc version:</subfield>
+            <subfield code="t">Monumental Crossroads.</subfield>
+            <subfield code="d">[Rotterdam, Netherlands] : Gander Yonder Pictures, 2019</subfield>
+            <subfield code="w">(OCoLC)1142636855</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="953">
+            <subfield code="a">Tier 3</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="955">
+            <subfield code="a">20200920</subfield>
+            <subfield code="b">LSO MAD</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="955">
+            <subfield code="a">20200924</subfield>
+            <subfield code="b">tsgy</subfield>
+            <subfield code="c">CO</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1="4" ind2="0" tag="956">
+            <subfield code="x">MAD</subfield>
+            <subfield code="z">UC Berkeley digital resources. UCB Access.</subfield>
+            <subfield code="u">https://avplayer.lib.berkeley.edu/Video-UCBOnly-MRC/b25742488</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="980">
+            <subfield code="a">Access restricted by licensing agreement.</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="993">
+            <subfield code="a">20201204 migrate this bib; has wb order syep</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="993">
+            <subfield code="a">20210216 Migration order records with 856s. sydr</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="996">
+            <subfield code="a">b25742488x</subfield>
+            <subfield code="b">Updated: 02-28-21</subfield>
+            <subfield code="c">Created: 09-17-20</subfield>
+            <subfield code="d">CatDate: 09-24-20</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="998">
+            <subfield code="g">Monumental_Crossroads.mov</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="AVE">
+            <subfield code="8">531000655170006532</subfield>
+            <subfield code="e">Available</subfield>
+            <subfield code="n">UC Berkeley digital resources. UCB Access.</subfield>
+          </datafield>
+        </record>
+      </recordData>
+      <recordIdentifier>991054510639706532</recordIdentifier>
+      <recordPosition>1</recordPosition>
+    </record>
+  </records>
+  <extraResponseData xmlns:xb="http://www.exlibris.com/repository/search/xmlbeans/">
+    <xb:exact>true</xb:exact>
+    <xb:responseDate>2021-10-21T15:08:11-0700</xb:responseDate>
+  </extraResponseData>
+</searchRetrieveResponse>

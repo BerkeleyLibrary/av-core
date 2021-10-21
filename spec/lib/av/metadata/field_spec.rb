@@ -40,12 +40,30 @@ module AV
         expect(value.entries).to eq(expected_entries)
       end
 
-      it 'extracts links' do
-        field = Field.new(order: 999, spec: '856{^1=\4}{^2=\1}', label: 'Linked Resources')
-        value = field.value_from(marc_record)
-        expect(value).to be_a(Value)
-        expected_link = AV::Metadata::Link.new(url: 'http://oskicat.berkeley.edu/record=b23305522', body: 'View library catalog record.')
-        expect(value.entries).to contain_exactly(expected_link)
+      context 'links' do
+        it 'extracts links from TIND records' do
+          field = AV::Metadata::Fields::PLAYER_LINK_TIND
+          value = field.value_from(marc_record)
+          expect(value).to be_a(Value)
+          expected_link = AV::Metadata::Link.new(
+            url: 'https://avplayer.lib.berkeley.edu/Pacifica/b23305522',
+            body: 'Play Audio for American Women Making History and Culture. Freely available for streaming.'
+          )
+          expect(value.entries).to contain_exactly(expected_link)
+        end
+
+        it 'extracts links from Alma records' do
+          marc_record = MARC::XMLReader.new('spec/data/alma/991054360089706532-sru.xml').first
+          field = AV::Metadata::Fields::PLAYER_LINK_ALMA
+          value = field.value_from(marc_record)
+          expect(value).to be_a(Value)
+          expected_link = AV::Metadata::Link.new(
+            url: 'https://avplayer.lib.berkeley.edu/Video-UCBOnly-MRC/b25716973',
+            body: 'UCB Access.'
+          )
+          expect(value.entries).to contain_exactly(expected_link)
+        end
+
       end
 
       describe :hash do

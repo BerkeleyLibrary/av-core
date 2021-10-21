@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><searchRetrieveResponse xmlns="http://www.loc.gov/zing/srw/">
+  <version>1.2</version>
+  <numberOfRecords>1</numberOfRecords>
+  <records>
+    <record>
+      <recordSchema>marcxml</recordSchema>
+      <recordPacking>xml</recordPacking>
+      <recordData>
+        <record xmlns="http://www.loc.gov/MARC21/slim">
+          <leader>02223ngm a2200433 a 4500</leader>
+          <controlfield tag="001">991010947659706532</controlfield>
+          <controlfield tag="005">20210907141839.0</controlfield>
+          <controlfield tag="007">vz czaz||</controlfield>
+          <controlfield tag="007">cr cn|||||||||</controlfield>
+          <controlfield tag="008">890502p20141983xxu060 g      o  0v|eng d</controlfield>
+          <datafield ind1="0" ind2=" " tag="033">
+            <subfield code="a">19841024</subfield>
+            <subfield code="b">4364</subfield>
+            <subfield code="c">B5</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="035">
+            <subfield code="a">(CUY)UCB-b221396470-01ucs_ber</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="035">
+            <subfield code="a">(OCoLC)902613019</subfield>
+            <subfield code="9">ExL</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="035">
+            <subfield code="a">(EXLNZ-01UCS_NETWORK)9914970781906531</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="040">
+            <subfield code="a">CUY</subfield>
+            <subfield code="c">CUY</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="043">
+            <subfield code="a">ew-----</subfield>
+          </datafield>
+          <datafield ind1="0" ind2="0" tag="245">
+            <subfield code="a">Europe and the nuclear arms race, with David Owen and co-host Prof. Thomas Barnes</subfield>
+            <subfield code="h">[electronic resource].</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="260">
+            <subfield code="a">Berkeley, Calif. :</subfield>
+            <subfield code="b">Institute of International Studies :</subfield>
+            <subfield code="b">Filmed by The Educational Television Office, U.C. Berkeley,</subfield>
+            <subfield code="c">c1983.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="300">
+            <subfield code="a">1 streaming video file (60 min.)</subfield>
+          </datafield>
+          <datafield ind1="1" ind2=" " tag="490">
+            <subfield code="a">Conversations ;</subfield>
+            <subfield code="v">47.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="500">
+            <subfield code="a">VHS.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="500">
+            <subfield code="a">"'Conversations' [is] a video series on international affairs".</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="501">
+            <subfield code="a">With: Diplomacy, the nuclear arms race, and East-West relations.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="508">
+            <subfield code="a">Executive producer, Harry Kreisler; coordinator, Peter Kerner.</subfield>
+          </datafield>
+          <datafield ind1="0" ind2=" " tag="511">
+            <subfield code="a">Series host: Harry Kreisler.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="518">
+            <subfield code="a">Recorded Oct. 24, 1984 at the University of California, Berkeley.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="520">
+            <subfield code="a">A conversation on Western defense policy, NATO, and the use of nuclear weapons between David Owen, leader of the Social Democratic Party in Great Britain and a member of British Parliament and Thomas Barnes, professor of History and Law, University of California, Berkeley.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="533">
+            <subfield code="a">Electronic reproduction.</subfield>
+            <subfield code="b">[Berkeley, Calif. :</subfield>
+            <subfield code="c">Library Applications &amp; Publishing,</subfield>
+            <subfield code="d">2014]</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="538">
+            <subfield code="a">Mode of access: World Wide Web.</subfield>
+          </datafield>
+          <datafield ind1="2" ind2="0" tag="610">
+            <subfield code="a">North Atlantic Treaty Organization.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="0" tag="650">
+            <subfield code="a">Nuclear weapons</subfield>
+            <subfield code="z">Europe.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="0" tag="651">
+            <subfield code="a">Europe</subfield>
+            <subfield code="x">Politics and government</subfield>
+            <subfield code="y">1945-</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="0" tag="651">
+            <subfield code="a">Europe</subfield>
+            <subfield code="x">Defenses.</subfield>
+          </datafield>
+          <datafield ind1="1" ind2="1" tag="700">
+            <subfield code="a">Kreisler, Harry.</subfield>
+          </datafield>
+          <datafield ind1="1" ind2="1" tag="700">
+            <subfield code="a">Owen, David,</subfield>
+            <subfield code="d">1938-</subfield>
+          </datafield>
+          <datafield ind1="1" ind2="1" tag="700">
+            <subfield code="a">Barnes, Thomas Garden.</subfield>
+          </datafield>
+          <datafield ind1="2" ind2="1" tag="710">
+            <subfield code="a">University of California, Berkeley.</subfield>
+            <subfield code="b">Institute of International Studies.</subfield>
+          </datafield>
+          <datafield ind1="2" ind2="1" tag="710">
+            <subfield code="a">University of California, Berkeley.</subfield>
+            <subfield code="b">Educational Television Office.</subfield>
+          </datafield>
+          <datafield ind1="0" ind2=" " tag="776">
+            <subfield code="i">Electronic reproduction of videorecording:</subfield>
+            <subfield code="t">Europe and the nuclear arms race, with David Owen and co-host Prof. Thomas Barnes</subfield>
+            <subfield code="w">(OCoLC)84277677</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="0" tag="830">
+            <subfield code="a">Collection Conversations</subfield>
+            <subfield code="h">[videorecording] ;</subfield>
+            <subfield code="v">47.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="955">
+            <subfield code="a">20140512</subfield>
+            <subfield code="b">MRC Videos streaming_master_lis_130416.xls</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1="4" ind2="0" tag="956">
+            <subfield code="z">UC Berkeley online videos. Freely available.</subfield>
+            <subfield code="u">https://avplayer.lib.berkeley.edu/Video-Public-MRC/b22139647</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1="0" ind2=" " tag="973">
+            <subfield code="a">MRC videos UCB access.</subfield>
+            <subfield code="5">CU</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="996">
+            <subfield code="a">b221396470</subfield>
+            <subfield code="b">Updated: 11-22-20</subfield>
+            <subfield code="c">Created: 01-28-15</subfield>
+            <subfield code="d">CatDate: 01-28-15</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="998">
+            <subfield code="a">02:12:07</subfield>
+            <subfield code="g">1319.mp4</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="AVE">
+            <subfield code="8">531004337580006532</subfield>
+            <subfield code="e">Available</subfield>
+            <subfield code="n">UC Berkeley online videos. Freely available.</subfield>
+          </datafield>
+        </record>
+      </recordData>
+      <recordIdentifier>991010947659706532</recordIdentifier>
+      <recordPosition>1</recordPosition>
+    </record>
+  </records>
+  <extraResponseData xmlns:xb="http://www.exlibris.com/repository/search/xmlbeans/">
+    <xb:exact>true</xb:exact>
+    <xb:responseDate>2021-10-21T11:43:00-0700</xb:responseDate>
+  </extraResponseData>
+</searchRetrieveResponse>
