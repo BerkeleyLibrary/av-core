@@ -63,7 +63,6 @@ module AV
           )
           expect(value.entries).to contain_exactly(expected_link)
         end
-
       end
 
       describe :hash do

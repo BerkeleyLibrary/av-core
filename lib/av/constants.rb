@@ -21,7 +21,9 @@ module AV
     UNKNOWN_TITLE = 'Unknown title'.freeze
 
     # TODO: do we still need 'UCB only'?
-    RESTRICTIONS = ['Requires CalNet', 'Restricted to CalNet', 'UCB access', 'UCB only'].map(&:freeze).freeze
+    RESTRICTIONS_CALNET = ['Requires CalNet', 'Restricted to CalNet'].map(&:freeze).freeze
+    RESTRICTIONS_UCB_IP = ['UCB access', 'UCB only'].map(&:freeze).freeze
+    RESTRICTIONS = (RESTRICTIONS_CALNET + RESTRICTIONS_UCB_IP).freeze
     RESTRICTIONS_NONE = 'Freely available'.freeze
 
     # '99' is the Alma prefix for a Metadata Management System ID

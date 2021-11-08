@@ -38,10 +38,14 @@ module AV
       end
 
       def alma_sru_base_uri
+        ensure_configured(:alma_sru_host, :alma_institution_code)
+
         sru_base_uri_for(alma_sru_host, alma_institution_code)
       end
 
       def alma_permalink_base_uri
+        ensure_configured(:alma_primo_host, :alma_institution_code, :alma_permalink_key)
+
         primo_permalink_base_uri_for(alma_primo_host, alma_institution_code, alma_permalink_key)
       end
 
@@ -138,13 +142,19 @@ module AV
 
       # Returns the list of missing required settings.
       # @return [Array<Symbol>] the missing settings.
-      def missing
+      def missing(*settings)
+        settings = REQUIRED_SETTINGS if settings.empty?
         [].tap do |unset|
-          settings = REQUIRED_SETTINGS
           settings.each do |setting|
             unset << setting unless set?(setting)
           end
         end
+      end
+
+      def ensure_configured(*settings)
+        return if (missing_settings = missing(*settings)).empty?
+
+        raise ArgumentError, "Missing AV configuration settings: #{missing_settings.join(', ')}"
       end
 
       private

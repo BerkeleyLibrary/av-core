@@ -50,11 +50,11 @@ module AV
     end
 
     def ucb_access?
-      restrictions != RESTRICTIONS_NONE
+      restrictions.any?
     end
 
-    def restrictions
-      @restrictions ||= (player_link_restrictions || RESTRICTIONS_NONE)
+    def calnet_only?
+      (restrictions & RESTRICTIONS_CALNET).any?
     end
 
     def display_uri
@@ -80,6 +80,10 @@ module AV
 
     private
 
+    def restrictions
+      @restrictions ||= source.restrictions_from(marc_record)
+    end
+
     def player_link
       @player_link ||= source.player_link_for(marc_record)
     end
@@ -89,11 +93,6 @@ module AV
       return (@id_001 = nil) unless (cf_001 = marc_record['001'])
 
       @id_001 = RecordId.ensure_record_id(cf_001.value)
-    end
-
-    def player_link_restrictions
-      link_text = player_link_text.downcase
-      RESTRICTIONS.find { |r| link_text.include?(r.downcase) }
     end
 
     def ensure_catalog_link(values_by_field)

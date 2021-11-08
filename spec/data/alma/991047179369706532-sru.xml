@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><searchRetrieveResponse xmlns="http://www.loc.gov/zing/srw/">
+  <version>1.2</version>
+  <numberOfRecords>1</numberOfRecords>
+  <records>
+    <record>
+      <recordSchema>marcxml</recordSchema>
+      <recordPacking>xml</recordPacking>
+      <recordData>
+        <record xmlns="http://www.loc.gov/MARC21/slim">
+          <leader>02303ngm a2200445Ki 4500</leader>
+          <controlfield tag="001">991047179369706532</controlfield>
+          <controlfield tag="005">20210907130728.0</controlfield>
+          <controlfield tag="006">m     o  c</controlfield>
+          <controlfield tag="007">cr |||||||||||</controlfield>
+          <controlfield tag="007">vz u|||z|</controlfield>
+          <controlfield tag="008">190927s2017    is 077 e      o   vlheb d</controlfield>
+          <datafield ind1=" " ind2=" " tag="035">
+            <subfield code="a">(CUY)UCB-b246591298-01ucs_ber</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="035">
+            <subfield code="a">(OCoLC)1121086493</subfield>
+            <subfield code="9">ExL</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="035">
+            <subfield code="a">(EXLNZ-01UCS_NETWORK)9913504836506531</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="040">
+            <subfield code="a">CUY</subfield>
+            <subfield code="b">eng</subfield>
+            <subfield code="e">rda</subfield>
+            <subfield code="e">pn</subfield>
+            <subfield code="c">CUY</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="4" tag="050">
+            <subfield code="a">HD7358.45.A3</subfield>
+            <subfield code="b">B45 2017</subfield>
+          </datafield>
+          <datafield ind1="0" ind2="0" tag="245">
+            <subfield code="a">Before my feet touch the ground /</subfield>
+            <subfield code="c">a film by Daphni Leef.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="0" tag="264">
+            <subfield code="a">[Tel-Aviv] :</subfield>
+            <subfield code="b">Cassis films,</subfield>
+            <subfield code="c">2017.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="2" tag="264">
+            <subfield code="a">[Jerusalem] :</subfield>
+            <subfield code="b">Go2 Films,</subfield>
+            <subfield code="c">[2017?].</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="300">
+            <subfield code="a">1 online resource (1 video file (77 min.)) :</subfield>
+            <subfield code="b">sound, color</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="336">
+            <subfield code="a">two-dimensional moving image</subfield>
+            <subfield code="b">tdi</subfield>
+            <subfield code="2">rdacontent</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="337">
+            <subfield code="a">computer</subfield>
+            <subfield code="b">c</subfield>
+            <subfield code="2">rdamedia</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="338">
+            <subfield code="a">online resource</subfield>
+            <subfield code="b">cr</subfield>
+            <subfield code="2">rdacarrier</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="520">
+            <subfield code="a">July 2011, a young Israeli video editor named Daphni Leef decides to protest against rent prices by pitching a tent in the city center. Within a few days a whole boulevard is full of tents, as a modest protest against housing policy grows into a national protest movement for social justice. In cities throughout Israel, and mass rallies are organized all over. Daphni at first combative and exuding an attractive idealism, she gradually becomes exhausted. As director, Daphni looks back on this turbulent period when she was transformed from a naive young woman into a celebrated and controversial national icon.</subfield>
+          </datafield>
+          <datafield ind1="0" ind2=" " tag="588">
+            <subfield code="a">Videodisc version record.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="0" tag="650">
+            <subfield code="a">Dwellings</subfield>
+            <subfield code="x">Social aspects</subfield>
+            <subfield code="z">Israel.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="0" tag="650">
+            <subfield code="a">Housing policy</subfield>
+            <subfield code="z">Israel.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="0" tag="650">
+            <subfield code="a">Political activists</subfield>
+            <subfield code="z">Israel.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="0" tag="650">
+            <subfield code="a">Young women</subfield>
+            <subfield code="z">Israel.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="7" tag="650">
+            <subfield code="a">Dwellings</subfield>
+            <subfield code="x">Social aspects.</subfield>
+            <subfield code="2">fast</subfield>
+            <subfield code="0">(OCoLC)fst00900183</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="7" tag="650">
+            <subfield code="a">Housing policy.</subfield>
+            <subfield code="2">fast</subfield>
+            <subfield code="0">(OCoLC)fst00962432</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="7" tag="650">
+            <subfield code="a">Political activists.</subfield>
+            <subfield code="2">fast</subfield>
+            <subfield code="0">(OCoLC)fst01069192</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="7" tag="650">
+            <subfield code="a">Young women.</subfield>
+            <subfield code="2">fast</subfield>
+            <subfield code="0">(OCoLC)fst01183301</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="7" tag="651">
+            <subfield code="a">Israel.</subfield>
+            <subfield code="2">fast</subfield>
+            <subfield code="0">(OCoLC)fst01204236</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="7" tag="655">
+            <subfield code="a">Nonfiction films.</subfield>
+            <subfield code="2">lcgft</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="7" tag="655">
+            <subfield code="a">Hebrew language films.</subfield>
+            <subfield code="2">lcgft</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="7" tag="655">
+            <subfield code="a">Nonfiction films.</subfield>
+            <subfield code="2">fast</subfield>
+            <subfield code="0">(OCoLC)fst01710269</subfield>
+          </datafield>
+          <datafield ind1="1" ind2=" " tag="700">
+            <subfield code="a">Leef, Daphni,</subfield>
+            <subfield code="e">film director.</subfield>
+          </datafield>
+          <datafield ind1="2" ind2=" " tag="710">
+            <subfield code="a">Cassis Films,</subfield>
+            <subfield code="e">production company.</subfield>
+          </datafield>
+          <datafield ind1="2" ind2=" " tag="710">
+            <subfield code="a">Go2Films (Firm),</subfield>
+            <subfield code="e">film distributor.</subfield>
+          </datafield>
+          <datafield ind1="0" ind2="8" tag="776">
+            <subfield code="i">Videodisc version:</subfield>
+            <subfield code="t">Before My Feet Touch the Ground</subfield>
+            <subfield code="w">(OCoLC)1088441456</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="953">
+            <subfield code="a">Tier 3</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="955">
+            <subfield code="a">20180921</subfield>
+            <subfield code="b">LSO MAD</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="955">
+            <subfield code="a">20190927</subfield>
+            <subfield code="b">tstp</subfield>
+            <subfield code="c">CCE</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1="4" ind2="0" tag="956">
+            <subfield code="z">UC Berkeley online videos. UCB access. Requires CalNet.</subfield>
+            <subfield code="u">https://avplayer.lib.berkeley.edu/Video-UCBOnly-MRC/b24659129</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1="0" ind2=" " tag="973">
+            <subfield code="a">MRC videos UCB access.</subfield>
+            <subfield code="5">CU</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="993">
+            <subfield code="a">20201204 migrate this bib; has wb order syep</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="993">
+            <subfield code="a">20210216 Migration order records with 856s. sydr</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="996">
+            <subfield code="a">b246591298</subfield>
+            <subfield code="b">Updated: 02-28-21</subfield>
+            <subfield code="c">Created: 09-05-18</subfield>
+            <subfield code="d">CatDate: 09-27-19</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="998">
+            <subfield code="a">01:18:14</subfield>
+            <subfield code="g">MRC_BeforeMyFeetTouchtheGround.mp4</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="AVE">
+            <subfield code="8">531004131810006532</subfield>
+            <subfield code="e">Available</subfield>
+            <subfield code="n">UC Berkeley online videos. UCB access. Requires CalNet.</subfield>
+          </datafield>
+        </record>
+      </recordData>
+      <recordIdentifier>991047179369706532</recordIdentifier>
+      <recordPosition>1</recordPosition>
+    </record>
+  </records>
+  <extraResponseData xmlns:xb="http://www.exlibris.com/repository/search/xmlbeans/">
+    <xb:exact>true</xb:exact>
+    <xb:responseDate>2021-11-08T11:09:32-0800</xb:responseDate>
+  </extraResponseData>
+</searchRetrieveResponse>

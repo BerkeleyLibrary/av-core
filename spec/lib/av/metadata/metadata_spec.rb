@@ -69,33 +69,82 @@ module AV
     end
 
     # TODO: do we need to check the 799s?
-    describe :restrictions do
+    context 'restrictions' do
       it 'returns "UCB access"' do
         bib_number = 'b18538031'
         stub_sru_request(bib_number)
         metadata = Metadata.for_record(record_id: bib_number)
-        expect(metadata.restrictions).to eq('UCB access')
+        expect(metadata.ucb_access?).to eq(true)
       end
 
       it 'finds "UCB Access" (capitalized)' do
         bib_number = 'b25716973'
         stub_sru_request(bib_number)
         metadata = Metadata.for_record(record_id: bib_number)
-        expect(metadata.restrictions).to eq('UCB access')
+        expect(metadata.ucb_access?).to eq(true)
+        expect(metadata.calnet_only?).to eq(false)
       end
 
       it 'returns "Requires CalNet"' do
         bib_number = 'b24659129'
         stub_sru_request(bib_number)
         metadata = Metadata.for_record(record_id: bib_number)
-        expect(metadata.restrictions).to eq('Requires CalNet')
+        expect(metadata.ucb_access?).to eq(true)
+        expect(metadata.calnet_only?).to eq(true)
       end
 
       it 'returns "Freely available" for unrestricted audio' do
         bib_number = 'b23161018'
         stub_sru_request(bib_number)
         metadata = Metadata.for_record(record_id: bib_number)
-        expect(metadata.restrictions).to eq('Freely available')
+        expect(metadata.ucb_access?).to eq(false)
+        expect(metadata.calnet_only?).to eq(false)
+      end
+
+      it 'extracts UCB restrictions from a TIND 856' do
+        marc_record = MARC::XMLReader.new('spec/data/record-(cityarts)00002.xml').first
+        metadata = Metadata.new(record_id: 'record-(cityarts)00002', source: Metadata::Source::TIND, marc_record: marc_record)
+        expect(metadata.ucb_access?).to eq(true)
+        expect(metadata.calnet_only?).to eq(false)
+      end
+
+      it 'extracts UCB restrictions from an Alma 956' do
+        marc_record = MARC::XMLReader.new('spec/data/alma/991054360089706532-sru.xml').first
+        metadata = Metadata.new(record_id: '991047179369706532', source: Metadata::Source::ALMA, marc_record: marc_record)
+        expect(metadata.ucb_access?).to eq(true)
+        expect(metadata.calnet_only?).to eq(false)
+      end
+
+      it 'extracts CalNet restrictions from an Alma 956' do
+        marc_record = MARC::XMLReader.new('spec/data/alma/991047179369706532-sru.xml').first
+        metadata = Metadata.new(record_id: '991054360089706532', source: Metadata::Source::ALMA, marc_record: marc_record)
+        expect(metadata.ucb_access?).to eq(true)
+        expect(metadata.calnet_only?).to eq(true)
+      end
+
+      it 'extracts restrictions from a 998$r' do
+        marc_record = MARC::XMLReader.new('spec/data/alma/991005939359706532-sru.xml').first
+        metadata = Metadata.new(record_id: '991005939359706532', source: Metadata::Source::ALMA, marc_record: marc_record)
+        expect(metadata.ucb_access?).to eq(false) # just to be sure
+        expect(metadata.calnet_only?).to eq(false) # just to be sure
+
+        marc_record['998'].append(MARC::Subfield.new('r', 'UCB access. Requires CalNet.'))
+        metadata = Metadata.new(record_id: '991005939359706532', source: Metadata::Source::ALMA, marc_record: marc_record)
+        expect(metadata.ucb_access?).to eq(true)
+        expect(metadata.calnet_only?).to eq(true)
+      end
+
+      it 'extracts restrictions from multiple subfields 998$r' do
+        marc_record = MARC::XMLReader.new('spec/data/alma/991005939359706532-sru.xml').first
+        metadata = Metadata.new(record_id: '991005939359706532', source: Metadata::Source::ALMA, marc_record: marc_record)
+        expect(metadata.ucb_access?).to eq(false) # just to be sure
+        expect(metadata.calnet_only?).to eq(false) # just to be sure
+
+        marc_record['998'].append(MARC::Subfield.new('r', 'UCB access.'))
+        marc_record['998'].append(MARC::Subfield.new('r', 'Requires CalNet.'))
+        metadata = Metadata.new(record_id: '991005939359706532', source: Metadata::Source::ALMA, marc_record: marc_record)
+        expect(metadata.ucb_access?).to eq(true)
+        expect(metadata.calnet_only?).to eq(true)
       end
     end
 
