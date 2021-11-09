@@ -258,7 +258,24 @@ module AV
           end
         end
       end
+    end
 
+    describe :calnet_only? do
+      it 'returns true for CalNet-only records' do
+        mms_id = '991047179369706532'
+        stub_sru_request(mms_id)
+        record = Record.from_metadata(collection: 'test', record_id: mms_id)
+        expect(record.ucb_access?).to eq(true)
+        expect(record.calnet_only?).to eq(true)
+      end
+
+      it 'returns false for records open to UCB IP addresses' do
+        mms_id = '991054360089706532'
+        stub_sru_request(mms_id)
+        record = Record.from_metadata(collection: 'test', record_id: mms_id)
+        expect(record.ucb_access?).to eq(true)
+        expect(record.calnet_only?).to eq(false)
+      end
     end
   end
 end

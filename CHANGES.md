@@ -1,3 +1,7 @@
+# 0.2.2 (next)
+
+- Add `Record#calnet_only?` in addition to `Record#ucb_access?`
+
 # 0.2.1 (2021-11-08)
 
 - Add `Metadata#calnet_only?` in addition to `Metadata#ucb_access?`

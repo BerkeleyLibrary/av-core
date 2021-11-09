@@ -10,6 +10,7 @@ module AV
 
     attr_reader :collection, :tracks, :metadata
 
+    # TODO: stop passing in track list & just get it from metadata & collection
     def initialize(collection:, tracks:, metadata:)
       @collection = collection
       @tracks = tracks.sort
@@ -34,6 +35,10 @@ module AV
 
     def ucb_access?
       metadata.ucb_access?
+    end
+
+    def calnet_only?
+      metadata.calnet_only?
     end
 
     def player_link_text

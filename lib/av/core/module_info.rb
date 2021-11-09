@@ -7,7 +7,7 @@ module AV
       SUMMARY = 'UC Berkeley Library audio/video core code'.freeze
       DESCRIPTION = 'Gem for UC Berkeley Library shared audio/video code'.freeze
       LICENSE = 'MIT'.freeze
-      VERSION = '0.2.1'.freeze
+      VERSION = '0.2.2'.freeze
       HOMEPAGE = 'https://git.lib.berkeley.edu/lap/av_core'.freeze
 
       private_class_method :new
