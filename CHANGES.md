@@ -1,4 +1,4 @@
-# 0.2.2 (next)
+# 0.2.2 (2022-01-03)
 
 - Add `Record#calnet_only?` in addition to `Record#ucb_access?`
 

@@ -14,7 +14,7 @@
     <orderEntry type="library" scope="PROVIDED" name="addressable (v2.8.0, RVM: ruby-3.0.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="amazing_print (v1.4.0, RVM: ruby-3.0.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="ast (v2.4.2, RVM: ruby-3.0.2) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="berkeley_library-logging (v0.2.3, RVM: ruby-3.0.2) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="berkeley_library-logging (v0.2.5, RVM: ruby-3.0.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="berkeley_library-marc (v0.2.1, RVM: ruby-3.0.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="berkeley_library-util (v0.1.1, RVM: ruby-3.0.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="brakeman (v4.10.1, RVM: ruby-3.0.2) [gem]" level="application" />
@@ -37,7 +37,7 @@
     <orderEntry type="library" scope="PROVIDED" name="hashdiff (v1.0.1, RVM: ruby-3.0.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="http-accept (v1.7.0, RVM: ruby-3.0.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="http-cookie (v1.0.4, RVM: ruby-3.0.2) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="i18n (v1.8.10, RVM: ruby-3.0.2) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="i18n (v1.8.11, RVM: ruby-3.0.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="io-console (v0.5.9, RVM: ruby-3.0.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="irb (v1.3.7, RVM: ruby-3.0.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="listen (v3.0.8, RVM: ruby-3.0.2) [gem]" level="application" />
@@ -45,15 +45,15 @@
     <orderEntry type="library" scope="PROVIDED" name="loofah (v2.12.0, RVM: ruby-3.0.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="marc (v1.1.1, RVM: ruby-3.0.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="method_source (v1.0.0, RVM: ruby-3.0.2) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="mime-types (v3.3.1, RVM: ruby-3.0.2) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="mime-types-data (v3.2021.0901, RVM: ruby-3.0.2) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="mime-types (v3.4.1, RVM: ruby-3.0.2) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="mime-types-data (v3.2021.1115, RVM: ruby-3.0.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="minitest (v5.14.4, RVM: ruby-3.0.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="netrc (v0.11.0, RVM: ruby-3.0.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="nokogiri (v1.12.5, RVM: ruby-3.0.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="oj (v3.13.9, RVM: ruby-3.0.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="ougai (v1.9.1, RVM: ruby-3.0.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="parallel (v1.21.0, RVM: ruby-3.0.2) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="parser (v3.0.2.0, RVM: ruby-3.0.2) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="parser (v3.0.3.1, RVM: ruby-3.0.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="parslet (v2.0.0, RVM: ruby-3.0.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="public_suffix (v4.0.6, RVM: ruby-3.0.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="racc (v1.6.0, RVM: ruby-3.0.2) [gem]" level="application" />
@@ -66,7 +66,6 @@
     <orderEntry type="library" scope="PROVIDED" name="rake (v13.0.6, RVM: ruby-3.0.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rb-fsevent (v0.11.0, RVM: ruby-3.0.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rb-inotify (v0.10.1, RVM: ruby-3.0.2) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="rbs (v1.0.4, RVM: ruby-3.0.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="regexp_parser (v2.1.1, RVM: ruby-3.0.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="reline (v0.2.7, RVM: ruby-3.0.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="request_store (v1.5.0, RVM: ruby-3.0.2) [gem]" level="application" />
@@ -76,9 +75,9 @@
     <orderEntry type="library" scope="PROVIDED" name="rspec-core (v3.10.1, RVM: ruby-3.0.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rspec-expectations (v3.10.1, RVM: ruby-3.0.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rspec-mocks (v3.10.2, RVM: ruby-3.0.2) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="rspec-support (v3.10.2, RVM: ruby-3.0.2) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rspec-support (v3.10.3, RVM: ruby-3.0.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rubocop (v1.18.0, RVM: ruby-3.0.2) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="rubocop-ast (v1.12.0, RVM: ruby-3.0.2) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rubocop-ast (v1.13.0, RVM: ruby-3.0.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rubocop-rake (v0.6.0, RVM: ruby-3.0.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rubocop-rspec (v2.4.0, RVM: ruby-3.0.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="ruby-marc-spec (v0.1.1, RVM: ruby-3.0.2) [gem]" level="application" />
@@ -112,7 +111,7 @@
           </RakeTaskImpl>
           <RakeTaskImpl description="Run all specs in spec directory, with coverage" fullCommand="coverage" id="coverage" />
           <RakeTaskImpl description="Run tests, check test coverage, check code style, check for vulnerabilities, build gem" fullCommand="default" id="default" />
-          <RakeTaskImpl description="Build av_core.gemspec as av_core-0.2.1.gem" fullCommand="gem" id="gem" />
+          <RakeTaskImpl description="Build av_core.gemspec as av_core-0.2.2.gem" fullCommand="gem" id="gem" />
           <RakeTaskImpl description="Run RuboCop with auto-correct, and output results to console" fullCommand="ra" id="ra" />
           <RakeTaskImpl description="Run rubocop with HTML output" fullCommand="rubocop" id="rubocop" />
           <RakeTaskImpl id="rubocop">
