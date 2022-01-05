@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Search-Engine-Total-Number-Of-Results: 1 -->
+<collection xmlns="http://www.loc.gov/MARC21/slim">
+<record>
+  <controlfield tag="001">153372</controlfield>
+  <controlfield tag="005">20211119155302.0</controlfield>
+  <datafield tag="024" ind1="8" ind2="0">
+    <subfield code="a">Motion Picture 204 B:1</subfield>
+  </datafield>
+  <datafield tag="035" ind1=" " ind2=" ">
+    <subfield code="a">(clir)00020</subfield>
+  </datafield>
+  <datafield tag="041" ind1=" " ind2=" ">
+    <subfield code="a">eng</subfield>
+  </datafield>
+  <datafield tag="245" ind1=" " ind2=" ">
+    <subfield code="a">Yellowstone Trip : Start to Grants Pass</subfield>
+  </datafield>
+  <datafield tag="260" ind1=" " ind2=" ">
+    <subfield code="c">1926</subfield>
+    <subfield code="a">United States</subfield>
+  </datafield>
+  <datafield tag="300" ind1=" " ind2=" ">
+    <subfield code="a">1 film reel (08:17)</subfield>
+    <subfield code="b">silent, b&amp;w</subfield>
+    <subfield code="c">16mm</subfield>
+  </datafield>
+  <datafield tag="336" ind1=" " ind2=" ">
+    <subfield code="a">Video</subfield>
+  </datafield>
+  <datafield tag="500" ind1=" " ind2=" ">
+    <subfield code="a">Film ends abruptly.</subfield>
+  </datafield>
+  <datafield tag="520" ind1=" " ind2=" ">
+    <subfield code="a">Features: Klamath River; Mill Creek Falls, Rogue River near Prospect; deer in Prospect; forest along Crater Lake Highway; Crater Lake National Park; panorama of Crater Lake and Wizard Island; Anna Canyon; Table Mountain near Medford; Grants Pass Auto Camp.</subfield>
+  </datafield>
+  <datafield tag="540" ind1=" " ind2=" ">
+    <subfield code="a">Researchers may make free and open use of the UC Berkeley Library’s digitized public domain materials. However, some materials in our online collections may be protected by U.S. copyright law (Title 17, U.S.C.). Use or reproduction of materials protected by copyright beyond that allowed by fair use (Title 17, U.S.C. § 107) requires permission from the copyright owners. The use or reproduction of some materials may also be restricted by terms of University of California gift or purchase agreements, privacy and publicity rights, or trademark law. Responsibility for determining rights status and permissibility of any use or reproduction rests exclusively with the researcher. Please see our Permissions Policies: http://www.lib.berkeley.edu/about/permissions-policies.</subfield>
+  </datafield>
+  <datafield tag="650" ind1=" " ind2=" ">
+    <subfield code="a">Yellowstone National Park</subfield>
+  </datafield>
+  <datafield tag="650" ind1=" " ind2=" ">
+    <subfield code="a">Grants Pass</subfield>
+  </datafield>
+  <datafield tag="650" ind1=" " ind2=" ">
+    <subfield code="a">Oregon</subfield>
+  </datafield>
+  <datafield tag="650" ind1=" " ind2=" ">
+    <subfield code="a">Klamath River</subfield>
+  </datafield>
+  <datafield tag="650" ind1=" " ind2=" ">
+    <subfield code="a">Mill Creek Falls</subfield>
+  </datafield>
+  <datafield tag="650" ind1=" " ind2=" ">
+    <subfield code="a">Rogue River</subfield>
+  </datafield>
+  <datafield tag="650" ind1=" " ind2=" ">
+    <subfield code="a">Prospect</subfield>
+  </datafield>
+  <datafield tag="650" ind1=" " ind2=" ">
+    <subfield code="a">Crater Lake National Park</subfield>
+  </datafield>
+  <datafield tag="650" ind1=" " ind2=" ">
+    <subfield code="a">Wizard Island</subfield>
+  </datafield>
+  <datafield tag="650" ind1=" " ind2=" ">
+    <subfield code="a">Anna Canyon</subfield>
+  </datafield>
+  <datafield tag="650" ind1=" " ind2=" ">
+    <subfield code="a">Table Mountain</subfield>
+  </datafield>
+  <datafield tag="650" ind1=" " ind2=" ">
+    <subfield code="a">Medford</subfield>
+  </datafield>
+  <datafield tag="650" ind1=" " ind2=" ">
+    <subfield code="a">Grants Pass Auto Camp</subfield>
+  </datafield>
+  <datafield tag="650" ind1=" " ind2=" ">
+    <subfield code="a">Forests</subfield>
+  </datafield>
+  <datafield tag="651" ind1=" " ind2=" ">
+    <subfield code="a">Wyoming</subfield>
+  </datafield>
+  <datafield tag="651" ind1=" " ind2=" ">
+    <subfield code="a">Utah</subfield>
+  </datafield>
+  <datafield tag="651" ind1=" " ind2=" ">
+    <subfield code="a">Idaho</subfield>
+  </datafield>
+  <datafield tag="651" ind1=" " ind2=" ">
+    <subfield code="a">Oregon</subfield>
+  </datafield>
+  <datafield tag="655" ind1=" " ind2=" ">
+    <subfield code="a">Actualities</subfield>
+  </datafield>
+  <datafield tag="655" ind1=" " ind2=" ">
+    <subfield code="a">Non-fiction films</subfield>
+  </datafield>
+  <datafield tag="655" ind1=" " ind2=" ">
+    <subfield code="a">Travelogues</subfield>
+  </datafield>
+  <datafield tag="700" ind1="1" ind2=" ">
+    <subfield code="a">Cleary, Ernest W.</subfield>
+    <subfield code="e">Director</subfield>
+  </datafield>
+  <datafield tag="700" ind1="1" ind2=" ">
+    <subfield code="a">Greve, Bill</subfield>
+    <subfield code="e">Cast</subfield>
+  </datafield>
+  <datafield tag="852" ind1=" " ind2=" ">
+    <subfield code="c">The Bancroft Library</subfield>
+  </datafield>
+  <datafield tag="856" ind1="4" ind2="2">
+    <subfield code="u">https://avplayer.lib.berkeley.edu/Video-Public-Bancroft/%28clir%2900020</subfield>
+    <subfield code="y">Play video</subfield>
+  </datafield>
+  <datafield tag="856" ind1="4" ind2="0">
+    <subfield code="u">http://oskicat.berkeley.edu/record=b23241508~S57</subfield>
+    <subfield code="y">View library catalog record.</subfield>
+  </datafield>
+  <datafield tag="856" ind1="4" ind2="1">
+    <subfield code="u">https://oac.cdlib.org/findaid/ark:/13030/tf4x0nb0qs/</subfield>
+    <subfield code="y">View collection guide</subfield>
+  </datafield>
+  <datafield tag="856" ind1="4" ind2="1">
+    <subfield code="u">https://search.library.berkeley.edu/permalink/01UCS_BER/1thfj9n/alma991034756419706532</subfield>
+    <subfield code="y">View library catalog record.</subfield>
+  </datafield>
+  <datafield tag="901" ind1=" " ind2=" ">
+    <subfield code="m">991034756419706532</subfield>
+  </datafield>
+  <datafield tag="902" ind1=" " ind2=" ">
+    <subfield code="n">LEG</subfield>
+    <subfield code="d">2020-08-22</subfield>
+  </datafield>
+  <datafield tag="950" ind1=" " ind2=" ">
+    <subfield code="a">cubanc_80_1_01287741a_01</subfield>
+  </datafield>
+  <datafield tag="980" ind1=" " ind2=" ">
+    <subfield code="a">Sierra Club</subfield>
+  </datafield>
+  <datafield tag="982" ind1=" " ind2=" ">
+    <subfield code="p">Moving Images from Environmental Movements in the West, 1920-2000</subfield>
+    <subfield code="a">Sierra Club</subfield>
+    <subfield code="b">Sierra Club Records</subfield>
+  </datafield>
+  <datafield tag="998" ind1=" " ind2=" ">
+    <subfield code="a">0:08:18</subfield>
+    <subfield code="g">clir_rec_risk/cubanc_80_1_01287741a_01_access.mp4</subfield>
+  </datafield>
+</record>
+</collection>

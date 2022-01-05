@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><searchRetrieveResponse xmlns="http://www.loc.gov/zing/srw/">
+  <version>1.2</version>
+  <numberOfRecords>1</numberOfRecords>
+  <records>
+    <record>
+      <recordSchema>marcxml</recordSchema>
+      <recordPacking>xml</recordPacking>
+      <recordData>
+        <record xmlns="http://www.loc.gov/MARC21/slim">
+          <leader>01580ngm a2200277Ki 4500</leader>
+          <controlfield tag="001">991034756419706532</controlfield>
+          <controlfield tag="005">20211112121037.0</controlfield>
+          <controlfield tag="008">160308s1926    xxu|||            mleng d</controlfield>
+          <datafield ind1="8" ind2=" " tag="024">
+            <subfield code="a">Motion Picture 204 B</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="035">
+            <subfield code="a">(CUY)UCB-b232415080-01ucs_ber</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="035">
+            <subfield code="a">(OCoLC)944128179</subfield>
+            <subfield code="9">ExL</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="035">
+            <subfield code="a">(EXLNZ-01UCS_NETWORK)9915015568206531</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="040">
+            <subfield code="a">CUY</subfield>
+            <subfield code="b">eng</subfield>
+            <subfield code="e">rda</subfield>
+            <subfield code="c">CUY</subfield>
+          </datafield>
+          <datafield ind1="0" ind2="0" tag="245">
+            <subfield code="a">Yellowstone trip, 1926.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="0" tag="264">
+            <subfield code="a">[United States?] :</subfield>
+            <subfield code="b">[producer not identified],</subfield>
+            <subfield code="c">1926.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="300">
+            <subfield code="a">9 motion picture reels :</subfield>
+            <subfield code="b">silent, black and white ;</subfield>
+            <subfield code="c">16 mm</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="336">
+            <subfield code="a">two-dimensional moving image</subfield>
+            <subfield code="b">tdi</subfield>
+            <subfield code="2">rdacontent.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="337">
+            <subfield code="a">projected</subfield>
+            <subfield code="b">g</subfield>
+            <subfield code="2">rdamedia.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="338">
+            <subfield code="a">film reel</subfield>
+            <subfield code="b">mr</subfield>
+            <subfield code="2">rdacarrier.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="500">
+            <subfield code="a">Item call number: Motion Picture 204 B. Reels 1-2 shelved in BMP 1 Box 99; reels 3-9, Box 100.</subfield>
+          </datafield>
+          <datafield ind1="0" ind2=" " tag="505">
+            <subfield code="a">Reel 1. Start to Grant's Pass (210 feet) -- Reel 2. Grant's Pass to Yellowstone (225 feet) -- Reel 3. Entering Yellowstone (425 feet) -- Reel 4. Old Faithful, Heart Lake (450 feet) -- Reel 5. Heart Lake to Grand Canyon (425 feet) -- Reel 6. Animals and birds (425 feet) -- Reel 7. Animals and birds (200 feet) -- Reel 8. Grand Canyon to Tetons (350 feet) -- Reel 9. Yellowstone to Burlingame (350 feet).</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="506">
+            <subfield code="a">RESTRICTED.</subfield>
+            <subfield code="b">Requests for use of original must be approved by the appropriate curator.</subfield>
+            <subfield code="5">CU-BANC</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="506">
+            <subfield code="a">ITEM STORED OFF-SITE AS PART OF BANCROFT MOTION PICTURE COLLECTION (BMP 1) :</subfield>
+            <subfield code="b">Advance notice required for use.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="508">
+            <subfield code="a">Photographed by Dr. Ernest W. Cleary.</subfield>
+          </datafield>
+          <datafield ind1="1" ind2=" " tag="592">
+            <subfield code="c">Gift,</subfield>
+            <subfield code="a">Dr. Ernest W. Cleary to Sierra Club papers,</subfield>
+            <subfield code="d">June 1972.</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1=" " ind2="0" tag="651">
+            <subfield code="a">Yellowstone National Park.</subfield>
+          </datafield>
+          <datafield ind1="1" ind2=" " tag="700">
+            <subfield code="a">Cleary, Ernest W.,</subfield>
+            <subfield code="e">filmmaker.</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="910">
+            <subfield code="a">Has related records (UCB)</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="955">
+            <subfield code="a">20160308</subfield>
+            <subfield code="b">tbtb01</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="980">
+            <subfield code="a">ITEM STORED OFF-SITE AS PART OF BANCROFT MOTION PICTURE COLLECTION (BMP 1) :</subfield>
+            <subfield code="b">Advance notice required for use.</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="980">
+            <subfield code="a">RESTRICTED.</subfield>
+            <subfield code="b">Requests for use of original must be approved by the appropriate curator.</subfield>
+            <subfield code="5">CU-BANC</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="996">
+            <!-- injected for testing; real record has bib number -->
+            <subfield code="a">991034756419706532</subfield>
+            <!-- <subfield code="a">b232415080</subfield>-->
+            <subfield code="b">Updated: 05-28-21</subfield>
+            <subfield code="c">Created: 03-08-16</subfield>
+            <subfield code="d">CatDate: 03-08-16</subfield>
+            <subfield code="9">LOCAL</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="AVA">
+            <subfield code="0">991082710499706532</subfield>
+            <subfield code="8">22955977220006532</subfield>
+            <subfield code="a">01UCS_BER</subfield>
+            <subfield code="b">NRLF</subfield>
+            <subfield code="c">Bancroft (NRLF)</subfield>
+            <subfield code="d">BMP 1</subfield>
+            <subfield code="e">unavailable</subfield>
+            <subfield code="f">1</subfield>
+            <subfield code="g">1</subfield>
+            <subfield code="i">UCB_Campus</subfield>
+            <subfield code="j">nbtbr</subfield>
+            <subfield code="k">8</subfield>
+            <subfield code="p">1</subfield>
+            <subfield code="q">Northern Regional Library Facility</subfield>
+          </datafield>
+          <datafield ind1=" " ind2=" " tag="AVA">
+            <subfield code="0">991083642049706532</subfield>
+            <subfield code="8">22956020930006532</subfield>
+            <subfield code="a">01UCS_BER</subfield>
+            <subfield code="b">NRLF</subfield>
+            <subfield code="c">Bancroft (NRLF)</subfield>
+            <subfield code="d">BMP 1</subfield>
+            <subfield code="e">unavailable</subfield>
+            <subfield code="f">1</subfield>
+            <subfield code="g">1</subfield>
+            <subfield code="i">UCB_Campus</subfield>
+            <subfield code="j">nbtbr</subfield>
+            <subfield code="k">8</subfield>
+            <subfield code="p">2</subfield>
+            <subfield code="q">Northern Regional Library Facility</subfield>
+          </datafield>
+        </record>
+      </recordData>
+      <recordIdentifier>991034756419706532</recordIdentifier>
+      <recordPosition>1</recordPosition>
+    </record>
+  </records>
+  <extraResponseData xmlns:xb="http://www.exlibris.com/repository/search/xmlbeans/">
+    <xb:exact>true</xb:exact>
+    <xb:responseDate>2022-01-05T11:35:15-0800</xb:responseDate>
+  </extraResponseData>
+</searchRetrieveResponse>

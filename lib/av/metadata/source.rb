@@ -102,8 +102,10 @@ module AV
       end
 
       def bib_from_marc(marc_record, tag, code)
-        bib_number = find_subfield_value(marc_record, tag, code)
-        bib_number && RecordId.strip_check_digit(bib_number)
+        return unless (bib_number = find_subfield_value(marc_record, tag, code))
+        return unless RecordId::Type.for_id(bib_number) == RecordId::Type::MILLENNIUM
+
+        RecordId.strip_check_digit(bib_number)
       end
 
       # TODO: Use marc/spec

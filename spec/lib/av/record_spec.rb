@@ -169,6 +169,25 @@ module AV
       end
     end
 
+    describe :bib_number do
+      it 'returns nil for Alma records with no bib number' do
+        mms_id = '991034756419706532'
+        stub_sru_request(mms_id)
+        record = Record.from_metadata(collection: 'Video-Public-Bancroft', record_id: mms_id)
+        expect(record.bib_number).to be_nil
+      end
+
+      it 'returns nil for TIND records with no bib number' do
+        tind_id = '(clir)00020'
+        marc_xml = File.read('spec/data/record-(clir)00020.xml')
+        search_url = 'https://digicoll.lib.berkeley.edu/search?p=035__a%3A%22%28clir%2900020%22&of=xm'
+        stub_request(:get, search_url).to_return(status: 200, body: marc_xml)
+
+        record = Record.from_metadata(collection: 'Video-Public-Bancroft', record_id: tind_id)
+        expect(record.bib_number).to be_nil
+      end
+    end
+
     describe :from_metadata do
       it 'loads the metadata' do
         marc_xml = File.read('spec/data/record-(pacradio)01469.xml')

@@ -1,3 +1,9 @@
+# 0.2.3 (2022-01-05)
+
+- `Record#bib_number` and `Metadata#bib_number` now return nil instead of raising an
+  exception when the MARC field expected to contain a Millennium bib number contains
+  something else.
+
 # 0.2.2 (2022-01-03)
 
 - Add `Record#calnet_only?` in addition to `Record#ucb_access?`
