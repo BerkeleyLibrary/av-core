@@ -1,3 +1,16 @@
+# 0.3.0 (2022-02-01)
+
+- Rename `Record#ucb_access?` and `Metadata#ucb_access?` to `calnet_or_ip?` for clarity.
+- Remove the following methods:
+  - `Record#player_link_text`
+  - `Metadata#player_link_text`
+  - `Metadata#player_url`
+- Remove the following constants:
+  - `AV::Constants::RESTRICTIONS_CALNET` 
+  - `AV::Constants::RESTRICTIONS_UCB_IP`
+  - `AV::Constants::RESTRICTIONS`
+  - `AV::Constants::RESTRICTIONS_NONE`
+
 # 0.2.3 (2022-01-05)
 
 - `Record#bib_number` and `Metadata#bib_number` now return nil instead of raising an
