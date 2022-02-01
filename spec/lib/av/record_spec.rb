@@ -83,19 +83,6 @@ module AV
       end
     end
 
-    describe :player_link_text do
-      it 'returns the player link text' do
-        collection = 'MRCAudio'
-
-        player_link_text = 'MRC online audio. Freely available.'
-        metadata = instance_double(Metadata)
-        expect(metadata).to receive(:player_link_text).and_return(player_link_text)
-
-        record = Record.new(collection: collection, tracks: [], metadata: metadata)
-        expect(record.player_link_text).to eq(player_link_text)
-      end
-    end
-
     describe :type_label do
       it 'handles audio' do
         t1 = Track.new(sort_order: 1, title: 'Part 1', path: 'MRCAudio/frost-read1.mp3')
@@ -251,7 +238,7 @@ module AV
       end
     end
 
-    describe :ucb_access? do
+    describe :calnet_or_ip? do
       it 'returns true for restricted, false for unrestricted' do
         restricted = %w[b18538031 b24071548 (cityarts)00002 (cityarts)00773]
         unrestricted = %w[b22139658 b23161018 (pacradio)00107 (pacradio)01469]
@@ -268,12 +255,12 @@ module AV
         aggregate_failures 'restrictions' do
           restricted.each do |record_id|
             record = Record.from_metadata(collection: 'test', record_id: record_id)
-            expect(record.ucb_access?).to eq(true), "Expected #{record_id} to be restricted, was not"
+            expect(record.calnet_or_ip?).to eq(true), "Expected #{record_id} to be restricted, was not"
           end
 
           unrestricted.each do |record_id|
             record = Record.from_metadata(collection: 'test', record_id: record_id)
-            expect(record.ucb_access?).to eq(false), "Expected #{record_id} not to be restricted, was"
+            expect(record.calnet_or_ip?).to eq(false), "Expected #{record_id} not to be restricted, was"
           end
         end
       end
@@ -284,7 +271,7 @@ module AV
         mms_id = '991047179369706532'
         stub_sru_request(mms_id)
         record = Record.from_metadata(collection: 'test', record_id: mms_id)
-        expect(record.ucb_access?).to eq(true)
+        expect(record.calnet_or_ip?).to eq(true)
         expect(record.calnet_only?).to eq(true)
       end
 
@@ -292,7 +279,7 @@ module AV
         mms_id = '991054360089706532'
         stub_sru_request(mms_id)
         record = Record.from_metadata(collection: 'test', record_id: mms_id)
-        expect(record.ucb_access?).to eq(true)
+        expect(record.calnet_or_ip?).to eq(true)
         expect(record.calnet_only?).to eq(false)
       end
     end

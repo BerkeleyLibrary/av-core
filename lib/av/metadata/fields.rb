@@ -13,13 +13,6 @@ module AV
       TRACKS = Field.new(order: 99, label: 'Tracks', spec: TAG_TRACK_FIELD, subfield_order: %w[g t a])
       CATALOG_LINK = Field.new(order: 999, label: 'Linked Resources', spec: "#{TAG_LINK_FIELD}{^1=\\4}{^2=\\1}")
 
-      # We don't actually care about the subfield order; it's a hack to simplify the MARCSpec query
-      # See https://github.com/MARCspec/MARCspec/issues/30#issuecomment-948933714
-      PLAYER_LINK_ALMA = Field.new(order: 9999, label: 'Link to Content', spec: '956{^1=\4}{^2=\0}', subfield_order: %w[u z])
-      PLAYER_LINK_TIND = Field.new(order: 9999, label: 'Link to Content', spec: '856{^1=\4}{^2=\2}', subfield_order: %w[u y])
-
-      RESTRICTION_FIELD = Field.new(order: 9999, label: 'Restrictions', spec: '998$r')
-
       STANDARD_FIELDS = [
         TITLE,
         DESCRIPTION,

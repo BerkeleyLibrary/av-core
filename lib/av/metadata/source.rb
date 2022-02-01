@@ -48,36 +48,7 @@ module AV
         return tind_bib_number(metadata.marc_record) if self == Source::TIND
       end
 
-      def player_link_field
-        return AV::Metadata::Fields::PLAYER_LINK_ALMA if self == ALMA
-        return AV::Metadata::Fields::PLAYER_LINK_TIND if self == TIND
-      end
-
-      def player_link_for(marc_record)
-        value = player_link_field.value_from(marc_record)
-        value.entries.find { |e| e.is_a?(AV::Metadata::Link) }
-      end
-
-      def restrictions_from(marc_record)
-        restriction_field_values = restriction_fields.filter_map do |f|
-          next unless (value = f.value_from(marc_record))
-
-          value.as_string.downcase
-        end
-
-        RESTRICTIONS.select do |r|
-          restriction_field_values.any? { |v| v.include?(r.downcase) }
-        end
-      end
-
       private
-
-      def restriction_fields
-        [
-          player_link_field,
-          AV::Metadata::Fields::RESTRICTION_FIELD
-        ]
-      end
 
       def canonical_record_id_for(metadata)
         accessor = canonical_record_id_accessor

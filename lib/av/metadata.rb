@@ -1,6 +1,7 @@
 require 'av/constants'
 require 'av/metadata/fields'
 require 'av/metadata/source'
+require 'av/restrictions'
 
 module AV
   class Metadata
@@ -49,24 +50,16 @@ module AV
       @description ||= (desc_value = values_by_field[Fields::DESCRIPTION]) ? desc_value.as_string : ''
     end
 
-    def ucb_access?
-      restrictions.any?
+    def calnet_or_ip?
+      restrictions.calnet_or_ip?
     end
 
     def calnet_only?
-      (restrictions & RESTRICTIONS_CALNET).any?
+      restrictions.calnet_only?
     end
 
     def display_uri
       @display_uri ||= source.display_uri_for(self)
-    end
-
-    def player_url
-      player_link.url if player_link
-    end
-
-    def player_link_text
-      player_link.body if player_link
     end
 
     class << self
@@ -81,11 +74,7 @@ module AV
     private
 
     def restrictions
-      @restrictions ||= source.restrictions_from(marc_record)
-    end
-
-    def player_link
-      @player_link ||= source.player_link_for(marc_record)
+      @restrictions ||= Restrictions.new(marc_record)
     end
 
     def id_001

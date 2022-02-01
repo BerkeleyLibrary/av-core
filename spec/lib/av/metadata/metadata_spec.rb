@@ -38,33 +38,33 @@ module AV
       end
     end
 
-    describe :ucb_access? do
+    describe :calnet_or_ip? do
       it 'detects restricted audio' do
         bib_number = 'b18538031'
         stub_sru_request(bib_number)
         metadata = Metadata.for_record(record_id: bib_number)
-        expect(metadata.ucb_access?).to eq(true)
+        expect(metadata.calnet_or_ip?).to eq(true)
       end
 
       it 'detects restricted video' do
         bib_number = 'b25207857'
         stub_sru_request(bib_number)
         metadata = Metadata.for_record(record_id: bib_number)
-        expect(metadata.ucb_access?).to eq(true)
+        expect(metadata.calnet_or_ip?).to eq(true)
       end
 
       it 'detects CalNet restrictions' do
         bib_number = 'b24659129'
         stub_sru_request(bib_number)
         metadata = Metadata.for_record(record_id: bib_number)
-        expect(metadata.ucb_access?).to eq(true)
+        expect(metadata.calnet_or_ip?).to eq(true)
       end
 
       it 'detects unrestricted audio' do
         bib_number = 'b23161018'
         stub_sru_request(bib_number)
         metadata = Metadata.for_record(record_id: bib_number)
-        expect(metadata.ucb_access?).to eq(false)
+        expect(metadata.calnet_or_ip?).to eq(false)
       end
     end
 
@@ -74,14 +74,14 @@ module AV
         bib_number = 'b18538031'
         stub_sru_request(bib_number)
         metadata = Metadata.for_record(record_id: bib_number)
-        expect(metadata.ucb_access?).to eq(true)
+        expect(metadata.calnet_or_ip?).to eq(true)
       end
 
       it 'finds "UCB Access" (capitalized)' do
         bib_number = 'b25716973'
         stub_sru_request(bib_number)
         metadata = Metadata.for_record(record_id: bib_number)
-        expect(metadata.ucb_access?).to eq(true)
+        expect(metadata.calnet_or_ip?).to eq(true)
         expect(metadata.calnet_only?).to eq(false)
       end
 
@@ -89,7 +89,7 @@ module AV
         bib_number = 'b24659129'
         stub_sru_request(bib_number)
         metadata = Metadata.for_record(record_id: bib_number)
-        expect(metadata.ucb_access?).to eq(true)
+        expect(metadata.calnet_or_ip?).to eq(true)
         expect(metadata.calnet_only?).to eq(true)
       end
 
@@ -97,54 +97,66 @@ module AV
         bib_number = 'b23161018'
         stub_sru_request(bib_number)
         metadata = Metadata.for_record(record_id: bib_number)
-        expect(metadata.ucb_access?).to eq(false)
+        expect(metadata.calnet_or_ip?).to eq(false)
         expect(metadata.calnet_only?).to eq(false)
       end
 
       it 'extracts UCB restrictions from a TIND 856' do
         marc_record = MARC::XMLReader.new('spec/data/record-(cityarts)00002.xml').first
         metadata = Metadata.new(record_id: 'record-(cityarts)00002', source: Metadata::Source::TIND, marc_record: marc_record)
-        expect(metadata.ucb_access?).to eq(true)
+        expect(metadata.calnet_or_ip?).to eq(true)
         expect(metadata.calnet_only?).to eq(false)
       end
 
       it 'extracts UCB restrictions from an Alma 956' do
         marc_record = MARC::XMLReader.new('spec/data/alma/991054360089706532-sru.xml').first
         metadata = Metadata.new(record_id: '991047179369706532', source: Metadata::Source::ALMA, marc_record: marc_record)
-        expect(metadata.ucb_access?).to eq(true)
+        expect(metadata.calnet_or_ip?).to eq(true)
         expect(metadata.calnet_only?).to eq(false)
       end
 
       it 'extracts CalNet restrictions from an Alma 956' do
         marc_record = MARC::XMLReader.new('spec/data/alma/991047179369706532-sru.xml').first
         metadata = Metadata.new(record_id: '991054360089706532', source: Metadata::Source::ALMA, marc_record: marc_record)
-        expect(metadata.ucb_access?).to eq(true)
+        expect(metadata.calnet_or_ip?).to eq(true)
         expect(metadata.calnet_only?).to eq(true)
       end
 
       it 'extracts restrictions from a 998$r' do
         marc_record = MARC::XMLReader.new('spec/data/alma/991005939359706532-sru.xml').first
         metadata = Metadata.new(record_id: '991005939359706532', source: Metadata::Source::ALMA, marc_record: marc_record)
-        expect(metadata.ucb_access?).to eq(false) # just to be sure
+        expect(metadata.calnet_or_ip?).to eq(false) # just to be sure
         expect(metadata.calnet_only?).to eq(false) # just to be sure
 
         marc_record['998'].append(MARC::Subfield.new('r', 'UCB access. Requires CalNet.'))
         metadata = Metadata.new(record_id: '991005939359706532', source: Metadata::Source::ALMA, marc_record: marc_record)
-        expect(metadata.ucb_access?).to eq(true)
+        expect(metadata.calnet_or_ip?).to eq(true)
         expect(metadata.calnet_only?).to eq(true)
       end
 
       it 'extracts restrictions from multiple subfields 998$r' do
         marc_record = MARC::XMLReader.new('spec/data/alma/991005939359706532-sru.xml').first
         metadata = Metadata.new(record_id: '991005939359706532', source: Metadata::Source::ALMA, marc_record: marc_record)
-        expect(metadata.ucb_access?).to eq(false) # just to be sure
+        expect(metadata.calnet_or_ip?).to eq(false) # just to be sure
         expect(metadata.calnet_only?).to eq(false) # just to be sure
 
         marc_record['998'].append(MARC::Subfield.new('r', 'UCB access.'))
         marc_record['998'].append(MARC::Subfield.new('r', 'Requires CalNet.'))
         metadata = Metadata.new(record_id: '991005939359706532', source: Metadata::Source::ALMA, marc_record: marc_record)
-        expect(metadata.ucb_access?).to eq(true)
+        expect(metadata.calnet_or_ip?).to eq(true)
         expect(metadata.calnet_only?).to eq(true)
+      end
+
+      it 'accepts "CalNet" anywhere in the 998$r' do
+        marc_record = MARC::XMLReader.new('spec/data/alma/991005939359706532-sru.xml').first
+        metadata = Metadata.new(record_id: '991005939359706532', source: Metadata::Source::ALMA, marc_record: marc_record)
+        expect(metadata.calnet_or_ip?).to eq(false) # just to be sure
+        expect(metadata.calnet_only?).to eq(false) # just to be sure
+
+        marc_record['998'].append(MARC::Subfield.new('r', 'some string with CalNet in it somewhere'))
+        metadata = Metadata.new(record_id: '991005939359706532', source: Metadata::Source::ALMA, marc_record: marc_record)
+        expect(metadata.calnet_only?).to eq(true)
+        expect(metadata.calnet_or_ip?).to eq(false) # just to be sure
       end
     end
 
@@ -254,25 +266,6 @@ module AV
           actual_values = metadata.each_value.to_a
           expect(actual_values).to eq(expected_values)
         end
-      end
-    end
-
-    describe :player_url do
-      it 'finds the player_url' do
-        bib_number = 'b22139658'
-        stub_sru_request(bib_number)
-        metadata = Metadata.for_record(record_id: bib_number)
-        # TODO: use ALMA record ID?
-        expect(metadata.player_url).to eq('https://avplayer.lib.berkeley.edu/Video-Public-MRC/b22139658')
-      end
-    end
-
-    describe :player_link_text do
-      it 'finds the player_link_text' do
-        bib_number = 'b22139658'
-        stub_sru_request(bib_number)
-        metadata = Metadata.for_record(record_id: bib_number)
-        expect(metadata.player_link_text).to eq('UC Berkeley online videos. Freely available.')
       end
     end
   end

@@ -33,16 +33,12 @@ module AV
       metadata.record_id
     end
 
-    def ucb_access?
-      metadata.ucb_access?
+    def calnet_or_ip?
+      metadata.calnet_or_ip?
     end
 
     def calnet_only?
       metadata.calnet_only?
-    end
-
-    def player_link_text
-      metadata.player_link_text
     end
 
     def type_label

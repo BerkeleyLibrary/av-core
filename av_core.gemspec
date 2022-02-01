@@ -27,7 +27,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'berkeley_library-logging', '~> 0.2'
   spec.add_dependency 'berkeley_library-marc', '~> 0.2', '>= 0.2.1'
   spec.add_dependency 'berkeley_library-util', '~> 0.1', '>= 0.1.1'
-  spec.add_dependency 'ruby-marc-spec', '~> 0.1', '>= 0.1.1'
+  spec.add_dependency 'ruby-marc-spec', '~> 0.1', '>= 0.1.3'
   spec.add_dependency 'typesafe_enum', '~> 0.3'
 
   spec.add_development_dependency 'brakeman', '~> 4.9'

@@ -42,7 +42,7 @@ module AV
 
       context 'links' do
         it 'extracts links from TIND records' do
-          field = AV::Metadata::Fields::PLAYER_LINK_TIND
+          field = Field.new(order: 9999, label: 'Link to Content', spec: '856{^1=\4}{^2=\2}', subfield_order: %w[u y])
           value = field.value_from(marc_record)
           expect(value).to be_a(Value)
           expected_link = AV::Metadata::Link.new(
@@ -54,7 +54,7 @@ module AV
 
         it 'extracts links from Alma records' do
           marc_record = MARC::XMLReader.new('spec/data/alma/991054360089706532-sru.xml').first
-          field = AV::Metadata::Fields::PLAYER_LINK_ALMA
+          field = Field.new(order: 9999, label: 'Link to Content', spec: '956{^1=\4}{^2=\0}', subfield_order: %w[u z])
           value = field.value_from(marc_record)
           expect(value).to be_a(Value)
           expected_link = AV::Metadata::Link.new(
