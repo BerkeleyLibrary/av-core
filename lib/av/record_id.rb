@@ -1,6 +1,7 @@
 require 'typesafe_enum'
 require 'av/constants'
 
+# TODO: use berkeley_library/alma to replace as much of this as possible
 module AV
   class RecordId
     include AV::Util
