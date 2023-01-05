@@ -6,17 +6,17 @@ ruby_version_file = File.expand_path('.ruby-version', __dir__)
 ruby_version_exact = File.read(ruby_version_file).strip
 ruby_minor_version = ruby_version_exact.gsub(/^(\d+\.\d+).*/, '\1')
 
-require 'av/core/module_info'
+require 'berkeley_library/av/core/module_info'
 
 Gem::Specification.new do |spec|
-  spec.name = AV::Core::ModuleInfo::NAME
-  spec.author = AV::Core::ModuleInfo::AUTHOR
-  spec.email = AV::Core::ModuleInfo::AUTHOR_EMAIL
-  spec.summary = AV::Core::ModuleInfo::SUMMARY
-  spec.description = AV::Core::ModuleInfo::DESCRIPTION
-  spec.license = AV::Core::ModuleInfo::LICENSE
-  spec.version = AV::Core::ModuleInfo::VERSION
-  spec.homepage = AV::Core::ModuleInfo::HOMEPAGE
+  spec.name = BerkeleyLibrary::AV::Core::ModuleInfo::NAME
+  spec.author = BerkeleyLibrary::AV::Core::ModuleInfo::AUTHOR
+  spec.email = BerkeleyLibrary::AV::Core::ModuleInfo::AUTHOR_EMAIL
+  spec.summary = BerkeleyLibrary::AV::Core::ModuleInfo::SUMMARY
+  spec.description = BerkeleyLibrary::AV::Core::ModuleInfo::DESCRIPTION
+  spec.license = BerkeleyLibrary::AV::Core::ModuleInfo::LICENSE
+  spec.version = BerkeleyLibrary::AV::Core::ModuleInfo::VERSION
+  spec.homepage = BerkeleyLibrary::AV::Core::ModuleInfo::HOMEPAGE
 
   spec.files = `git ls-files -z -- ':!:Dockerfile' ':!:docker-compose.yml'`.split("\x0")
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})

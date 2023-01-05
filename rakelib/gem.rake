@@ -1,56 +1,54 @@
 require 'rubygems/gem_runner'
-require 'av/core/module_info'
+require 'berkeley_library/av/core/module_info'
 
-module AV
-  module Core
-    class << self
-      def project_root
-        @project_root ||= File.expand_path('..', __dir__)
-      end
+gem_root_module = BerkeleyLibrary::AV::Core
 
-      def artifacts_dir
-        return project_root unless ENV['CI']
+class << gem_root_module
+  def project_root
+    @project_root ||= File.expand_path('..', __dir__)
+  end
 
-        @artifacts_dir ||= File.join(project_root, 'artifacts')
-      end
+  def artifacts_dir
+    return project_root unless ENV['CI']
 
-      def gemspec_file
-        @gemspec_file ||= begin
-          gemspec_files = Dir.glob(File.expand_path('*.gemspec', project_root))
-          raise ArgumentError, "Too many .gemspecs: #{gemspec_files.join(', ')}" if gemspec_files.size > 1
-          raise ArgumentError, 'No .gemspec file found' if gemspec_files.empty?
+    @artifacts_dir ||= File.join(project_root, 'artifacts')
+  end
 
-          gemspec_files[0]
-        end
-      end
+  def gemspec_file
+    @gemspec_file ||= begin
+      gemspec_files = Dir.glob(File.expand_path('*.gemspec', project_root))
+      raise ArgumentError, "Too many .gemspecs: #{gemspec_files.join(', ')}" if gemspec_files.size > 1
+      raise ArgumentError, 'No .gemspec file found' if gemspec_files.empty?
 
-      def gemspec_basename
-        File.basename(gemspec_file)
-      end
+      gemspec_files[0]
+    end
+  end
 
-      def output_file
-        @output_file ||= begin
-          gem_name = File.basename(gemspec_file, '.*')
-          version = AV::Core::ModuleInfo::VERSION
-          basename = "#{gem_name}-#{version}.gem"
-          File.join(artifacts_dir, basename)
-        end
-      end
+  def gemspec_basename
+    File.basename(gemspec_file)
+  end
 
-      def output_file_relative
-        return File.basename(output_file) unless ENV['CI']
+  def output_file
+    @output_file ||= begin
+      gem_name = File.basename(gemspec_file, '.*')
+      version = self::ModuleInfo::VERSION
+      basename = "#{gem_name}-#{version}.gem"
+      File.join(artifacts_dir, basename)
+    end
+  end
 
-        @output_file_relative ||= begin
-          artifacts_dir_relative = File.basename(artifacts_dir)
-          File.join(artifacts_dir_relative, File.basename(output_file))
-        end
-      end
+  def output_file_relative
+    return File.basename(output_file) unless ENV['CI']
+
+    @output_file_relative ||= begin
+      artifacts_dir_relative = File.basename(artifacts_dir)
+      File.join(artifacts_dir_relative, File.basename(output_file))
     end
   end
 end
 
-desc "Build #{AV::Core.gemspec_basename} as #{AV::Core.output_file_relative}"
+desc "Build #{gem_root_module.gemspec_basename} as #{gem_root_module.output_file_relative}"
 task :gem do
-  args = ['build', AV::Core.gemspec_file, "--output=#{AV::Core.output_file}"]
+  args = ['build', gem_root_module.gemspec_file, "--output=#{gem_root_module.output_file}"]
   Gem::GemRunner.new.run(args)
 end

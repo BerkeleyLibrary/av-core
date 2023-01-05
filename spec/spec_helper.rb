@@ -26,7 +26,7 @@ end
 # ------------------------------------------------------------
 # Code under test
 
-require 'av/core'
+require 'berkeley_library/av/core'
 
 # ------------------------------------------------------------
 # Utility methods
@@ -40,9 +40,9 @@ def permalink_base
 end
 
 def alma_sru_url_for(record_id)
-  return "#{sru_url_base}alma.mms_id%3D#{record_id}" unless AV::RecordId::Type.for_id(record_id) == AV::RecordId::Type::MILLENNIUM
+  return "#{sru_url_base}alma.mms_id%3D#{record_id}" unless BerkeleyLibrary::AV::RecordId::Type.for_id(record_id) == BerkeleyLibrary::AV::RecordId::Type::MILLENNIUM
 
-  full_bib = AV::RecordId.ensure_check_digit(record_id)
+  full_bib = BerkeleyLibrary::AV::RecordId.ensure_check_digit(record_id)
   "#{sru_url_base}alma.other_system_number%3DUCB-#{full_bib}-01ucs_ber"
 end
 
