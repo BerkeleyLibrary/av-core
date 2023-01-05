@@ -1,7 +1,0 @@
-require 'av/config'
-require 'av/marc'
-require 'av/metadata'
-require 'av/record'
-require 'av/record_id'
-require 'av/track'
-require 'av/util'
