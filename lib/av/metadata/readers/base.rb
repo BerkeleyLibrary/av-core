@@ -27,7 +27,7 @@ module AV
         def record_from(marc_uri, record_id)
           xml = do_get(marc_uri)
           AV::Marc.from_xml(xml).tap do |record|
-            raise not_found(record_id, "GET #{marc_uri} returned: #{xml}", marc_uri: marc_uri) unless record
+            raise not_found(record_id, "GET #{marc_uri} returned: #{xml}", marc_uri:) unless record
           end
         end
 

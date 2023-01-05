@@ -4,7 +4,7 @@ require 'ostruct'
 module AV
   describe Config do
 
-    after(:each) do
+    after do
       Config.send(:clear!)
     end
 
@@ -45,12 +45,12 @@ module AV
           tind_base_uri: URI.parse('http://tind.example.edu'),
           wowza_base_uri: URI.parse('http://wowza.example.edu')
         }
-        rails_config = OpenStruct.new(settings)
+        rails_config = Struct.new(*settings.keys, keyword_init: true).new(**settings)
 
         # Mock Rails config
         expect(defined?(Rails)).to be_nil # just to be sure
-        Object.send(:const_set, 'Rails', OpenStruct.new)
-        Rails.application = OpenStruct.new
+        Object.send(:const_set, 'Rails', Struct.new(:application).new)
+        Rails.application = Struct.new(:config).new
         Rails.application.config = rails_config
 
         aggregate_failures do
@@ -190,7 +190,7 @@ module AV
     describe 'with Rails config' do
       attr_reader :config
 
-      before(:each) do
+      before do
         @config = double(Config)
 
         application = double(Object)
@@ -202,14 +202,14 @@ module AV
         Object.const_set(:Rails, rails)
       end
 
-      after(:each) do
+      after do
         Object.send(:remove_const, :Rails)
       end
 
       describe :avplayer_base_uri do
         attr_reader :avplayer_base_uri
 
-        before(:each) do
+        before do
           @avplayer_base_uri = URI.parse('http://avplayer.example.edu')
           allow(config).to receive(:avplayer_base_uri).and_return(avplayer_base_uri.to_s)
         end
@@ -228,7 +228,7 @@ module AV
       describe :tind_base_uri do
         attr_reader :tind_base_uri
 
-        before(:each) do
+        before do
           @tind_base_uri = URI.parse('http://tind.example.edu')
           allow(config).to receive(:tind_base_uri).and_return(tind_base_uri.to_s)
         end

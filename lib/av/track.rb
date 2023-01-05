@@ -76,7 +76,7 @@ module AV
         track_fields.each_with_object([]) do |df, all_tracks|
           value_groups = group_values(df.subfields)
           value_groups.each do |group|
-            all_tracks << from_value_group(group, collection: collection, sort_order: all_tracks.size)
+            all_tracks << from_value_group(group, collection:, sort_order: all_tracks.size)
           end
         end
       end
@@ -118,7 +118,7 @@ module AV
 
       def from_value_group(group, collection:, sort_order:)
         Track.new(
-          sort_order: sort_order,
+          sort_order:,
           title: group[SUBFIELD_CODE_TITLE],
           path: "#{collection}/#{group[SUBFIELD_CODE_PATH]}",
           duration: group[SUBFIELD_CODE_DURATION]

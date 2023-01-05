@@ -11,7 +11,7 @@ module AV
         url = alma_sru_url_for(bib_number)
         data_path = alma_sru_data_path_for(bib_number)
         body = File.read(data_path)
-        stub_request(:get, url).with(headers: { 'User-Agent' => expected_ua }).to_return(status: 200, body: body)
+        stub_request(:get, url).with(headers: { 'User-Agent' => expected_ua }).to_return(status: 200, body:)
 
         result = AV::Util.do_get(url)
         expect(result).to eq(body.scrub)

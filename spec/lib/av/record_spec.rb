@@ -2,7 +2,7 @@ require 'spec_helper'
 
 module AV
   describe Record do
-    before(:each) do
+    before do
       Config.avplayer_base_uri = 'https://avplayer.lib.berkeley.edu'
       Config.tind_base_uri = 'https://digicoll.lib.berkeley.edu'
       Config.alma_sru_host = 'berkeley.alma.exlibrisgroup.com'
@@ -11,7 +11,7 @@ module AV
       Config.alma_permalink_key = 'iqob43'
     end
 
-    after(:each) do
+    after do
       Config.send(:clear!)
     end
 
@@ -36,7 +36,7 @@ module AV
         stub_sru_request(bib_number)
 
         collection = 'MRCVideo'
-        record = Record.from_metadata(collection: collection, record_id: bib_number)
+        record = Record.from_metadata(collection:, record_id: bib_number)
 
         expected_uri = URI.parse("https://avplayer.lib.berkeley.edu/#{collection}/#{bib_number}")
         expect(record.player_uri).to eq(expected_uri)
@@ -49,7 +49,7 @@ module AV
         stub_request(:get, search_url).to_return(status: 200, body: marc_xml)
 
         collection = 'Pacifica'
-        record = Record.from_metadata(collection: collection, record_id: tind_035)
+        record = Record.from_metadata(collection:, record_id: tind_035)
 
         expected_uri = URI.parse("https://avplayer.lib.berkeley.edu/#{collection}/#{tind_035}")
         expect(record.player_uri).to eq(expected_uri)
@@ -62,7 +62,7 @@ module AV
         metadata = instance_double(Metadata)
         expect(metadata).to receive(:record_id).and_return(bib_number)
 
-        record = Record.new(collection: collection, tracks: [], metadata: metadata)
+        record = Record.new(collection:, tracks: [], metadata:)
 
         expected_uri = URI.parse("https://avplayer.lib.berkeley.edu/#{collection}/#{bib_number}")
         expect(record.player_uri).to eq(expected_uri)
@@ -78,7 +78,7 @@ module AV
         metadata = instance_double(Metadata)
         expect(metadata).to receive(:display_uri).and_return(expected_uri)
 
-        record = Record.new(collection: collection, tracks: [], metadata: metadata)
+        record = Record.new(collection:, tracks: [], metadata:)
         expect(record.display_uri).to eq(expected_uri)
       end
     end
@@ -181,10 +181,7 @@ module AV
         search_url = 'https://digicoll.lib.berkeley.edu/search?p=035__a%3A%22%28pacradio%2901469%22&of=xm'
         stub_request(:get, search_url).to_return(status: 200, body: marc_xml)
 
-        record = Record.from_metadata(
-          collection: 'Pacifica',
-          record_id: '(pacradio)01469'
-        )
+        record = Record.from_metadata(collection: 'Pacifica', record_id: '(pacradio)01469')
 
         tracks = record.tracks
         expect(tracks.size).to eq(1)
@@ -216,9 +213,7 @@ module AV
           ]
           expect(values.size).to eq(expected.size)
           aggregate_failures 'fields' do
-            values.each_with_index do |f, i|
-              expect(f.to_s).to eq(expected[i])
-            end
+            values.each_with_index { |f, i| expect(f.to_s).to eq(expected[i]) }
           end
 
           expect(record.title).to eq(metadata.title)
@@ -254,12 +249,12 @@ module AV
 
         aggregate_failures 'restrictions' do
           restricted.each do |record_id|
-            record = Record.from_metadata(collection: 'test', record_id: record_id)
+            record = Record.from_metadata(collection: 'test', record_id:)
             expect(record.calnet_or_ip?).to eq(true), "Expected #{record_id} to be restricted, was not"
           end
 
           unrestricted.each do |record_id|
-            record = Record.from_metadata(collection: 'test', record_id: record_id)
+            record = Record.from_metadata(collection: 'test', record_id:)
             expect(record.calnet_or_ip?).to eq(false), "Expected #{record_id} not to be restricted, was"
           end
         end

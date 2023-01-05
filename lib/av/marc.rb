@@ -30,7 +30,7 @@ module AV
       def reader_for(marc_path, external_encoding: 'MARC-8')
         downcased_path = marc_path.downcase
         return MARC::XMLReader.new(marc_path) if downcased_path.end_with?('.xml')
-        return MARC::Reader.new(marc_path, external_encoding: external_encoding) if downcased_path.end_with?('.mrc')
+        return MARC::Reader.new(marc_path, external_encoding:) if downcased_path.end_with?('.mrc')
 
         raise ArgumentError, "Unable to determine reader needed for MARC file #{marc_path.inspect}"
       end
@@ -43,7 +43,7 @@ module AV
       # @return [MARC::Record] the MARC record
       def read(marc_path, external_encoding: 'MARC-8')
         # noinspection RubyYardReturnMatch
-        reader_for(marc_path, external_encoding: external_encoding).first
+        reader_for(marc_path, external_encoding:).first
       end
     end
   end

@@ -38,8 +38,8 @@ module AV
       @values_by_field ||= Fields.default_values_from(marc_record).tap { |values| ensure_catalog_link(values) }
     end
 
-    def each_value(&block)
-      values_by_field.each_value(&block)
+    def each_value(&)
+      values_by_field.each_value(&)
     end
 
     def title
@@ -67,7 +67,7 @@ module AV
         source = Source.for_record_id(record_id)
         raise AV::RecordNotFound, "Unable to determine metadata source for record ID: #{record_id.inspect}" unless source
 
-        Metadata.new(record_id: record_id, source: source)
+        Metadata.new(record_id:, source:)
       end
     end
 

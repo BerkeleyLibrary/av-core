@@ -40,7 +40,7 @@ module AV
       # @param order [Array<Symbol>, nil] the order of subfield codes
       # @return [Array<Hash<Symbol, String>>] the grouped values
       def group_subfield_values(data_field, order: nil) # TODO: do we still need this?
-        grouped_subfields = group_subfields(data_field.subfields, order: order)
+        grouped_subfields = group_subfields(data_field.subfields, order:)
         grouped_subfields.each_with_object([]) do |subfield_group, value_groups|
           value_group = subfield_group.transform_values { |sf| tidy_value(sf.value) }
           value_groups << value_group
