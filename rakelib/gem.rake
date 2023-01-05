@@ -30,7 +30,7 @@ class << gem_root_module
 
   def output_file
     @output_file ||= begin
-      gem_name = File.basename(gemspec_file, '.*')
+      gem_name = self::ModuleInfo::NAME
       version = self::ModuleInfo::VERSION
       basename = "#{gem_name}-#{version}.gem"
       File.join(artifacts_dir, basename)
