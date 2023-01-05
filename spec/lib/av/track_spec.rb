@@ -121,14 +121,22 @@ module AV
           Track.new(sort_order: 9, title: 'reel 10', path: 'MRCAudio/C040790988.mp3', duration: AV::Types::Duration.from_string('00:22:38')),
           Track.new(sort_order: 10, title: 'reel 11', path: 'MRCAudio/C040791089.mp3', duration: AV::Types::Duration.from_string('00:23:44')),
           Track.new(sort_order: 11, title: 'reel 12', path: 'MRCAudio/C040791186.mp3', duration: AV::Types::Duration.from_string('00:22:27')),
-          Track.new(sort_order: 12, title: 'reel 13, part 1', path: 'MRCAudio/C040790890_1.mp3', duration: AV::Types::Duration.from_string('00:21:57')),
-          Track.new(sort_order: 13, title: 'reel 14, part 1', path: 'MRCAudio/C040790997_1.mp3', duration: AV::Types::Duration.from_string('00:44:28')),
-          Track.new(sort_order: 14, title: 'reel 15, part 1', path: 'MRCAudio/C040791098_1.mp3', duration: AV::Types::Duration.from_string('00:44:33')),
-          Track.new(sort_order: 15, title: 'reel 16, part 1', path: 'MRCAudio/C040790906_1.mp3', duration: AV::Types::Duration.from_string('00:44:01')),
-          Track.new(sort_order: 16, title: 'reel 17, part 1', path: 'MRCAudio/C040791007_1.mp3', duration: AV::Types::Duration.from_string('00:46:58')),
-          Track.new(sort_order: 17, title: 'reel 18, part 1', path: 'MRCAudio/C040791104_1.mp3', duration: AV::Types::Duration.from_string('00:42:49')),
-          Track.new(sort_order: 18, title: 'reel 19, part 1', path: 'MRCAudio/C040791195_1.mp3', duration: AV::Types::Duration.from_string('00:44:35')),
-          Track.new(sort_order: 19, title: 'reel 20, part 1', path: 'MRCAudio/C040791201_1.mp3', duration: AV::Types::Duration.from_string('00:40:12'))
+          Track.new(sort_order: 12, title: 'reel 13, part 1', path: 'MRCAudio/C040790890_1.mp3',
+                    duration: AV::Types::Duration.from_string('00:21:57')),
+          Track.new(sort_order: 13, title: 'reel 14, part 1', path: 'MRCAudio/C040790997_1.mp3',
+                    duration: AV::Types::Duration.from_string('00:44:28')),
+          Track.new(sort_order: 14, title: 'reel 15, part 1', path: 'MRCAudio/C040791098_1.mp3',
+                    duration: AV::Types::Duration.from_string('00:44:33')),
+          Track.new(sort_order: 15, title: 'reel 16, part 1', path: 'MRCAudio/C040790906_1.mp3',
+                    duration: AV::Types::Duration.from_string('00:44:01')),
+          Track.new(sort_order: 16, title: 'reel 17, part 1', path: 'MRCAudio/C040791007_1.mp3',
+                    duration: AV::Types::Duration.from_string('00:46:58')),
+          Track.new(sort_order: 17, title: 'reel 18, part 1', path: 'MRCAudio/C040791104_1.mp3',
+                    duration: AV::Types::Duration.from_string('00:42:49')),
+          Track.new(sort_order: 18, title: 'reel 19, part 1', path: 'MRCAudio/C040791195_1.mp3',
+                    duration: AV::Types::Duration.from_string('00:44:35')),
+          Track.new(sort_order: 19, title: 'reel 20, part 1', path: 'MRCAudio/C040791201_1.mp3',
+                    duration: AV::Types::Duration.from_string('00:40:12'))
         ]
 
         bib_number = 'b23161018'
@@ -156,14 +164,22 @@ module AV
           Track.new(sort_order: 9, title: 'reel 10', path: 'MRCAudio/C040790988.mp3', duration: AV::Types::Duration.from_string('00:22:38')),
           Track.new(sort_order: 10, title: 'reel 11', path: 'MRCAudio/C040791089.mp3', duration: AV::Types::Duration.from_string('00:23:44')),
           Track.new(sort_order: 11, title: 'reel 12', path: 'MRCAudio/C040791186.mp3', duration: AV::Types::Duration.from_string('00:22:27')),
-          Track.new(sort_order: 12, title: 'reel 13, part 1', path: 'MRCAudio/C040790890_1.mp3', duration: AV::Types::Duration.from_string('00:21:57')),
-          Track.new(sort_order: 13, title: 'reel 14, part 1', path: 'MRCAudio/C040790997_1.mp3', duration: AV::Types::Duration.from_string('00:44:28')),
-          Track.new(sort_order: 14, title: 'reel 15, part 1', path: 'MRCAudio/C040791098_1.mp3', duration: AV::Types::Duration.from_string('00:44:33')),
-          Track.new(sort_order: 15, title: 'reel 16, part 1', path: 'MRCAudio/C040790906_1.mp3', duration: AV::Types::Duration.from_string('00:44:01')),
-          Track.new(sort_order: 16, title: 'reel 17, part 1', path: 'MRCAudio/C040791007_1.mp3', duration: AV::Types::Duration.from_string('00:46:58')),
-          Track.new(sort_order: 17, title: 'reel 18, part 1', path: 'MRCAudio/C040791104_1.mp3', duration: AV::Types::Duration.from_string('00:42:49')),
-          Track.new(sort_order: 18, title: 'reel 19, part 1', path: 'MRCAudio/C040791195_1.mp3', duration: AV::Types::Duration.from_string('00:44:35')),
-          Track.new(sort_order: 19, title: 'reel 20, part 1', path: 'MRCAudio/C040791201_1.mp3', duration: AV::Types::Duration.from_string('00:40:12'))
+          Track.new(sort_order: 12, title: 'reel 13, part 1', path: 'MRCAudio/C040790890_1.mp3',
+                    duration: AV::Types::Duration.from_string('00:21:57')),
+          Track.new(sort_order: 13, title: 'reel 14, part 1', path: 'MRCAudio/C040790997_1.mp3',
+                    duration: AV::Types::Duration.from_string('00:44:28')),
+          Track.new(sort_order: 14, title: 'reel 15, part 1', path: 'MRCAudio/C040791098_1.mp3',
+                    duration: AV::Types::Duration.from_string('00:44:33')),
+          Track.new(sort_order: 15, title: 'reel 16, part 1', path: 'MRCAudio/C040790906_1.mp3',
+                    duration: AV::Types::Duration.from_string('00:44:01')),
+          Track.new(sort_order: 16, title: 'reel 17, part 1', path: 'MRCAudio/C040791007_1.mp3',
+                    duration: AV::Types::Duration.from_string('00:46:58')),
+          Track.new(sort_order: 17, title: 'reel 18, part 1', path: 'MRCAudio/C040791104_1.mp3',
+                    duration: AV::Types::Duration.from_string('00:42:49')),
+          Track.new(sort_order: 18, title: 'reel 19, part 1', path: 'MRCAudio/C040791195_1.mp3',
+                    duration: AV::Types::Duration.from_string('00:44:35')),
+          Track.new(sort_order: 19, title: 'reel 20, part 1', path: 'MRCAudio/C040791201_1.mp3',
+                    duration: AV::Types::Duration.from_string('00:40:12'))
         ]
 
         marc_record = AV::Marc.from_xml(File.read('spec/data/record-multiple-998s.xml'))
@@ -190,14 +206,22 @@ module AV
           Track.new(sort_order: 9, title: 'reel 10', path: 'MRCAudio/C040790988.mp3', duration: AV::Types::Duration.from_string('00:22:38')),
           Track.new(sort_order: 10, title: 'reel 11', path: 'MRCAudio/C040791089.mp3', duration: AV::Types::Duration.from_string('00:23:44')),
           Track.new(sort_order: 11, title: 'reel 12', path: 'MRCAudio/C040791186.mp3', duration: AV::Types::Duration.from_string('00:22:27')),
-          Track.new(sort_order: 12, title: 'reel 13, part 1', path: 'MRCAudio/C040790890_1.mp3', duration: AV::Types::Duration.from_string('00:21:57')),
-          Track.new(sort_order: 13, title: 'reel 14, part 1', path: 'MRCAudio/C040790997_1.mp3', duration: AV::Types::Duration.from_string('00:44:28')),
-          Track.new(sort_order: 14, title: 'reel 15, part 1', path: 'MRCAudio/C040791098_1.mp3', duration: AV::Types::Duration.from_string('00:44:33')),
-          Track.new(sort_order: 15, title: 'reel 16, part 1', path: 'MRCAudio/C040790906_1.mp3', duration: AV::Types::Duration.from_string('00:44:01')),
-          Track.new(sort_order: 16, title: 'reel 17, part 1', path: 'MRCAudio/C040791007_1.mp3', duration: AV::Types::Duration.from_string('00:46:58')),
-          Track.new(sort_order: 17, title: 'reel 18, part 1', path: 'MRCAudio/C040791104_1.mp3', duration: AV::Types::Duration.from_string('00:42:49')),
-          Track.new(sort_order: 18, title: 'reel 19, part 1', path: 'MRCAudio/C040791195_1.mp3', duration: AV::Types::Duration.from_string('00:44:35')),
-          Track.new(sort_order: 19, title: 'reel 20, part 1', path: 'MRCAudio/C040791201_1.mp3', duration: AV::Types::Duration.from_string('00:40:12'))
+          Track.new(sort_order: 12, title: 'reel 13, part 1', path: 'MRCAudio/C040790890_1.mp3',
+                    duration: AV::Types::Duration.from_string('00:21:57')),
+          Track.new(sort_order: 13, title: 'reel 14, part 1', path: 'MRCAudio/C040790997_1.mp3',
+                    duration: AV::Types::Duration.from_string('00:44:28')),
+          Track.new(sort_order: 14, title: 'reel 15, part 1', path: 'MRCAudio/C040791098_1.mp3',
+                    duration: AV::Types::Duration.from_string('00:44:33')),
+          Track.new(sort_order: 15, title: 'reel 16, part 1', path: 'MRCAudio/C040790906_1.mp3',
+                    duration: AV::Types::Duration.from_string('00:44:01')),
+          Track.new(sort_order: 16, title: 'reel 17, part 1', path: 'MRCAudio/C040791007_1.mp3',
+                    duration: AV::Types::Duration.from_string('00:46:58')),
+          Track.new(sort_order: 17, title: 'reel 18, part 1', path: 'MRCAudio/C040791104_1.mp3',
+                    duration: AV::Types::Duration.from_string('00:42:49')),
+          Track.new(sort_order: 18, title: 'reel 19, part 1', path: 'MRCAudio/C040791195_1.mp3',
+                    duration: AV::Types::Duration.from_string('00:44:35')),
+          Track.new(sort_order: 19, title: 'reel 20, part 1', path: 'MRCAudio/C040791201_1.mp3',
+                    duration: AV::Types::Duration.from_string('00:40:12'))
         ]
 
         marc_record = AV::Marc.from_xml(File.read('spec/data/record-multiple-998s-disordered.xml'))

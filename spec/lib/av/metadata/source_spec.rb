@@ -4,7 +4,7 @@ require 'spec_helper'
 module AV
   class Metadata
     describe Source do
-      before(:each) do
+      before do
         allow(BerkeleyLibrary::Logging).to receive(:logger).and_return(Logger.new(File::NULL))
       end
 
@@ -47,7 +47,7 @@ module AV
 
       describe 'ALMA' do
 
-        before(:each) do
+        before do
           Config.avplayer_base_uri = 'https://avplayer.lib.berkeley.edu'
           Config.tind_base_uri = 'https://digicoll.lib.berkeley.edu'
           Config.alma_sru_host = 'berkeley.alma.exlibrisgroup.com'
@@ -87,7 +87,7 @@ module AV
             metadata = Metadata.new(
               record_id: mms_id,
               source: Source::ALMA,
-              marc_record: marc_record
+              marc_record:
             )
 
             uri_actual = Source::ALMA.display_uri_for(metadata)
@@ -115,7 +115,7 @@ module AV
             metadata = Metadata.new(
               record_id: mms_id,
               source: Source::ALMA,
-              marc_record: marc_record
+              marc_record:
             )
             expect(metadata.bib_number).to eq('b25716973')
           end
@@ -158,12 +158,12 @@ module AV
       describe 'TIND' do
         attr_reader :record_url
 
-        before(:each) do
+        before do
           AV::Config.tind_base_uri = 'https://digicoll.lib.berkeley.edu'
           @record_url = 'https://digicoll.lib.berkeley.edu/search?p=035__a%3A%22%28pacradio%2900107%22&of=xm'
         end
 
-        after(:each) do
+        after do
           Config.send(:clear!)
         end
 
@@ -198,7 +198,7 @@ module AV
             metadata = Metadata.new(
               record_id: '(pacradio)00107',
               source: Source::ALMA,
-              marc_record: marc_record
+              marc_record:
             )
 
             expect { Source::TIND.display_uri_for(metadata) }.to raise_error(ArgumentError)

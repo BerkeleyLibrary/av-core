@@ -72,11 +72,11 @@ module AV
       # @param collection [String] The collection name (Wowza application id).
       # @param record_id [String] The record ID.
       def from_metadata(collection:, record_id:)
-        metadata = Metadata.for_record(record_id: record_id)
+        metadata = Metadata.for_record(record_id:)
         Record.new(
-          collection: collection,
-          metadata: metadata,
-          tracks: Track.tracks_from(metadata.marc_record, collection: collection)
+          collection:,
+          metadata:,
+          tracks: Track.tracks_from(metadata.marc_record, collection:)
         )
       end
     end

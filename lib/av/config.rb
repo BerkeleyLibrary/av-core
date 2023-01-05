@@ -225,8 +225,8 @@ module AV
       AV::Config
     end
 
-    def configure(&block)
-      class_eval(&block)
+    def configure(&)
+      class_eval(&)
     end
 
     def configured?

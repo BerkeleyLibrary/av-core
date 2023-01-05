@@ -68,7 +68,7 @@ module AV
           Field.new(
             order: json_field['order'].to_i,
             label: json_field['labels']['en'],
-            tag: tag,
+            tag:,
             spec: marc_spec,
             subfields_separator: (params['subfields_separator'] || ' '),
             subfield_order: params['subfield_order'].to_s.split(',')

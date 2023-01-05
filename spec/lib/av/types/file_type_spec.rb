@@ -85,12 +85,11 @@ module AV
       end
 
       describe :new do
-        # rubocop: disable Lint/ConstantDefinitionInBlock
         it "doesn't allow duplicate extensions" do
-          expect { class FileType; new(:QT, 'video', 'video/qt', extensions: ['.mov']); end }
+          expect { FileType.send(:new, :QT, 'video', 'video/qt', extensions: ['.mov']) }
             .to raise_error(ArgumentError, /.mov/)
+          expect(defined? FileType::QT).to be_nil
         end
-        # rubocop: enable Lint/ConstantDefinitionInBlock
       end
     end
   end

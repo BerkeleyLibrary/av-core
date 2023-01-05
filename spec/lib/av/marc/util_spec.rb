@@ -24,7 +24,7 @@ module AV
         end
 
         describe 'pre-grouped subfields' do
-          before(:each) do
+          before do
             original_groups.each do |g|
               g.each { |c, v| df.subfields << MARC::Subfield.new(c, v) }
             end
@@ -36,7 +36,7 @@ module AV
           end
 
           it 'reorders the groups' do
-            reordered = Util.group_subfield_values(df, order: order)
+            reordered = Util.group_subfield_values(df, order:)
             # Hash equality doesn't check order, so we do it by hand
             reordered.each_with_index do |actual, i|
               expected = ordered_groups[i]
@@ -47,7 +47,7 @@ module AV
         end
 
         describe 'pre-grouped by code' do
-          before(:each) do
+          before do
             {
               b: %w[2 4 6],
               a: %w[1 3 5],
@@ -63,7 +63,7 @@ module AV
           end
 
           it 'reorders the groups' do
-            reordered = Util.group_subfield_values(df, order: order)
+            reordered = Util.group_subfield_values(df, order:)
             # Hash equality doesn't check order, so we do it by hand
             reordered.each_with_index do |actual, i|
               expected = ordered_groups[i]
@@ -82,7 +82,7 @@ module AV
             ]
           end
 
-          before(:each) do
+          before do
             inconsistent_groups.each do |g|
               g.each { |c, v| df.subfields << MARC::Subfield.new(c, v) }
             end
@@ -94,7 +94,7 @@ module AV
           end
 
           it 'reorders the groups' do
-            reordered = Util.group_subfield_values(df, order: order)
+            reordered = Util.group_subfield_values(df, order:)
             # Hash equality doesn't check order, so we do it by hand
             reordered.each_with_index do |actual, i|
               expected = ordered_groups[i]
@@ -116,7 +116,7 @@ module AV
             ]
           end
 
-          before(:each) do
+          before do
             ragged_groups.each do |g|
               g.each { |c, v| df.subfields << MARC::Subfield.new(c, v) }
             end
@@ -133,7 +133,7 @@ module AV
           end
 
           it 'reorders the values' do
-            reordered = Util.group_subfield_values(df, order: order)
+            reordered = Util.group_subfield_values(df, order:)
             # Hash equality doesn't check order, so we do it by hand
             reordered.each_with_index do |actual, i|
               expected = ragged_reordered[i]

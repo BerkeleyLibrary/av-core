@@ -3,7 +3,7 @@ require 'spec_helper'
 module AV
   describe Metadata do
 
-    before(:each) do
+    before do
       Config.avplayer_base_uri = 'https://avplayer.lib.berkeley.edu'
       Config.tind_base_uri = 'https://digicoll.lib.berkeley.edu'
       Config.alma_sru_host = 'berkeley.alma.exlibrisgroup.com'
@@ -12,7 +12,7 @@ module AV
       Config.alma_permalink_key = 'iqob43'
     end
 
-    after(:each) do
+    after do
       Config.send(:clear!)
     end
 
@@ -26,7 +26,7 @@ module AV
       it 'returns UNKNOWN_TITLE if the title cannot be found' do
         marc_record = alma_marc_record_for('b22139658')
         marc_record.fields.delete_if { |f| f.tag == AV::Constants::TAG_TITLE_FIELD }
-        metadata = Metadata.new(record_id: 'b22139658', source: AV::Metadata::Source::ALMA, marc_record: marc_record)
+        metadata = Metadata.new(record_id: 'b22139658', source: AV::Metadata::Source::ALMA, marc_record:)
         expect(metadata.title).to eq(Metadata::UNKNOWN_TITLE)
       end
 
@@ -103,58 +103,58 @@ module AV
 
       it 'extracts UCB restrictions from a TIND 856' do
         marc_record = MARC::XMLReader.new('spec/data/record-(cityarts)00002.xml').first
-        metadata = Metadata.new(record_id: 'record-(cityarts)00002', source: Metadata::Source::TIND, marc_record: marc_record)
+        metadata = Metadata.new(record_id: 'record-(cityarts)00002', source: Metadata::Source::TIND, marc_record:)
         expect(metadata.calnet_or_ip?).to eq(true)
         expect(metadata.calnet_only?).to eq(false)
       end
 
       it 'extracts UCB restrictions from an Alma 956' do
         marc_record = MARC::XMLReader.new('spec/data/alma/991054360089706532-sru.xml').first
-        metadata = Metadata.new(record_id: '991047179369706532', source: Metadata::Source::ALMA, marc_record: marc_record)
+        metadata = Metadata.new(record_id: '991047179369706532', source: Metadata::Source::ALMA, marc_record:)
         expect(metadata.calnet_or_ip?).to eq(true)
         expect(metadata.calnet_only?).to eq(false)
       end
 
       it 'extracts CalNet restrictions from an Alma 956' do
         marc_record = MARC::XMLReader.new('spec/data/alma/991047179369706532-sru.xml').first
-        metadata = Metadata.new(record_id: '991054360089706532', source: Metadata::Source::ALMA, marc_record: marc_record)
+        metadata = Metadata.new(record_id: '991054360089706532', source: Metadata::Source::ALMA, marc_record:)
         expect(metadata.calnet_or_ip?).to eq(true)
         expect(metadata.calnet_only?).to eq(true)
       end
 
       it 'extracts restrictions from a 998$r' do
         marc_record = MARC::XMLReader.new('spec/data/alma/991005939359706532-sru.xml').first
-        metadata = Metadata.new(record_id: '991005939359706532', source: Metadata::Source::ALMA, marc_record: marc_record)
+        metadata = Metadata.new(record_id: '991005939359706532', source: Metadata::Source::ALMA, marc_record:)
         expect(metadata.calnet_or_ip?).to eq(false) # just to be sure
         expect(metadata.calnet_only?).to eq(false) # just to be sure
 
         marc_record['998'].append(MARC::Subfield.new('r', 'UCB access. Requires CalNet.'))
-        metadata = Metadata.new(record_id: '991005939359706532', source: Metadata::Source::ALMA, marc_record: marc_record)
+        metadata = Metadata.new(record_id: '991005939359706532', source: Metadata::Source::ALMA, marc_record:)
         expect(metadata.calnet_or_ip?).to eq(true)
         expect(metadata.calnet_only?).to eq(true)
       end
 
       it 'extracts restrictions from multiple subfields 998$r' do
         marc_record = MARC::XMLReader.new('spec/data/alma/991005939359706532-sru.xml').first
-        metadata = Metadata.new(record_id: '991005939359706532', source: Metadata::Source::ALMA, marc_record: marc_record)
+        metadata = Metadata.new(record_id: '991005939359706532', source: Metadata::Source::ALMA, marc_record:)
         expect(metadata.calnet_or_ip?).to eq(false) # just to be sure
         expect(metadata.calnet_only?).to eq(false) # just to be sure
 
         marc_record['998'].append(MARC::Subfield.new('r', 'UCB access.'))
         marc_record['998'].append(MARC::Subfield.new('r', 'Requires CalNet.'))
-        metadata = Metadata.new(record_id: '991005939359706532', source: Metadata::Source::ALMA, marc_record: marc_record)
+        metadata = Metadata.new(record_id: '991005939359706532', source: Metadata::Source::ALMA, marc_record:)
         expect(metadata.calnet_or_ip?).to eq(true)
         expect(metadata.calnet_only?).to eq(true)
       end
 
       it 'accepts "CalNet" anywhere in the 998$r' do
         marc_record = MARC::XMLReader.new('spec/data/alma/991005939359706532-sru.xml').first
-        metadata = Metadata.new(record_id: '991005939359706532', source: Metadata::Source::ALMA, marc_record: marc_record)
+        metadata = Metadata.new(record_id: '991005939359706532', source: Metadata::Source::ALMA, marc_record:)
         expect(metadata.calnet_or_ip?).to eq(false) # just to be sure
         expect(metadata.calnet_only?).to eq(false) # just to be sure
 
         marc_record['998'].append(MARC::Subfield.new('r', 'some string with CalNet in it somewhere'))
-        metadata = Metadata.new(record_id: '991005939359706532', source: Metadata::Source::ALMA, marc_record: marc_record)
+        metadata = Metadata.new(record_id: '991005939359706532', source: Metadata::Source::ALMA, marc_record:)
         expect(metadata.calnet_only?).to eq(true)
         expect(metadata.calnet_or_ip?).to eq(false) # just to be sure
       end

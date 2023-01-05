@@ -101,7 +101,7 @@ module AV
 
           url = url_sf.value
           body = link_body_from(subfield_group) || url
-          AV::Metadata::Link.new(url: url, body: body)
+          AV::Metadata::Link.new(url:, body:)
         end
 
         def link_body_from(subfield_group)

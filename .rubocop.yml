@@ -1,10 +1,17 @@
+inherit_mode:
+  merge:
+    - Exclude
+    - Include
+
 AllCops:
+  UseCache: false
   # Exclude generated files
   Exclude:
     - 'bin/**/*'
-    - 'node_modules/**/*'
-    - 'artifacts/**/*'
-  SuggestExtensions: false
+    - 'db/**/*'
+    - 'out/**/*'
+    # Exclude vendor files in GitHub build
+    - 'vendor/**/*'
 
 # Allow one line around block body (Layout/EmptyLines will still disallow two or more)
 Layout/EmptyLinesAroundBlockBody:
@@ -42,12 +49,20 @@ Naming/MethodParameterName:
 Naming/VariableNumber:
   Enabled: False
 
+# Whether vertical or horizontal is more readable depends on context
+Style/AccessorGrouping:
+  Enabled: false
+
 # Do what's readable in the context you're in
 Style/AccessModifierDeclarations:
   Enabled: false
 
 # 👎 to cultural imperialism
 Style/AsciiComments:
+  Enabled: false
+
+#
+Style/ClassEqualityComparison:
   Enabled: false
 
 # Seriously?
@@ -88,6 +103,7 @@ Style/SafeNavigation:
   Enabled: false
 
 ############################################################
+# Enable newer cops
 
 Style/HashEachMethods: # (new in 0.80)
   Enabled: true
@@ -188,4 +204,38 @@ Style/QuotedSymbols: # (new in 1.16)
 Layout/LineEndStringConcatenationIndentation: # (new in 1.18)
   Enabled: true
 Naming/InclusiveLanguage: # (new in 1.18)
+  Enabled: true
+Lint/AmbiguousRange: # new in 1.19
+  Enabled: true
+Style/RedundantSelfAssignmentBranch: # new in 1.19
+  Enabled: true
+Lint/AmbiguousOperatorPrecedence: # new in 1.21
+  Enabled: true
+Lint/IncompatibleIoSelectWithFiberScheduler: # new in 1.21
+  Enabled: true
+Lint/RequireRelativeSelfPath: # new in 1.22
+  Enabled: true
+Security/IoMethods: # new in 1.22
+  Enabled: true
+Style/NumberedParameters: # new in 1.22
+  Enabled: true
+Style/NumberedParametersLimit: # new in 1.22
+  Enabled: true
+Style/SelectByRegexp: # new in 1.22
+  Enabled: true
+Gemspec/RequireMFA: # new in 1.23
+  Enabled: true
+Lint/UselessRuby2Keywords: # new in 1.23
+  Enabled: true
+Style/OpenStructUse: # new in 1.23
+  Enabled: true
+Naming/BlockForwarding: # new in 1.24
+  Enabled: true
+Style/FileRead: # new in 1.24
+  Enabled: true
+Style/FileWrite: # new in 1.24
+  Enabled: true
+Style/MapToHash: # new in 1.24
+  Enabled: true
+Style/NestedFileDirname: # new in 1.26
   Enabled: true

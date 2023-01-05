@@ -6,7 +6,7 @@ module AV
     describe Field do
       attr_reader :marc_record
 
-      before(:each) do
+      before do
         @marc_record = MARC::XMLReader.new('spec/data/record-(pacradio)01469.xml').first
       end
 
