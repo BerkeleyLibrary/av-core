@@ -2,7 +2,7 @@ module BerkeleyLibrary
   module AV
     module Core
       class ModuleInfo
-        NAME = 'av_core'.freeze
+        NAME = 'berkeley_library-av-core'.freeze
         AUTHOR = 'David Moles'.freeze
         AUTHOR_EMAIL = 'dmoles@berkeley.edu'.freeze
         SUMMARY = 'UC Berkeley Library audio/video core code'.freeze
