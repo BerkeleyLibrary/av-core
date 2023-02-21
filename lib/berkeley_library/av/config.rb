@@ -53,6 +53,7 @@ module BerkeleyLibrary
           primo_permalink_base_uri_for(alma_primo_host, alma_institution_code, alma_permalink_key)
         end
 
+        # TODO: is this needed?
         def avplayer_base_uri
           @avplayer_base_uri ||= uri_from_rails_config(:avplayer_base_uri)
         end

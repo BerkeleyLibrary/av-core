@@ -51,6 +51,7 @@ module BerkeleyLibrary
         end
       end
 
+      # TODO: is this needed?
       def player_uri
         @player_uri ||= URIs.append(AV::Config.avplayer_base_uri, collection, record_id)
       end
