@@ -1,3 +1,7 @@
+# 0.3.1 (next)
+
+- Add `BerkeleyLibrary::AV::Config.log_settings!`
+
 # 0.3.0 (2022-02-01)
 
 - Rename `Record#ucb_access?` and `Metadata#ucb_access?` to `calnet_or_ip?` for clarity.

@@ -9,7 +9,7 @@ module BerkeleyLibrary
         Config.send(:clear!)
       end
 
-      describe(:configured?) do
+      describe :configured? do
         it 'defaults to false' do
           expect(AV.configured?).to eq(false)
         end
@@ -66,7 +66,7 @@ module BerkeleyLibrary
         end
       end
 
-      describe(:missing) do
+      describe :missing do
         it 'defaults to all settings' do
           expect(Config.missing).to eq(Config::REQUIRED_SETTINGS)
         end
@@ -104,6 +104,52 @@ module BerkeleyLibrary
             expected << setting
             expect(Config.missing).to eq(expected)
           end
+        end
+      end
+
+      describe :log_settings! do
+        it 'logs all settings' do
+          settings = {
+            avplayer_base_uri: 'http://avplayer.example.edu',
+            alma_sru_host: 'berkeley.alma.exlibrisgroup.com',
+            alma_primo_host: 'search.library.berkeley.edu',
+            alma_institution_code: '01UCS_BER',
+            alma_permalink_key: 'iqob43',
+            tind_base_uri: 'http://tind.example.edu',
+            wowza_base_uri: 'http://wowza.example.edu'
+          }
+          settings.each { |setting, value| Config.send("#{setting}=", value) }
+
+          expect(BerkeleyLibrary::Logging.logger)
+            .to receive(:info).with(/config/i, settings:)
+          Config.log_settings!
+        end
+
+        it 'logs nil for missing settings' do
+          settings = Config::REQUIRED_SETTINGS.to_h { |attr| [attr, nil] }
+
+          expect(BerkeleyLibrary::Logging.logger)
+            .to receive(:info).with(/config/i, settings:)
+          Config.log_settings!
+        end
+
+        it 'accepts a custom logger' do
+          settings = {
+            avplayer_base_uri: 'http://avplayer.example.edu',
+            alma_sru_host: 'berkeley.alma.exlibrisgroup.com',
+            alma_primo_host: 'search.library.berkeley.edu',
+            alma_institution_code: '01UCS_BER',
+            alma_permalink_key: 'iqob43',
+            tind_base_uri: 'http://tind.example.edu',
+            wowza_base_uri: 'http://wowza.example.edu'
+          }
+          settings.each { |setting, value| Config.send("#{setting}=", value) }
+
+          logger = instance_double(Ougai::Logger)
+          expect(logger)
+            .to receive(:info).with(/config/i, settings:)
+
+          Config.log_settings!(to_logger: logger)
         end
       end
 

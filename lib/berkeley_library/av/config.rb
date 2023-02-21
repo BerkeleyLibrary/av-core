@@ -1,4 +1,5 @@
-require 'berkeley_library/util/uris'
+require 'berkeley_library/logging'
+require 'berkeley_library/util'
 
 module BerkeleyLibrary
   module AV
@@ -34,6 +35,8 @@ module BerkeleyLibrary
 
         # View state key to use when generating Alma permalinks, e.g. `iqob43`; see
         # https://knowledge.exlibrisgroup.com/Primo/Knowledge_Articles/What_is_the_key_in_short_permalinks%3F
+        #
+        # Note that despite the name 'key', this is not a secret.
         def alma_permalink_key
           @alma_permalink_key ||= value_from_rails_config(:alma_permalink_key)
         end
@@ -158,7 +161,18 @@ module BerkeleyLibrary
           raise ArgumentError, "Missing AV configuration settings: #{missing_settings.join(', ')}"
         end
 
+        # Logs settings to the specified logger, or to the default logger.
+        # @param to_logger The logger to log to, if not the default.
+        def log_settings!(to_logger: BerkeleyLibrary::Logging.logger)
+          settings = REQUIRED_SETTINGS.to_h { |attr| [attr, loggable_value(send(attr))] }
+          to_logger.info("#{name} settings:", settings:)
+        end
+
         private
+
+        def loggable_value(v)
+          v.is_a?(URI) ? v.to_s : v
+        end
 
         def sru_base_uri_for(domain, inst_code)
           URIs.append("https://#{domain}/view/sru/", inst_code)
