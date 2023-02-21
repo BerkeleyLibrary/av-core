@@ -1,6 +1,10 @@
-# 0.3.1 (next)
+# 0.4.1 (2023-02-21)
 
 - Add `BerkeleyLibrary::AV::Config.log_settings!`
+
+# 0.4.0 (2023-01-05)
+
+- Initial public release to RubyGems
 
 # 0.3.0 (2022-02-01)
 
