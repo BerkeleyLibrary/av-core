@@ -5,6 +5,10 @@ module BerkeleyLibrary
       TAG_LINK_FIELD = '856'.freeze
       TAG_TRACK_FIELD = '998'.freeze
       TAG_TIND_ID = '001'.freeze
+      TAG_TRANSCRIPT_FIELD = '856'.freeze
+
+      SUBFIELD_CODE_URI = :u
+      SUBFIELD_CODE_LINKTEXT = :y
 
       # TODO: use marc/spec
       TAG_TIND_CATALOG_ID = '901'.freeze
