@@ -75,7 +75,8 @@ module BerkeleyLibrary
               Field.new(order: 86, spec: '991$a', label: 'Access', subfields_separator: ', '),
               Field.new(order: 89, spec: '982$a', label: 'Collection'),
               Field.new(order: 99, spec: '998', label: 'Tracks', subfield_order: %w[g t a]),
-              Field.new(order: 999, spec: '856{^1=\4}{^2=\1}', label: 'Linked Resources')
+              Field.new(order: 998, spec: '856{^1=\4}{^2=\1}', label: 'Linked Resources'),
+              Field.new(order: 999, spec: '856{$y~\Transcript}{^1=\4}{^2=\2}', label: 'Transcripts', subfield_order: %w[u y])
             ]
 
             fields = Fields.default_fields

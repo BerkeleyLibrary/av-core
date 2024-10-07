@@ -12,7 +12,8 @@ module BerkeleyLibrary
         CREATOR_PERSONAL = Field.new(order: 2, label: 'Creator', spec: '700')
         CREATOR_CORPORATE = Field.new(order: 2, label: 'Creator', spec: '710')
         TRACKS = Field.new(order: 99, label: 'Tracks', spec: TAG_TRACK_FIELD, subfield_order: %w[g t a])
-        CATALOG_LINK = Field.new(order: 999, label: 'Linked Resources', spec: "#{TAG_LINK_FIELD}{^1=\\4}{^2=\\1}")
+        CATALOG_LINK = Field.new(order: 998, label: 'Linked Resources', spec: "#{TAG_LINK_FIELD}{^1=\\4}{^2=\\1}")
+        TRANSCRIPTS = Field.new(order: 999, label: 'Transcripts', spec: "#{TAG_TRANSCRIPT_FIELD}{$y~\\Transcript}{^1=\\4}{^2=\\2}", subfield_order: %w[u y])
 
         STANDARD_FIELDS = [
           TITLE,
@@ -20,6 +21,7 @@ module BerkeleyLibrary
           CREATOR_PERSONAL,
           CREATOR_CORPORATE,
           TRACKS,
+          TRANSCRIPTS,
           CATALOG_LINK
         ].freeze
 
