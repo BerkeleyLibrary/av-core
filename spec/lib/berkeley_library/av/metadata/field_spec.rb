@@ -66,6 +66,27 @@ module BerkeleyLibrary
           end
         end
 
+        context 'transcripts' do
+          it 'extracts transcripts from TIND records' do
+            marc_record = MARC::XMLReader.new('spec/data/record-audio-multiple-856s.xml').first
+            field = Field.new(order: 999, label: 'Transcripts', spec: "#{TAG_TRANSCRIPT_FIELD}{$y~\\Transcript}{^1=\\4}{^2=\\2}", subfield_order: %w[u y])
+            value = field.value_from(marc_record)
+            expect(value).to be_a(Value)
+            expected_transcript = AV::Metadata::Link.new(
+              url: 'https://digitalassets.lib.berkeley.edu/audio/transcript/Carol_Fewell_Billings_Transcript.pdf',
+              body: 'Transcript of audio file'
+            )
+            expect(value.entries).to contain_exactly(expected_transcript)
+          end
+
+          it 'doesn\'t break when there are no transcripts' do
+            marc_record = MARC::XMLReader.new('spec/data/record-(pacradio)01469.xml').first
+            field = Field.new(order: 999, label: 'Transcripts', spec: "#{TAG_TRANSCRIPT_FIELD}{$y~\\Transcript}{^1=\\4}{^2=\\2}", subfield_order: %w[u y])
+            value = field.value_from(marc_record)
+            expect(value).to be_nil
+          end
+        end
+
         describe :hash do
           it 'returns the same hash for identical Fields' do
             f1 = Field.new(order: 2, label: 'Description', spec: '520$a')

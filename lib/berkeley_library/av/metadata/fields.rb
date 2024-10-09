@@ -14,7 +14,7 @@ module BerkeleyLibrary
         TRACKS = Field.new(order: 99, label: 'Tracks', spec: TAG_TRACK_FIELD, subfield_order: %w[g t a])
         CATALOG_LINK = Field.new(order: 998, label: 'Linked Resources', spec: "#{TAG_LINK_FIELD}{^1=\\4}{^2=\\1}")
         # rubocop:disable Layout/LineLength
-        Field.new(order: 999, label: 'Transcripts', spec: "#{TAG_TRANSCRIPT_FIELD}{$y~\\Transcript}{^1=\\4}{^2=\\2}", subfield_order: %w[u y])
+        TRANSCRIPTS = Field.new(order: 999, label: 'Transcripts', spec: "#{TAG_TRANSCRIPT_FIELD}{$y~\\Transcript}{^1=\\4}{^2=\\2}", subfield_order: %w[u y])
         # rubocop:enable Layout/LineLength
 
         STANDARD_FIELDS = [
