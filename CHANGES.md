@@ -1,3 +1,7 @@
+# 0.4.2 (2024-10-10)
+
+- Add TRANSCRIPTS to `AV::METADATA::FIELDS`
+
 # 0.4.1 (2023-02-21)
 
 - Add `BerkeleyLibrary::AV::Config.log_settings!`
