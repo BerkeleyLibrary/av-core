@@ -46,7 +46,7 @@ module BerkeleyLibrary
         it 'returns a player URI based on the record ID for TIND records' do
           tind_035 = '(pacradio)01469'
           marc_xml = File.read("spec/data/record-#{tind_035}.xml")
-          search_url = "https://digicoll.lib.berkeley.edu/search?p=035__a%3A%22#{CGI.escape(tind_035)}%22&of=xm"
+          search_url = "https://digicoll.lib.berkeley.edu/api/v1/search?p=035__a%3A%22#{CGI.escape(tind_035)}%22&format=xml"
           stub_request(:get, search_url).to_return(status: 200, body: marc_xml)
 
           collection = 'Pacifica'
@@ -145,7 +145,7 @@ module BerkeleyLibrary
 
         it 'returns the TIND ID for TIND records' do
           marc_xml = File.read('spec/data/record-(pacradio)01469.xml')
-          search_url = 'https://digicoll.lib.berkeley.edu/search?p=035__a%3A%22%28pacradio%2901469%22&of=xm'
+          search_url = 'https://digicoll.lib.berkeley.edu/api/v1/search?p=035__a%3A%22%28pacradio%2901469%22&format=xml'
           stub_request(:get, search_url).to_return(status: 200, body: marc_xml)
 
           record = Record.from_metadata(
@@ -168,7 +168,7 @@ module BerkeleyLibrary
         it 'returns nil for TIND records with no bib number' do
           tind_id = '(clir)00020'
           marc_xml = File.read('spec/data/record-(clir)00020.xml')
-          search_url = 'https://digicoll.lib.berkeley.edu/search?p=035__a%3A%22%28clir%2900020%22&of=xm'
+          search_url = 'https://digicoll.lib.berkeley.edu/api/v1/search?p=035__a%3A%22%28clir%2900020%22&format=xml'
           stub_request(:get, search_url).to_return(status: 200, body: marc_xml)
 
           record = Record.from_metadata(collection: 'Video-Public-Bancroft', record_id: tind_id)
@@ -179,7 +179,7 @@ module BerkeleyLibrary
       describe :from_metadata do
         it 'loads the metadata' do
           marc_xml = File.read('spec/data/record-(pacradio)01469.xml')
-          search_url = 'https://digicoll.lib.berkeley.edu/search?p=035__a%3A%22%28pacradio%2901469%22&of=xm'
+          search_url = 'https://digicoll.lib.berkeley.edu/api/v1/search?p=035__a%3A%22%28pacradio%2901469%22&format=xml'
           stub_request(:get, search_url).to_return(status: 200, body: marc_xml)
 
           record = Record.from_metadata(collection: 'Pacifica', record_id: '(pacradio)01469')
@@ -223,7 +223,7 @@ module BerkeleyLibrary
         end
 
         it "raises #{AV::RecordNotFound} if the record cannot be found" do
-          search_url = 'https://digicoll.lib.berkeley.edu/search?p=035__a%3A%22%28pacradio%2901469%22&of=xm'
+          search_url = 'https://digicoll.lib.berkeley.edu/api/v1/search?p=035__a%3A%22%28pacradio%2901469%22&format=xml'
           stub_request(:get, search_url).to_return(status: 404)
           expect do
             Record.from_metadata(

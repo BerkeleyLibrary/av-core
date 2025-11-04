@@ -161,7 +161,7 @@ module BerkeleyLibrary
 
           before do
             AV::Config.tind_base_uri = 'https://digicoll.lib.berkeley.edu'
-            @record_url = 'https://digicoll.lib.berkeley.edu/search?p=035__a%3A%22%28pacradio%2900107%22&of=xm'
+            @record_url = 'https://digicoll.lib.berkeley.edu/api/v1/search?p=035__a%3A%22%28pacradio%2900107%22&format=xml'
           end
 
           after do

@@ -22,9 +22,9 @@ module BerkeleyLibrary
             id_field = id_field_for(record_id)
             query_string = URI.encode_www_form(
               'p' => "#{id_field}:\"#{record_id}\"",
-              'of' => 'xm'
+              'format' => 'xml'
             )
-            URIs.append(base_uri, 'search', '?', query_string)
+            URIs.append(base_uri, 'api/v1/search', '?', query_string)
           end
 
           protected

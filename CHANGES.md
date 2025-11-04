@@ -1,3 +1,8 @@
+# 0.4.3 (2025-11-04)
+
+- BerkeleyLibrary::AV::Metadata::Readers:TIND now uses the /api/v1/search endpoint to retrieve records. The public /search endpoint stopped working for non-browser/human clients in the past week due to TIND changes.
+- BerkeleyLibrary::AV::Util#do_get sources the TIND API key from ENV['LIT_TIND_API_KEY'] if it's set.
+
 # 0.4.2 (2024-10-10)
 
 - Add TRANSCRIPTS to `AV::METADATA::FIELDS`
@@ -18,7 +23,7 @@
   - `Metadata#player_link_text`
   - `Metadata#player_url`
 - Remove the following constants:
-  - `AV::Constants::RESTRICTIONS_CALNET` 
+  - `AV::Constants::RESTRICTIONS_CALNET`
   - `AV::Constants::RESTRICTIONS_UCB_IP`
   - `AV::Constants::RESTRICTIONS`
   - `AV::Constants::RESTRICTIONS_NONE`

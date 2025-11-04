@@ -12,7 +12,11 @@ module BerkeleyLibrary
       DEFAULT_USER_AGENT = "#{Core::ModuleInfo::NAME} #{Core::ModuleInfo::VERSION} (#{Core::ModuleInfo::HOMEPAGE})".freeze
 
       def do_get(uri, ignore_errors: false)
-        body = URIs.get(uri, headers: { user_agent: DEFAULT_USER_AGENT })
+        headers = { user_agent: DEFAULT_USER_AGENT }
+        if uri.to_s.start_with?(BerkeleyLibrary::AV::Config.tind_base_uri.to_s) && ENV['LIT_TIND_API_KEY']
+          headers[:authorization] = "Token #{ENV['LIT_TIND_API_KEY']}"
+        end
+        body = URIs.get(uri, headers:)
         body && body.scrub
       rescue RestClient::Exception
         raise unless ignore_errors
