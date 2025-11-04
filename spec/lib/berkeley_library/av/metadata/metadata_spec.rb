@@ -183,7 +183,7 @@ module BerkeleyLibrary
           it 'injects a TIND URL if not present (1/2)' do
             tind_035 = '(miscmat)00615'
             marc_xml = File.read("spec/data/record-#{tind_035}.xml")
-            search_url = "https://digicoll.lib.berkeley.edu/search?p=035__a%3A%22#{CGI.escape(tind_035)}%22&of=xm"
+            search_url = "https://digicoll.lib.berkeley.edu/api/v1/search?p=035__a%3A%22#{CGI.escape(tind_035)}%22&format=xml"
             stub_request(:get, search_url).to_return(status: 200, body: marc_xml)
             metadata = Metadata.for_record(record_id: tind_035)
 
@@ -200,7 +200,7 @@ module BerkeleyLibrary
           it 'injects a TIND URL if not present (2/2)' do
             tind_035 = 'physcolloquia-bk00169017b'
             marc_xml = File.read("spec/data/record-#{tind_035}.xml")
-            search_url = "https://digicoll.lib.berkeley.edu/search?p=035__a%3A%22#{CGI.escape(tind_035)}%22&of=xm"
+            search_url = "https://digicoll.lib.berkeley.edu/api/v1/search?p=035__a%3A%22#{CGI.escape(tind_035)}%22&format=xml"
             stub_request(:get, search_url).to_return(status: 200, body: marc_xml)
             metadata = Metadata.for_record(record_id: tind_035)
 
@@ -218,7 +218,7 @@ module BerkeleyLibrary
           it 'works for TIND records with OskiCat URLs' do
             tind_035 = '(pacradio)00107'
             marc_xml = File.read("spec/data/record-#{tind_035}.xml")
-            search_url = "https://digicoll.lib.berkeley.edu/search?p=035__a%3A%22#{CGI.escape(tind_035)}%22&of=xm"
+            search_url = "https://digicoll.lib.berkeley.edu/api/v1/search?p=035__a%3A%22#{CGI.escape(tind_035)}%22&format=xml"
             stub_request(:get, search_url).to_return(status: 200, body: marc_xml)
             metadata = Metadata.for_record(record_id: tind_035)
 
@@ -239,7 +239,7 @@ module BerkeleyLibrary
           it 'works for TIND-only records' do
             tind_035 = 'physcolloquia-bk00169017b'
             marc_xml = File.read("spec/data/record-#{tind_035}.xml")
-            search_url = "https://digicoll.lib.berkeley.edu/search?p=035__a%3A%22#{CGI.escape(tind_035)}%22&of=xm"
+            search_url = "https://digicoll.lib.berkeley.edu/api/v1/search?p=035__a%3A%22#{CGI.escape(tind_035)}%22&format=xml"
             stub_request(:get, search_url).to_return(status: 200, body: marc_xml)
             metadata = Metadata.for_record(record_id: tind_035)
 
@@ -259,7 +259,7 @@ module BerkeleyLibrary
           it 'returns the values' do
             tind_035 = 'physcolloquia-bk00169017b'
             marc_xml = File.read("spec/data/record-#{tind_035}.xml")
-            search_url = "https://digicoll.lib.berkeley.edu/search?p=035__a%3A%22#{CGI.escape(tind_035)}%22&of=xm"
+            search_url = "https://digicoll.lib.berkeley.edu/api/v1/search?p=035__a%3A%22#{CGI.escape(tind_035)}%22&format=xml"
             stub_request(:get, search_url).to_return(status: 200, body: marc_xml)
             metadata = Metadata.for_record(record_id: tind_035)
 
