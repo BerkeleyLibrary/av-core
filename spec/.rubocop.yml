@@ -1,6 +1,6 @@
 inherit_from: ../.rubocop.yml
 
-require:
+plugins:
   - rubocop-rspec
 
 Layout/LineLength:
@@ -65,7 +65,10 @@ RSpec/ExpectInHook:
   Enabled: false
 
 # your naming scheme is not in possession of all the facts
-RSpec/FilePath:
+RSpec/SpecFilePathFormat:
+  Enabled: false
+
+RSpec/SpecFilePathSuffix:
   Enabled: false
 
 # explicit >>> implicit
@@ -110,7 +113,4 @@ RSpec/VerifiedDoubles:
 # enable newer rubocop-rspec cops
 
 RSpec/IdenticalEqualityAssertion: # new in 2.4
-  Enabled: true
-
-RSpec/Rails/AvoidSetupHook: # new in 2.4
   Enabled: true
