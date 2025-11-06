@@ -7,7 +7,7 @@ module BerkeleyLibrary
         describe :mime_type do
           it 'is correct' do
             expected = {
-              FileType::MP3 => 'application/x-mpegURL',
+              FileType::MP3 => 'audio/mpeg',
               FileType::MP4 => 'video/mp4',
               FileType::UNKNOWN => 'application/octet-stream'
             }

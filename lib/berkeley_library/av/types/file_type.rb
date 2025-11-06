@@ -56,7 +56,7 @@ module BerkeleyLibrary
         # ############################################################
         # Enum members
 
-        new(:MP3, 'audio', 'application/x-mpegURL', extensions: MP3_EXTENSIONS)
+        new(:MP3, 'audio', 'audio/mpeg', extensions: MP3_EXTENSIONS)
         new(:MP4, 'video', 'video/mp4', extensions: MP4_EXTENSIONS)
         new(:UNKNOWN, 'object', 'application/octet-stream', label: 'Unknown')
 
