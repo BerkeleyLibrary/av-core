@@ -1,7 +1,7 @@
 # =============================================================================
 # Target: base
 
-FROM ruby:3.0.2-alpine AS base
+FROM ruby:3.3-alpine AS base
 
 RUN apk --no-cache --update upgrade && \
     apk --no-cache add \
@@ -12,6 +12,7 @@ RUN apk --no-cache --update upgrade && \
         openssl \
         tzdata \
         xz-libs \
+        yaml-dev \
     && rm -rf /var/cache/apk/*
 
 WORKDIR /opt/app
@@ -28,6 +29,9 @@ RUN apk --update --no-cache add \
         coreutils \
         git \
     && rm -rf /var/cache/apk/*
+
+# The base image ships an older bundler, but we want something more recent
+RUN gem install bundler -v 2.5.22
 
 # Copy codebase to WORKDIR. Unlike application projects, for a gem project
 # we need to do this before running `bundle install`, in order for the gem
