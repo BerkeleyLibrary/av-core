@@ -10,8 +10,8 @@ require 'berkeley_library/av/core/module_info'
 
 Gem::Specification.new do |spec|
   spec.name = BerkeleyLibrary::AV::Core::ModuleInfo::NAME
-  spec.author = BerkeleyLibrary::AV::Core::ModuleInfo::AUTHOR
-  spec.email = BerkeleyLibrary::AV::Core::ModuleInfo::AUTHOR_EMAIL
+  spec.authors = BerkeleyLibrary::AV::Core::ModuleInfo::AUTHORS
+  spec.email = BerkeleyLibrary::AV::Core::ModuleInfo::AUTHOR_EMAILS
   spec.summary = BerkeleyLibrary::AV::Core::ModuleInfo::SUMMARY
   spec.description = BerkeleyLibrary::AV::Core::ModuleInfo::DESCRIPTION
   spec.license = BerkeleyLibrary::AV::Core::ModuleInfo::LICENSE
