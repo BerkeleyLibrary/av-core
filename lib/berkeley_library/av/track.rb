@@ -35,7 +35,7 @@ module BerkeleyLibrary
       end
 
       def inspect
-        "\#<#{self.class.name} #{self}>"
+        "#<#{self.class.name} #{self}>"
       end
 
       # @return [Array<MARC::Subfield>]
@@ -90,7 +90,7 @@ module BerkeleyLibrary
         end
 
         def group_subfields(subfields)
-          single_track = subfields.lazy.select { |sf| sf.code.to_sym == SUBFIELD_CODE_PATH }.one?
+          single_track = subfields.lazy.one? { |sf| sf.code.to_sym == SUBFIELD_CODE_PATH }
           return [group_together(subfields)] if single_track
 
           group_on_paths(subfields)

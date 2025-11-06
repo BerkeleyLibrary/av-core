@@ -75,7 +75,7 @@ module BerkeleyLibrary
               label: json_field['labels']['en'],
               tag:,
               spec: marc_spec,
-              subfields_separator: (params['subfields_separator'] || ' '),
+              subfields_separator: params['subfields_separator'] || ' ',
               subfield_order: params['subfield_order'].to_s.split(',')
             )
           end

@@ -177,6 +177,7 @@ module BerkeleyLibrary
       end
 
       describe :from_metadata do
+        # rubocop:disable RSpec/ExampleLength
         it 'loads the metadata' do
           marc_xml = File.read('spec/data/record-(pacradio)01469.xml')
           search_url = 'https://digicoll.lib.berkeley.edu/api/v1/search?p=035__a%3A%22%28pacradio%2901469%22&format=xml'
@@ -220,6 +221,7 @@ module BerkeleyLibrary
             expect(record.title).to eq(metadata.title)
             expect(record.bib_number).to eq(metadata.bib_number)
           end
+          # rubocop:enable RSpec/ExampleLength
         end
 
         it "raises #{AV::RecordNotFound} if the record cannot be found" do
@@ -234,6 +236,7 @@ module BerkeleyLibrary
         end
       end
 
+      # rubocop:disable RSpec/ExampleLength
       describe :calnet_or_ip? do
         it 'returns true for restricted, false for unrestricted' do
           restricted = %w[b18538031 b24071548 (cityarts)00002 (cityarts)00773]
@@ -251,32 +254,33 @@ module BerkeleyLibrary
           aggregate_failures 'restrictions' do
             restricted.each do |record_id|
               record = Record.from_metadata(collection: 'test', record_id:)
-              expect(record.calnet_or_ip?).to eq(true), "Expected #{record_id} to be restricted, was not"
+              expect(record.calnet_or_ip?).to be(true), "Expected #{record_id} to be restricted, was not"
             end
 
             unrestricted.each do |record_id|
               record = Record.from_metadata(collection: 'test', record_id:)
-              expect(record.calnet_or_ip?).to eq(false), "Expected #{record_id} not to be restricted, was"
+              expect(record.calnet_or_ip?).to be(false), "Expected #{record_id} not to be restricted, was"
             end
           end
         end
       end
+      # rubocop:enable RSpec/ExampleLength
 
       describe :calnet_only? do
         it 'returns true for CalNet-only records' do
           mms_id = '991047179369706532'
           stub_sru_request(mms_id)
           record = Record.from_metadata(collection: 'test', record_id: mms_id)
-          expect(record.calnet_or_ip?).to eq(true)
-          expect(record.calnet_only?).to eq(true)
+          expect(record.calnet_or_ip?).to be(true)
+          expect(record.calnet_only?).to be(true)
         end
 
         it 'returns false for records open to UCB IP addresses' do
           mms_id = '991054360089706532'
           stub_sru_request(mms_id)
           record = Record.from_metadata(collection: 'test', record_id: mms_id)
-          expect(record.calnet_or_ip?).to eq(true)
-          expect(record.calnet_only?).to eq(false)
+          expect(record.calnet_or_ip?).to be(true)
+          expect(record.calnet_only?).to be(false)
         end
       end
     end

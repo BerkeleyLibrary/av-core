@@ -48,7 +48,7 @@ module BerkeleyLibrary
           raise ArgumentError, "Not a #{class_name(self)}: #{other}" unless other.is_a?(Field)
 
           %i[tag query subfields_separator subfield_order].all? do |attr|
-            (other.respond_to?(attr) && send(attr) == other.send(attr))
+            other.respond_to?(attr) && send(attr) == other.send(attr)
           end
         end
 

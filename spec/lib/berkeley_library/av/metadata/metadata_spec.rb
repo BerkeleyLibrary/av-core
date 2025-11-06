@@ -44,28 +44,28 @@ module BerkeleyLibrary
           bib_number = 'b18538031'
           stub_sru_request(bib_number)
           metadata = Metadata.for_record(record_id: bib_number)
-          expect(metadata.calnet_or_ip?).to eq(true)
+          expect(metadata.calnet_or_ip?).to be(true)
         end
 
         it 'detects restricted video' do
           bib_number = 'b25207857'
           stub_sru_request(bib_number)
           metadata = Metadata.for_record(record_id: bib_number)
-          expect(metadata.calnet_or_ip?).to eq(true)
+          expect(metadata.calnet_or_ip?).to be(true)
         end
 
         it 'detects CalNet restrictions' do
           bib_number = 'b24659129'
           stub_sru_request(bib_number)
           metadata = Metadata.for_record(record_id: bib_number)
-          expect(metadata.calnet_or_ip?).to eq(true)
+          expect(metadata.calnet_or_ip?).to be(true)
         end
 
         it 'detects unrestricted audio' do
           bib_number = 'b23161018'
           stub_sru_request(bib_number)
           metadata = Metadata.for_record(record_id: bib_number)
-          expect(metadata.calnet_or_ip?).to eq(false)
+          expect(metadata.calnet_or_ip?).to be(false)
         end
       end
 
@@ -75,89 +75,89 @@ module BerkeleyLibrary
           bib_number = 'b18538031'
           stub_sru_request(bib_number)
           metadata = Metadata.for_record(record_id: bib_number)
-          expect(metadata.calnet_or_ip?).to eq(true)
+          expect(metadata.calnet_or_ip?).to be(true)
         end
 
         it 'finds "UCB Access" (capitalized)' do
           bib_number = 'b25716973'
           stub_sru_request(bib_number)
           metadata = Metadata.for_record(record_id: bib_number)
-          expect(metadata.calnet_or_ip?).to eq(true)
-          expect(metadata.calnet_only?).to eq(false)
+          expect(metadata.calnet_or_ip?).to be(true)
+          expect(metadata.calnet_only?).to be(false)
         end
 
         it 'returns "Requires CalNet"' do
           bib_number = 'b24659129'
           stub_sru_request(bib_number)
           metadata = Metadata.for_record(record_id: bib_number)
-          expect(metadata.calnet_or_ip?).to eq(true)
-          expect(metadata.calnet_only?).to eq(true)
+          expect(metadata.calnet_or_ip?).to be(true)
+          expect(metadata.calnet_only?).to be(true)
         end
 
         it 'returns "Freely available" for unrestricted audio' do
           bib_number = 'b23161018'
           stub_sru_request(bib_number)
           metadata = Metadata.for_record(record_id: bib_number)
-          expect(metadata.calnet_or_ip?).to eq(false)
-          expect(metadata.calnet_only?).to eq(false)
+          expect(metadata.calnet_or_ip?).to be(false)
+          expect(metadata.calnet_only?).to be(false)
         end
 
         it 'extracts UCB restrictions from a TIND 856' do
           marc_record = MARC::XMLReader.new('spec/data/record-(cityarts)00002.xml').first
           metadata = Metadata.new(record_id: 'record-(cityarts)00002', source: Metadata::Source::TIND, marc_record:)
-          expect(metadata.calnet_or_ip?).to eq(true)
-          expect(metadata.calnet_only?).to eq(false)
+          expect(metadata.calnet_or_ip?).to be(true)
+          expect(metadata.calnet_only?).to be(false)
         end
 
         it 'extracts UCB restrictions from an Alma 956' do
           marc_record = MARC::XMLReader.new('spec/data/alma/991054360089706532-sru.xml').first
           metadata = Metadata.new(record_id: '991047179369706532', source: Metadata::Source::ALMA, marc_record:)
-          expect(metadata.calnet_or_ip?).to eq(true)
-          expect(metadata.calnet_only?).to eq(false)
+          expect(metadata.calnet_or_ip?).to be(true)
+          expect(metadata.calnet_only?).to be(false)
         end
 
         it 'extracts CalNet restrictions from an Alma 956' do
           marc_record = MARC::XMLReader.new('spec/data/alma/991047179369706532-sru.xml').first
           metadata = Metadata.new(record_id: '991054360089706532', source: Metadata::Source::ALMA, marc_record:)
-          expect(metadata.calnet_or_ip?).to eq(true)
-          expect(metadata.calnet_only?).to eq(true)
+          expect(metadata.calnet_or_ip?).to be(true)
+          expect(metadata.calnet_only?).to be(true)
         end
 
         it 'extracts restrictions from a 998$r' do
           marc_record = MARC::XMLReader.new('spec/data/alma/991005939359706532-sru.xml').first
           metadata = Metadata.new(record_id: '991005939359706532', source: Metadata::Source::ALMA, marc_record:)
-          expect(metadata.calnet_or_ip?).to eq(false) # just to be sure
-          expect(metadata.calnet_only?).to eq(false) # just to be sure
+          expect(metadata.calnet_or_ip?).to be(false) # just to be sure
+          expect(metadata.calnet_only?).to be(false) # just to be sure
 
           marc_record['998'].append(MARC::Subfield.new('r', 'UCB access. Requires CalNet.'))
           metadata = Metadata.new(record_id: '991005939359706532', source: Metadata::Source::ALMA, marc_record:)
-          expect(metadata.calnet_or_ip?).to eq(true)
-          expect(metadata.calnet_only?).to eq(true)
+          expect(metadata.calnet_or_ip?).to be(true)
+          expect(metadata.calnet_only?).to be(true)
         end
 
         it 'extracts restrictions from multiple subfields 998$r' do
           marc_record = MARC::XMLReader.new('spec/data/alma/991005939359706532-sru.xml').first
           metadata = Metadata.new(record_id: '991005939359706532', source: Metadata::Source::ALMA, marc_record:)
-          expect(metadata.calnet_or_ip?).to eq(false) # just to be sure
-          expect(metadata.calnet_only?).to eq(false) # just to be sure
+          expect(metadata.calnet_or_ip?).to be(false) # just to be sure
+          expect(metadata.calnet_only?).to be(false) # just to be sure
 
           marc_record['998'].append(MARC::Subfield.new('r', 'UCB access.'))
           marc_record['998'].append(MARC::Subfield.new('r', 'Requires CalNet.'))
           metadata = Metadata.new(record_id: '991005939359706532', source: Metadata::Source::ALMA, marc_record:)
-          expect(metadata.calnet_or_ip?).to eq(true)
-          expect(metadata.calnet_only?).to eq(true)
+          expect(metadata.calnet_or_ip?).to be(true)
+          expect(metadata.calnet_only?).to be(true)
         end
 
         it 'accepts "CalNet" anywhere in the 998$r' do
           marc_record = MARC::XMLReader.new('spec/data/alma/991005939359706532-sru.xml').first
           metadata = Metadata.new(record_id: '991005939359706532', source: Metadata::Source::ALMA, marc_record:)
-          expect(metadata.calnet_or_ip?).to eq(false) # just to be sure
-          expect(metadata.calnet_only?).to eq(false) # just to be sure
+          expect(metadata.calnet_or_ip?).to be(false) # just to be sure
+          expect(metadata.calnet_only?).to be(false) # just to be sure
 
           marc_record['998'].append(MARC::Subfield.new('r', 'some string with CalNet in it somewhere'))
           metadata = Metadata.new(record_id: '991005939359706532', source: Metadata::Source::ALMA, marc_record:)
-          expect(metadata.calnet_only?).to eq(true)
-          expect(metadata.calnet_or_ip?).to eq(false) # just to be sure
+          expect(metadata.calnet_only?).to be(true)
+          expect(metadata.calnet_or_ip?).to be(false) # just to be sure
         end
       end
 
@@ -177,7 +177,7 @@ module BerkeleyLibrary
                 body: AV::Metadata::Source::ALMA.catalog_link_text
               )
             ]
-            expect(catalog_value.entries).to contain_exactly(*expected_links)
+            expect(catalog_value.entries).to match_array(expected_links)
           end
 
           it 'injects a TIND URL if not present (1/2)' do
@@ -194,7 +194,7 @@ module BerkeleyLibrary
                 body: Metadata::Source::TIND.catalog_link_text
               )
             ]
-            expect(catalog_value.entries).to contain_exactly(*expected_links)
+            expect(catalog_value.entries).to match_array(expected_links)
           end
 
           it 'injects a TIND URL if not present (2/2)' do
@@ -211,7 +211,7 @@ module BerkeleyLibrary
                 body: Metadata::Source::TIND.catalog_link_text
               )
             ]
-            expect(catalog_value.entries).to contain_exactly(*expected_links)
+            expect(catalog_value.entries).to match_array(expected_links)
           end
 
           # TODO: suppress these?
@@ -233,7 +233,7 @@ module BerkeleyLibrary
                 body: Metadata::Source::TIND.catalog_link_text
               )
             ]
-            expect(catalog_value.entries).to contain_exactly(*expected_links)
+            expect(catalog_value.entries).to match_array(expected_links)
           end
 
           it 'works for TIND-only records' do
@@ -250,7 +250,7 @@ module BerkeleyLibrary
                 url: 'https://digicoll.lib.berkeley.edu/record/21937'
               )
             ]
-            expect(catalog_value.entries).to contain_exactly(*expected_links)
+            expect(catalog_value.entries).to match_array(expected_links)
           end
 
         end
