@@ -34,7 +34,8 @@ module BerkeleyLibrary
 
         def catalog_link_text
           return LINK_TEXT_ALMA if self == ALMA
-          return LINK_TEXT_TIND if self == TIND
+
+          LINK_TEXT_TIND if self == TIND
         end
 
         def display_uri_for(metadata)
@@ -46,7 +47,8 @@ module BerkeleyLibrary
 
         def find_bib_number(metadata)
           return alma_bib_number(metadata.marc_record) if self == Source::ALMA
-          return tind_bib_number(metadata.marc_record) if self == Source::TIND
+
+          tind_bib_number(metadata.marc_record) if self == Source::TIND
         end
 
         private
@@ -58,7 +60,8 @@ module BerkeleyLibrary
 
         def canonical_record_id_accessor
           return :alma_id if self == ALMA
-          return :tind_id if self == TIND
+
+          :tind_id if self == TIND
         end
 
         def tind_bib_number(marc_record)

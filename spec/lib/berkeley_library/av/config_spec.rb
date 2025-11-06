@@ -11,7 +11,7 @@ module BerkeleyLibrary
 
       describe :configured? do
         it 'defaults to false' do
-          expect(AV.configured?).to eq(false)
+          expect(AV.configured?).to be(false)
         end
 
         it 'returns true if and only if all values are configured' do
@@ -25,12 +25,12 @@ module BerkeleyLibrary
             wowza_base_uri: 'http://wowza.example.edu'
           }
           settings.each { |setting, value| Config.send("#{setting}=", value) }
-          expect(AV.configured?).to eq(true)
+          expect(AV.configured?).to be(true)
 
           aggregate_failures do
             settings.each do |setting, value|
-              Config.instance_variable_set("@#{setting}".to_sym, nil)
-              expect(AV.configured?).to eq(false), "Clearing #{setting} did not set configured? to false"
+              Config.instance_variable_set(:"@#{setting}", nil)
+              expect(AV.configured?).to be(false), "Clearing #{setting} did not set configured? to false"
               Config.send("#{setting}=", value)
             end
           end
@@ -49,8 +49,7 @@ module BerkeleyLibrary
           rails_config = Struct.new(*settings.keys, keyword_init: true).new(**settings)
 
           # Mock Rails config
-          expect(defined?(Rails)).to be_nil # just to be sure
-          Object.send(:const_set, 'Rails', Struct.new(:application).new)
+          stub_const('Rails', Struct.new(:application).new)
           Rails.application = Struct.new(:config).new
           Rails.application.config = rails_config
 
@@ -60,9 +59,8 @@ module BerkeleyLibrary
             end
           end
 
-          expect(AV.configured?).to eq(true)
-        ensure
-          Object.send(:remove_const, 'Rails')
+          expect(AV.configured?).to be(true)
+
         end
       end
 
@@ -100,7 +98,7 @@ module BerkeleyLibrary
 
           expected = []
           settings.each_key do |setting|
-            Config.instance_variable_set("@#{setting}".to_sym, nil)
+            Config.instance_variable_set(:"@#{setting}", nil)
             expected << setting
             expect(Config.missing).to eq(expected)
           end
@@ -246,11 +244,7 @@ module BerkeleyLibrary
           rails = double(Object)
           allow(rails).to receive(:application).and_return(application)
 
-          Object.const_set(:Rails, rails)
-        end
-
-        after do
-          Object.send(:remove_const, :Rails)
+          stub_const('Rails', rails)
         end
 
         describe :avplayer_base_uri do
