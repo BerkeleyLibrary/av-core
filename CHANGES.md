@@ -1,3 +1,8 @@
+# 0.5.0 (2025-11-06)
+
+- AP-487: correctly declare mime type for mp3s
+- dependency updates and explicit support for ruby 3.3+ 
+
 # 0.4.3 (2025-11-04)
 
 - BerkeleyLibrary::AV::Metadata::Readers:TIND now uses the /api/v1/search endpoint to retrieve records. The public /search endpoint stopped working for non-browser/human clients in the past week due to TIND changes.
