@@ -1,5 +1,7 @@
 # BerkeleyLibrary::AV::Core
 
+**NOTE: This gem (along with [avplayer](https://github.com/BerkeleyLibrary/avplayer)) was decommissioned on 2026-11-02.
+
 [![Build Status](https://github.com/BerkeleyLibrary/av-core/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/BerkeleyLibrary/av-core/actions/workflows/build.yml)
 [![Gem Version](https://img.shields.io/gem/v/berkeley_library-av-core.svg)](https://rubygems.org/gems/berkeley_library-av-core)
 
